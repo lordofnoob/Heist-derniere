@@ -17,7 +17,7 @@ public class Pathfinder : MonoBehaviour
 
         foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
         {
-            tile.StraightLineDistanceToEnd = tile.StraightLineDistanceTo(end);
+            tile.straightLineDistanceToEnd = tile.StraightLineDistanceTo(end);
         }
 
         AstarSearch();
@@ -34,29 +34,29 @@ public class Pathfinder : MonoBehaviour
 
     private void AstarSearch()
     {
-        Start.MinCostToStart = 0;
+        Start.minCostToStart = 0;
         List<Tile> Queue = new List<Tile>();
         Queue.Add(Start);
         do
         {
-            Queue.OrderBy(x => x.MinCostToStart + x.StraightLineDistanceToEnd).ToList();
+            Queue.OrderBy(x => x.minCostToStart + x.straightLineDistanceToEnd).ToList();
             Tile currentTile = Queue.First();
             Queue.Remove(currentTile);
             TileVisited++;
 
             foreach(Tile neighbours in currentTile.GetFreeNeighbours())
             {
-                if (neighbours.Visited)
+                if (neighbours.visited)
                     continue;
-                if(neighbours.MinCostToStart == 0f || currentTile.MinCostToStart + 1 < neighbours.MinCostToStart)
+                if(neighbours.minCostToStart == 0f || currentTile.minCostToStart + 1 < neighbours.minCostToStart)
                 {
-                    neighbours.MinCostToStart = currentTile.MinCostToStart + 1;
+                    neighbours.minCostToStart = currentTile.minCostToStart + 1;
                     neighbours.previous = currentTile;
                     if (!Queue.Contains(neighbours))
                         Queue.Add(neighbours);
                 }
             }
-            currentTile.Visited = true;
+            currentTile.visited = true;
             if (currentTile == End)
                 return;
         } while (Queue.Any());
@@ -88,8 +88,8 @@ public class Pathfinder : MonoBehaviour
     {
         foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
         {
-            if (tile.Visited)
-                tile.Visited = false;
+            if (tile.visited)
+                tile.visited = false;
         }
     }
 

@@ -14,7 +14,8 @@ public class Mb_Door : Mb_Trial
             listOfUser[i].state = Mb_Player.StateOfAction.Idle;
         }
         listOfUser.Clear();
-       // tileAssociated.avaible = !tileAssociated.avaible;
+        tileAssociated.visited = !tileAssociated.visited;
+     //   door.
         door.Play();
     }        
 }

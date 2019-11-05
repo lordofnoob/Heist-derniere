@@ -13,8 +13,8 @@ public class Tile : MonoBehaviour
     public bool outlined = false;
 
     public int row, column;
-    public float StraightLineDistanceToEnd, MinCostToStart;
-    public bool Visited = false;
+    public float straightLineDistanceToEnd, minCostToStart;
+    public bool visited = false;
     public Tile previous;
 
     public object Connections { get; internal set; }

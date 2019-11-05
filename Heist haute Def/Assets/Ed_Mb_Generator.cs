@@ -7,10 +7,16 @@ public class Ed_Mb_Generator : MonoBehaviour
 {
     public Texture2D textureToTraduce;
     public float distanceBetweenItems;
-    public Ed_Sc_ColorCode colorCodeAssociated;  
+    public Ed_Sc_ColorCode colorCodeAssociated;
+    public Transform roomParent;
 
+    public void InstantiateRoom()
+    {
+        Identify();
+    }
     void Identify()
     {
+        Debug.Log(textureToTraduce.width);
         for (int x = 0; x < textureToTraduce.width; x++)
         {
             for (int z = 0; z < textureToTraduce.height; z++)
@@ -27,14 +33,11 @@ public class Ed_Mb_Generator : MonoBehaviour
             return;
         else
         {
-            for (int i =0; i< colorCodeAssociated.colorCode.Count; i++)
+            for (int i =0; i< colorCodeAssociated.colorCode.Length; i++)
             {
                 if (colorCodeAssociated.colorCode[i].colorAssociated.Equals(currentPixelColor))
                 {
-                   /* Mb_PoolManager.PoolManager.CallItem(
-                        colorCode.itemTospawn,
-                        positionOfTheSpawn.position + new Vector3(x * distanceBetweenPixels, 0, z * distanceBetweenPixels),
-                        180);*/
+                    Instantiate(colorCodeAssociated.colorCode[i].prefabAssociated, new Vector3(roomParent.position.x + x * distanceBetweenItems, roomParent.position.y, roomParent.position.z + z * distanceBetweenItems), Quaternion.identity, roomParent);
                 }
             }
 

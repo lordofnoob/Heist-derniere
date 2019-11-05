@@ -85,7 +85,7 @@ public class Ma_PlayerManager : MonoBehaviour
                                 }
                             }
                         else
-                            positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count].position;
+                            positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count];
 
                         //selectedPlayer.AddDeplacement(positionToAccomplishDuty);
                         selectedPlayer.SetNextInteraction(targetTrial);

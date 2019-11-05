@@ -6,8 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="ColorCode")]
 public class Ed_Sc_ColorCode : ScriptableObject
 {
-    public List<ColorToValue> colorCode;
+    public ColorToValue[] colorCode;
 }
+[System.Serializable]
 public struct ColorToValue
 {
     public Color colorAssociated;
