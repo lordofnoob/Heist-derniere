@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7511143353713208393}
   - component: {fileID: 3519075447395660427}
   - component: {fileID: 8424775565515314317}
-  - component: {fileID: 1926673876582789653}
   - component: {fileID: 1926673876582789652}
   - component: {fileID: 871794684365505223}
   m_Layer: 8
@@ -86,28 +85,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!195 &1926673876582789653
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087831344316508124}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 5
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &1926673876582789652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +103,7 @@ MonoBehaviour:
   highlightedColor: {r: 1, g: 0.73647493, b: 0, a: 0.50980395}
   selectedColor: {r: 1, g: 0.47614014, b: 0, a: 0.7921569}
   nextAction: 1
+  destination: {fileID: 0}
   capturedHostages: []
   itemsHold: []
   highlighted: 0

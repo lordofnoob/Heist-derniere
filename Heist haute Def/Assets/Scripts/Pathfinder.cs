@@ -5,26 +5,29 @@ using UnityEngine;
 
 public class Pathfinder : MonoBehaviour
 {
-    private Tile Start, End;
+    private Tile Start, End, Hit;
+    private List<Tile> PosToGo;
     [HideInInspector]public int TileVisited = 0;
     private List<Tile> ShortestPath;
 
-    public List<Tile> SearchForShortestPath(Tile start, Tile end)
+    public List<Tile> SearchForShortestPath(Tile start, List<Tile> posToGo, Tile hit)
     {
         ResetVisitedTile();
         Start = start;
-        End = end;
         TileVisited = 0;
+        Hit = hit;
+        End = null;
+        PosToGo = posToGo;
 
         foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
         {
-            tile.StraightLineDistanceToEnd = tile.StraightLineDistanceTo(end);
+            tile.StraightLineDistanceToEnd = tile.StraightLineDistanceTo(Hit);
         }
 
         AstarSearch();
         List<Tile> ShortestPath = new List<Tile>();
-        ShortestPath.Add(end);
-        BuildShortestPath(ShortestPath, end);
+        ShortestPath.Add(End);
+        BuildShortestPath(ShortestPath, End);
         ShortestPath.Reverse();
         print(ShortestPath.Count);
         HighLightShortestPath();
@@ -58,8 +61,11 @@ public class Pathfinder : MonoBehaviour
                 }
             }
             currentTile.Visited = true;
-            if (currentTile == End)
+            if (PosToGo.Contains(currentTile))
+            {
+                End = currentTile;
                 return;
+            }
         } while (Queue.Any());
     }
 

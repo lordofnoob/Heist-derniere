@@ -50,15 +50,17 @@ public class Grid : MonoBehaviour
                         freeTiles.Add(newTile);
                         break;
 
-                    case "IA":
+                    case "H":
                         GameObject newFreeIA = Instantiate(Ma_LevelManager.Instance.FreePrefab, position, new Quaternion(0f, 0f, 0f, 0f), GameObject.Find("Tiles").transform);
                         newTile = newFreeIA.GetComponent<Free>();
                         newTile.row = row;
                         newTile.column = column;
                         //Spawn player
-                        GameObject IA = Instantiate(Ma_LevelManager.Instance.IAPrefab, new Vector3(position.x, 0.5f, position.z), new Quaternion(0f, 0f, 0f, 0f));
-                        IA.GetComponent<Mb_IAHostage>().IATile = newTile;
-                        IAManager.Instance.IAList.Add(IA.GetComponent<Mb_IAHostage>());
+                        GameObject IAGameObject = Instantiate(Ma_LevelManager.Instance.IAPrefab, new Vector3(position.x, 0.5f, position.z), new Quaternion(0f, 0f, 0f, 0f));
+                        Mb_IAHostage IAHostage = IAGameObject.GetComponent<Mb_IAHostage>();
+                        IAHostage.positionToGo = newTile.GetFreeNeighbours().ToArray();
+                        IAHostage.trialTile = newTile;
+                        IAManager.Instance.IAList.Add(IAHostage);
                         freeTiles.Add(newTile);
                         break;
                 }
