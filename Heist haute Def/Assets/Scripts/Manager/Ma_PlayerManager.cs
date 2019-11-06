@@ -51,7 +51,7 @@ public class Ma_PlayerManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != Mb_Player.StateOfAction.Captured)
+                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != Mb_Player.StateOfAction.Captured && selectedPlayer.state != Mb_Player.StateOfAction.Moving)
                 {
                     /*hit.point += new Vector3(Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2, 0f, Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2);
 
@@ -67,6 +67,7 @@ public class Ma_PlayerManager : MonoBehaviour
                         selectedPlayer.onGoingInteraction = null;
                     }
 
+                    //Debug.Log(selectedPlayer.playerTile.transform.position);
                     List<Tile> ShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(selectedPlayer.playerTile, hit.transform.GetComponent<Tile>());
                     selectedPlayer.AddDeplacement(ShortestPath);
                 }
@@ -75,17 +76,17 @@ public class Ma_PlayerManager : MonoBehaviour
                     Mb_Trial targetTrial = hit.transform.gameObject.GetComponent<Mb_Trial>();
                     if (selectedPlayer.onGoingInteraction != targetTrial)
                     {
-                        Tile positionToAccomplishDuty = null;
+                        Vector3 positionToAccomplishDuty = Vector3.zero;
                         if (targetTrial.listOfUser.Count > 0)
                             for (int i = 0; i < targetTrial.listOfUser.Count; i++)
                             {
                                 if (targetTrial.listOfUser[i] != selectedPlayer)
                                 {
-                                    positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count];
+                                    positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count].transform.position;
                                 }
                             }
                         else
-                            positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count];
+                            positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count].transform.position;
 
                         //selectedPlayer.AddDeplacement(positionToAccomplishDuty);
                         selectedPlayer.SetNextInteraction(targetTrial);

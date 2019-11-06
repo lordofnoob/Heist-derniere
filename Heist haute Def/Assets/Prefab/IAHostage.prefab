@@ -284,9 +284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3e654579237d644ada22d8b8aa7bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolable: 1
+  objectType: 0
   trialParameters: {fileID: 11400000, guid: 639a342ae923c1147827b43c98bbd567, type: 2}
   positionToGo:
-  - {fileID: 5028995057435999965}
+  - {fileID: 0}
   timeVignet: {fileID: 1129344465071966787}
   listOfUser: []
   stress: 0
@@ -528,7 +530,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 742ecfadbc6cac54eac51810c1186741, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

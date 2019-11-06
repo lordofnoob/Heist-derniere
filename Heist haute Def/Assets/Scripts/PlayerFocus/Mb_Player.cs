@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System.Linq;
 
 public class Mb_Player : Mb_Poolable {
 
@@ -13,6 +14,7 @@ public class Mb_Player : Mb_Poolable {
     [Header("Actions")]
     public List<Sc_Action> actionsToPerform = new List<Sc_Action>();
     [HideInInspector] public bool nextAction = true;
+    [HideInInspector] public Tile destination = null;
 
     [Header("Hostage")]
     public List<Mb_IAHostage> capturedHostages = new List<Mb_IAHostage>();
@@ -103,6 +105,7 @@ public class Mb_Player : Mb_Poolable {
     public void AddDeplacement(List<Tile> path)
     {
         state = StateOfAction.Moving;
+        destination = path.Last();
         foreach(Tile tile in path)
         {
             actionsToPerform.Add(new Sc_Deplacement(characterProperty.speed, this, tile));
@@ -155,7 +158,6 @@ public class Mb_Player : Mb_Poolable {
         {            
                 Interact();
         }*/
-        //if ()
     }
 
     public void AddItem(Sc_Items itemToAdd)

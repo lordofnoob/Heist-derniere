@@ -10,11 +10,11 @@ public class Tile : MonoBehaviour
     private Renderer rend;
     private Color startColor;
 
-    public bool outlined = false;
+    public bool highlighted = false;
 
     public int row, column;
-    public float straightLineDistanceToEnd, minCostToStart;
-    public bool visited = false;
+    public float StraightLineDistanceToEnd, MinCostToStart;
+    public bool Visited = false;
     public Tile previous;
 
     public object Connections { get; internal set; }
@@ -33,7 +33,7 @@ public class Tile : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (!outlined)
+        if (!highlighted)
         {
             ModifyOutlines(Outlines.Mode.OutlineVisible, Color.black, 7.5f);
             SetOutlinesEnabled(true);
@@ -43,7 +43,7 @@ public class Tile : MonoBehaviour
 
     void OnMouseExit()
     {
-        if (!outlined)
+        if (!highlighted)
             SetOutlinesEnabled(false);
     }
 

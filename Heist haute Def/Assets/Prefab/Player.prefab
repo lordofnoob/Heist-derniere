@@ -125,14 +125,14 @@ MonoBehaviour:
   characterProperty: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
   highlightedColor: {r: 1, g: 0.73647493, b: 0, a: 0.50980395}
   selectedColor: {r: 1, g: 0.47614014, b: 0, a: 0.7921569}
-  actionsToPerform: []
+  nextAction: 1
   capturedHostages: []
   itemsHold: []
   highlighted: 0
   isSelected: 0
   onGoingInteraction: {fileID: 0}
   playerTile: {fileID: 0}
-  state: 0
+  state: 3
 --- !u!114 &871794684365505223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4b4304ac9cbaa04ca7af370a87ce03d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

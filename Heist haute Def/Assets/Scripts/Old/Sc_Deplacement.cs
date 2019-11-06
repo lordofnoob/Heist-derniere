@@ -18,6 +18,16 @@ public class Sc_Deplacement : Sc_Action
     {
         //Debug.Log("MOVE TO : "+ destination.transform.position);
         toMove.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
+            toMove.playerTile = destination;
+            destination.SetOutlinesEnabled(false);
+            destination.highlighted = false;
+
+            if(destination == toMove.destination)
+            {
+                toMove.state = Mb_Player.StateOfAction.Idle;
+                toMove.destination = null;
+            }
+
             toMove.nextAction = true;
         });
     }
