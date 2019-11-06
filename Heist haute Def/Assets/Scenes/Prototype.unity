@@ -433,12 +433,6 @@ Transform:
   m_Father: {fileID: 1425220596}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &526718687 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3431368413598332794, guid: 6620c699e4103b74e84e8eaa441f47e2,
-    type: 3}
-  m_PrefabInstance: {fileID: 8810978851591148029}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &568060807
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +633,7 @@ MonoBehaviour:
   positionToGo:
   - {fileID: 0}
   - {fileID: 0}
+  trialTile: {fileID: 0}
   timeVignet: {fileID: 1095717573}
   listOfUser: []
 --- !u!65 &1064745586
@@ -1066,6 +1061,7 @@ MonoBehaviour:
   trialParameters: {fileID: 11400000, guid: 65a991251500f654682546c454888163, type: 2}
   positionToGo:
   - {fileID: 0}
+  trialTile: {fileID: 0}
   timeVignet: {fileID: 2110220077}
   listOfUser: []
   hostagesPos:
@@ -1151,7 +1147,8 @@ PrefabInstance:
         type: 3}
       propertyPath: IAPrefab
       value: 
-      objectReference: {fileID: 526718687}
+      objectReference: {fileID: 3431368413598332794, guid: 6620c699e4103b74e84e8eaa441f47e2,
+        type: 3}
     - target: {fileID: 836429698690726368, guid: d1fb6d4fb1ae380419697334abbe5780,
         type: 3}
       propertyPath: clock
