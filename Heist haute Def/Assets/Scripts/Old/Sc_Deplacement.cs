@@ -16,19 +16,53 @@ public class Sc_Deplacement : Sc_Action
 
     public override void PerformAction()
     {
-        //Debug.Log("MOVE TO : "+ destination.transform.position);
-        toMove.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
+        if (destination.avaible)
+        {
+            destination.avaible = false;
+            toMove.playerTile.avaible = true;
             toMove.playerTile = destination;
-            destination.SetOutlinesEnabled(false);
-            destination.highlighted = false;
 
-            if(destination == toMove.destination)
+            //Debug.Log("MOVE TO : "+ destination.transform.position);
+            toMove.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
+                destination.SetOutlinesEnabled(false);
+                destination.highlighted = false;
+
+                if (destination == toMove.destination)
+                {
+                    toMove.state = Mb_Player.StateOfAction.Idle;
+                    toMove.destination = null;
+                }
+
+                toMove.nextAction = true;
+            });
+        }
+
+        //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
+        bool findNewPath = false;
+        foreach(Sc_Action action in toMove.actionsToPerform)
+        {
+            if(action is Sc_Deplacement)
             {
-                toMove.state = Mb_Player.StateOfAction.Idle;
-                toMove.destination = null;
+                Sc_Deplacement deplacement = action as Sc_Deplacement;
+                if (!deplacement.destination.avaible)
+                {
+                    findNewPath = true;
+                    break;
+                }
+            }
+        }
+
+        if (findNewPath)
+        {
+            for(int i = 0; i<toMove.actionsToPerform.Count; i++)
+            {
+                if (toMove.actionsToPerform[i] is Sc_Deplacement)
+                    toMove.actionsToPerform.RemoveAt(i);
             }
 
-            toMove.nextAction = true;
-        });
+            List<Tile> newShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(toMove.playerTile, new List<Tile> { toMove.destination }, toMove.destination);
+            toMove.AddDeplacement(newShortestPath);
+        }
+
     }
 }

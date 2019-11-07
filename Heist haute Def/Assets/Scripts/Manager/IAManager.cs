@@ -54,8 +54,8 @@ public class IAManager : MonoBehaviour
                     hostage.state = HostageState.Stocked;                    
                     hostage.target = null;
                     stockedHosteges.Add(hostage);
-                    hostage.agent.SetDestination(position.position);
-                    hostage.agent.stoppingDistance = 0f;
+                    //hostage.agent.SetDestination(position.position);
+                    //hostage.agent.stoppingDistance = 0f;
                     break;
                 }
             }

@@ -59,22 +59,22 @@ public class Tile : MonoBehaviour
     {
         List<Tile> res = new List<Tile>();
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row-1,column) is Free && row !=0)
+        if(Ma_LevelManager.Instance.Grid.GetTile(row-1,column).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && row !=0)
         {
             res.Add(Ma_LevelManager.Instance.Grid.GetTile(row - 1, column));
         }
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row+1,column) is Free && row != Ma_LevelManager.Instance.Grid.tilemap.GetLength(0))
+        if(Ma_LevelManager.Instance.Grid.GetTile(row+1,column).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && row != Ma_LevelManager.Instance.Grid.tilemap.GetLength(0))
         {
             res.Add(Ma_LevelManager.Instance.Grid.GetTile(row + 1, column));
         }
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row,column-1) is Free && column != 0)
+        if(Ma_LevelManager.Instance.Grid.GetTile(row,column-1).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && column != 0)
         {
             res.Add(Ma_LevelManager.Instance.Grid.GetTile(row, column-1));
         }
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row,column+1) is Free && column != Ma_LevelManager.Instance.Grid.tilemap.GetLength(1))
+        if(Ma_LevelManager.Instance.Grid.GetTile(row,column+1).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && column != Ma_LevelManager.Instance.Grid.tilemap.GetLength(1))
         {
             res.Add(Ma_LevelManager.Instance.Grid.GetTile(row, column+1));
         }
