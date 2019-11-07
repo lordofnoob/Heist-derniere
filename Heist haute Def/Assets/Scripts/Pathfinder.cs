@@ -50,7 +50,7 @@ public class Pathfinder : MonoBehaviour
             foreach(Tile neighbours in currentTile.GetFreeNeighbours())
             {
                 //Debug.Log("NEIGHBOURS : " + neighbours.transform.position);
-                if (neighbours.Visited)
+                if (neighbours.visited)
                     continue;
                 if(neighbours.MinCostToStart == 0f || currentTile.MinCostToStart + 1 < neighbours.MinCostToStart)
                 {
@@ -60,7 +60,7 @@ public class Pathfinder : MonoBehaviour
                         Queue.Add(neighbours);
                 }
             }
-            currentTile.Visited = true;
+            currentTile.visited = true;
             if (PosToGo.Contains(currentTile))
             {
                 End = currentTile;
@@ -95,9 +95,9 @@ public class Pathfinder : MonoBehaviour
     {
         foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
         {
-            if (tile.Visited)
+            if (tile.visited)
             {
-                tile.Visited = false;
+                tile.visited = false;
             }
             tile.previous = null;
             tile.MinCostToStart = 0;

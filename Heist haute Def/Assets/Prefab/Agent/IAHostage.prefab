@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1112481153666434520}
   - component: {fileID: 5628605433060301194}
   - component: {fileID: 6270282380555665319}
+  - component: {fileID: 6111246125894185761}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -73,6 +74,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6111246125894185761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227804482148568742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821de9b1a6d80d34ca736b29fc0cdff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3098506329312567151
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +171,6 @@ GameObject:
   - component: {fileID: 3557224083425641414}
   - component: {fileID: 3930483895375567117}
   - component: {fileID: 1847766912380400694}
-  - component: {fileID: 4115088470665456137}
   - component: {fileID: 7816519674179130439}
   - component: {fileID: 3465430763639448767}
   m_Layer: 8
@@ -232,28 +244,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!195 &4115088470665456137
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3431368413598332794}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &7816519674179130439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,16 +274,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3e654579237d644ada22d8b8aa7bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolable: 1
+  objectType: 0
   trialParameters: {fileID: 11400000, guid: 639a342ae923c1147827b43c98bbd567, type: 2}
   positionToGo:
-  - {fileID: 5028995057435999965}
+  - {fileID: 0}
+  trialTile: {fileID: 0}
   timeVignet: {fileID: 1129344465071966787}
   listOfUser: []
   stress: 0
   stressBar: {fileID: 6270282380555665319}
-  agent: {fileID: 4115088470665456137}
+  agent: {fileID: 0}
   trialsAreaSize: 5
-  IATile: {fileID: 0}
   state: 0
   target: {fileID: 0}
 --- !u!1 &4317472599911500450
@@ -528,7 +520,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 742ecfadbc6cac54eac51810c1186741, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

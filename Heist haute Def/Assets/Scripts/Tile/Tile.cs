@@ -5,19 +5,21 @@ using System.Collections.Generic;
 
 public class Tile : MonoBehaviour
 {
-
+    [Header("Surlignance")]
     public Color hoverColor;
     private Renderer rend;
     private Color startColor;
+    [HideInInspector] public bool highlighted = false;
 
-    public bool highlighted = false;
+    [Header("TileParamaters")]
+    public bool walkable;
+    public bool avaible;
 
-    public int row, column;
-    public float StraightLineDistanceToEnd, MinCostToStart;
-    public bool Visited = false;
-    public Tile previous;
-
-    public object Connections { get; internal set; }
+  //  [Header("GridPamaters")]
+    [HideInInspector] public int row, column;
+    [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart;
+    [HideInInspector] public bool visited = false; // a changer ne supporte pas le multi movement
+    [HideInInspector] public Tile previous;
 
     public Tile(Vector3 position, float row, float column)
     {

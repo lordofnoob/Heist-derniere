@@ -38,6 +38,10 @@ public class In_RoomCreator : Editor
                 DestroyImmediate(mySelectedScript.roomParent.GetChild(0).gameObject);
             }
         }
+        if (GUILayout.Button("GenerateGrid", GUILayout.MinHeight(50)))
+        {
+            mySelectedScript.GetComponentsInChildren
+        }
         EditorGUI.EndChangeCheck();
     }
 }
