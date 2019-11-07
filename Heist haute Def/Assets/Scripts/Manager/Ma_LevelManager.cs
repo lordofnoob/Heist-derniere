@@ -17,6 +17,7 @@ public class Ma_LevelManager : MonoBehaviour
 
     private Grid grid;
     public Grid Grid { get { return grid; } }
+    public List<Tile> allWalkableTile;
 
     public void Awake()
     {

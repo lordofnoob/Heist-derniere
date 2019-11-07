@@ -6,17 +6,21 @@ using UnityEditor;
 public class In_RoomCreator : Editor
 {
     Ed_Mb_Generator mySelectedScript;
+    SerializedProperty charactSpectToInstantiateProperty;
 
 
     private void OnEnable()
     {
         mySelectedScript = target as Ed_Mb_Generator;
+        charactSpectToInstantiateProperty = serializedObject.FindProperty("charactSpectToInstantiate");
     }
 
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
         EditorGUI.BeginChangeCheck();
+
+        serializedObject.Update();
 
         if (GUILayout.Button("GenerateRoom", GUILayout.MinHeight(50)))
         {
@@ -51,14 +55,16 @@ public class In_RoomCreator : Editor
         if (GUILayout.Button("GenerateGrid", GUILayout.MinHeight(50)))
         {
             List<Tile> listOfTile =  new List<Tile>();
+            List<Tile> listOfTileOfWalkableTile = new List<Tile>();
             for (int j = 0; j < mySelectedScript.transform.childCount; j++)
             {
                 for (int i = 0; i < mySelectedScript.transform.GetChild(j).childCount; i++)
                 { 
                 if (mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>() == true)
                     {
-                       // Debug.Log(i);
                         listOfTile.Add(mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>());
+                        if (mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>().walkable == true)
+                            listOfTileOfWalkableTile.Add(mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>());
                     }
                 }
             }
@@ -123,20 +129,26 @@ public class In_RoomCreator : Editor
                 
             }
             listOfTile.Remove(firstTile);
-            Debug.Log("uesh");
-            Selection.activeGameObject = firstTile.gameObject;
             firstTile.SetColumnAndRow(0, 0);
 
+            GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile = listOfTileOfWalkableTile;
+        /*    for (int i =0; i < listOfTileOfWalkableTile.Count; i++)
+                GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile.Add(listOfTileOfWalkableTile[i]);*/
             for (int i = 0; i < listOfTile.Count; i++)
             {
                 listOfTile[i].SetColumnAndRow( Mathf.RoundToInt(firstTile.transform.position.x - listOfTile[i].transform.position.x), Mathf.RoundToInt(firstTile.transform.position.z - listOfTile[i].transform.position.z));
             }
         }
+
+        EditorGUILayout.PropertyField(charactSpectToInstantiateProperty);
+        serializedObject.ApplyModifiedProperties();
         EditorGUI.EndChangeCheck();
+ 
 
-        if (GUILayout.Button("AddPlayer", GUILayout.MinHeight(50))
+        //mySelectedScript.charactSpectToInstantiate = (Sc_Charaspec)EditorGUILayout.ObjectField("My prefab", mySelectedScript.charactSpectToInstantiate, typeof(Sc_Charaspec), false);
+        if (GUILayout.Button("AddPlayer", GUILayout.MinHeight(50)))
         {
-
+           
         }
     }
 

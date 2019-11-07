@@ -10,6 +10,7 @@ public class Ed_Mb_Generator : MonoBehaviour
     public float distanceBetweenItems;
     public Ed_Sc_ColorCode colorCodeAssociated;
     public Transform roomParent;
+    [HideInInspector] public Sc_Charaspec charactSpectToInstantiate;
 
     public void InstantiateRoom()
     {
