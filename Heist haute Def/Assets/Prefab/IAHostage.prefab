@@ -158,7 +158,6 @@ GameObject:
   - component: {fileID: 3557224083425641414}
   - component: {fileID: 3930483895375567117}
   - component: {fileID: 1847766912380400694}
-  - component: {fileID: 4115088470665456137}
   - component: {fileID: 7816519674179130439}
   - component: {fileID: 3465430763639448767}
   m_Layer: 8
@@ -232,28 +231,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!195 &4115088470665456137
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3431368413598332794}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &7816519674179130439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,16 +261,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3e654579237d644ada22d8b8aa7bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolable: 1
+  objectType: 0
   trialParameters: {fileID: 11400000, guid: 639a342ae923c1147827b43c98bbd567, type: 2}
-  positionToGo:
-  - {fileID: 5028995057435999965}
+  positionToGo: []
   timeVignet: {fileID: 1129344465071966787}
   listOfUser: []
   stress: 0
   stressBar: {fileID: 6270282380555665319}
-  agent: {fileID: 4115088470665456137}
+  agent: {fileID: 0}
   trialsAreaSize: 5
-  IATile: {fileID: 0}
   state: 0
   target: {fileID: 0}
 --- !u!1 &4317472599911500450
@@ -498,7 +475,7 @@ Transform:
   m_GameObject: {fileID: 6386188099836607167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 0.7, y: 2, z: 0.7}
   m_Children: []
   m_Father: {fileID: 5028995057435999965}
   m_RootOrder: 1
@@ -528,7 +505,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 742ecfadbc6cac54eac51810c1186741, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

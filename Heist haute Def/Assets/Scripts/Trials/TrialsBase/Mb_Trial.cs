@@ -8,6 +8,7 @@ public class Mb_Trial : Mb_Poolable
     [Header("Parameters")]
     public Sc_TrialDefinition trialParameters;
     public Tile[] positionToGo;
+    public Tile trialTile;
 
     [Header("Interface")]
     public Image timeVignet;

@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 679f3bfa9a375934190bacbf42e2b181, type: 2}
+  - {fileID: 2100000, guid: 7d76366d6e7465a499460076204f34fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,9 +127,9 @@ MonoBehaviour:
   outlined: 0
   row: 0
   column: 0
-  StraightLineDistanceToEnd: 0
-  MinCostToStart: 0
-  Visited: 0
+  straightLineDistanceToEnd: 0
+  minCostToStart: 0
+  visited: 0
   previous: {fileID: 0}
 --- !u!114 &1798576917441579246
 MonoBehaviour:

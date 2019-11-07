@@ -5,26 +5,29 @@ using UnityEngine;
 
 public class Pathfinder : MonoBehaviour
 {
-    private Tile Start, End;
+    private Tile Start, End, Hit;
+    private List<Tile> PosToGo;
     [HideInInspector]public int TileVisited = 0;
     private List<Tile> ShortestPath;
 
-    public List<Tile> SearchForShortestPath(Tile start, Tile end)
+    public List<Tile> SearchForShortestPath(Tile start, List<Tile> posToGo, Tile hit)
     {
+        ResetVisitedTile();
         Start = start;
-        End = end;
         TileVisited = 0;
+        Hit = hit;
+        End = null;
+        PosToGo = posToGo;
 
         foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
         {
-            tile.straightLineDistanceToEnd = tile.StraightLineDistanceTo(end);
+            tile.StraightLineDistanceToEnd = tile.StraightLineDistanceTo(Hit);
         }
 
         AstarSearch();
         List<Tile> ShortestPath = new List<Tile>();
-        ShortestPath.Add(end);
-        BuildShortestPath(ShortestPath, end);
-        //ResetVisitedTile();
+        ShortestPath.Add(End);
+        BuildShortestPath(ShortestPath, End);
         ShortestPath.Reverse();
         print(ShortestPath.Count);
         HighLightShortestPath();
@@ -34,31 +37,35 @@ public class Pathfinder : MonoBehaviour
 
     private void AstarSearch()
     {
-        Start.minCostToStart = 0;
+        Start.MinCostToStart = 0;
         List<Tile> Queue = new List<Tile>();
         Queue.Add(Start);
         do
         {
-            Queue.OrderBy(x => x.minCostToStart + x.straightLineDistanceToEnd).ToList();
+            Queue.OrderBy(x => x.MinCostToStart + x.StraightLineDistanceToEnd).ToList();
             Tile currentTile = Queue.First();
             Queue.Remove(currentTile);
             TileVisited++;
 
             foreach(Tile neighbours in currentTile.GetFreeNeighbours())
             {
-                if (neighbours.visited)
+                //Debug.Log("NEIGHBOURS : " + neighbours.transform.position);
+                if (neighbours.Visited)
                     continue;
-                if(neighbours.minCostToStart == 0f || currentTile.minCostToStart + 1 < neighbours.minCostToStart)
+                if(neighbours.MinCostToStart == 0f || currentTile.MinCostToStart + 1 < neighbours.MinCostToStart)
                 {
-                    neighbours.minCostToStart = currentTile.minCostToStart + 1;
+                    neighbours.MinCostToStart = currentTile.MinCostToStart + 1;
                     neighbours.previous = currentTile;
                     if (!Queue.Contains(neighbours))
                         Queue.Add(neighbours);
                 }
             }
-            currentTile.visited = true;
-            if (currentTile == End)
+            currentTile.Visited = true;
+            if (PosToGo.Contains(currentTile))
+            {
+                End = currentTile;
                 return;
+            }
         } while (Queue.Any());
     }
 
@@ -80,7 +87,7 @@ public class Pathfinder : MonoBehaviour
         {
             tile.ModifyOutlines(Outlines.Mode.OutlineVisible, Color.magenta, 7.5f);
             tile.SetOutlinesEnabled(true);
-            tile.outlined = true;
+            tile.highlighted = true;
         }
     }
 
@@ -88,9 +95,15 @@ public class Pathfinder : MonoBehaviour
     {
         foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
         {
-            if (tile.visited)
-                tile.visited = false;
+            if (tile.Visited)
+            {
+                tile.Visited = false;
+            }
+            tile.previous = null;
+            tile.MinCostToStart = 0;
+            tile.StraightLineDistanceToEnd = 0;
         }
+        ShortestPath = new List<Tile>();
     }
 
 }

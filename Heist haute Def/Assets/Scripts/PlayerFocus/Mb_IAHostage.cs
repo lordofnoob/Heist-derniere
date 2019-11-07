@@ -19,8 +19,6 @@ public class Mb_IAHostage : Mb_Trial
     public NavMeshAgent agent;
     public float trialsAreaSize = 5f;
 
-    public Tile IATile;
-
     public HostageState state = HostageState.Free;
     public Mb_Player target;
 

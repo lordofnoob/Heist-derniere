@@ -51,7 +51,7 @@ public class Ma_PlayerManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != Mb_Player.StateOfAction.Captured)
+                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != Mb_Player.StateOfAction.Captured && selectedPlayer.state != Mb_Player.StateOfAction.Moving)
                 {
                     /*hit.point += new Vector3(Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2, 0f, Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2);
 
@@ -67,7 +67,8 @@ public class Ma_PlayerManager : MonoBehaviour
                         selectedPlayer.onGoingInteraction = null;
                     }
 
-                    List<Tile> ShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(selectedPlayer.playerTile, hit.transform.GetComponent<Tile>());
+                    //Debug.Log(selectedPlayer.playerTile.transform.position);
+                    List<Tile> ShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(selectedPlayer.playerTile, new List<Tile> { hit.transform.GetComponent<Tile>() },hit.transform.GetComponent<Tile>());
                     selectedPlayer.AddDeplacement(ShortestPath);
                 }
                 else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.state != Mb_Player.StateOfAction.Captured && selectedPlayer.state!= Mb_Player.StateOfAction.Interacting)
@@ -75,19 +76,34 @@ public class Ma_PlayerManager : MonoBehaviour
                     Mb_Trial targetTrial = hit.transform.gameObject.GetComponent<Mb_Trial>();
                     if (selectedPlayer.onGoingInteraction != targetTrial)
                     {
-                        Tile positionToAccomplishDuty = null;
-                        if (targetTrial.listOfUser.Count > 0)
+                        //CHANGED 
+                        List<Tile> positionToAccomplishDuty = new List<Tile>();
+                        if (targetTrial.listOfUser.Count >= targetTrial.positionToGo.Length)
+                        {
                             for (int i = 0; i < targetTrial.listOfUser.Count; i++)
                             {
-                                if (targetTrial.listOfUser[i] != selectedPlayer)
+                                if (targetTrial.listOfUser[i] == null)
                                 {
-                                    positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count];
+                                    positionToAccomplishDuty.Add(targetTrial.positionToGo[i]);
                                 }
                             }
+                        }
                         else
-                            positionToAccomplishDuty = targetTrial.positionToGo[targetTrial.listOfUser.Count];
+                        {
+                            for (int i = 0; i < targetTrial.positionToGo.Length; i++)
+                            {
+                                positionToAccomplishDuty.Add(targetTrial.positionToGo[i]);
+                            }
+                        }
 
-                        //selectedPlayer.AddDeplacement(positionToAccomplishDuty);
+                        if (positionToAccomplishDuty.Count == 0)
+                        {
+                            Debug.Log("DEPLACEMENT IMPOSSIBLE");
+                            return;
+                        }
+
+                        List<Tile> ShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(selectedPlayer.playerTile, positionToAccomplishDuty, targetTrial.trialTile);
+                        selectedPlayer.AddDeplacement(ShortestPath);
                         selectedPlayer.SetNextInteraction(targetTrial);
                     }
                     
