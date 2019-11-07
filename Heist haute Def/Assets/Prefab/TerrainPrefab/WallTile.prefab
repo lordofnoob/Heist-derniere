@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 23691042456720532}
   - component: {fileID: 65674349208408934}
   - component: {fileID: -4780213482630193181}
-  - component: {fileID: 1993787672083936316}
   - component: {fileID: 343077278710418383}
+  - component: {fileID: 47738409495746552}
   m_Layer: 10
-  m_Name: Wall
+  m_Name: WallTile
   m_TagString: mur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 247fac4328fcc194bbe29964e9f6bea3, type: 2}
+  - {fileID: 2100000, guid: e4a3a960503ffff428cc386594fb73f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,26 +111,6 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
---- !u!114 &1993787672083936316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997135797365634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bbc145457dce6e40827a9e87dfc473b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverColor: {r: 0, g: 0, b: 0, a: 0}
-  outlined: 0
-  row: 0
-  column: 0
-  straightLineDistanceToEnd: 0
-  minCostToStart: 0
-  visited: 0
-  previous: {fileID: 0}
 --- !u!114 &343077278710418383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +129,25 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &47738409495746552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997135797365634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acf8b7df80d3cc41a238ef4ae8b0fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0, g: 0, b: 0, a: 1}
+  highlighted: 0
+  walkable: 0
+  avaible: 0
+  row: 0
+  column: 0
+  StraightLineDistanceToEnd: 0
+  MinCostToStart: 0
+  visited: 0
+  previous: {fileID: 0}

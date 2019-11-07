@@ -25,7 +25,7 @@ public class Ma_LevelManager : MonoBehaviour
     }
 
     public void InitLevel()
-    {
+    {/*
         //TO CHANGE
         string[,] array = new string[,]{    { "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"},
                                             { "W", "F", "H", "F", "F", "W", "F", "F", "F", "W", "F", "F", "F", "F", "F", "F", "F", "F", "F", "W"},
@@ -50,6 +50,6 @@ public class Ma_LevelManager : MonoBehaviour
                                             };
         grid = gameObject.AddComponent<Grid>();
         grid.BuildGridLevel(array);
-        //navMeshSurface.BuildNavMesh();
+        //navMeshSurface.BuildNavMesh();*/
     }
 }

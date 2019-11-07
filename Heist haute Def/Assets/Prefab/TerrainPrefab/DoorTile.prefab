@@ -109,6 +109,7 @@ MonoBehaviour:
   objectType: 0
   trialParameters: {fileID: 11400000, guid: e59a5339bce6ac048bef46286bdb0f4f, type: 2}
   positionToGo: []
+  trialTile: {fileID: 0}
   timeVignet: {fileID: 9196770387053895367}
   listOfUser: []
   door: {fileID: 0}
@@ -176,7 +177,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 679f3bfa9a375934190bacbf42e2b181, type: 2}
+  - {fileID: 2100000, guid: 7d76366d6e7465a499460076204f34fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -239,11 +240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0.5176471}
-  outlined: 0
+  highlighted: 0
+  walkable: 0
+  avaible: 0
   row: 0
   column: 0
-  straightLineDistanceToEnd: 0
-  minCostToStart: 0
+  StraightLineDistanceToEnd: 0
+  MinCostToStart: 0
   visited: 0
   previous: {fileID: 0}
 --- !u!114 &5031133093994900520

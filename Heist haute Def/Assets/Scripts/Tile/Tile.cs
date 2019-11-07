@@ -15,8 +15,8 @@ public class Tile : MonoBehaviour
     public bool walkable;
     public bool avaible;
 
-  //  [Header("GridPamaters")]
-    [HideInInspector] public int row, column;
+    [Header("GridPamaters")]
+     public int row, column;
     [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart;
     [HideInInspector] public bool visited = false; // a changer ne supporte pas le multi movement
     [HideInInspector] public Tile previous;
@@ -94,6 +94,12 @@ public class Tile : MonoBehaviour
     {
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.enabled = enabled;
+    }
+
+    public void SetColumnAndRow(int newColumn, int newRow)
+    {
+        column = newColumn;
+        row = newRow;
     }
 
 }
