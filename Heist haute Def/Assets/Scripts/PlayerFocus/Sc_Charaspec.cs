@@ -16,7 +16,8 @@ public class Sc_Charaspec : ScriptableObject
    
 
 }
-[System.Serializable]
+
+[System.Serializable]nk 
 public enum CharacterSkills
 {
     LockPicking, NotLockPicking, Hacker, NotHacker, Inteligent, NotInteligent, Quick, NotQuick, Charismatic, NotCharismatic
