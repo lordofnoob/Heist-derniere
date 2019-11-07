@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;   
+using UnityEditor;
+using UnityEditor.SceneManagement;
 
 public class Ed_Mb_Generator : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class Ed_Mb_Generator : MonoBehaviour
             {
                 if (colorCodeAssociated.colorCode[i].colorAssociated.Equals(currentPixelColor))
                 {
-                    Object newObject= PrefabUtility.InstantiatePrefab(colorCodeAssociated.colorCode[i].prefabAssociated);
+                    Object newObject=  PrefabUtility.InstantiatePrefab(colorCodeAssociated.colorCode[i].prefabAssociated);
                     if(newObject is GameObject)
                     {
                         GameObject newGameObject = (newObject as GameObject);
