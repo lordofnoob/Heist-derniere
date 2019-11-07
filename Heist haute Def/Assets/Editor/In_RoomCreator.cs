@@ -6,12 +6,14 @@ using UnityEditor;
 public class In_RoomCreator : Editor
 {
     Ed_Mb_Generator mySelectedScript;
+    SerializedProperty characterPrefab;
     SerializedProperty charactSpectToInstantiateProperty;
-
+    private bool placingPlayerCharacter;
 
     private void OnEnable()
     {
         mySelectedScript = target as Ed_Mb_Generator;
+        characterPrefab = serializedObject.FindProperty("playerPrefab");
         charactSpectToInstantiateProperty = serializedObject.FindProperty("charactSpectToInstantiate");
     }
 
@@ -140,17 +142,81 @@ public class In_RoomCreator : Editor
                 listOfTile[i].SetColumnAndRow( Mathf.RoundToInt(firstTile.transform.position.x - listOfTile[i].transform.position.x), Mathf.RoundToInt(firstTile.transform.position.z - listOfTile[i].transform.position.z));
                 EditorUtility.SetDirty(listOfTile[i]);
             }
+
+      
         }
 
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(characterPrefab);
         EditorGUILayout.PropertyField(charactSpectToInstantiateProperty);
+        EditorGUILayout.EndVertical();
         serializedObject.ApplyModifiedProperties();
         EditorGUI.EndChangeCheck();
- 
 
-        //mySelectedScript.charactSpectToInstantiate = (Sc_Charaspec)EditorGUILayout.ObjectField("My prefab", mySelectedScript.charactSpectToInstantiate, typeof(Sc_Charaspec), false);
-        if (GUILayout.Button("AddPlayer", GUILayout.MinHeight(50)))
+        var style = new GUIStyle(GUI.skin.box);
+        //style.normal.background = Color.red;
+        if (GUILayout.Button("AddPlayer", style, GUILayout.MinHeight(50)))
+        {
+            placingPlayerCharacter = !placingPlayerCharacter;
+            if (placingPlayerCharacter == true)
+            {
+                Selection.activeGameObject = mySelectedScript.gameObject;
+               // style.
+            }
+        }
+
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void OnSceneGUI()
+    {
+        Placingcharacter();
+    }
+    private void OnDisable()
+    {
+        placingPlayerCharacter = false;
+    }
+
+    void Placingcharacter()
+    {
+      
+        if (Input.GetKey(KeyCode.W) && placingPlayerCharacter == true)
         {
            
+            Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Tile>().avaible == true)
+            {
+                /*
+                // Load the current prefab
+                string path = "Assets/Prefabs/" + __typeStrings[__currentType] + ".prefab";
+                GameObject anchor_point = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+                // Instance this prefab
+                GameObject prefab_instance = PrefabUtility.InstantiatePrefab(anchor_point) as GameObject;
+                // Place the prefab at correct position (position of the hit).
+                prefab_instance.transform.position = hitInfo.point;
+                prefab_instance.transform.parent = __objectGroup.transform;
+                // Mark the instance as dirty because we like dirty
+                EditorUtility.SetDirty(prefab_instance); */
+             
+                hitInfo.collider.GetComponent<Tile>().avaible = false;
+                Debug.Log(hitInfo.collider.GetComponent<Tile>().avaible);
+                Object newObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue);
+                Debug.Log(characterPrefab.objectReferenceValue);
+
+                if (newObject is Mb_Player)
+                {
+                    GameObject newGameObject = (newObject as GameObject);
+                    Mb_Player newPlayer = newGameObject.GetComponent<Mb_Player>();
+                    Selection.activeGameObject = newGameObject;
+                    newPlayer.characterProperty = (charactSpectToInstantiateProperty.objectReferenceValue as Sc_Charaspec);
+                    newGameObject.transform.position = new Vector3(hitInfo.collider.transform.position.x, hitInfo.collider.transform.position.y + hitInfo.collider.transform.localScale.y / 2, hitInfo.collider.transform.position.z);
+    
+                    EditorUtility.SetDirty(newGameObject);
+                }
+            }
         }
     }
 

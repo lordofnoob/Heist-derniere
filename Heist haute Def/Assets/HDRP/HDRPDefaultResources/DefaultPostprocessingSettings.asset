@@ -44,13 +44,13 @@ MonoBehaviour:
     m_Value: 0
   compensation:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: -27.64
   limitMin:
-    m_OverrideState: 0
-    m_Value: -10
+    m_OverrideState: 1
+    m_Value: -1
   limitMax:
-    m_OverrideState: 0
-    m_Value: 20
+    m_OverrideState: 1
+    m_Value: 1
   curveMap:
     m_OverrideState: 0
     m_Value:
@@ -78,14 +78,14 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   adaptationMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   adaptationSpeedDarkToLight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 3
     min: 0.001
   adaptationSpeedLightToDark:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
     min: 0.001
 --- !u!114 &2926520594555130314
@@ -107,7 +107,7 @@ MonoBehaviour:
     m_Value: 2
   toeStrength:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 0.567
     min: 0
     max: 1
   toeLength:
@@ -117,7 +117,7 @@ MonoBehaviour:
     max: 1
   shoulderStrength:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 0.847
     min: 0
     max: 1
   shoulderLength:
@@ -149,12 +149,12 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.1
     min: 0
     max: 1
   scatter:
     m_OverrideState: 0
-    m_Value: 0.7
+    m_Value: 0.132
     min: 0
     max: 1
   tint:
@@ -164,11 +164,11 @@ MonoBehaviour:
     showAlpha: 0
     showEyeDropper: 1
   dirtTexture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
+    m_OverrideState: 1
+    m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
   dirtIntensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 10
     min: 0
   highQualityFiltering:
     m_OverrideState: 0

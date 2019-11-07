@@ -11,6 +11,7 @@ public class Ed_Mb_Generator : MonoBehaviour
     public Ed_Sc_ColorCode colorCodeAssociated;
     public Transform roomParent;
     [HideInInspector] public Sc_Charaspec charactSpectToInstantiate;
+    [HideInInspector] public Mb_Player playerPrefab;
 
     public void InstantiateRoom()
     {
@@ -18,7 +19,6 @@ public class Ed_Mb_Generator : MonoBehaviour
     }
     void Identify()
     {
-        Debug.Log(textureToTraduce.width);
         for (int x = 0; x < textureToTraduce.width; x++)
         {
             for (int z = 0; z < textureToTraduce.height; z++)
