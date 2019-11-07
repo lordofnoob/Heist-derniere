@@ -16,10 +16,12 @@ public class Tile : MonoBehaviour
     public bool avaible;
 
     [Header("GridPamaters")]
-     public int row, column;
+    [SerializeField] public int row;
+    [SerializeField] public int column;
     [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart;
     [HideInInspector] public bool visited = false; // a changer ne supporte pas le multi movement
-    [HideInInspector] public Tile previous;
+    //[HideInInspector] 
+    public Tile previous;
 
     public Tile(Vector3 position, float row, float column)
     {
@@ -59,26 +61,30 @@ public class Tile : MonoBehaviour
     {
         List<Tile> res = new List<Tile>();
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row-1,column).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && row !=0)
+        Tile North = Ma_LevelManager.Instance.GetTile(row - 1, column);
+        Tile South = Ma_LevelManager.Instance.GetTile(row + 1, column);
+        Tile East = Ma_LevelManager.Instance.GetTile(row, column - 1);
+        Tile West = Ma_LevelManager.Instance.GetTile(row, column + 1);
+
+        if(North != null && North.walkable && North.avaible)
         {
-            res.Add(Ma_LevelManager.Instance.Grid.GetTile(row - 1, column));
+            res.Add(North);
         }
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row+1,column).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && row != Ma_LevelManager.Instance.Grid.tilemap.GetLength(0))
+        if(South != null && South.walkable && South.avaible)
         {
-            res.Add(Ma_LevelManager.Instance.Grid.GetTile(row + 1, column));
+            res.Add(South);
         }
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row,column-1).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && column != 0)
+        if(East != null && East.walkable && East.avaible)
         {
-            res.Add(Ma_LevelManager.Instance.Grid.GetTile(row, column-1));
+            res.Add(East);
         }
 
-        if(Ma_LevelManager.Instance.Grid.GetTile(row,column+1).walkable && Ma_LevelManager.Instance.Grid.GetTile(row - 1, column).avaible && column != Ma_LevelManager.Instance.Grid.tilemap.GetLength(1))
+        if(West != null && West.walkable && West.avaible)
         {
-            res.Add(Ma_LevelManager.Instance.Grid.GetTile(row, column+1));
+            res.Add(West);
         }
-
         return res;
     }
 

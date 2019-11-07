@@ -12,6 +12,8 @@ public class Pathfinder : MonoBehaviour
 
     public List<Tile> SearchForShortestPath(Tile start, List<Tile> posToGo, Tile hit)
     {
+        //Debug.Log(hit.transform.position);
+
         ResetVisitedTile();
         Start = start;
         TileVisited = 0;
@@ -19,7 +21,7 @@ public class Pathfinder : MonoBehaviour
         End = null;
         PosToGo = posToGo;
 
-        foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
+        foreach (Tile tile in Ma_LevelManager.Instance.allWalkableTile)
         {
             tile.StraightLineDistanceToEnd = tile.StraightLineDistanceTo(Hit);
         }
@@ -71,6 +73,7 @@ public class Pathfinder : MonoBehaviour
 
     private void BuildShortestPath(List<Tile> shortestPath, Tile tile)
     {
+        //Debug.Log(shortestPath.Count);
         if(tile.previous == null)
         {
             ShortestPath = shortestPath;
@@ -93,7 +96,7 @@ public class Pathfinder : MonoBehaviour
 
     public void ResetVisitedTile()
     {
-        foreach (Tile tile in Ma_LevelManager.Instance.Grid.freeTiles)
+        foreach (Tile tile in Ma_LevelManager.Instance.allWalkableTile)
         {
             if (tile.visited)
             {

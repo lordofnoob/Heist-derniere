@@ -131,12 +131,14 @@ public class In_RoomCreator : Editor
             listOfTile.Remove(firstTile);
             firstTile.SetColumnAndRow(0, 0);
 
-            GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile = listOfTileOfWalkableTile;
-        /*    for (int i =0; i < listOfTileOfWalkableTile.Count; i++)
+            GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile = listOfTileOfWalkableTile.ToArray(); ;
+            EditorUtility.SetDirty(GameObject.FindObjectOfType<Ma_LevelManager>());
+            /*for (int i =0; i < listOfTileOfWalkableTile.Count; i++)
                 GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile.Add(listOfTileOfWalkableTile[i]);*/
             for (int i = 0; i < listOfTile.Count; i++)
             {
                 listOfTile[i].SetColumnAndRow( Mathf.RoundToInt(firstTile.transform.position.x - listOfTile[i].transform.position.x), Mathf.RoundToInt(firstTile.transform.position.z - listOfTile[i].transform.position.z));
+                EditorUtility.SetDirty(listOfTile[i]);
             }
         }
 

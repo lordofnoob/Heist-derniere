@@ -67,7 +67,7 @@ public class Ma_PlayerManager : MonoBehaviour
                         selectedPlayer.onGoingInteraction = null;
                     }
 
-                    //Debug.Log(selectedPlayer.playerTile.transform.position);
+                    //Debug.Log(hit.transform.GetComponent<Tile>().transform.position);
                     List<Tile> ShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(selectedPlayer.playerTile, new List<Tile> { hit.transform.GetComponent<Tile>() },hit.transform.GetComponent<Tile>());
                     selectedPlayer.AddDeplacement(ShortestPath);
                 }

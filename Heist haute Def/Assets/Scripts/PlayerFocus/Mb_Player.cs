@@ -115,6 +115,23 @@ public class Mb_Player : MonoBehaviour {
         //positionToGo = endPos;
     }
 
+    public void FindAnOtherPath()
+    {
+        List<Sc_Deplacement> removeList = new List<Sc_Deplacement>();
+        foreach(Sc_Action action in actionsToPerform)
+        {
+            if (action is Sc_Deplacement)
+                removeList.Add(action as Sc_Deplacement);
+        }
+
+        foreach(Sc_Deplacement depla in removeList)
+            actionsToPerform.Remove(depla);
+
+        List<Tile> newShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(playerTile, new List<Tile> { destination }, destination);
+        AddDeplacement(newShortestPath);
+        nextAction = true;
+    }
+
     public void PerformAction()
     {
         if(actionsToPerform.Count != 0 && nextAction)
