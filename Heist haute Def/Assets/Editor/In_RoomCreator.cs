@@ -26,13 +26,25 @@ public class In_RoomCreator : Editor
                 Debug.Log("AlreadyProduced");
            
         }
+        GUILayout.BeginHorizontal();
         if (GUILayout.Button("CleanRoom", GUILayout.MinHeight(50)))
         {
             while (mySelectedScript.roomParent.childCount>0)
             {
-                DestroyImmediate(mySelectedScript.roomParent.GetChild(0).gameObject);
+                Undo.DestroyObjectImmediate(mySelectedScript.roomParent.GetChild(0).gameObject);
             }
         }
+        if (GUILayout.Button("CleanAllRooms", GUILayout.MinHeight(50)))
+        {
+            for (int i = 0; i < mySelectedScript.transform.childCount; i++)
+            {
+                while (mySelectedScript.transform.GetChild(i).transform.childCount > 0)
+                {
+                    Undo.DestroyObjectImmediate(mySelectedScript.transform.GetChild(i).GetChild(0).gameObject);
+                }
+            }
+        }
+        GUILayout.EndHorizontal();
         if (GUILayout.Button("GenerateGrid", GUILayout.MinHeight(50)))
         {
             List<Tile> listOfTile =  new List<Tile>();
@@ -64,10 +76,12 @@ public class In_RoomCreator : Editor
                     if (listOfTile[i].transform.position.x < worstXtile.transform.position.x)
                     {
                         worstXtile = listOfTile[i];
+               
                     }
                     else if (listOfTile[i].transform.position.x > bestXtile.transform.position.x)
                     {
                         bestXtile = listOfTile[i];
+                       // Debug.Log(bestXtile.transform.position.x);
                     }
                     else if (listOfTile[i].transform.position.y < worstYtile.transform.position.y)
                     {
@@ -86,18 +100,22 @@ public class In_RoomCreator : Editor
                 if (bestX > worstX || bestX > bestY || bestX > worstY)
                 {
                     firstTile = bestXtile;
+                  
                 }
                 else if (worstX > bestX || worstX > bestY || worstX > worstY)
                 {
                     firstTile = worstXtile;
+
                 }
                 else if (bestY > worstX || bestY > bestX || bestY > worstY)
                 {
                     firstTile = bestYtile;
+
                 }
                 else if (worstY > bestX || worstY > bestY || worstY > worstX)
                 {
                     firstTile = worstYtile;
+ 
                 }
                 
             }
