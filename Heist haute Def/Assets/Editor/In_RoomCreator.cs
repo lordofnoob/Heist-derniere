@@ -26,6 +26,7 @@ public class In_RoomCreator : Editor
                 Debug.Log("AlreadyProduced");
            
         }
+        #region
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("CleanRoom", GUILayout.MinHeight(50)))
         {
@@ -45,6 +46,8 @@ public class In_RoomCreator : Editor
             }
         }
         GUILayout.EndHorizontal();
+        #endregion
+
         if (GUILayout.Button("GenerateGrid", GUILayout.MinHeight(50)))
         {
             List<Tile> listOfTile =  new List<Tile>();
@@ -130,6 +133,11 @@ public class In_RoomCreator : Editor
             }
         }
         EditorGUI.EndChangeCheck();
+
+        if (GUILayout.Button("AddPlayer", GUILayout.MinHeight(50))
+        {
+
+        }
     }
 
 }
