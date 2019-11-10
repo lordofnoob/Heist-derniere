@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Mb_Trial : Mb_Poolable
+public class Mb_Trial : Mb_Agent
 {
     [Header("Parameters")]
     public Sc_TrialDefinition trialParameters;
@@ -113,7 +113,7 @@ public class Mb_Trial : Mb_Poolable
         definitiveModifier = 1;
         foreach (Mb_Player player in listOfUser)
         {
-            player.state = Mb_Player.StateOfAction.Idle;
+            player.state = StateOfAction.Idle;
             player.ResetInteractionParameters();
         }
         listOfUser.Clear();

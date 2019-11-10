@@ -37,7 +37,7 @@ public class IAManager : MonoBehaviour
     {
         hostage.target = p;
         p.capturedHostages.Add(hostage);
-        hostage.state = HostageState.Captured;
+        hostage.hostageState = HostageState.Captured;
     }
 
     public void StockHostagesInArea(Mb_HostageStockArea area, List<Mb_IAHostage> hostages)
@@ -51,7 +51,7 @@ public class IAManager : MonoBehaviour
                 {
                     position.GetComponent<Mb_PositionCheck>().dispo = false;
 
-                    hostage.state = HostageState.Stocked;                    
+                    hostage.hostageState = HostageState.Stocked;                    
                     hostage.target = null;
                     stockedHosteges.Add(hostage);
                     //hostage.agent.SetDestination(position.position);

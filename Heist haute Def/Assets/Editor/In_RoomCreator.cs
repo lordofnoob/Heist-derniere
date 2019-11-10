@@ -220,7 +220,7 @@ public class In_RoomCreator : Editor
         if (NewGameObject.GetComponent<Mb_Player>() == true)
         {
             NewGameObject.GetComponent<Mb_Player>().characterProperty = characterProperty;
-            NewGameObject.GetComponent<Mb_Player>().playerTile = hisTile;
+            NewGameObject.GetComponent<Mb_Player>().agentTile = hisTile;
         
             hisTile.avaible = false;
             Selection.activeGameObject = NewGameObject;

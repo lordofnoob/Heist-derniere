@@ -5,16 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using System.Linq;
 
-public class Mb_Player : MonoBehaviour {
+public enum StateOfAction
+{
+    Moving, Interacting, Captured, Idle
+}
+
+
+public class Mb_Player : Mb_Agent 
+{
 
     public Sc_Charaspec characterProperty;
     //[SerializeField] NavMeshAgent agent;
     public Color highlightedColor, selectedColor;
-
-    [Header("Actions")]
-    public List<Sc_Action> actionsToPerform = new List<Sc_Action>();
-    [HideInInspector] public bool nextAction = true;
-    [HideInInspector] public Tile destination = null;
 
     [Header("Hostage")]
     public List<Mb_IAHostage> capturedHostages = new List<Mb_IAHostage>();
@@ -51,14 +53,10 @@ public class Mb_Player : MonoBehaviour {
 
     [HideInInspector] public Mb_Trial onGoingInteraction;
 
-
-    public Tile playerTile;
-    public StateOfAction state;
     // nextInteractionToussa
-    private Vector3 positionToGo;
     float distanceRemaining;
 
-    private void Start()
+    public void Start()
     {
         Ma_ClockManager.Instance.tickTrigger.AddListener(PerformAction);
     }
@@ -102,48 +100,60 @@ public class Mb_Player : MonoBehaviour {
         outline.enabled = enabled;
     }
 
-    public void AddDeplacement(List<Tile> path)
+    public override void AddDeplacement(List<Tile> path)
     {
+        //Debug.Log(path.Count);
         state = StateOfAction.Moving;
-        destination = path.Last();
+        destination = path[path.Count - 1];
         foreach(Tile tile in path)
         {
-            actionsToPerform.Add(new Sc_Deplacement(characterProperty.speed, this, tile));
+            actionsToPerform.Add(new Deplacement(characterProperty.speed, this, tile));
         }
-        
+        //Debug.Log(actionsToPerform.Count);
+
         //uniquement pour la next interaction n influe pas sur le deplacement whatsoever
         //positionToGo = endPos;
     }
 
-    public void FindAnOtherPath()
+    public override void FindAnOtherPath()
     {
-        List<Sc_Deplacement> removeList = new List<Sc_Deplacement>();
-        foreach(Sc_Action action in actionsToPerform)
+        List<Deplacement> removeList = new List<Deplacement>();
+        foreach(Action action in actionsToPerform)
         {
-            if (action is Sc_Deplacement)
-                removeList.Add(action as Sc_Deplacement);
+            if (action is Deplacement)
+                removeList.Add(action as Deplacement);
         }
 
-        foreach(Sc_Deplacement depla in removeList)
+        foreach(Deplacement depla in removeList)
             actionsToPerform.Remove(depla);
 
-        List<Tile> newShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(playerTile, new List<Tile> { destination }, destination);
+        List<Tile> newShortestPath = new List<Tile>();
+        if (!destination.avaible)
+        {
+            newShortestPath = pathfinder.SearchForShortestPath(agentTile, destination.GetFreeNeighbours());
+        }
+        else
+        {
+            newShortestPath = pathfinder.SearchForShortestPath(agentTile, new List<Tile> { destination });
+        }
+        Debug.Log("New path deplacement number : " + newShortestPath.Count);
         AddDeplacement(newShortestPath);
         nextAction = true;
     }
 
-    public void PerformAction()
+    public override void PerformAction()
     {
         if(actionsToPerform.Count != 0 && nextAction)
         {
-            actionsToPerform[0].PerformAction();
             nextAction = false;
-            actionsToPerform.RemoveAt(0);
+            actionsToPerform.First().PerformAction();
+            actionsToPerform.Remove(actionsToPerform.First());
         }
     }
 
-    public void Interact()
+    public override void Interact()
     {
+        Debug.Log("INTERACT");
         state = StateOfAction.Interacting;
         if (onGoingInteraction.listOfUser.Count==0)
         {
@@ -165,7 +175,6 @@ public class Mb_Player : MonoBehaviour {
     {
         onGoingInteraction = null;
         distanceRemaining = 0;
-        positionToGo = transform.position;
     }
 
     void CheckingDistance()
@@ -190,10 +199,6 @@ public class Mb_Player : MonoBehaviour {
     public void SetNextInteraction(Mb_Trial trialToUse)
     {
         onGoingInteraction = trialToUse;
-    }
-
-    public enum StateOfAction
-    {
-        Moving, Interacting, Captured, Idle
+        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
     }
 }

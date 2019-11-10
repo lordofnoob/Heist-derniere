@@ -18,8 +18,7 @@ public class Tile : MonoBehaviour
     [Header("GridPamaters")]
     [SerializeField] public int row;
     [SerializeField] public int column;
-    [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart;
-    [HideInInspector] public bool visited = false; // a changer ne supporte pas le multi movement
+    [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart, Cost;
     //[HideInInspector] 
     public Tile previous;
 
