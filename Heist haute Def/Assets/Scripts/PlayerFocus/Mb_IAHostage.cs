@@ -100,10 +100,13 @@ public class Mb_IAHostage : Mb_Trial
     {
         if (actionsToPerform.Count != 0 && nextAction)
         {
+            if(actionsToPerform.First() is Interact)
+                Debug.Log("Perform Interaction");
             //Debug.Log("PERFORM 1 IAHOSTAGE ACTION");
             nextAction = false;
             actionsToPerform.First().PerformAction();
             actionsToPerform.Remove(actionsToPerform.First());
+
         }
     }
 
@@ -155,13 +158,24 @@ public class Mb_IAHostage : Mb_Trial
 
     public override void SetNextInteraction(Mb_Trial trialToUse)
     {
+        //Debug.Log("Interact");
         onGoingInteraction = trialToUse;
         actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
     }
 
+    public override void SetFirstInteraction(Mb_Trial trialToUse)
+    {
+        onGoingInteraction = trialToUse;
+        List<Action> temp = actionsToPerform;
+        actionsToPerform.Clear();
+        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+        actionsToPerform.AddRange(temp);
+        //Debug.Log(actionsToPerform[0]);
+    }
+
     public override void Interact()
     {
-        Debug.Log("INTERACT");
+        Debug.Log("INTERACTING");
         state = StateOfAction.Interacting;
         if (onGoingInteraction.listOfUser.Count == 0)
         {
@@ -177,6 +191,13 @@ public class Mb_IAHostage : Mb_Trial
                     onGoingInteraction.ReUpduateTiming();
                 }
             }
+    }
+
+    public override void ResetInteractionParameters()
+    {
+        state = StateOfAction.Idle;
+        onGoingInteraction = null;
+        nextAction = true;
     }
 
 }

@@ -28,7 +28,7 @@ public class Mb_Trial : Mb_Agent
     }
 
      public void StartInteracting()
-    {
+     {
 
         if (CheckCondition())
         {
@@ -48,7 +48,7 @@ public class Mb_Trial : Mb_Agent
                                 definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
                             }
 
-                        }
+                        }                
             }
         }
 
@@ -56,7 +56,7 @@ public class Mb_Trial : Mb_Agent
         
         currentTimeSpentOn = 0;
         counting = true;
-    }
+     }
 
     public void Counting()
     {
@@ -111,10 +111,10 @@ public class Mb_Trial : Mb_Agent
         counting = false;
         currentTimeSpentOn = 0;
         definitiveModifier = 1;
-        Debug.Log(listOfUser.Count);
-        foreach (Mb_Player player in listOfUser)
+        //Debug.Log(listOfUser.Count);
+        foreach (Mb_Agent agent in listOfUser)
         {
-            player.ResetInteractionParameters();
+            agent.ResetInteractionParameters();
         }
         listOfUser.Clear();
 

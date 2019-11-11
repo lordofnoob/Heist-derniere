@@ -159,7 +159,8 @@ public class Deplacement : Action
             }
             else if(destination.GetComponentInChildren<Mb_Door>() != null)
             {
-                hostage.SetNextInteraction(destination.GetComponentInChildren<Mb_Door>());
+                //Debug.Log("Set interaction");
+                hostage.SetFirstInteraction(destination.GetComponentInChildren<Mb_Trial>());
             }
             else
             {
