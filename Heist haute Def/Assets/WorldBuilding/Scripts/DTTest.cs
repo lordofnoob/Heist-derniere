@@ -12,17 +12,31 @@ public class DTTest : MonoBehaviour
     public bool isSnapping;
     public bool isFadeOut;
 
+    public Vector3 originPos;
+    public float resetDist;
+    public float resetSpeed;
     public void Start()
     {
         DOTween.Init();
-        DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(200, 10);
+        DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 10);
 
+        originPos = transform.position;
     }
 
     public void Update()
     {
         duration = Time.deltaTime + 1;
-        transform.DOShakePosition(duration, shakeStrength, vibrato, noise, isSnapping, isFadeOut);
+
+        if (transform.position.x > originPos.x + resetDist || transform.position.x < originPos.x - resetDist || transform.position.y < originPos.y - resetDist || transform.position.y > originPos.y + resetDist)
+        {
+            transform.position = Vector3.Lerp(transform.position, originPos, resetSpeed);
+        }
+        else
+        {
+            transform.DOShakePosition(duration, shakeStrength, vibrato, noise, isSnapping, isFadeOut);
+        }
     }
+
+    
 
 }
