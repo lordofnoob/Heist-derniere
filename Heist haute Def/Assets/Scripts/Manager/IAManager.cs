@@ -6,7 +6,9 @@ public class IAManager : MonoBehaviour
 {
     public static IAManager Instance;
 
-    public List<Mb_IAHostage> IAList = new List<Mb_IAHostage>();
+    public Transform HostagesContainer;
+    //[HideInInspector]
+    public Mb_IAHostage[] IAList;
     public List<Mb_Trial> HostageArea = new List<Mb_Trial>();
 
     public float repeatActionInterval = 3f;
@@ -15,6 +17,16 @@ public class IAManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        IAList = HostagesContainer.GetComponentsInChildren<Mb_IAHostage>();
+    }
+
+    private void Start()
+    {
+        foreach (Mb_IAHostage hostage in IAList)
+        {
+            Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
+            Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.PerformAction);
+        }
     }
 
     // Update is called once per frame
@@ -29,8 +41,7 @@ public class IAManager : MonoBehaviour
             timer = 0f;
         }
         timer += Time.deltaTime;*/
-        if(IAList.Count != 0)
-            UpdateHostageStress();
+        
     }
 
     public void IAHostageFollowingPlayer(Mb_IAHostage hostage, Mb_Player p)
@@ -63,13 +74,5 @@ public class IAManager : MonoBehaviour
         foreach(Mb_IAHostage stockedHostege in stockedHosteges)
             hostages.Remove(stockedHostege);
         
-    }
-
-    void UpdateHostageStress()
-    {
-        foreach(Mb_IAHostage hostage in IAList)
-        {
-            hostage.stress += Random.Range(0.01f, 0.1f) * Time.deltaTime;
-        }
     }
 }

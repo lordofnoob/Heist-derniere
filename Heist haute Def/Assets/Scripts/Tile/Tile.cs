@@ -18,7 +18,8 @@ public class Tile : MonoBehaviour
     [Header("GridPamaters")]
     [SerializeField] public int row;
     [SerializeField] public int column;
-    [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart, Cost;
+    [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart;
+    public float Cost;
     //[HideInInspector] 
     public Tile previous;
 

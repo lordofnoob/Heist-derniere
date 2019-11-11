@@ -173,8 +173,10 @@ public class Mb_Player : Mb_Agent
 
     public void ResetInteractionParameters()
     {
+        state = StateOfAction.Idle;
         onGoingInteraction = null;
         distanceRemaining = 0;
+        nextAction = true;
     }
 
     void CheckingDistance()

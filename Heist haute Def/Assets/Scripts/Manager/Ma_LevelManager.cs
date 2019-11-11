@@ -16,6 +16,7 @@ public class Ma_LevelManager : MonoBehaviour
     //public NavMeshSurface navMeshSurface;
 
     [SerializeField]public Tile[] allWalkableTile;
+    [SerializeField]public Mb_Door[] allExitDoors;
 
     public void Awake()
     {

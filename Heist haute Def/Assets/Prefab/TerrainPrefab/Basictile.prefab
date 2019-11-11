@@ -132,5 +132,5 @@ MonoBehaviour:
   column: 0
   StraightLineDistanceToEnd: 0
   MinCostToStart: 0
-  visited: 0
+  Cost: 1
   previous: {fileID: 0}
