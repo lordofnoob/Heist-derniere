@@ -111,9 +111,9 @@ public class Mb_Trial : Mb_Agent
         counting = false;
         currentTimeSpentOn = 0;
         definitiveModifier = 1;
+        Debug.Log(listOfUser.Count);
         foreach (Mb_Player player in listOfUser)
         {
-            player.state = StateOfAction.Idle;
             player.ResetInteractionParameters();
         }
         listOfUser.Clear();

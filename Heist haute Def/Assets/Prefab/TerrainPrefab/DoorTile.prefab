@@ -164,7 +164,7 @@ MonoBehaviour:
   timeVignet: {fileID: 9196770387053895367}
   listOfUser: []
   door: {fileID: 0}
-  tileAssociated: {fileID: 0}
+  tileAssociated: {fileID: 3885763082956274667}
 --- !u!1 &6711392818150648204
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,13 +293,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverColor: {r: 0, g: 0, b: 0, a: 0}
   highlighted: 0
-  walkable: 0
+  walkable: 1
   avaible: 0
   row: 0
   column: 0
   StraightLineDistanceToEnd: 0
   MinCostToStart: 0
-  Cost: 0
+  Cost: 1
   previous: {fileID: 0}
 --- !u!1001 &6722226658690690321
 PrefabInstance:

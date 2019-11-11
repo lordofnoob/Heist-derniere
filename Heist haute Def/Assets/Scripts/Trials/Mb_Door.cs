@@ -6,16 +6,25 @@ public class Mb_Door : Mb_Trial
 {
     public Animation door;
     public Tile tileAssociated;
+    public bool close = true;
 
     public override void DoThings()
     {
-        for (int i = 0; i < listOfUser.Count; i++)
+        if (close)
         {
-            listOfUser[i].state = StateOfAction.Idle;
+            tileAssociated.Cost = 1;
         }
-        listOfUser.Clear();
-        //tileAssociated.avaible = !tileAssociated.avaible;
+        else
+        {
+            tileAssociated.Cost = 3;
+        }
+
+        close = !close;
+        GetComponent<MeshRenderer>().enabled = close;
+        tileAssociated.avaible = !tileAssociated.avaible;
+
         //   door.
-        door.Play();
+        //door.Play();
+        ResetValues();
     }        
 }

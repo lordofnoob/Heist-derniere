@@ -113,20 +113,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolable: 0
   objectType: 0
-  pathfinder: {fileID: 0}
+  pathfinder: {fileID: 7951976372505407169}
   VisitedTiles: []
+  agentTile: {fileID: 0}
+  state: 3
+  destination: {fileID: 0}
+  nextAction: 1
   characterProperty: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
   highlightedColor: {r: 1, g: 0.73647493, b: 0, a: 0.50980395}
   selectedColor: {r: 1, g: 0.47614014, b: 0, a: 0.7921569}
-  nextAction: 1
-  destination: {fileID: 0}
   capturedHostages: []
   itemsHold: []
   highlighted: 0
   isSelected: 0
   onGoingInteraction: {fileID: 0}
-  playerTile: {fileID: 0}
-  state: 3
 --- !u!114 &871794684365505223
 MonoBehaviour:
   m_ObjectHideFlags: 0

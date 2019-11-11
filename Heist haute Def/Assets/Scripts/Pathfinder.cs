@@ -20,7 +20,7 @@ public class Pathfinder : MonoBehaviour
 
     // start = start tile, posToGo = liste des tuiles ou il doit aller,  hit = case sur laquelle il va dse de^placer , la liste de postogo c est en general la liste des tuiles d u trila
     // Ai.SearchForShortestPath(AI.tile, Ma_LevelManager.levelManager.list<escapeDoor>, Ma_LevelManager.levelManager.list<escapeDoor>[2]);
-    public List<Tile> SearchForShortestPath(Tile start, List<Tile> posToGo)
+    public List<Tile> SearchForShortestPath(Tile start, List<Tile> posToGo, bool useDoors = false)
     {
         //Debug.Log(hit.transform.position);
 
