@@ -120,7 +120,7 @@ public class Deplacement : Action
                     Deplacement deplacement = action as Deplacement;
                     //Debug.Log(deplacement.destination.avaible);
 
-                    if (!deplacement.destination.avaible)
+                    if (!deplacement.destination.avaible && deplacement.destination.GetComponentInChildren<Mb_Door>() == null)
                     {
                         findNewPath = true;
                         break;
@@ -156,6 +156,10 @@ public class Deplacement : Action
                                          hostage.nextAction = true;
                                  });
 
+            }
+            else if(destination.GetComponentInChildren<Mb_Door>() != null)
+            {
+                hostage.SetNextInteraction(destination.GetComponentInChildren<Mb_Door>());
             }
             else
             {

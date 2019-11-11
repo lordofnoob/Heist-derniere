@@ -9,7 +9,7 @@ public class Ma_ClockManager : MonoBehaviour
 
     public UnityEvent tickTrigger;
 
-    public float tickInterval = 0.5f;
+    public float tickInterval = 0.2f;
     void Awake()
     {
         Instance = this;

@@ -57,7 +57,7 @@ public class Tile : MonoBehaviour
         return (end.transform.position - transform.position).magnitude;
     }
 
-    public List<Tile> GetFreeNeighbours()
+    public List<Tile> GetFreeNeighbours(bool useDoors = false)
     {
         List<Tile> res = new List<Tile>();
 
@@ -66,24 +66,28 @@ public class Tile : MonoBehaviour
         Tile East = Ma_LevelManager.Instance.GetTile(row, column - 1);
         Tile West = Ma_LevelManager.Instance.GetTile(row, column + 1);
 
-        if(North != null && North.walkable && North.avaible)
+        if(North != null && North.walkable)
         {
-            res.Add(North);
+            if((useDoors && North.GetComponentInChildren<Mb_Door>() != null) || North.avaible)
+                res.Add(North);
         }
 
-        if(South != null && South.walkable && South.avaible)
+        if(South != null && South.walkable)
         {
-            res.Add(South);
+            if ((useDoors && South.GetComponentInChildren<Mb_Door>() != null) || South.avaible)
+                res.Add(South);
         }
 
-        if(East != null && East.walkable && East.avaible)
+        if(East != null && East.walkable)
         {
-            res.Add(East);
+            if ((useDoors && East.GetComponentInChildren<Mb_Door>() != null) || East.avaible)
+                res.Add(East);
         }
 
-        if(West != null && West.walkable && West.avaible)
+        if(West != null && West.walkable )
         {
-            res.Add(West);
+            if ((useDoors && West.GetComponentInChildren<Mb_Door>() != null) || West.avaible)
+                res.Add(West);
         }
         return res;
     }

@@ -40,7 +40,7 @@ public class Pathfinder : MonoBehaviour
                 tile.StraightLineDistanceToEnd = tile.StraightLineDistanceTo(endPos);
             }
 
-            AstarSearch();
+            AstarSearch(useDoors);
         }
 
         ShortestPath.Reverse();
@@ -51,7 +51,7 @@ public class Pathfinder : MonoBehaviour
         return ShortestPath;
     }
 
-    private void AstarSearch()
+    private void AstarSearch(bool useDoors)
     {
         Start.MinCostToStart = 0;
         List<Tile> Queue = new List<Tile>();
@@ -62,7 +62,7 @@ public class Pathfinder : MonoBehaviour
             Tile currentTile = Queue.First();
             Queue.Remove(currentTile);
             TileVisited++;
-            foreach(Tile neighbours in currentTile.GetFreeNeighbours())
+            foreach(Tile neighbours in currentTile.GetFreeNeighbours(useDoors))
             {
                 //Debug.Log("NEIGHBOURS : " + neighbours.transform.position);
                 if (agent.VisitedTiles.Contains(neighbours))
