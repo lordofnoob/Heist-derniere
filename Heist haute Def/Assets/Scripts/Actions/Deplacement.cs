@@ -14,60 +14,123 @@ public class Deplacement : Action
 
     public override void PerformAction()
     {
-        agent = agent as Mb_Player;
-        if(!destination.avaible && destination == agent.destination)
+        if(agent is Mb_Player)
         {
-            agent.nextAction = true;
-            return;
-        }
-        bool findNewPath = false;
-
-        //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
-        foreach (Action action in agent.actionsToPerform)
-        {
-            if (action is Deplacement)
+            Mb_Player player = agent as Mb_Player;
+            if (!destination.avaible && destination == player.destination)
             {
-                Deplacement deplacement = action as Deplacement;
-                //Debug.Log(deplacement.destination.avaible);
+                player.nextAction = true;
+                return;
+            }
+            bool findNewPath = false;
 
-                if (!deplacement.destination.avaible)
+            //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
+            foreach (Action action in player.actionsToPerform)
+            {
+                if (action is Deplacement)
                 {
-                    findNewPath = true;
-                    break;
+                    Deplacement deplacement = action as Deplacement;
+                    //Debug.Log(deplacement.destination.avaible);
+
+                    if (!deplacement.destination.avaible)
+                    {
+                        findNewPath = true;
+                        break;
+                    }
                 }
             }
+
+            if (destination.avaible)
+            {
+                destination.avaible = false;
+                player.agentTile.avaible = true;
+
+                //Debug.Log("MOVE TO : "+ destination.transform.position);
+                agent.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
+                    player.agentTile = destination;
+                    destination.SetOutlinesEnabled(false);
+                    destination.highlighted = false;
+
+                    if (destination == player.destination)
+                    {
+                        player.state = StateOfAction.Idle;
+                        player.destination = null;
+                    }
+                    if (!findNewPath)
+                        player.nextAction = true;
+                });
+            }
+            else
+            {
+                findNewPath = true;
+            }
+
+            if (findNewPath)
+            {
+                Debug.Log("FIND ANOTHER PATH");
+                player.FindAnOtherPath();
+            }
         }
-
-        if (destination.avaible)
+        else if(agent is Mb_IAHostage)
         {
-            destination.avaible = false;
-            agent.agentTile.avaible = true;
-            agent.agentTile = destination;
+            Mb_IAHostage hostage = agent as Mb_IAHostage;
 
-            //Debug.Log("MOVE TO : "+ destination.transform.position);
-            agent.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
-                destination.SetOutlinesEnabled(false);
-                destination.highlighted = false;
+            if (!destination.avaible && destination == hostage.destination)
+            {
+                hostage.nextAction = true;
+                return;
+            }
+            bool findNewPath = false;
 
-                if (destination == agent.destination)
+            //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
+            foreach (Action action in hostage.actionsToPerform)
+            {
+                if (action is Deplacement)
                 {
-                    agent.state = StateOfAction.Idle;
-                    agent.destination = null;
+                    Deplacement deplacement = action as Deplacement;
+                    //Debug.Log(deplacement.destination.avaible);
+
+                    if (!deplacement.destination.avaible)
+                    {
+                        findNewPath = true;
+                        break;
+                    }
                 }
+            }
 
-                if(!findNewPath)
-                    agent.nextAction = true;
-            });
-        }
-        else
-        {
-            findNewPath = true;
-        }
+            if (destination.avaible)
+            {
+                destination.avaible = false;
+                hostage.agentTile.avaible = true;
 
-        if (findNewPath)
-        {
-            Debug.Log("FIND ANOTHER PATH");
-            agent.FindAnOtherPath();
+                //Debug.Log("MOVE TO : "+ destination.transform.position);
+                hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
+                    hostage.agentTile = destination;
+                    destination.SetOutlinesEnabled(false);
+                    destination.highlighted = false;
+
+                    if (destination == hostage.destination)
+                    {
+                        hostage.state = StateOfAction.Idle;
+                        hostage.destination = null;
+                    }
+
+                    hostage.UpdatePositionToGo();
+
+                    if (!findNewPath)
+                        hostage.nextAction = true;
+                });
+            }
+            else
+            {
+                findNewPath = true;
+            }
+
+            if (findNewPath)
+            {
+                Debug.Log("FIND ANOTHER PATH");
+                hostage.FindAnOtherPath();
+            }
         }
 
     }

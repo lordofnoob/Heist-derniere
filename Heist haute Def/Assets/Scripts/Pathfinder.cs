@@ -24,8 +24,8 @@ public class Pathfinder : MonoBehaviour
     {
         //Debug.Log(hit.transform.position);
 
-        Debug.Log("Start : " + start.row +", "+start.column);
-        Debug.Log("Position to go : " + posToGo.Count);
+        //Debug.Log("Start : " + start.row +", "+start.column);
+        //Debug.Log("Position to go : " + posToGo.Count);
 
         ResetVisitedTile();
         Start = start;

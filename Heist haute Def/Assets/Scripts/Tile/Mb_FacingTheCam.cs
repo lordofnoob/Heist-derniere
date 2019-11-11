@@ -5,8 +5,8 @@ using UnityEditor;
 
 public class Mb_FacingTheCam : MonoBehaviour
 {
-    Transform transformToLookAt;
-    public void FindCam()
+    public Transform transformToLookAt;
+    public void Awake()
     {
         transformToLookAt = Editor.FindObjectOfType<Camera>().transform;
     }

@@ -45,8 +45,8 @@ public class Ed_Mb_Generator : MonoBehaviour
                         GameObject newGameObject = (newObject as GameObject);
                         newGameObject.transform.position = new Vector3(roomParent.position.x + x * distanceBetweenItems, roomParent.position.y, roomParent.position.z + z * distanceBetweenItems);
                         newGameObject.transform.SetParent(roomParent);
-                        if (newGameObject.GetComponentInChildren<Mb_FacingTheCam>()==true)
-                            newGameObject.GetComponentInChildren<Mb_FacingTheCam>().FindCam();
+                        /*if (newGameObject.GetComponentInChildren<Mb_FacingTheCam>()==true)
+                            newGameObject.GetComponentInChildren<Mb_FacingTheCam>().FindCam();*/
                     }
                        // colorCodeAssociated.colorCode[i].prefabAssociated, , Quaternion.identity, roomParent);
                 }

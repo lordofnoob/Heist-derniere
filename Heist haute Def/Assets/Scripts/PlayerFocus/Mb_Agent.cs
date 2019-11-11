@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Mb_Agent : Mb_Poolable
 {
-    [HideInInspector] public Pathfinder pathfinder;
+    //[HideInInspector] 
+    public Pathfinder pathfinder;
     [HideInInspector] public List<Tile> VisitedTiles = new List<Tile>();
 
     public Tile agentTile;
