@@ -20,7 +20,7 @@ public class Mb_IAHostage : Mb_Trial
     public float trialsAreaSize = 5f;
 
     [Header("Hostage State")]
-    public HostageState state = HostageState.Free;
+    public HostageState hostageState = HostageState.Free;
 
     [Header("Hostage target")]
     public Mb_Player target;
@@ -35,7 +35,7 @@ public class Mb_IAHostage : Mb_Trial
     void Update()
     {
         Counting();
-        if (state == HostageState.Captured)
+        if (hostageState == HostageState.Captured)
             FollowTarget();
     }
 

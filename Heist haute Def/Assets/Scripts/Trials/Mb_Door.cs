@@ -11,11 +11,11 @@ public class Mb_Door : Mb_Trial
     {
         for (int i = 0; i < listOfUser.Count; i++)
         {
-            listOfUser[i].state = Mb_Player.StateOfAction.Idle;
+            listOfUser[i].state = StateOfAction.Idle;
         }
         listOfUser.Clear();
-        tileAssociated.visited = !tileAssociated.visited;
-     //   door.
+        tileAssociated.avaible = !tileAssociated.avaible;
+        //   door.
         door.Play();
     }        
 }

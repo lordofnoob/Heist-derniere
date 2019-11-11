@@ -51,7 +51,7 @@ public class Ma_PlayerManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != Mb_Player.StateOfAction.Captured && selectedPlayer.state != Mb_Player.StateOfAction.Moving)
+                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != StateOfAction.Captured && selectedPlayer.state != StateOfAction.Moving)
                 {
                     /*hit.point += new Vector3(Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2, 0f, Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2);
 
@@ -67,11 +67,11 @@ public class Ma_PlayerManager : MonoBehaviour
                         selectedPlayer.onGoingInteraction = null;
                     }
 
-                    //Debug.Log(selectedPlayer.playerTile.transform.position);
-                    List<Tile> ShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(selectedPlayer.playerTile, new List<Tile> { hit.transform.GetComponent<Tile>() },hit.transform.GetComponent<Tile>());
+                    //Debug.Log(hit.transform.GetComponent<Tile>().transform.position);
+                    List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.agentTile, new List<Tile> { hit.transform.GetComponent<Tile>() });
                     selectedPlayer.AddDeplacement(ShortestPath);
                 }
-                else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.state != Mb_Player.StateOfAction.Captured && selectedPlayer.state!= Mb_Player.StateOfAction.Interacting)
+                else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.state != StateOfAction.Captured && selectedPlayer.state!= StateOfAction.Interacting)
                 {
                     Mb_Trial targetTrial = hit.transform.gameObject.GetComponent<Mb_Trial>();
                     if (selectedPlayer.onGoingInteraction != targetTrial)
@@ -102,7 +102,7 @@ public class Ma_PlayerManager : MonoBehaviour
                             return;
                         }
 
-                        List<Tile> ShortestPath = Ma_LevelManager.Instance.GetComponentInChildren<Pathfinder>().SearchForShortestPath(selectedPlayer.playerTile, positionToAccomplishDuty, targetTrial.trialTile);
+                        List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.agentTile, positionToAccomplishDuty);
                         selectedPlayer.AddDeplacement(ShortestPath);
                         selectedPlayer.SetNextInteraction(targetTrial);
                     }

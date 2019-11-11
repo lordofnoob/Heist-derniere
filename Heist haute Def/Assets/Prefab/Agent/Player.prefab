@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7511143353713208393}
   - component: {fileID: 3519075447395660427}
   - component: {fileID: 8424775565515314317}
+  - component: {fileID: 7951976372505407169}
   - component: {fileID: 1926673876582789652}
   - component: {fileID: 871794684365505223}
   m_Layer: 8
@@ -85,6 +86,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7951976372505407169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087831344316508124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1c720970e58ca45a95f97c1df5ffe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileVisited: 0
 --- !u!114 &1926673876582789652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,8 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c16667fbb56174fb0c80d11ed65399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolable: 1
+  poolable: 0
   objectType: 0
+  pathfinder: {fileID: 0}
+  VisitedTiles: []
   characterProperty: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
   highlightedColor: {r: 1, g: 0.73647493, b: 0, a: 0.50980395}
   selectedColor: {r: 1, g: 0.47614014, b: 0, a: 0.7921569}
@@ -110,7 +126,7 @@ MonoBehaviour:
   isSelected: 0
   onGoingInteraction: {fileID: 0}
   playerTile: {fileID: 0}
-  state: 0
+  state: 3
 --- !u!114 &871794684365505223
 MonoBehaviour:
   m_ObjectHideFlags: 0

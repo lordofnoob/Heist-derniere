@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_Action
+public class Action
 {
     public float timeToPerform;
+    public Mb_Agent agent;
 
-    public Sc_Action(float timeToPerform)
+    public Action(float timeToPerform, Mb_Agent agent)
     {
         this.timeToPerform = timeToPerform;
+        this.agent = agent;
     }
 
     public virtual void PerformAction() { }

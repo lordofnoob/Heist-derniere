@@ -15,9 +15,7 @@ public class Ma_LevelManager : MonoBehaviour
     public Ma_ClockManager clock;
     //public NavMeshSurface navMeshSurface;
 
-    private Grid grid;
-    public Grid Grid { get { return grid; } }
-    public List<Tile> allWalkableTile;
+    [SerializeField]public Tile[] allWalkableTile;
 
     public void Awake()
     {
@@ -52,5 +50,21 @@ public class Ma_LevelManager : MonoBehaviour
         grid = gameObject.AddComponent<Grid>();
         grid.BuildGridLevel(array);
         //navMeshSurface.BuildNavMesh();*/
+    }
+
+    public Tile GetTile(int row, int column)
+    {
+        Tile res = null;
+        for(int i = 0; i < allWalkableTile.Length; i++)
+        {
+            if(allWalkableTile[i].column == column)
+            {
+                if(allWalkableTile[i].row == row)
+                {
+                    res = allWalkableTile[i];
+                }
+            }
+        }
+        return res;
     }
 }
