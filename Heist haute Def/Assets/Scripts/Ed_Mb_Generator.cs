@@ -13,6 +13,7 @@ public class Ed_Mb_Generator : MonoBehaviour
     [HideInInspector] public Sc_Charaspec charactSpectToInstantiate;
     [HideInInspector] public Mb_Player playerPrefab;
 
+
     public void InstantiateRoom()
     {
         Identify();
@@ -45,8 +46,6 @@ public class Ed_Mb_Generator : MonoBehaviour
                         GameObject newGameObject = (newObject as GameObject);
                         newGameObject.transform.position = new Vector3(roomParent.position.x + x * distanceBetweenItems, roomParent.position.y, roomParent.position.z + z * distanceBetweenItems);
                         newGameObject.transform.SetParent(roomParent);
-                        /*if (newGameObject.GetComponentInChildren<Mb_FacingTheCam>()==true)
-                            newGameObject.GetComponentInChildren<Mb_FacingTheCam>().FindCam();*/
                     }
                        // colorCodeAssociated.colorCode[i].prefabAssociated, , Quaternion.identity, roomParent);
                 }
@@ -54,4 +53,6 @@ public class Ed_Mb_Generator : MonoBehaviour
 
         }
     }
+
+
 }

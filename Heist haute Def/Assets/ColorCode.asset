@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorCode:
   - colorAssociated: {r: 0, g: 0, b: 0, a: 1}
-    prefabAssociated: {fileID: 1997135797365634, guid: 295134a2ca5d0b748abd933e01ae9c8d,
+    prefabAssociated: {fileID: 6711392818150648204, guid: d7e25eb25d1fca840bfb80699016fcc5,
       type: 3}
   - colorAssociated: {r: 1, g: 0, b: 0, a: 1}
-    prefabAssociated: {fileID: 6711392818150648204, guid: d7e25eb25d1fca840bfb80699016fcc5,
+    prefabAssociated: {fileID: 6711392818150648204, guid: 0a8371a65471e224da50a853227093c6,
       type: 3}
   - colorAssociated: {r: 1, g: 1, b: 1, a: 1}
     prefabAssociated: {fileID: 1214944879021386, guid: a1a586269b311724b83e8635e5e6c6fa,

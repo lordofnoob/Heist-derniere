@@ -7,6 +7,7 @@ public class Mb_Door : Mb_Trial
     public Animation door;
     public Tile tileAssociated;
     public bool close = true;
+    public bool isExitDoor = false;
 
     public override void DoThings()
     {

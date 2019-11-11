@@ -10,6 +10,7 @@ public class In_RoomCreator : Editor
     SerializedProperty charactSpectToInstantiateProperty;
     private bool placingPlayerCharacter;
     private Color backGroundColorPlacingPlayer = Color.red;
+    private List<Mb_Door> exitList;
 
     // Selection.activeGameObject = mySelectedScript.gameObject;
     private void OnEnable()
@@ -77,8 +78,8 @@ public class In_RoomCreator : Editor
                     }
                 }
             }
-
-
+            //nettoyer toiute la liste des tuiles de sorties
+            exitList = new List<Mb_Door>();
             Tile firstTile = listOfTile[0];
 
             for (int i = 0; i < listOfTile.Count; i++)
@@ -150,7 +151,18 @@ public class In_RoomCreator : Editor
                 EditorUtility.SetDirty(listOfTile[i]);
             }
 
+            // check de chacune des portes pour verifier si faut les rajouter en sortie ou pas
+            Mb_Door[] temporaryList= FindObjectsOfType<Mb_Door>();
+            for (int i = 0; i < temporaryList.Length; i++)
+            {
+                if (temporaryList[i].isExitDoor == true)
+                {
+                    Debug.Log(temporaryList[i]);
+                    exitList.Add(temporaryList[i]);
+                }
+            }
 
+            updateExits();
         }
         #endregion
 
@@ -210,9 +222,14 @@ public class In_RoomCreator : Editor
         }
     }
 
+    void updateExits()
+    {
+        Ma_LevelManager level = FindObjectOfType<Ma_LevelManager>();
+        level.allExitDoors = exitList.ToArray();
+    }
+
     void CreateCharacter(Sc_Charaspec characterProperty, Tile hisTile)
     {
- ;
         Object newObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue);
         GameObject NewGameObject = newObject as GameObject;
 
@@ -233,41 +250,3 @@ public class In_RoomCreator : Editor
     }
 }
         //Mb_Player newMb_Player = Instantiate((characterPrefab.objectReferenceValue as GameObject).GetComponent<Mb_Player>());
-
-      
-    /**
-                           Object newObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue);
-                           Debug.Log(characterPrefab.objectReferenceValue);
-
-                           if (newObject is Mb_Player)
-                           {
-                               GameObject newGameObject = (newObject as GameObject);
-                               Mb_Player newPlayer = newGameObject.GetComponent<Mb_Player>();
-                               Selection.activeGameObject = newGameObject;
-                               newPlayer.characterProperty = (charactSpectToInstantiateProperty.objectReferenceValue as Sc_Charaspec);
-                               newGameObject.transform.position = new Vector3(hitInfo.collider.transform.position.x, hitInfo.collider.transform.position.y + hitInfo.collider.transform.localScale.y / 2, hitInfo.collider.transform.position.z);
-
-                               EditorUtility.SetDirty(newGameObject);
-                           }
-                       }
-                   }
-               }
-
-               /*
-               switch (e.type)
-               {
-                   case EventType.KeyDown:
-                       {
-                           if (Event.current.keyCode == (KeyCode.A))
-                           {
-                              
-                               //&& hitInfo.collider.GetComponent<Tile>().avaible == true
-                              
-                           break;
-                       }
-               }
-
-           */
-
-
-
