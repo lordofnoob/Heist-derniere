@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 6187152332806789115}
   - component: {fileID: 6910772779160549354}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Interaction
   m_TagString: Trial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,8 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6e2869263abc14589b55e8831c78f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolable: 1
-  objectType: 1
   pathfinder: {fileID: 0}
   VisitedTiles: []
   agentTile: {fileID: 0}
@@ -310,6 +308,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8818113118122498021}
     m_Modifications:
+    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 203322268724562778, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -429,11 +432,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6894246211669830886, guid: d7eab8d6cf5d12f48a3149e6d8e181c8, type: 3}

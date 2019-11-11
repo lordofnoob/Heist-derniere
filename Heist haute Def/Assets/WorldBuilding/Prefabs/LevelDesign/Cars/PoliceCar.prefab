@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6257664889450700620}
   - component: {fileID: 5031153603635910295}
   - component: {fileID: 3208028644848370948}
+  - component: {fileID: 69039098}
   m_Layer: 0
   m_Name: Voiture_police_sans_roues
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8412998549695727490}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.934, y: -2.274, z: 5.626}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5703200690883174725}
@@ -39,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8412998549695727490}
-  m_Mesh: {fileID: -598004769593665779, guid: 6666ef4c6e1c91a4f95d7f0aa34ad83d, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: 6666ef4c6e1c91a4f95d7f0aa34ad83d, type: 3}
 --- !u!23 &3208028644848370948
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -78,6 +79,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &69039098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8412998549695727490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c438ebf4b7f071c4ab582d7aaf21f9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1.0357915
+  shakeStrength: {x: 0, y: 0.05, z: 0.1}
+  vibrato: 10
+  noise: 10
+  isFadeOut: 1
+  originScale: {x: 1, y: 1, z: 1}
+  resetDist: 0.1
+  resetSpeed: 0.1
 --- !u!1 &8754592055965799254
 GameObject:
   m_ObjectHideFlags: 0
