@@ -13,6 +13,7 @@ public class Mb_Agent : Mb_Poolable
     [Header("Actions")]
     public StateOfAction state;
     public List<Action> actionsToPerform = new List<Action>();
+    [HideInInspector] public Mb_Trial onGoingInteraction;
     public Tile destination;
     public bool nextAction = true;
 
@@ -25,5 +26,8 @@ public class Mb_Agent : Mb_Poolable
     public virtual void AddDeplacement(List<Tile> path) { }
     public virtual void FindAnOtherPath() { }
     public virtual void Interact() { }
+    public virtual void SetNextInteraction(Mb_Trial trialToUse) { }
+    public virtual void AddItem(Sc_Items itemToAdd) { }
+    public virtual void DropItem(Sc_Items itemToDrop) { }
 
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Mb_Poolable : MonoBehaviour
 {
-    public bool poolable=true;
-    public ObjectType objectType;
+  /*  public bool poolable=true;
+    public ObjectType objectType;*/
 }
 
 public enum ObjectType
