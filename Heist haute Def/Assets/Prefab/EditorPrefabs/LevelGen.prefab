@@ -27,8 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18, y: 1.8483589, z: -7.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1378220159336713761}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,38 +47,7 @@ MonoBehaviour:
   distanceBetweenItems: 1
   colorCodeAssociated: {fileID: 11400000, guid: fec7311aeb512fc44b18085e6467c823,
     type: 2}
-  roomParent: {fileID: 1378220159336713761}
-  charactSpectToInstantiate: {fileID: 11400000, guid: 80331760e9f1c584380efdfae5aff921,
-    type: 2}
+  roomParent: {fileID: 0}
+  charactSpectToInstantiate: {fileID: 0}
   playerPrefab: {fileID: 1926673876582789652, guid: e5fa444fb59a8ef4a85efe8cdd0e7991,
     type: 3}
---- !u!1 &1378220159336713950
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1378220159336713761}
-  m_Layer: 0
-  m_Name: ROom1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1378220159336713761
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378220159336713950}
-  m_LocalRotation: {x: -0, y: 0.0000012367963, z: -0, w: 1}
-  m_LocalPosition: {x: -36.999992, y: 0, z: 24.000004}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1378220158350890998}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
