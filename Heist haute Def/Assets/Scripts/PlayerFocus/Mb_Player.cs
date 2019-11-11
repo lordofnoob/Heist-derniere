@@ -50,9 +50,6 @@ public class Mb_Player : Mb_Agent
         }
     }
 
-
-    [HideInInspector] public Mb_Trial onGoingInteraction;
-
     // nextInteractionToussa
     float distanceRemaining;
 
@@ -188,17 +185,17 @@ public class Mb_Player : Mb_Agent
         }*/
     }
 
-    public void AddItem(Sc_Items itemToAdd)
+    public override void AddItem(Sc_Items itemToAdd)
     {
         itemsHold.Add(itemToAdd);
     }
 
-    public void DropItem(Sc_Items itemToDrop)
+    public override void DropItem(Sc_Items itemToDrop)
     {
         itemsHold.Remove(itemToDrop);
     }
 
-    public void SetNextInteraction(Mb_Trial trialToUse)
+    public override void SetNextInteraction(Mb_Trial trialToUse)
     {
         onGoingInteraction = trialToUse;
         actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));

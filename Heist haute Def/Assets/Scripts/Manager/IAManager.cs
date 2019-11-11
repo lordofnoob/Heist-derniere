@@ -44,10 +44,12 @@ public class IAManager : MonoBehaviour
         
     }
 
-    public void IAHostageFollowingPlayer(Mb_IAHostage hostage, Mb_Player p)
+    public void IAHostageFollowingPlayer(Mb_Agent h, Mb_Agent p)
     {
-        hostage.target = p;
-        p.capturedHostages.Add(hostage);
+        Mb_IAHostage hostage = h as Mb_IAHostage;
+        Mb_Player player = p as Mb_Player;
+        hostage.target = player;
+        player.capturedHostages.Add(hostage);
         hostage.hostageState = HostageState.Captured;
     }
 

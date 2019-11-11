@@ -13,7 +13,7 @@ public class Mb_Trial : Mb_Agent
     [Header("Interface")]
     public Image timeVignet;
     //A rechanger en private
-    public List<Mb_Player> listOfUser= new List<Mb_Player>();
+    public List<Mb_Agent> listOfUser= new List<Mb_Agent>();
 
    
     private float currentTimeSpentOn=0;

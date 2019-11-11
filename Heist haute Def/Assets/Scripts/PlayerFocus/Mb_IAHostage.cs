@@ -91,7 +91,7 @@ public class Mb_IAHostage : Mb_Trial
         {
             posToExit.AddRange(door.positionToGo);
         }
-        List<Tile> pathToNearestExitDoor = pathfinder.SearchForShortestPath(agentTile, posToExit);
+        List<Tile> pathToNearestExitDoor = pathfinder.SearchForShortestPath(agentTile, posToExit, true);
         AddDeplacement(pathToNearestExitDoor);
         //Debug.Log(actionsToPerform.Count);
     }
@@ -152,4 +152,31 @@ public class Mb_IAHostage : Mb_Trial
     {
         positionToGo = agentTile.GetFreeNeighbours().ToArray();
     }
+
+    public override void SetNextInteraction(Mb_Trial trialToUse)
+    {
+        onGoingInteraction = trialToUse;
+        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+    }
+
+    public override void Interact()
+    {
+        Debug.Log("INTERACT");
+        state = StateOfAction.Interacting;
+        if (onGoingInteraction.listOfUser.Count == 0)
+        {
+            onGoingInteraction.listOfUser.Add(this);
+            onGoingInteraction.StartInteracting();
+        }
+        else
+            for (int i = 0; i < onGoingInteraction.listOfUser.Count; i++)
+            {
+                if (onGoingInteraction.listOfUser[i] != this)
+                {
+                    onGoingInteraction.listOfUser.Add(this);
+                    onGoingInteraction.ReUpduateTiming();
+                }
+            }
+    }
+
 }
