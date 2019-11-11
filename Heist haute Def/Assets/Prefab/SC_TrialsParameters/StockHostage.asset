@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c331ba71144345645a84011634befb4c, type: 3}
   m_Name: StockHostage
   m_EditorClassIdentifier: 
-  skillToUse: []
-  timeToAccomplishTrial: 2
+  skillToUse:
+  - associatedSkill: 8
+    associatedReduction: 0.2
+  timeToAccomplishTrial: 10

@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 6187152332806789115}
   - component: {fileID: 8411338046535841379}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Chest
   m_TagString: Trial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   VisitedTiles: []
   agentTile: {fileID: 0}
   state: 0
+  onGoingInteraction: {fileID: 0}
   destination: {fileID: 0}
   nextAction: 1
   trialParameters: {fileID: 0}
@@ -305,11 +306,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8818113118122498021}
     m_Modifications:
-    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 203322268724562778, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -429,6 +425,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2516202087017526230, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
         type: 3}
