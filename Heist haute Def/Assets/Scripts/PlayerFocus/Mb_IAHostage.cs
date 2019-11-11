@@ -43,8 +43,6 @@ public class Mb_IAHostage : Mb_Trial
     void Update()
     {
         Counting();
-        if (hostageState == HostageState.Captured)
-            FollowTarget();
     }
 
     public void RandomMovement()
@@ -59,15 +57,6 @@ public class Mb_IAHostage : Mb_Trial
         IAManager.Instance.IAHostageFollowingPlayer(this, listOfUser[0]);
         
         ResetValues();
-    }
-
-    void FollowTarget()
-    {
-        //Debug.Log("FOLLOWING");
-
-        Vector3 targetPos = target.transform.position;
-        //agent.SetDestination(targetPos);
-        //agent.stoppingDistance = 2f;
     }
 
     public void IncreaseStress()

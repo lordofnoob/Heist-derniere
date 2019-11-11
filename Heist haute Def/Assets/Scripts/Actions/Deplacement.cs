@@ -46,19 +46,49 @@ public class Deplacement : Action
                 player.agentTile.avaible = true;
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
-                agent.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
-                    player.agentTile = destination;
-                    destination.SetOutlinesEnabled(false);
-                    destination.highlighted = false;
+                player.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
+                                                    destination.transform.position.z),
+                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                .SetEase(Ease.Linear)
+                                .OnComplete(() =>
+                                {
+                                    player.agentTile = destination;
+                                    destination.SetOutlinesEnabled(false);
+                                    destination.highlighted = false;
 
-                    if (destination == player.destination)
+                                    if (destination == player.destination)
+                                    {
+                                        player.state = StateOfAction.Idle;
+                                        player.destination = null;
+                                    }
+                                    if (!findNewPath)
+                                        player.nextAction = true;
+                                });
+
+                if(player.capturedHostages.Count != 0)
+                {
+                    for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
                     {
-                        player.state = StateOfAction.Idle;
-                        player.destination = null;
+                        if (i == 0)
+                        {
+                            //Debug.Log("FIRST HOSTAGE");
+                            player.capturedHostages[i].transform.DOMove(new Vector3(player.agentTile.transform.position.x, 0.5f,
+                                                                                    player.agentTile.transform.position.z),
+                                                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                                                .SetEase(Ease.Linear);
+                            player.capturedHostages[i].agentTile = player.agentTile;
+                        }
+                        else
+                        {
+                            //Debug.Log("OTHER HOSTAGE");
+                            player.capturedHostages[i].transform.DOMove(new Vector3(player.capturedHostages[i - 1].agentTile.transform.position.x, 0.5f,
+                                                        player.capturedHostages[i - 1].agentTile.transform.position.z),
+                                                        Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                                                .SetEase(Ease.Linear);
+                            player.capturedHostages[i].agentTile = player.capturedHostages[i - 1].agentTile;
+                        }
                     }
-                    if (!findNewPath)
-                        player.nextAction = true;
-                });
+                }
             }
             else
             {
@@ -104,22 +134,28 @@ public class Deplacement : Action
                 hostage.agentTile.avaible = true;
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
-                hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f, destination.transform.position.z), Ma_LevelManager.Instance.clock.tickInterval * timeToPerform).SetEase(Ease.Linear).OnComplete(() => {
-                    hostage.agentTile = destination;
-                    destination.SetOutlinesEnabled(false);
-                    destination.highlighted = false;
+                hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
+                                                     destination.transform.position.z),
+                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                 .SetEase(Ease.Linear)
+                                 .OnComplete(() =>
+                                 {
+                                     hostage.agentTile = destination;
+                                     destination.SetOutlinesEnabled(false);
+                                     destination.highlighted = false;
 
-                    if (destination == hostage.destination)
-                    {
-                        hostage.state = StateOfAction.Idle;
-                        hostage.destination = null;
-                    }
+                                     if (destination == hostage.destination)
+                                     {
+                                         hostage.state = StateOfAction.Idle;
+                                         hostage.destination = null;
+                                     }
 
-                    hostage.UpdatePositionToGo();
+                                     hostage.UpdatePositionToGo();
 
-                    if (!findNewPath)
-                        hostage.nextAction = true;
-                });
+                                     if (!findNewPath)
+                                         hostage.nextAction = true;
+                                 });
+
             }
             else
             {
