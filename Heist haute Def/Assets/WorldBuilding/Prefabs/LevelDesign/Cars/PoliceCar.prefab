@@ -91,13 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c438ebf4b7f071c4ab582d7aaf21f9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1.0357915
-  shakeStrength: {x: 0, y: 0.05, z: 0.1}
-  vibrato: 10
-  noise: 10
+  duration: 1.0408357
+  shakeStrength: {x: 0, y: 0.05, z: 0.075}
+  vibrato: 5
+  noise: 5
   isFadeOut: 1
   originScale: {x: 1, y: 1, z: 1}
-  resetDist: 0.1
+  resetDist: 0.025
   resetSpeed: 0.1
 --- !u!1 &8754592055965799254
 GameObject:
