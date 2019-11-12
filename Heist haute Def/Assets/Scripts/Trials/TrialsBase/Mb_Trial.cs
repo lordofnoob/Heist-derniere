@@ -32,23 +32,27 @@ public class Mb_Trial : Mb_Agent
 
         if (CheckCondition())
         {
-            foreach (Mb_Player player in listOfUser)
+            foreach (Mb_Agent agent in listOfUser)
             {
-                int length = player.characterProperty.characterSkills.Length;
-                for (int i = 0; i < player.characterProperty.characterSkills.Length; i++)
-                    for (int y = 0; y < trialParameters.skillToUse.Length; y++)
-                        if (player.characterProperty.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
-                        {
-                            if (definitiveModifier > (1 - trialParameters.skillToUse[y].associatedReduction))
+                if(agent is Mb_Player)
+                {
+                    Mb_Player player = agent as Mb_Player;
+                    int length = player.characterProperty.characterSkills.Length;
+                    for (int i = 0; i < player.characterProperty.characterSkills.Length; i++)
+                        for (int y = 0; y < trialParameters.skillToUse.Length; y++)
+                            if (player.characterProperty.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
                             {
-                                definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
-                            }
-                            else if (definitiveModifier <= (definitiveModifier - trialParameters.skillToUse[y].associatedReduction) && definitiveModifier >= 1)
-                            {
-                                definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
-                            }
+                                if (definitiveModifier > (1 - trialParameters.skillToUse[y].associatedReduction))
+                                {
+                                    definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
+                                }
+                                else if (definitiveModifier <= (definitiveModifier - trialParameters.skillToUse[y].associatedReduction) && definitiveModifier >= 1)
+                                {
+                                    definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
+                                }
 
-                        }                
+                            }
+                }
             }
         }
 
@@ -134,5 +138,14 @@ public class Mb_Trial : Mb_Agent
     public virtual bool CheckCondition()
     {
         return true;
+    }
+
+    public void StopMoving()
+    {
+        Debug.Log("STOP MOVING");
+        state = StateOfAction.Idle;
+        actionsToPerform.Clear();
+        onGoingInteraction = null;
+        destination = null;
     }
 }

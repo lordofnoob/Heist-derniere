@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IAManager : MonoBehaviour
+public class Ma_IAManager : MonoBehaviour
 {
-    public static IAManager Instance;
+    public static Ma_IAManager Instance;
 
     public Transform HostagesContainer;
     //[HideInInspector]
@@ -25,7 +25,6 @@ public class IAManager : MonoBehaviour
         foreach (Mb_IAHostage hostage in IAList)
         {
             Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
-            Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.PerformAction);
         }
     }
 

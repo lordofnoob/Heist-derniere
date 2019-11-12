@@ -150,12 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6e2869263abc14589b55e8831c78f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolable: 1
-  objectType: 1
   pathfinder: {fileID: 0}
   VisitedTiles: []
   agentTile: {fileID: 0}
-  state: 0
+  state: 3
+  onGoingInteraction: {fileID: 0}
   destination: {fileID: 0}
   nextAction: 1
   trialParameters: {fileID: 11400000, guid: e59a5339bce6ac048bef46286bdb0f4f, type: 2}
@@ -166,6 +165,7 @@ MonoBehaviour:
   door: {fileID: 0}
   tileAssociated: {fileID: 3885763082956274667}
   close: 1
+  isExitDoor: 0
 --- !u!1 &6711392818150648204
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,11 +414,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 1427255710154951644, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -433,6 +428,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6894246211669830886, guid: d7eab8d6cf5d12f48a3149e6d8e181c8, type: 3}

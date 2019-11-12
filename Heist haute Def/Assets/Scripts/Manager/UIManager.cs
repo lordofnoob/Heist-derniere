@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     void UpdateHostageStressBar()
     {
-        foreach(Mb_IAHostage hostage in IAManager.Instance.IAList)
+        foreach(Mb_IAHostage hostage in Ma_IAManager.Instance.IAList)
         {
             hostage.stressBar.fillAmount = hostage.stress/100;
         }

@@ -111,12 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c16667fbb56174fb0c80d11ed65399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolable: 0
-  objectType: 0
   pathfinder: {fileID: 7951976372505407169}
   VisitedTiles: []
   agentTile: {fileID: 0}
-  state: 3
+  state: 0
+  onGoingInteraction: {fileID: 0}
   destination: {fileID: 0}
   nextAction: 1
   characterProperty: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
@@ -126,7 +125,6 @@ MonoBehaviour:
   itemsHold: []
   highlighted: 0
   isSelected: 0
-  onGoingInteraction: {fileID: 0}
 --- !u!114 &871794684365505223
 MonoBehaviour:
   m_ObjectHideFlags: 0
