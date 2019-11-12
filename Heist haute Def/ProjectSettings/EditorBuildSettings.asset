@@ -9,6 +9,11 @@ EditorBuildSettings:
     path: Assets/HDRP/Scenes/samplescene.unity
     guid: cbfe36cfddfde964d9dfce63a355d5dd
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Prototype.unity
     guid: 4ec4fb46ad9500042984845597c800ab
+=======
+    path: Assets/Scenes/Level1.unity
+    guid: 97af0641659d50042a8d6cc4256bf660
+>>>>>>> master
   m_configObjects: {}
