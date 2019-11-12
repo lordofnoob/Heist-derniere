@@ -31,8 +31,8 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        startColor = rend.material.color;
+      /*  rend = GetComponent<Renderer>();
+        startColor = rend.material.color;*/
     }
 
     void OnMouseEnter()

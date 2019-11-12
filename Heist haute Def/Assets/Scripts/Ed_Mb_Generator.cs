@@ -10,9 +10,10 @@ public class Ed_Mb_Generator : MonoBehaviour
     public float distanceBetweenItems;
     public Ed_Sc_ColorCode colorCodeAssociated;
     public Transform roomParent;
-    [HideInInspector] public Sc_Charaspec charactSpectToInstantiate;
+    [HideInInspector] public Sc_Charaspec playerCharactSpectToInstantiate;
     [HideInInspector] public Mb_Player playerPrefab;
-
+    [HideInInspector] public Sc_Charaspec hostageCharactSpectToInstantiate;
+    [HideInInspector] public Mb_Player hostagePrefab;
 
     public void InstantiateRoom()
     {
