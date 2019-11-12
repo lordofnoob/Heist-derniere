@@ -50,9 +50,6 @@ public class Mb_Player : Mb_Agent
         }
     }
 
-    // nextInteractionToussa
-    float distanceRemaining;
-
     public void Start()
     {
         Ma_ClockManager.Instance.tickTrigger.AddListener(PerformAction);
@@ -168,11 +165,10 @@ public class Mb_Player : Mb_Agent
             }
     }
 
-    public void ResetInteractionParameters()
+    public override void ResetInteractionParameters()
     {
         state = StateOfAction.Idle;
         onGoingInteraction = null;
-        distanceRemaining = 0;
         nextAction = true;
     }
 
