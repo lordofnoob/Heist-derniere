@@ -11,7 +11,8 @@ public class Ma_CameraManager : MonoBehaviour
     [Header("Camera Settings")]
     public Camera mainCam;
     public float panSpeed = 20f;
-	public float minPanLimitX, maxPanLimitX, minusPanLimitY, maxPanLimitY, minHeight, maxHeight;
+    private float minPanLimitX, maxPanLimitX, minZlimit, maxZlimit, minHeight=10, maxHeight=50;
+    public Transform minXZ, maxXZ;
 	public float scrollSpeed = 15f;
     private Vector3 pos;
 
@@ -34,12 +35,17 @@ public class Ma_CameraManager : MonoBehaviour
         mainCam = FindObjectOfType<Camera>();
         screenHeight = Screen.height;
         screenWidth = Screen.width;
-        transform.position = new Vector3(0f, 30f, 0f);
+       // transform.position = new Vector3(0f, 30f, 0f);
+
+        minPanLimitX = minXZ.position.x;
+        minZlimit = minXZ.position.z;
+        maxPanLimitX = maxXZ.position.x;
+        maxZlimit = maxXZ.position.z;
     }
 
     void Update () {
 
-		pos = mainCam.transform.localPosition;
+		pos = mainCam.transform.position;
 
         //camera au clavier
         #region
@@ -64,7 +70,8 @@ public class Ma_CameraManager : MonoBehaviour
         float scroll = InputController.scroll;
 		if(!hasTarget){
 			pos.y -= scroll * scrollSpeed * 100 * Time.deltaTime;
-		}else if(hasTarget){
+		}
+        else if(hasTarget){
 			targetOffset.y -= scroll * scrollSpeed * 100 * Time.deltaTime;
 			targetOffset.x += -scroll * (targetOffset.y/1.75f);
 			targetOffset.y = Mathf.Clamp(targetOffset.y, minHeight, maxHeight);
@@ -74,12 +81,13 @@ public class Ma_CameraManager : MonoBehaviour
 
 		pos.x = Mathf.Clamp(pos.x, minPanLimitX, maxPanLimitX);
 		pos.y = Mathf.Clamp(pos.y, minHeight, maxHeight);
-		pos.z = Mathf.Clamp(pos.z, minusPanLimitY, maxPanLimitY);
+		pos.z = Mathf.Clamp(pos.z, minZlimit, maxZlimit);
         ScrollingMouse();
 
         if (!hasTarget){
 			mainCam.transform.position = pos;
-		}else	if(hasTarget){
+		}
+        else	if(hasTarget){
 			FollowTarget();
 		}
 	}
