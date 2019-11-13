@@ -271,7 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3e654579237d644ada22d8b8aa7bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathfinder: {fileID: 0}
+  charaPerks: {fileID: 0}
+  pathfinder: {fileID: 5657659807170411418}
   VisitedTiles: []
   agentTile: {fileID: 0}
   state: 0

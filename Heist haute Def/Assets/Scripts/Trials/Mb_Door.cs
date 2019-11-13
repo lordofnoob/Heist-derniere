@@ -21,7 +21,7 @@ public class Mb_Door : Mb_Trial
         }
 
         close = !close;
-        GetComponent<MeshRenderer>().enabled = close;
+        GetComponentInChildren<MeshRenderer>().enabled = close;
         tileAssociated.avaible = !tileAssociated.avaible;
 
         //   door.
