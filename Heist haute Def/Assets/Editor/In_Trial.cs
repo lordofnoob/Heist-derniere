@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class In : MonoBehaviour
+using UnityEditor;
+[CustomEditor(typeof(Mb_Trial))]
+public class In_Trial : Editor
 {
     // Start is called before the first frame update
     void Start()

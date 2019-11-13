@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Mb_Agent : Mb_Poolable
 {
+    [Header("Chara perks")]
+    public Sc_Charaspec charaPerks;
     //[HideInInspector] 
     public Pathfinder pathfinder;
     [HideInInspector] public List<Tile> VisitedTiles = new List<Tile>();
-
+    
     public Tile agentTile;
 
     [Header("Actions")]

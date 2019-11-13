@@ -8,13 +8,11 @@ using UnityEditor.SceneManagement;
 public class In_RoomCreator : Editor
 {
     Ed_Mb_Generator mySelectedScript;
-    SerializedProperty characterPrefab;
-    SerializedProperty charactSpectToInstantiateProperty;
+    SerializedProperty characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty;
     //Pour donner toutes les sorties au gameManager
     private List<Mb_Door> exitList;
     //Pour l'editor pour qu il sache quoi faire
-    private bool placingPlayerCharacter;
-    private bool erasingPlayerCharacter;
+    private UsedMode mode;
     private Color backGroundColorPlacingPlayer, backGroundColorErasingPlayer, backGroundColorAddHostage, backGroundColorErasingHostage = Color.red;
 
     // Selection.activeGameObject = mySelectedScript.gameObject;
@@ -22,8 +20,10 @@ public class In_RoomCreator : Editor
     {
         mySelectedScript = target as Ed_Mb_Generator;
         characterPrefab = serializedObject.FindProperty("playerPrefab");
-        charactSpectToInstantiateProperty = serializedObject.FindProperty("charactSpectToInstantiate");
-
+        charactSpectToInstantiateProperty = serializedObject.FindProperty("playerCharactSpectToInstantiate");
+        hostagePrefabProperty = serializedObject.FindProperty("hostagePrefab");
+        hostageSpecProperty = serializedObject.FindProperty("hostageCharactSpectToInstantiate");
+        resetAllColor();
     }
 
     public override void OnInspectorGUI()
@@ -157,7 +157,7 @@ public class In_RoomCreator : Editor
             }
 
             // check de chacune des portes pour verifier si faut les rajouter en sortie ou pas
-            Mb_Door[] temporaryList= FindObjectsOfType<Mb_Door>();
+            Mb_Door[] temporaryList = FindObjectsOfType<Mb_Door>();
             for (int i = 0; i < temporaryList.Length; i++)
             {
                 if (temporaryList[i].isExitDoor == true)
@@ -173,11 +173,14 @@ public class In_RoomCreator : Editor
 
         //AddPlayerPart
         #region
+  
         EditorGUILayout.HelpBox("Lock the inspector and select the correct mode, then press A on a player or a tile to create or remove it", MessageType.None);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
+        EditorGUI.BeginChangeCheck();
         EditorGUILayout.PropertyField(characterPrefab);
         EditorGUILayout.PropertyField(charactSpectToInstantiateProperty);
+        EditorGUI.EndChangeCheck();
         EditorGUILayout.EndVertical();
         serializedObject.ApplyModifiedProperties();
         EditorGUI.EndChangeCheck();
@@ -185,44 +188,44 @@ public class In_RoomCreator : Editor
         GUI.backgroundColor = backGroundColorPlacingPlayer;
         if (GUILayout.Button("AddPlayer", GUILayout.MinWidth(50)))
         {
-            placingPlayerCharacter = !placingPlayerCharacter;
-            erasingPlayerCharacter = false;
+            mode = UsedMode.AddPlayer;
             CheckButtonColor();
         }
         GUI.backgroundColor = backGroundColorErasingPlayer;
         if (GUILayout.Button("RemovePlayer", GUILayout.MinWidth(50)))
         {
-            placingPlayerCharacter = false;
-            erasingPlayerCharacter = !erasingPlayerCharacter;
+            mode = UsedMode.RemovePlayer;
             CheckButtonColor();
         }
-
+        GUI.backgroundColor = Color.grey;
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
         #endregion
 
         //Add Hostage
+        #region
         EditorGUILayout.HelpBox("Lock the inspector and select the correct mode, then press A on a Hostage or a tile to create or remove it", MessageType.None);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
-        EditorGUILayout.PropertyField(characterPrefab);
-        EditorGUILayout.PropertyField(charactSpectToInstantiateProperty);
+        EditorGUI.BeginChangeCheck();
+        EditorGUILayout.PropertyField(hostagePrefabProperty);
+        EditorGUILayout.PropertyField(hostageSpecProperty);
+        EditorGUI.EndChangeCheck();
         EditorGUILayout.EndVertical();
         serializedObject.ApplyModifiedProperties();
-        EditorGUI.EndChangeCheck();
         EditorGUILayout.BeginVertical();
-        GUI.backgroundColor = backGroundColorPlacingPlayer;
-        if (GUILayout.Button("AddPlayer", GUILayout.MinWidth(50)))
+
+        GUI.backgroundColor = backGroundColorAddHostage;
+        if (GUILayout.Button("AddHostage", GUILayout.MinWidth(50)))
         {
-            placingPlayerCharacter = !placingPlayerCharacter;
-            erasingPlayerCharacter = false;
+            mode = UsedMode.AddHostage;
             CheckButtonColor();
         }
-        GUI.backgroundColor = backGroundColorErasingPlayer;
-        if (GUILayout.Button("RemovePlayer", GUILayout.MinWidth(50)))
+
+        GUI.backgroundColor = backGroundColorErasingHostage;
+        if (GUILayout.Button("RemoveHostage", GUILayout.MinWidth(50)))
         {
-            placingPlayerCharacter = false;
-            erasingPlayerCharacter = !erasingPlayerCharacter;
+            mode = UsedMode.RemoveHostage;
             CheckButtonColor();
         }
 
@@ -230,80 +233,110 @@ public class In_RoomCreator : Editor
         EditorGUILayout.EndHorizontal();
 
 
+        #endregion
+
     }
 
-    void CheckButtonColor()
-    {
-        if (placingPlayerCharacter == true)
-        {
-            backGroundColorPlacingPlayer = Color.green;
-        }
-        else
-            backGroundColorPlacingPlayer = Color.red;
-
-        if (erasingPlayerCharacter == true)
-        {
-            backGroundColorErasingPlayer = Color.green;
-        }
-        else
-            backGroundColorErasingPlayer = Color.red;
-    }
 
     private void OnSceneGUI()
     {
-        Placingcharacter();
-        ErasingCharacter();
+        PlacingAndErasing();
     }
 
     private void OnDisable()
     {
-        placingPlayerCharacter = false;
+        mode = UsedMode.none;
     }
 
-    //AddPlayerPart OnSceneGUI + erasePlayer
-    void Placingcharacter()
-    {
-        if (Event.current.keyCode == KeyCode.A && Event.current.type == EventType.KeyUp)
-        {
-            if (placingPlayerCharacter == true)
-            {
-               
-                Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-                RaycastHit hitInfo;
-                if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Tile>().avaible == true)
-                {
-                    CreateCharacter(charactSpectToInstantiateProperty.objectReferenceValue as Sc_Charaspec, hitInfo.collider.GetComponent<Tile>());
-                    serializedObject.ApplyModifiedProperties();
-                }
-            }
-        }
-    }
-    //Erase Player
-    void ErasingCharacter()
-    {
-        if (Event.current.keyCode == KeyCode.A && Event.current.type == EventType.KeyUp)
-        {
-            if (erasingPlayerCharacter == true)
-            {
-                Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-                RaycastHit hitInfo;
-                if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Mb_Player>() == true)
-                {
-                    Debug.Log("yes");
-                    EraseCharacter(hitInfo.collider.GetComponent<Mb_Player>());
-                    serializedObject.ApplyModifiedProperties();
-                }
-            }
-        }
-    }
     void updateExits()
     {
         Ma_LevelManager level = FindObjectOfType<Ma_LevelManager>();
         level.allExitDoors = exitList.ToArray();
     }
 
+    void CheckButtonColor()
+    {
+        switch (mode)
+        {
+            case UsedMode.AddPlayer:
+                resetAllColor();
+                backGroundColorPlacingPlayer = Color.green;
+                break;
+            case UsedMode.RemovePlayer:
+                resetAllColor();
+                backGroundColorErasingPlayer = Color.green;
+                break;
+            case UsedMode.AddHostage:
+                resetAllColor();
+                backGroundColorAddHostage = Color.green;
+                break;
+            case UsedMode.RemoveHostage:
+                resetAllColor();
+                backGroundColorErasingHostage = Color.green;
+                break;
+            case UsedMode.none:
+                resetAllColor();
+                break;
+        }
+    }
+
+    void resetAllColor()
+    {
+        backGroundColorPlacingPlayer = Color.red;
+        backGroundColorErasingPlayer = Color.red;
+        backGroundColorAddHostage = Color.red;
+        backGroundColorErasingHostage = Color.red;
+    }
 
     // ALED SIMON LE CONTROL Z D UN OBJET QUE JE CREER DANS UNE SCENE CA MARCHE     PAS
+
+    //AddPlayerPart OnSceneGUI + erasePlayer
+
+    void PlacingAndErasing()
+    {
+        if (Event.current.keyCode == KeyCode.A && Event.current.type == EventType.KeyUp)
+        {
+            Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+            RaycastHit hitInfo;
+            switch (mode)
+            { 
+                case UsedMode.AddHostage:
+                    if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Tile>().avaible == true)
+                    {
+                        CreateHostage(charactSpectToInstantiateProperty.objectReferenceValue as Sc_Charaspec, hitInfo.collider.GetComponent<Tile>());
+                        serializedObject.ApplyModifiedProperties();
+                    }
+                break;
+
+                case UsedMode.RemoveHostage:
+                    if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Mb_IAHostage>() == true)
+                    {
+                        EraseHostage(hitInfo.collider.GetComponent<Mb_IAHostage>());
+                        serializedObject.ApplyModifiedProperties();
+                    }
+                    break;
+
+                case UsedMode.AddPlayer:
+                    if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Tile>().avaible == true)
+                    {
+                        CreateCharacter(charactSpectToInstantiateProperty.objectReferenceValue as Sc_Charaspec, hitInfo.collider.GetComponent<Tile>());
+                        serializedObject.ApplyModifiedProperties();
+                    }
+                    break;
+
+                case UsedMode.RemovePlayer:
+                    if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Mb_Player>() == true)
+                    {
+                        EraseCharacter(hitInfo.collider.GetComponent<Mb_Player>());
+                        serializedObject.ApplyModifiedProperties();
+                    }
+                    break;
+            }
+        }
+    }
+
+
+
     void CreateCharacter(Sc_Charaspec characterProperty, Tile hisTile)
     {
         //
@@ -314,18 +347,38 @@ public class In_RoomCreator : Editor
         NewGameObject.GetComponent<Mb_Player>().agentTile = hisTile;
         hisTile.avaible = false;
         Selection.activeGameObject = NewGameObject.gameObject;
-   /*     Undo.RecordObject(hisTile,"newObject");
-        Undo.RegisterCreatedObjectUndo(NewGameObject as Object,"lastItemCreated");
-        // Undo.RegisterSceneUndo(EditorSceneManager.GetActiveScene().ToString());
-    //    Undo.RegisterCreatedObjectUndo(hisTile as Object, "lastItemCreated");*/
         EditorSceneManager.MarkAllScenesDirty();
-  
+    }
+
+    void CreateHostage(Sc_Charaspec characterProperty, Tile hisTile)
+    {
+        Mb_IAHostage NewGameObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue) as Mb_IAHostage;
+        Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
+        NewGameObject.transform.position = newpos;
+        NewGameObject.GetComponent<Mb_IAHostage>().charaPerks = characterProperty;
+        NewGameObject.GetComponent<Mb_IAHostage>().agentTile = hisTile;
+        hisTile.avaible = false;
+        Selection.activeGameObject = NewGameObject.gameObject;
+        EditorSceneManager.MarkAllScenesDirty();
     }
 
     void EraseCharacter(Mb_Player player)
     {
         player.agentTile.avaible = true;
         Undo.DestroyObjectImmediate(player.gameObject);
+    }
+
+    void EraseHostage(Mb_IAHostage hostage)
+    {
+        hostage.agentTile.avaible = true;
+        Undo.DestroyObjectImmediate(hostage.gameObject);
+    }
+
+    //GENRE JUSQUE LA
+
+    enum UsedMode
+    {
+        AddPlayer, RemovePlayer, AddHostage, RemoveHostage, none
     }
 }
     
