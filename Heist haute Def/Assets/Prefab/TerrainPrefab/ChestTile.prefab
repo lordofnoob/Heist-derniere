@@ -94,7 +94,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6621746791564297987}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -157,12 +157,14 @@ MonoBehaviour:
   onGoingInteraction: {fileID: 0}
   destination: {fileID: 0}
   nextAction: 1
-  trialParameters: {fileID: 0}
-  positionToGo: []
+  trialParameters: {fileID: 11400000, guid: 0e7f7af4812fe314e9251f0d8f2711fa, type: 2}
+  positionToGo:
+  - {fileID: 0}
   trialTile: {fileID: 0}
   timeVignet: {fileID: 9196770387053895367}
   listOfUser: []
-  itemList: []
+  itemList:
+  - {fileID: 11400000, guid: ee249106be30dc24898bd526073b6bad, type: 2}
 --- !u!1 &6711392818150648204
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,8 +295,8 @@ MonoBehaviour:
   highlighted: 0
   walkable: 1
   avaible: 0
-  row: 0
-  column: 0
+  row: -18
+  column: -10
   StraightLineDistanceToEnd: 0
   MinCostToStart: 0
   Cost: 1
@@ -437,8 +439,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 263b5825edb429d41ae01fbbe47f4932,
         type: 3}
-    m_RemovedComponents:
-    - {fileID: 6894246211669830886, guid: d7eab8d6cf5d12f48a3149e6d8e181c8, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7eab8d6cf5d12f48a3149e6d8e181c8, type: 3}
 --- !u!224 &6888393073456997963 stripped
 RectTransform:
