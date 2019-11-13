@@ -21,7 +21,8 @@ public class Mb_Agent : Mb_Poolable
 
     public void Awake()
     {
-        pathfinder = GetComponent<Pathfinder>();
+        if(GetComponent<Pathfinder>() != null)
+            pathfinder = GetComponent<Pathfinder>();
     }
 
     public virtual void PerformAction() { }

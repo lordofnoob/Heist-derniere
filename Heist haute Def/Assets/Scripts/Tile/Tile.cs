@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
     [Header("TileParamaters")]
     public bool walkable;
     public bool avaible;
+    public Mb_Agent agentOnTile = null;
 
     [Header("GridPamaters")]
     [SerializeField] public int row;
@@ -89,6 +90,31 @@ public class Tile : MonoBehaviour
             if ((useDoors && West.GetComponentInChildren<Mb_Door>() != null) || West.avaible)
                 res.Add(West);
         }
+        return res;
+    }
+
+    public List<Tile> GetNeighbours()
+    {
+        List<Tile> res = new List<Tile>();
+
+        Tile North = Ma_LevelManager.Instance.GetTile(row - 1, column);
+        Tile South = Ma_LevelManager.Instance.GetTile(row + 1, column);
+        Tile East = Ma_LevelManager.Instance.GetTile(row, column - 1);
+        Tile West = Ma_LevelManager.Instance.GetTile(row, column + 1);
+        Tile NW = Ma_LevelManager.Instance.GetTile(row -1, column + 1);
+        Tile NE = Ma_LevelManager.Instance.GetTile(row -1, column - 1);
+        Tile SW = Ma_LevelManager.Instance.GetTile(row +1, column + 1);
+        Tile SE = Ma_LevelManager.Instance.GetTile(row +1, column - 1);
+
+        res.Add(North);
+        res.Add(South);
+        res.Add(East);
+        res.Add(West);
+        res.Add(NW);
+        res.Add(NE);
+        res.Add(SW);
+        res.Add(SE);
+
         return res;
     }
 

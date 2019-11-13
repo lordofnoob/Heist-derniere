@@ -45,7 +45,9 @@ public class Deplacement : Action
             if (destination.avaible)
             {
                 destination.avaible = false;
+                destination.agentOnTile = player;
                 player.agentTile.avaible = true;
+                player.agentTile.agentOnTile = null;
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 player.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
@@ -133,7 +135,9 @@ public class Deplacement : Action
             if (destination.avaible)
             {
                 destination.avaible = false;
+                destination.agentOnTile = hostage;
                 hostage.agentTile.avaible = true;
+                hostage.agentTile.agentOnTile = null;
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
