@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 public class In_RoomCreator : Editor
 {
     Ed_Mb_Generator mySelectedScript;
-    SerializedProperty characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty;
+    SerializedProperty characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty, playerTransformProperty, hostageTransformProperty;
     //Pour donner toutes les sorties au gameManager
     private List<Mb_Door> exitList;
     //Pour l'editor pour qu il sache quoi faire
@@ -23,6 +23,8 @@ public class In_RoomCreator : Editor
         charactSpectToInstantiateProperty = serializedObject.FindProperty("playerCharactSpectToInstantiate");
         hostagePrefabProperty = serializedObject.FindProperty("hostagePrefab");
         hostageSpecProperty = serializedObject.FindProperty("hostageCharactSpectToInstantiate");
+        playerTransformProperty= serializedObject.FindProperty("playerTransform");
+        hostageTransformProperty = serializedObject.FindProperty("hostageTransform");
         resetAllColor();
     }
 
@@ -162,11 +164,10 @@ public class In_RoomCreator : Editor
             {
                 if (temporaryList[i].isExitDoor == true)
                 {
-                    Debug.Log(temporaryList[i]);
                     exitList.Add(temporaryList[i]);
                 }
             }
-
+            UpdateAgentsLists();
             updateExits();
         }
         #endregion
@@ -178,6 +179,7 @@ public class In_RoomCreator : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
         EditorGUI.BeginChangeCheck();
+        EditorGUILayout.PropertyField(playerTransformProperty);
         EditorGUILayout.PropertyField(characterPrefab);
         EditorGUILayout.PropertyField(charactSpectToInstantiateProperty);
         EditorGUI.EndChangeCheck();
@@ -208,6 +210,7 @@ public class In_RoomCreator : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
         EditorGUI.BeginChangeCheck();
+        EditorGUILayout.PropertyField(hostageTransformProperty);
         EditorGUILayout.PropertyField(hostagePrefabProperty);
         EditorGUILayout.PropertyField(hostageSpecProperty);
         EditorGUI.EndChangeCheck();
@@ -236,7 +239,14 @@ public class In_RoomCreator : Editor
         #endregion
 
     }
+    void UpdateAgentsLists()
+    {
+        Ma_IAManager iaManage = GameObject.FindObjectOfType<Ma_IAManager>();
+        iaManage.IAList = GameObject.FindObjectsOfType<Mb_IAHostage>();
 
+        Ma_PlayerManager playerManage = GameObject.FindObjectOfType<Ma_PlayerManager>();
+        playerManage.playerList = GameObject.FindObjectsOfType<Mb_Player>();
+    }
 
     private void OnSceneGUI()
     {
@@ -331,11 +341,11 @@ public class In_RoomCreator : Editor
                         serializedObject.ApplyModifiedProperties();
                     }
                     break;
+                    
             }
+            UpdateAgentsLists();
         }
     }
-
-
 
     void CreateCharacter(Sc_Charaspec characterProperty, Tile hisTile)
     {
@@ -345,6 +355,7 @@ public class In_RoomCreator : Editor
         NewGameObject.transform.position = newpos;
         NewGameObject.GetComponent<Mb_Player>().characterProperty = characterProperty;
         NewGameObject.GetComponent<Mb_Player>().agentTile = hisTile;
+        NewGameObject.transform.SetParent(playerTransformProperty.objectReferenceValue as Transform);
         hisTile.avaible = false;
         Selection.activeGameObject = NewGameObject.gameObject;
         EditorSceneManager.MarkAllScenesDirty();
@@ -352,11 +363,12 @@ public class In_RoomCreator : Editor
 
     void CreateHostage(Sc_Charaspec characterProperty, Tile hisTile)
     {
-        Mb_IAHostage NewGameObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue) as Mb_IAHostage;
+        Mb_IAHostage NewGameObject = PrefabUtility.InstantiatePrefab(hostagePrefabProperty.objectReferenceValue) as Mb_IAHostage;
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
         NewGameObject.GetComponent<Mb_IAHostage>().charaPerks = characterProperty;
         NewGameObject.GetComponent<Mb_IAHostage>().agentTile = hisTile;
+        NewGameObject.transform.SetParent(hostageTransformProperty.objectReferenceValue as Transform);
         hisTile.avaible = false;
         Selection.activeGameObject = NewGameObject.gameObject;
         EditorSceneManager.MarkAllScenesDirty();

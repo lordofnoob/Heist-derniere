@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
+
 [CustomEditor(typeof(Mb_Trial))]
 public class In_Trial : Editor
 {
-    // Start is called before the first frame update
-    void Start()
+//    SerializedProperty
+
+    public void OnEnable()
     {
-        
+     //   mySelectedScript = target as Ed_Mb_Generator;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnInspectorGUI()
     {
-        
+
     }
 }
