@@ -114,7 +114,7 @@ public class Deplacement : Action
             }
             bool findNewPath = false;
 
-            //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
+            //IF HOSTAGE PATH HAS CHANGE DURING DEPLACEMENT
             foreach (Action action in hostage.actionsToPerform)
             {
                 if (action is Deplacement)
