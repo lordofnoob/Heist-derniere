@@ -14,7 +14,9 @@ public class Deplacement : Action
 
     public override void PerformAction()
     {
-        if(agent is Mb_Player)
+        agent.state = StateOfAction.Moving;
+
+        if (agent is Mb_Player)
         {
             Mb_Player player = agent as Mb_Player;
             if (!destination.avaible && destination == player.destination)
@@ -112,7 +114,7 @@ public class Deplacement : Action
             }
             bool findNewPath = false;
 
-            //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
+            //IF HOSTAGE PATH HAS CHANGE DURING DEPLACEMENT
             foreach (Action action in hostage.actionsToPerform)
             {
                 if (action is Deplacement)
@@ -161,6 +163,7 @@ public class Deplacement : Action
             {
                 //Debug.Log("Set interaction");
                 hostage.SetFirstInteraction(destination.GetComponentInChildren<Mb_Trial>());
+                hostage.nextAction = true;
             }
             else
             {

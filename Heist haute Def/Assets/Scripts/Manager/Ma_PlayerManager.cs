@@ -9,6 +9,8 @@ public class Ma_PlayerManager : MonoBehaviour
     public static Ma_PlayerManager Instance;
 
     public Mb_InputController InputController;
+    public Transform PlayersContainer;
+    public Mb_Player[] playerList;
 
     public Mb_Player selectedPlayer = null;
     public int TickPerTileSpeed = 4;
@@ -16,6 +18,7 @@ public class Ma_PlayerManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        playerList = PlayersContainer.GetComponentsInChildren<Mb_Player>();
     }
 
     void Update()

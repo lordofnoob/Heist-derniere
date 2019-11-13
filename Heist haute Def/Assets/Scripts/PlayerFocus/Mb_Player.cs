@@ -7,7 +7,7 @@ using System.Linq;
 
 public enum StateOfAction
 {
-    Moving, Interacting, Captured, Idle
+    Idle, Interacting, Captured, Moving
 }
 
 
@@ -48,11 +48,6 @@ public class Mb_Player : Mb_Agent
         {
             return isSelected;
         }
-    }
-
-    public void Start()
-    {
-        Ma_ClockManager.Instance.tickTrigger.AddListener(PerformAction);
     }
 
     void Update () 
@@ -109,18 +104,29 @@ public class Mb_Player : Mb_Agent
         //positionToGo = endPos;
     }
 
-    public override void FindAnOtherPath()
+    public void ChangeDeplacement(List<Tile> newPath)
     {
+        //REMOVE OLDER DEPLACEMENT ACTION
         List<Deplacement> removeList = new List<Deplacement>();
-        foreach(Action action in actionsToPerform)
+        foreach (Action action in actionsToPerform)
         {
             if (action is Deplacement)
                 removeList.Add(action as Deplacement);
         }
 
-        foreach(Deplacement depla in removeList)
-            actionsToPerform.Remove(depla);
+        List<Action> actionList = actionsToPerform;
+        actionsToPerform.Clear();
+        
+        foreach(Tile tile in newPath)
+        {
+            actionsToPerform.Add(new Deplacement(characterProperty.speed, this, tile));
+        }
 
+        actionsToPerform.AddRange(actionList);
+    }
+
+    public override void FindAnOtherPath()
+    {
         List<Tile> newShortestPath = new List<Tile>();
         if (!destination.avaible)
         {
@@ -131,7 +137,7 @@ public class Mb_Player : Mb_Agent
             newShortestPath = pathfinder.SearchForShortestPath(agentTile, new List<Tile> { destination });
         }
         Debug.Log("New path deplacement number : " + newShortestPath.Count);
-        AddDeplacement(newShortestPath);
+        ChangeDeplacement(newShortestPath);
         nextAction = true;
     }
 
@@ -139,6 +145,16 @@ public class Mb_Player : Mb_Agent
     {
         if(actionsToPerform.Count != 0 && nextAction)
         {
+            if(onGoingInteraction != null && onGoingInteraction.state == StateOfAction.Moving)
+            {
+                List<Tile> posToGo = new List<Tile>();
+                for (int i = 0; i < onGoingInteraction.positionToGo.Length; i++)
+                {
+                    posToGo.Add(onGoingInteraction.positionToGo[i]);
+                }
+                List<Tile> newPath = pathfinder.SearchForShortestPath(agentTile, posToGo);
+                ChangeDeplacement(newPath);
+            }
             nextAction = false;
             actionsToPerform.First().PerformAction();
             actionsToPerform.Remove(actionsToPerform.First());
@@ -147,7 +163,7 @@ public class Mb_Player : Mb_Agent
 
     public override void Interact()
     {
-        Debug.Log("INTERACT");
+        //Debug.Log("INTERACT");
         state = StateOfAction.Interacting;
         if (onGoingInteraction.listOfUser.Count==0)
         {

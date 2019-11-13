@@ -271,12 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3e654579237d644ada22d8b8aa7bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolable: 1
-  objectType: 0
   pathfinder: {fileID: 0}
   VisitedTiles: []
   agentTile: {fileID: 0}
   state: 0
+  onGoingInteraction: {fileID: 0}
   destination: {fileID: 0}
   nextAction: 1
   trialParameters: {fileID: 11400000, guid: 639a342ae923c1147827b43c98bbd567, type: 2}

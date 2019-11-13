@@ -54,7 +54,7 @@ public class Mb_IAHostage : Mb_Trial
     {
         Debug.Log("TARGET CAPTURED");
         listOfUser[0].nextAction = true;
-        IAManager.Instance.IAHostageFollowingPlayer(this, listOfUser[0]);
+        Ma_IAManager.Instance.IAHostageFollowingPlayer(this, listOfUser[0]);
         
         ResetValues();
     }
@@ -68,7 +68,7 @@ public class Mb_IAHostage : Mb_Trial
                 stress = Mathf.Clamp(stress, 0, 100);
                 break;
             case HostageState.Captured:
-                stress -= Random.Range(minStress, maxStress);
+                stress += Random.Range(minStress, maxStress)/2;
                 stress = Mathf.Clamp(stress, 40, 100);
                 break;
         }
@@ -82,7 +82,7 @@ public class Mb_IAHostage : Mb_Trial
 
     public void Panic()
     {
-        Debug.Log("PANIC!");
+        //Debug.Log("PANIC!");
         hostageState = HostageState.InPanic;
         panicCounter++;
 
@@ -100,8 +100,8 @@ public class Mb_IAHostage : Mb_Trial
     {
         if (actionsToPerform.Count != 0 && nextAction)
         {
-            if(actionsToPerform.First() is Interact)
-                Debug.Log("Perform Interaction");
+            /*if(actionsToPerform.First() is Interact)
+                Debug.Log("Perform Interaction");*/
             //Debug.Log("PERFORM 1 IAHOSTAGE ACTION");
             nextAction = false;
             actionsToPerform.First().PerformAction();
@@ -112,42 +112,51 @@ public class Mb_IAHostage : Mb_Trial
 
     public override void AddDeplacement(List<Tile> path)
     {
-        //Debug.Log(path.Count);
-        state = StateOfAction.Moving;
-        destination = path[path.Count - 1];
-        foreach (Tile tile in path)
+        if(path.Count != 0)
         {
-            if(hostageState == HostageState.InPanic)
-                actionsToPerform.Add(new Deplacement(panicSpeed, this, tile));
-            else
-                actionsToPerform.Add(new Deplacement(normalSpeed, this, tile));
+            Debug.Log(path.Count);
+            destination = path[path.Count - 1];
+            foreach (Tile tile in path)
+            {
+                if (hostageState == HostageState.InPanic)
+                    actionsToPerform.Add(new Deplacement(panicSpeed, this, tile));
+                else
+                    actionsToPerform.Add(new Deplacement(normalSpeed, this, tile));
+            }
+            //Debug.Log(actionsToPerform.Count);
         }
-        //Debug.Log(actionsToPerform.Count);
+        else
+        {
+            Debug.Log("COUCOU");
+        }
     }
 
     public override void FindAnOtherPath()
     {
-        List<Deplacement> removeList = new List<Deplacement>();
-        foreach (Action action in actionsToPerform)
+        if(state == StateOfAction.Moving)
         {
-            if (action is Deplacement)
-                removeList.Add(action as Deplacement);
-        }
+            List<Deplacement> removeList = new List<Deplacement>();
+            foreach (Action action in actionsToPerform)
+            {
+                if (action is Deplacement)
+                    removeList.Add(action as Deplacement);
+            }
 
-        foreach (Deplacement depla in removeList)
-            actionsToPerform.Remove(depla);
+            foreach (Deplacement depla in removeList)
+                actionsToPerform.Remove(depla);
 
-        List<Tile> newShortestPath = new List<Tile>();
-        if (!destination.avaible)
-        {
-            newShortestPath = pathfinder.SearchForShortestPath(agentTile, destination.GetFreeNeighbours());
+            List<Tile> newShortestPath = new List<Tile>();
+            if (!destination.avaible)
+            {
+                newShortestPath = pathfinder.SearchForShortestPath(agentTile, destination.GetFreeNeighbours());
+            }
+            else
+            {
+                newShortestPath = pathfinder.SearchForShortestPath(agentTile, new List<Tile> { destination });
+            }
+            //Debug.Log("New path deplacement number : " + newShortestPath.Count);
+            AddDeplacement(newShortestPath);
         }
-        else
-        {
-            newShortestPath = pathfinder.SearchForShortestPath(agentTile, new List<Tile> { destination });
-        }
-        Debug.Log("New path deplacement number : " + newShortestPath.Count);
-        AddDeplacement(newShortestPath);
         nextAction = true;
     }
 
@@ -175,8 +184,9 @@ public class Mb_IAHostage : Mb_Trial
 
     public override void Interact()
     {
-        Debug.Log("INTERACTING");
+        //Debug.Log("INTERACTING");
         state = StateOfAction.Interacting;
+
         if (onGoingInteraction.listOfUser.Count == 0)
         {
             onGoingInteraction.listOfUser.Add(this);
@@ -198,6 +208,7 @@ public class Mb_IAHostage : Mb_Trial
         state = StateOfAction.Idle;
         onGoingInteraction = null;
         nextAction = true;
+        //Debug.Log(actionsToPerform.Count);
     }
 
 }

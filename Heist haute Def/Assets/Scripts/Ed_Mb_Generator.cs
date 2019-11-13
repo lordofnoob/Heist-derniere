@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
+
 public class Ed_Mb_Generator : MonoBehaviour
 {
     public Texture2D textureToTraduce;
