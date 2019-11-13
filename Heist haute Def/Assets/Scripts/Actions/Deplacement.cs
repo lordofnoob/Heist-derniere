@@ -80,6 +80,10 @@ public class Deplacement : Action
                                                                                     player.agentTile.transform.position.z),
                                                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                                                 .SetEase(Ease.Linear);
+                            player.agentTile.avaible = false;
+                            player.agentTile.agentOnTile = player.capturedHostages[i];
+                            player.capturedHostages[i].agentTile.avaible = true;
+                            player.capturedHostages[i].agentTile.agentOnTile = null;
                             player.capturedHostages[i].agentTile = player.agentTile;
                         }
                         else
@@ -89,6 +93,10 @@ public class Deplacement : Action
                                                         player.capturedHostages[i - 1].agentTile.transform.position.z),
                                                         Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                                                 .SetEase(Ease.Linear);
+                            player.capturedHostages[i - 1].agentTile.avaible = false;
+                            player.capturedHostages[i - 1].agentTile.agentOnTile = player.capturedHostages[i];
+                            player.capturedHostages[i].agentTile.avaible = true;
+                            player.capturedHostages[i].agentTile.agentOnTile = null;
                             player.capturedHostages[i].agentTile = player.capturedHostages[i - 1].agentTile;
                         }
                     }
@@ -101,7 +109,6 @@ public class Deplacement : Action
 
             if (findNewPath)
             {
-                Debug.Log("FIND ANOTHER PATH");
                 player.FindAnOtherPath();
             }
         }
@@ -176,7 +183,6 @@ public class Deplacement : Action
 
             if (findNewPath)
             {
-                Debug.Log("FIND ANOTHER PATH");
                 hostage.FindAnOtherPath();
             }
         }

@@ -37,10 +37,10 @@ public class Mb_Trial : Mb_Agent
                 if(agent is Mb_Player)
                 {
                     Mb_Player player = agent as Mb_Player;
-                    int length = player.characterProperty.characterSkills.Length;
-                    for (int i = 0; i < player.characterProperty.characterSkills.Length; i++)
+                    int length = player.charaPerks.characterSkills.Length;
+                    for (int i = 0; i < player.charaPerks.characterSkills.Length; i++)
                         for (int y = 0; y < trialParameters.skillToUse.Length; y++)
-                            if (player.characterProperty.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
+                            if (player.charaPerks.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
                             {
                                 if (definitiveModifier > (1 - trialParameters.skillToUse[y].associatedReduction))
                                 {
@@ -80,12 +80,12 @@ public class Mb_Trial : Mb_Agent
     {
         foreach (Mb_Player player in listOfUser)
         {
-            Debug.Log(player.characterProperty);
-            int length = player.characterProperty.characterSkills.Length;
+            Debug.Log(player.charaPerks);
+            int length = player.charaPerks.characterSkills.Length;
             Debug.Log(length);
-            for (int i = 0; i < player.characterProperty.characterSkills.Length; i++)
+            for (int i = 0; i < player.charaPerks.characterSkills.Length; i++)
                 for (int y = 0; y < trialParameters.skillToUse.Length; y++)
-                    if (player.characterProperty.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
+                    if (player.charaPerks.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
                     {
                         if (definitiveModifier > (1 - trialParameters.skillToUse[y].associatedReduction))
                         {
@@ -145,7 +145,9 @@ public class Mb_Trial : Mb_Agent
         Debug.Log("STOP MOVING");
         state = StateOfAction.Idle;
         actionsToPerform.Clear();
+        actionsToPerform.TrimExcess();
         onGoingInteraction = null;
         destination = null;
+        Debug.Log("actions have been flushed. Count left = " + actionsToPerform.Count.ToString());
     }
 }
