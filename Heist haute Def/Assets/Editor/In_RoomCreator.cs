@@ -9,11 +9,14 @@ public class In_RoomCreator : Editor
 {
     Ed_Mb_Generator mySelectedScript;
     SerializedProperty characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty, playerTransformProperty, hostageTransformProperty;
+    SerializedProperty wallConfigProperty;
     //Pour donner toutes les sorties au gameManager
     private List<Mb_Door> exitList;
     //Pour l'editor pour qu il sache quoi faire
     private UsedMode mode;
     private Color backGroundColorPlacingPlayer, backGroundColorErasingPlayer, backGroundColorAddHostage, backGroundColorErasingHostage = Color.red;
+
+
 
     // Selection.activeGameObject = mySelectedScript.gameObject;
     private void OnEnable()
@@ -25,6 +28,7 @@ public class In_RoomCreator : Editor
         hostageSpecProperty = serializedObject.FindProperty("hostageCharactSpectToInstantiate");
         playerTransformProperty= serializedObject.FindProperty("playerTransform");
         hostageTransformProperty = serializedObject.FindProperty("hostageTransform");
+        wallConfigProperty = serializedObject.FindProperty("wallConfig");
         resetAllColor();
     }
 
@@ -239,6 +243,7 @@ public class In_RoomCreator : Editor
         #endregion
 
     }
+
     void UpdateAgentsLists()
     {
         Ma_IAManager iaManage = GameObject.FindObjectOfType<Ma_IAManager>();
@@ -296,6 +301,25 @@ public class In_RoomCreator : Editor
         backGroundColorErasingPlayer = Color.red;
         backGroundColorAddHostage = Color.red;
         backGroundColorErasingHostage = Color.red;
+    }
+
+    void SetWallGraphs()
+    {
+        Tile[] allTiles = GameObject.FindObjectsOfType<Tile>();
+        List<Tile> temporaryTileList = new List<Tile>();
+        Tile[] allWalls;
+        foreach (Tile tile in allTiles)
+        {
+            if (tile.walkable == false)
+                temporaryTileList.Add(tile);
+        }
+        allWalls = temporaryTileList.ToArray();
+
+        foreach(Tile wallTile in allWalls)
+        {
+            wallTile.GetFreeNeighbours
+        }
+
     }
 
     // ALED SIMON LE CONTROL Z D UN OBJET QUE JE CREER DANS UNE SCENE CA MARCHE     PAS
