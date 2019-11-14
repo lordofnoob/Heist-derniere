@@ -14,7 +14,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
     RenderType: Transparent
@@ -111,7 +111,7 @@ Material:
     m_Floats:
     - Vector1_48DB2732: 0.01
     - Vector1_C62E65BD: 0.008
-    - Vector1_F70CF984: 0.8
+    - Vector1_F70CF984: 1.5
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
