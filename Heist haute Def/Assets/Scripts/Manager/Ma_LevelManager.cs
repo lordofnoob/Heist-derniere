@@ -17,6 +17,7 @@ public class Ma_LevelManager : MonoBehaviour
 
     [SerializeField]public Tile[] allWalkableTile;
     [SerializeField]public Mb_Door[] allExitDoors;
+    [SerializeField] public Tile[] allTiles;
 
     public void Awake()
     {
@@ -53,7 +54,7 @@ public class Ma_LevelManager : MonoBehaviour
         //navMeshSurface.BuildNavMesh();*/
     }
 
-    public Tile GetTile(int row, int column)
+    public Tile GetWalkableTile(int row, int column)
     {
         Tile res = null;
         for(int i = 0; i < allWalkableTile.Length; i++)
@@ -63,6 +64,21 @@ public class Ma_LevelManager : MonoBehaviour
                 if(allWalkableTile[i].row == row)
                 {
                     res = allWalkableTile[i];
+                }
+            }
+        }
+        return res;
+    }
+    public Tile GetTile(int row, int column)
+    {
+        Tile res = null;
+        for (int i = 0; i < allTiles.Length; i++)
+        {
+            if (allTiles[i].column == column)
+            {
+                if (allTiles[i].row == row)
+                {
+                    res = allTiles[i];
                 }
             }
         }

@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 public class In_RoomCreator : Editor
 {
     Ed_Mb_Generator mySelectedScript;
-    SerializedProperty characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty, playerTransformProperty, hostageTransformProperty;
+    SerializedProperty allRoomTransform, characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty, playerTransformProperty, hostageTransformProperty;
     SerializedProperty wallConfigProperty;
     //Pour donner toutes les sorties au gameManager
     private List<Mb_Door> exitList;
@@ -28,6 +28,7 @@ public class In_RoomCreator : Editor
         hostageSpecProperty = serializedObject.FindProperty("hostageCharactSpectToInstantiate");
         playerTransformProperty= serializedObject.FindProperty("playerTransform");
         hostageTransformProperty = serializedObject.FindProperty("hostageTransform");
+        allRoomTransform = serializedObject.FindProperty("allRoomTransform");
         wallConfigProperty = serializedObject.FindProperty("wallConfig");
         resetAllColor();
     }
@@ -58,16 +59,17 @@ public class In_RoomCreator : Editor
                 Undo.DestroyObjectImmediate(mySelectedScript.roomParent.GetChild(0).gameObject);
             }
         }
+        /*
         if (GUILayout.Button("CleanAllRooms", GUILayout.MinHeight(50)))
         {
-            for (int i = 0; i < mySelectedScript.transform.childCount; i++)
+            for (int i = 0; i < mySelectedScript.roomParent.childCount; i++)
             {
-                while (mySelectedScript.transform.GetChild(i).transform.childCount > 0)
+                while (mySelectedScript.roomParent.transform.GetChild(i).transform.childCount > 0)
                 {
-                    Undo.DestroyObjectImmediate(mySelectedScript.transform.GetChild(i).GetChild(0).gameObject);
+                    Undo.DestroyObjectImmediate(mySelectedScript.roomParent.GetChild(i).GetChild(0).gameObject);
                 }
             }
-        }
+        }*/
         GUILayout.EndHorizontal();
         #endregion
 
@@ -75,104 +77,12 @@ public class In_RoomCreator : Editor
         #region
         if (GUILayout.Button("GenerateGrid", GUILayout.MinHeight(50)))
         {
-            List<Tile> listOfTile = new List<Tile>();
-            List<Tile> listOfTileOfWalkableTile = new List<Tile>();
-            for (int j = 0; j < mySelectedScript.transform.childCount; j++)
-            {
-                for (int i = 0; i < mySelectedScript.transform.GetChild(j).childCount; i++)
-                {
-                    if (mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>() == true)
-                    {
-                        listOfTile.Add(mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>());
-                        if (mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>().walkable == true)
-                            listOfTileOfWalkableTile.Add(mySelectedScript.transform.GetChild(j).GetChild(i).GetComponent<Tile>());
-                    }
-                }
-            }
-            //nettoyer toiute la liste des tuiles de sorties
-            exitList = new List<Mb_Door>();
-            Tile firstTile = listOfTile[0];
-
-            for (int i = 0; i < listOfTile.Count; i++)
-            {
-
-                Tile worstXtile = listOfTile[0];
-                Tile worstYtile = listOfTile[0];
-                Tile bestXtile = listOfTile[0];
-                Tile bestYtile = listOfTile[0];
-
-                if (i > 0)
-                {
-                    if (listOfTile[i].transform.position.x < worstXtile.transform.position.x)
-                    {
-                        worstXtile = listOfTile[i];
-
-                    }
-                    else if (listOfTile[i].transform.position.x > bestXtile.transform.position.x)
-                    {
-                        bestXtile = listOfTile[i];
-                        // Debug.Log(bestXtile.transform.position.x);
-                    }
-                    else if (listOfTile[i].transform.position.y < worstYtile.transform.position.y)
-                    {
-                        worstYtile = listOfTile[i];
-                    }
-                    else if (listOfTile[i].transform.position.y > bestYtile.transform.position.y)
-                    {
-                        bestYtile = listOfTile[i];
-                    }
-                }
-                float bestX = Mathf.Abs(bestXtile.transform.position.x + bestXtile.transform.position.z);
-                float worstX = Mathf.Abs(worstXtile.transform.position.x + worstXtile.transform.position.z);
-                float bestY = Mathf.Abs(bestYtile.transform.position.x + bestYtile.transform.position.z);
-                float worstY = Mathf.Abs(worstYtile.transform.position.x + worstYtile.transform.position.z);
-
-                if (bestX > worstX || bestX > bestY || bestX > worstY)
-                {
-                    firstTile = bestXtile;
-
-                }
-                else if (worstX > bestX || worstX > bestY || worstX > worstY)
-                {
-                    firstTile = worstXtile;
-
-                }
-                else if (bestY > worstX || bestY > bestX || bestY > worstY)
-                {
-                    firstTile = bestYtile;
-
-                }
-                else if (worstY > bestX || worstY > bestY || worstY > worstX)
-                {
-                    firstTile = worstYtile;
-
-                }
-
-            }
-            listOfTile.Remove(firstTile);
-            firstTile.SetColumnAndRow(0, 0);
-
-            GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile = listOfTileOfWalkableTile.ToArray(); ;
-            EditorUtility.SetDirty(GameObject.FindObjectOfType<Ma_LevelManager>());
-            /*for (int i =0; i < listOfTileOfWalkableTile.Count; i++)
-                GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile.Add(listOfTileOfWalkableTile[i]);*/
-            for (int i = 0; i < listOfTile.Count; i++)
-            {
-                listOfTile[i].SetColumnAndRow(Mathf.RoundToInt(firstTile.transform.position.x - listOfTile[i].transform.position.x), Mathf.RoundToInt(firstTile.transform.position.z - listOfTile[i].transform.position.z));
-                EditorUtility.SetDirty(listOfTile[i]);
-            }
-
-            // check de chacune des portes pour verifier si faut les rajouter en sortie ou pas
-            Mb_Door[] temporaryList = FindObjectsOfType<Mb_Door>();
-            for (int i = 0; i < temporaryList.Length; i++)
-            {
-                if (temporaryList[i].isExitDoor == true)
-                {
-                    exitList.Add(temporaryList[i]);
-                }
-            }
+            GenerateGrid();
+           
             UpdateAgentsLists();
             updateExits();
+            SetWallGraphs();
+
         }
         #endregion
 
@@ -310,21 +220,220 @@ public class In_RoomCreator : Editor
         Tile[] allWalls;
         foreach (Tile tile in allTiles)
         {
-            if (tile.walkable == false)
+            if (tile.tileType == Tile.TileType.Wall)
                 temporaryTileList.Add(tile);
         }
         allWalls = temporaryTileList.ToArray();
 
-        foreach(Tile wallTile in allWalls)
+        foreach (Tile wallTile in allWalls)
         {
-            wallTile.GetFreeNeighbours
+            wallTile.GetNeighbours();
+            List<CombinableWallType> WallTypeList = new List<CombinableWallType>();
+
+            if (wallTile.neighbours.North != null)
+                if (wallTile.neighbours.North.tileType == Tile.TileType.Wall)
+                    WallTypeList.Add(CombinableWallType.Up);
+            if (wallTile.neighbours.South != null)
+                if (wallTile.neighbours.South.tileType == Tile.TileType.Wall)
+                    WallTypeList.Add(CombinableWallType.Down);
+            if (wallTile.neighbours.East != null)
+                if (wallTile.neighbours.East.tileType == Tile.TileType.Wall)
+                    WallTypeList.Add(CombinableWallType.Right);
+            if (wallTile.neighbours.West != null)
+                if (wallTile.neighbours.West.tileType == Tile.TileType.Wall)
+                    WallTypeList.Add(CombinableWallType.Left);
+
+
+            //Quand on voudra detecter l exterieur 
+            /*         if (wallTile.neighbours.NE.tileType == Tile.TileType.Wall)
+                         WallTypeList.Add(CombinableWallType.LeftUp);
+                     if (wallTile.neighbours.NW.tileType == Tile.TileType.Wall)
+                         WallTypeList.Add(CombinableWallType.RightUp);
+                     if (wallTile.neighbours.SE.tileType == Tile.TileType.Wall)
+                         WallTypeList.Add(CombinableWallType.LeftDown);
+                     if (wallTile.neighbours.SW.tileType == Tile.TileType.Wall)
+                         WallTypeList.Add(CombinableWallType.RightDown);*/
+
+            CombinableWallType DefinitiveType = CombinableWallType.None;
+            for (int i = 0; i < WallTypeList.Count; i++)
+            {
+                DefinitiveType |= WallTypeList[i];
+
+            }
+           
+            Sc_WallConfiguration wallConfig = wallConfigProperty.objectReferenceValue as Sc_WallConfiguration;
+
+            for (int i = 0; i < wallConfig.wallConfiguration.Length; i++)
+            {
+                if (DefinitiveType == wallConfig.wallConfiguration[i].walltype)
+                {
+                    int randomTileToGenerate = Random.Range(0, wallConfig.wallConfiguration[i].associatedTiles.Length - 1);
+
+                    Tile newGameObject =
+                        PrefabUtility.InstantiatePrefab(wallConfig.wallConfiguration[i].associatedTiles[randomTileToGenerate].associatedTile) as Tile;
+
+
+                    newGameObject.transform.position = wallTile.transform.position;
+                    newGameObject.transform.SetParent(wallTile.transform.parent);
+
+                }
+           
+            }
+          //  GenerateGrid();
+
+            // PrefabUtility.InstantiatePrefab();*/
         }
 
+        foreach (Tile wallTile in allWalls)
+        {
+                DestroyImmediate(wallTile.gameObject);
+        }
     }
 
+   
     // ALED SIMON LE CONTROL Z D UN OBJET QUE JE CREER DANS UNE SCENE CA MARCHE     PAS
 
     //AddPlayerPart OnSceneGUI + erasePlayer
+    void GenerateGrid()
+    {
+         Tile[] listOfTile;
+           List<Tile> listOfTileOfWalkableTile = new List<Tile>();
+
+            exitList = new List<Mb_Door>();
+
+   
+            listOfTile = GameObject.FindObjectsOfType<Tile>();
+            for (int i = 0; i < listOfTile.Length; i++)
+                if (listOfTile[i].walkable == true)
+                    listOfTileOfWalkableTile.Add(listOfTile[i]);
+            GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile = listOfTileOfWalkableTile.ToArray();
+            GameObject.FindObjectOfType<Ma_LevelManager>().allTiles = listOfTile;
+            Tile firstTile = listOfTile[0];
+
+            //test
+            #region
+            /*
+            for (int j = 0; j < mySelectedScript.allRoomTransform.transform.childCount; j++)
+            {
+                for (int i = 0; i < mySelectedScript.allRoomTransform.GetChild(j).childCount; i++)
+                {
+                    if (mySelectedScript.allRoomTransform.transform.GetChild(j).GetChild(i).GetComponent<Tile>() == true)
+                    {
+                        listOfTile.Add(mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>());
+                        if (mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>().walkable == true)
+                            listOfTileOfWalkableTile.Add(mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>());
+
+                    }
+                }
+            }*/
+
+            //nettoyer toiute la liste des tuiles de sorties
+
+
+            /*
+            for (int i = 0; i < listOfTile.Count; i++)
+            {
+
+                Tile worstXtile = listOfTile[0];
+                Tile worstYtile = listOfTile[0];
+                Tile bestXtile = listOfTile[0];
+                Tile bestYtile = listOfTile[0];
+
+                if (i > 0)
+                {
+                    if (listOfTile[i].transform.position.x < worstXtile.transform.position.x)
+                    {
+                        worstXtile = listOfTile[i];
+
+                    }
+                    else if (listOfTile[i].transform.position.x > bestXtile.transform.position.x)
+                    {
+                        bestXtile = listOfTile[i];
+                        // Debug.Log(bestXtile.transform.position.x);
+                    }
+                    else if (listOfTile[i].transform.position.y < worstYtile.transform.position.y)
+                    {
+                        worstYtile = listOfTile[i];
+                    }
+                    else if (listOfTile[i].transform.position.y > bestYtile.transform.position.y)
+                    {
+                        bestYtile = listOfTile[i];
+                    }
+                }
+                float bestX = Mathf.Abs(bestXtile.transform.position.x + bestXtile.transform.position.z);
+                float worstX = Mathf.Abs(worstXtile.transform.position.x + worstXtile.transform.position.z);
+                float bestY = Mathf.Abs(bestYtile.transform.position.x + bestYtile.transform.position.z);
+                float worstY = Mathf.Abs(worstYtile.transform.position.x + worstYtile.transform.position.z);
+
+                if (bestX > worstX || bestX > bestY || bestX > worstY)
+                {
+                    firstTile = bestXtile;
+
+                }
+                else if (worstX > bestX || worstX > bestY || worstX > worstY)
+                {
+                    firstTile = worstXtile;
+
+                }
+                else if (bestY > worstX || bestY > bestX || bestY > worstY)
+                {
+                    firstTile = bestYtile;
+
+                }
+                else if (worstY > bestX || worstY > bestY || worstY > worstX)
+                {
+                    firstTile = worstYtile;
+
+                }
+
+            }*/
+            #endregion
+
+            List<Tile> tempListOfTile = new List<Tile>();
+            foreach (Tile tileToAdd in listOfTile)
+            {
+                tempListOfTile.Add(tileToAdd);
+            }
+            tempListOfTile.Remove(firstTile);
+
+            listOfTile =tempListOfTile.ToArray();
+            firstTile.SetColumnAndRow(0, 0);
+
+
+            EditorUtility.SetDirty(GameObject.FindObjectOfType<Ma_LevelManager>());
+  
+            // SI LA TAILLE DES TUILES CHANGE FAUDRA CHANGER ICI
+            for (int i = 0; i < listOfTile.Length; i++)
+            {
+                string newName= "";
+                listOfTile[i].SetColumnAndRow(Mathf.RoundToInt(firstTile.transform.position.x - listOfTile[i].transform.position.x), Mathf.RoundToInt(firstTile.transform.position.z - listOfTile[i].transform.position.z));
+                if (listOfTile[i].GetComponentInChildren<Mb_Chest>())
+                    newName = ("Chest " + listOfTile[i].row + " - " + listOfTile[i].column);
+                else if (listOfTile[i].GetComponent<Tile>().tileType == Tile.TileType.Wall)
+                    newName = ("Wall " + listOfTile[i].row + " - " + listOfTile[i].column);
+                else if (listOfTile[i].GetComponentInChildren<Mb_Door>())
+                    newName = ("Door " + listOfTile[i].row + " - " + listOfTile[i].column);
+                else if (listOfTile[i].GetComponentInChildren<Mb_LockedDoor>())
+                    newName = ("LockedDoor " + listOfTile[i].row + " - " + listOfTile[i].column);
+                else if (listOfTile[i].GetComponentInChildren<Mb_HostageStockArea>())
+                    newName = ("HostageStock " + listOfTile[i].row + " - " + listOfTile[i].column);
+                else
+                    newName = ("Tile " + listOfTile[i].row + " - " + listOfTile[i].column);
+
+                listOfTile[i].name = newName;
+                EditorUtility.SetDirty(listOfTile[i]);
+            }
+
+            // check de chacune des portes pour verifier si faut les rajouter en sortie ou pas
+            Mb_Door[] temporaryList = FindObjectsOfType<Mb_Door>();
+            for (int i = 0; i < temporaryList.Length; i++)
+            {
+                if (temporaryList[i].isExitDoor == true)
+                {
+                    exitList.Add(temporaryList[i]);
+                }
+            }
+    }
 
     void PlacingAndErasing()
     {
@@ -417,4 +526,4 @@ public class In_RoomCreator : Editor
         AddPlayer, RemovePlayer, AddHostage, RemoveHostage, none
     }
 }
-    
+

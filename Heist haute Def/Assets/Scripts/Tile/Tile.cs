@@ -20,9 +20,12 @@ public class Tile : MonoBehaviour
     [SerializeField] public int row;
     [SerializeField] public int column;
     [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart;
+    [HideInInspector] public TileNeighbours neighbours;
     public float Cost;
     //[HideInInspector] 
     public Tile previous;
+    public TileType tileType;
+
 
     public Tile(Vector3 position, float row, float column)
     {
@@ -62,10 +65,10 @@ public class Tile : MonoBehaviour
     {
         List<Tile> res = new List<Tile>();
 
-        Tile North = Ma_LevelManager.Instance.GetTile(row - 1, column);
-        Tile South = Ma_LevelManager.Instance.GetTile(row + 1, column);
-        Tile East = Ma_LevelManager.Instance.GetTile(row, column - 1);
-        Tile West = Ma_LevelManager.Instance.GetTile(row, column + 1);
+        Tile North = Ma_LevelManager.Instance.GetWalkableTile(row - 1, column);
+        Tile South = Ma_LevelManager.Instance.GetWalkableTile(row + 1, column);
+        Tile East = Ma_LevelManager.Instance.GetWalkableTile(row, column - 1);
+        Tile West = Ma_LevelManager.Instance.GetWalkableTile(row, column + 1);
 
         if(North != null && North.walkable)
         {
@@ -93,29 +96,27 @@ public class Tile : MonoBehaviour
         return res;
     }
 
-    public List<Tile> GetNeighbours()
+    public void GetNeighbours()
     {
-        List<Tile> res = new List<Tile>();
+        /* neighbours.Add(Ma_LevelManager.Instance.GetTile(row - 1, column));
+         neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column));
+         neighbours.Add(Ma_LevelManager.Instance.GetTile(row, column + 1));
+         neighbours.Add(Ma_LevelManager.Instance.GetTile(row, column - 1));
+         //TANT QU IL N Y A PAS DE DETECTION INTERIEUR / EXTERIEUR C EST INUTILE A FAIRE PLUS TARD DU COUP
+         /* neighbours.Add(Ma_LevelManager.Instance.GetTile(row - 1, column - 1));
+         neighbours.Add(Ma_LevelManager.Instance.GetTile(row - 1, column + 1));
+         neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column - 1));
+         neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column + 1));*/
+         Ma_LevelManager manager = GameObject.FindObjectOfType<Ma_LevelManager>();
 
-        Tile North = Ma_LevelManager.Instance.GetTile(row - 1, column);
-        Tile South = Ma_LevelManager.Instance.GetTile(row + 1, column);
-        Tile East = Ma_LevelManager.Instance.GetTile(row, column - 1);
-        Tile West = Ma_LevelManager.Instance.GetTile(row, column + 1);
-        Tile NW = Ma_LevelManager.Instance.GetTile(row -1, column + 1);
-        Tile NE = Ma_LevelManager.Instance.GetTile(row -1, column - 1);
-        Tile SW = Ma_LevelManager.Instance.GetTile(row +1, column + 1);
-        Tile SE = Ma_LevelManager.Instance.GetTile(row +1, column - 1);
-
-        res.Add(North);
-        res.Add(South);
-        res.Add(East);
-        res.Add(West);
-        res.Add(NW);
-        res.Add(NE);
-        res.Add(SW);
-        res.Add(SE);
-
-        return res;
+           neighbours.North = manager.GetTile(row - 1, column);;
+           neighbours.South = manager.GetTile(row + 1, column);
+           neighbours.East =manager.GetTile(row, column - 1);
+           neighbours.West =manager.GetTile(row, column + 1);
+           neighbours.NW =  manager.GetTile(row -1, column + 1);
+           neighbours.NE =  manager.GetTile(row -1, column - 1);
+           neighbours.SW =  manager.GetTile(row +1, column + 1);
+           neighbours.SE =  manager.GetTile(row +1, column - 1);
     }
 
     public void ModifyOutlines(Outlines.Mode mode, Color color, float width)
@@ -136,6 +137,48 @@ public class Tile : MonoBehaviour
     {
         column = newColumn;
         row = newRow;
+    }
+    
+    public struct TileNeighbours
+    {
+        public Tile North;
+        public Tile South;
+        public Tile East;
+        public Tile West;
+        public Tile NW;
+        public Tile NE;
+        public Tile SW;
+        public Tile SE;
+    }
+
+
+   
+
+    public enum TileType
+    {
+        Other, Wall
+    }
+
+    [System.Flags]
+    public enum CombinableWallType2
+    {
+        None = (0 << 0),
+        Left = (1 << 0),
+        Right = (1 << 1),
+        Up = (1 << 2),
+        Down = (1 << 3),
+
+        LeftUp = (1 << 4),
+        RightUp = (1 << 5),
+        LeftDown = (1 << 6),
+        RightDown = (1 << 7),
+
+        LeftDownRight = (1 << 8),
+        DownRightUp = (1 << 9),
+        RightUpLeft = (1 << 10),
+        UpLeftDown = (1 << 11),
+
+        All = Left & Down & Left & Right
     }
 
 }

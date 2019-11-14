@@ -7,17 +7,17 @@ using UnityEditor.SceneManagement;
 
 public class Ed_Mb_Generator : MonoBehaviour
 {
+    public Transform allRoomTransform;
     public Texture2D textureToTraduce;
     public float distanceBetweenItems;
     public Ed_Sc_ColorCode colorCodeAssociated;
     public Transform roomParent;
-    [HideInInspector] private Sc_WallConfiguration wallConfig;
+    [SerializeField] Sc_WallConfiguration wallConfig;
     [HideInInspector] public Sc_Charaspec playerCharactSpectToInstantiate;
     [HideInInspector] public Mb_Player playerPrefab;
     [HideInInspector] public Sc_Charaspec hostageCharactSpectToInstantiate;
     [HideInInspector] public Mb_Agent hostagePrefab;
     [HideInInspector] public Transform playerTransform, hostageTransform;
-
     public void InstantiateRoom()
     {
         Identify();
