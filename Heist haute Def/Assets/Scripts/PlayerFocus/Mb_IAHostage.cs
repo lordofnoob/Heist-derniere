@@ -82,7 +82,7 @@ public class Mb_IAHostage : Mb_Trial
 
     public void Panic()
     {
-        //Debug.Log("PANIC!");
+        Debug.Log("PANIC!");
         hostageState = HostageState.InPanic;
         panicCounter++;
 
@@ -98,6 +98,7 @@ public class Mb_IAHostage : Mb_Trial
 
     public override void PerformAction()
     {
+        Debug.Log("about to perform action. Count left = "+actionsToPerform.Count.ToString());
         if (actionsToPerform.Count != 0 && nextAction)
         {
             /*if(actionsToPerform.First() is Interact)
@@ -133,30 +134,51 @@ public class Mb_IAHostage : Mb_Trial
 
     public override void FindAnOtherPath()
     {
-        if(state == StateOfAction.Moving)
+        bool playerWillInteractWith = false;
+        foreach (Tile neighbour in agentTile.GetNeighbours())
         {
-            List<Deplacement> removeList = new List<Deplacement>();
-            foreach (Action action in actionsToPerform)
+            if(neighbour.agentOnTile != null && neighbour.agentOnTile.onGoingInteraction == this)
             {
-                if (action is Deplacement)
-                    removeList.Add(action as Deplacement);
+                playerWillInteractWith = true;
+                break;
             }
-
-            foreach (Deplacement depla in removeList)
-                actionsToPerform.Remove(depla);
-
-            List<Tile> newShortestPath = new List<Tile>();
-            if (!destination.avaible)
-            {
-                newShortestPath = pathfinder.SearchForShortestPath(agentTile, destination.GetFreeNeighbours());
-            }
-            else
-            {
-                newShortestPath = pathfinder.SearchForShortestPath(agentTile, new List<Tile> { destination });
-            }
-            //Debug.Log("New path deplacement number : " + newShortestPath.Count);
-            AddDeplacement(newShortestPath);
         }
+
+        if (!playerWillInteractWith)
+        {
+            if (state == StateOfAction.Moving)
+            {
+                Debug.Log("FIND ANOTHER PATH");
+
+                List<Deplacement> removeList = new List<Deplacement>();
+                foreach (Action action in actionsToPerform)
+                {
+                    if (action is Deplacement)
+                        removeList.Add(action as Deplacement);
+                }
+
+                foreach (Deplacement depla in removeList)
+                    actionsToPerform.Remove(depla);
+
+                List<Tile> newShortestPath = new List<Tile>();
+                if (!destination.avaible)
+                {
+                    newShortestPath = pathfinder.SearchForShortestPath(agentTile, destination.GetFreeNeighbours());
+                }
+                else
+                {
+                    newShortestPath = pathfinder.SearchForShortestPath(agentTile, new List<Tile> { destination });
+                }
+                //Debug.Log("New path deplacement number : " + newShortestPath.Count);
+                AddDeplacement(newShortestPath);
+            }
+        }
+        else
+        {
+            Debug.Log("WILL INTERACT");
+            StopMoving();
+        }
+
         nextAction = true;
     }
 

@@ -4706,11 +4706,6 @@ PrefabInstance:
       propertyPath: column
       value: -9
       objectReference: {fileID: 0}
-    - target: {fileID: 7660018696681990147, guid: d7e25eb25d1fca840bfb80699016fcc5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6910772779160549354, guid: d7e25eb25d1fca840bfb80699016fcc5,
         type: 3}
       propertyPath: positionToGo.Array.size
@@ -4720,7 +4715,12 @@ PrefabInstance:
         type: 3}
       propertyPath: positionToGo.Array.data[0]
       value: 
-      objectReference: {fileID: 769537958}
+      objectReference: {fileID: 761331397}
+    - target: {fileID: 7660018696681990147, guid: d7e25eb25d1fca840bfb80699016fcc5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7e25eb25d1fca840bfb80699016fcc5, type: 3}
 --- !u!4 &761331396 stripped
@@ -9704,7 +9704,7 @@ PrefabInstance:
         type: 3}
       propertyPath: textureToTraduce
       value: 
-      objectReference: {fileID: 2800000, guid: 6b653141986bb934ca7c48e4de54c757, type: 3}
+      objectReference: {fileID: 2800000, guid: 146df6f7ad3f6cd4392c09d2df0d9c97, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f625d60d95348274185e7d0ed65819a3, type: 3}
 --- !u!1001 &1848762801

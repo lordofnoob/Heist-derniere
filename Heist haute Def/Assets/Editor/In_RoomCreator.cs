@@ -486,7 +486,7 @@ public class In_RoomCreator : Editor
         Mb_Player NewGameObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue) as Mb_Player;
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
-        NewGameObject.GetComponent<Mb_Player>().characterProperty = characterProperty;
+        NewGameObject.GetComponent<Mb_Player>().charaPerks = characterProperty;
         NewGameObject.GetComponent<Mb_Player>().agentTile = hisTile;
         NewGameObject.transform.SetParent(playerTransformProperty.objectReferenceValue as Transform);
         hisTile.avaible = false;

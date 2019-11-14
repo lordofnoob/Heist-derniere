@@ -14,7 +14,6 @@ public enum StateOfAction
 public class Mb_Player : Mb_Agent 
 {
 
-    public Sc_Charaspec characterProperty;
     //[SerializeField] NavMeshAgent agent;
     public Color highlightedColor, selectedColor;
 
@@ -96,33 +95,12 @@ public class Mb_Player : Mb_Agent
         destination = path[path.Count - 1];
         foreach(Tile tile in path)
         {
-            actionsToPerform.Add(new Deplacement(characterProperty.speed, this, tile));
+            actionsToPerform.Add(new Deplacement(charaPerks.speed, this, tile));
         }
         //Debug.Log(actionsToPerform.Count);
 
         //uniquement pour la next interaction n influe pas sur le deplacement whatsoever
         //positionToGo = endPos;
-    }
-
-    public void ChangeDeplacement(List<Tile> newPath)
-    {
-        //REMOVE OLDER DEPLACEMENT ACTION
-        List<Deplacement> removeList = new List<Deplacement>();
-        foreach (Action action in actionsToPerform)
-        {
-            if (action is Deplacement)
-                removeList.Add(action as Deplacement);
-        }
-
-        List<Action> actionList = actionsToPerform;
-        actionsToPerform.Clear();
-        
-        foreach(Tile tile in newPath)
-        {
-            actionsToPerform.Add(new Deplacement(characterProperty.speed, this, tile));
-        }
-
-        actionsToPerform.AddRange(actionList);
     }
 
     public override void FindAnOtherPath()
