@@ -264,40 +264,57 @@ public class In_RoomCreator : Editor
             Sc_WallConfiguration wallConfig = wallConfigProperty.objectReferenceValue as Sc_WallConfiguration;
 
             int randomWeightCumulated = 0;
+            int totalWeight=0;
+
             for (int i = 0; i < wallConfig.wallConfiguration.Length; i++)
             {
-                for (int j= 0; j < wallConfig.wallConfiguration[i].associatedTiles.Length; j++)
-                {
-                    randomWeightCumulated += wallConfig.wallConfiguration[i].associatedTiles[j].weight;
-                }
-                
+
                 if (DefinitiveType == wallConfig.wallConfiguration[i].walltype)
                 {
-                    
-                    int randomTileToGenerate = Random.Range(0, wallConfig.wallConfiguration[i].associatedTiles.Length - 1);
-
-                    Tile newGameObject =
-                        PrefabUtility.InstantiatePrefab(wallConfig.wallConfiguration[i].associatedTiles[0].associatedTile) as Tile;
-
-
+                    Tile newGameObject = PrefabUtility.InstantiatePrefab(wallConfig.wallConfiguration[i].associatedTiles[0].associatedTile) as Tile;
                     newGameObject.transform.position = wallTile.transform.position;
                     newGameObject.transform.SetParent(wallTile.transform.parent);
-
+                    DestroyImmediate(wallTile.gameObject);
+                    GenerateGrid();
                 }
-           
+                /* for (int j = 0; j < wallConfig.wallConfiguration[i].associatedTiles.Length; j++)
+               {
+                   totalWeight += wallConfig.wallConfiguration[i].associatedTiles[j].weight;
+               }
+
+               int randomTileToGenerate = Random.Range(0, totalWeight);
+
+               for (int k= 0; k < wallConfig.wallConfiguration[i].associatedTiles.Length; k++)
+               {
+               randomWeightCumulated += wallConfig.wallConfiguration[i].associatedTiles[k].weight;
+
+                   Debug.Log(randomTileToGenerate);
+                   Debug.Log(randomWeightCumulated);
+                   if (randomTileToGenerate > randomWeightCumulated)
+                   {
+                       Debug.Log("goPourvoir");
+                       Debug.Log(randomWeightCumulated);*/
+
+                //}
             }
-          //  GenerateGrid();
+        
 
-            // PrefabUtility.InstantiatePrefab();*/
         }
 
-        foreach (Tile wallTile in allWalls)
-        {
-                DestroyImmediate(wallTile.gameObject);
-        }
-    }
 
-   
+        }
+    //  GenerateGrid();
+
+    // PrefabUtility.InstantiatePrefab();*/
+    /* }
+
+           foreach (Tile wallTile in allWalls)
+            {
+
+            }
+}*/
+
+
     // ALED SIMON LE CONTROL Z D UN OBJET QUE JE CREER DANS UNE SCENE CA MARCHE     PAS
 
     //AddPlayerPart OnSceneGUI + erasePlayer

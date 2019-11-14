@@ -24,10 +24,10 @@ public enum CombinableWallType
     RightLeft = Right | Left,
 
 
-    LeftDownRight = Left | Down | Right,
-    DownRightUp = Down | Right | Up,
-    RightUpLeft = Right | Up | Left,
-    UpLeftDown = Up | Left | Down,
+    TDown = Left | Down | Right,
+    TRight = Down | Right | Up,
+    TUp = Right | Up | Left,
+    TLeft = Up | Left | Down,
 
     All = Left | Down | Up | Right
 }
