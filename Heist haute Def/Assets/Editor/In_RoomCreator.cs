@@ -227,7 +227,7 @@ public class In_RoomCreator : Editor
 
         foreach (Tile wallTile in allWalls)
         {
-            wallTile.GetNeighbours();
+            wallTile.SetStructNeighbours();
             List<CombinableWallType> WallTypeList = new List<CombinableWallType>();
 
             if (wallTile.neighbours.North != null)
@@ -263,14 +263,21 @@ public class In_RoomCreator : Editor
            
             Sc_WallConfiguration wallConfig = wallConfigProperty.objectReferenceValue as Sc_WallConfiguration;
 
+            int randomWeightCumulated = 0;
             for (int i = 0; i < wallConfig.wallConfiguration.Length; i++)
             {
+                for (int j= 0; j < wallConfig.wallConfiguration[i].associatedTiles.Length; j++)
+                {
+                    randomWeightCumulated += wallConfig.wallConfiguration[i].associatedTiles[j].weight;
+                }
+                
                 if (DefinitiveType == wallConfig.wallConfiguration[i].walltype)
                 {
+                    
                     int randomTileToGenerate = Random.Range(0, wallConfig.wallConfiguration[i].associatedTiles.Length - 1);
 
                     Tile newGameObject =
-                        PrefabUtility.InstantiatePrefab(wallConfig.wallConfiguration[i].associatedTiles[randomTileToGenerate].associatedTile) as Tile;
+                        PrefabUtility.InstantiatePrefab(wallConfig.wallConfiguration[i].associatedTiles[0].associatedTile) as Tile;
 
 
                     newGameObject.transform.position = wallTile.transform.position;

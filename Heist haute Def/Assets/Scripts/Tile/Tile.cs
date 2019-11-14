@@ -96,7 +96,7 @@ public class Tile : MonoBehaviour
         return res;
     }
 
-    public void GetNeighbours()
+    public List<Tile> GetNeighbours()
     {
         /* neighbours.Add(Ma_LevelManager.Instance.GetTile(row - 1, column));
          neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column));
@@ -107,7 +107,7 @@ public class Tile : MonoBehaviour
          neighbours.Add(Ma_LevelManager.Instance.GetTile(row - 1, column + 1));
          neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column - 1));
          neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column + 1));*/
-         Ma_LevelManager manager = GameObject.FindObjectOfType<Ma_LevelManager>();
+        List<Tile> res = new List<Tile>();
 
         Tile North = Ma_LevelManager.Instance.GetTile(row - 1, column);
         Tile South = Ma_LevelManager.Instance.GetTile(row + 1, column);
@@ -136,6 +136,21 @@ public class Tile : MonoBehaviour
             res.Add(SE);
 
         return res;
+    }
+
+    public void SetStructNeighbours()
+    {
+        Ma_LevelManager manager = GameObject.FindObjectOfType<Ma_LevelManager>();
+
+        neighbours.North = manager.GetTile(row - 1, column); ;
+        neighbours.South = manager.GetTile(row + 1, column);
+        neighbours.East = manager.GetTile(row, column - 1);
+        neighbours.West = manager.GetTile(row, column + 1);
+        neighbours.NW = manager.GetTile(row - 1, column + 1);
+        neighbours.NE = manager.GetTile(row - 1, column - 1);
+        neighbours.SW = manager.GetTile(row + 1, column + 1);
+        neighbours.SE = manager.GetTile(row + 1, column - 1);
+
     }
 
     public void ModifyOutlines(Outlines.Mode mode, Color color, float width)
