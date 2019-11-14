@@ -150,13 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6e2869263abc14589b55e8831c78f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathfinder: {fileID: 0}
-  VisitedTiles: []
-  agentTile: {fileID: 0}
-  state: 0
-  onGoingInteraction: {fileID: 0}
-  destination: {fileID: 0}
-  nextAction: 1
   trialParameters: {fileID: 11400000, guid: 0e7f7af4812fe314e9251f0d8f2711fa, type: 2}
   positionToGo:
   - {fileID: 0}
@@ -298,12 +291,14 @@ MonoBehaviour:
   highlighted: 0
   walkable: 1
   avaible: 0
+  agentOnTile: {fileID: 0}
   row: -18
   column: -8
   StraightLineDistanceToEnd: 0
   MinCostToStart: 0
   Cost: 1
   previous: {fileID: 0}
+  tileType: 1
 --- !u!1001 &1771413428771355335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,6 +396,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8818113118122498021}
     m_Modifications:
+    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 203322268724562778, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -520,11 +520,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 869469074241437878, guid: d7eab8d6cf5d12f48a3149e6d8e181c8,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7eab8d6cf5d12f48a3149e6d8e181c8, type: 3}
