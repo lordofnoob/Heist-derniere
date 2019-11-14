@@ -4,11 +4,30 @@ using UnityEngine;
 
 public class Mb_Agent : Mb_Poolable
 {
+    [Header("Chara perks")]
+    public Sc_Charaspec charaPerks;
     //[HideInInspector] 
     public Pathfinder pathfinder;
     [HideInInspector] public List<Tile> VisitedTiles = new List<Tile>();
 
-    public Tile agentTile;
+    [SerializeField]private Tile agentTile;
+    [SerializeField]public Tile AgentTile {
+        get { return agentTile; }
+        set
+        {
+            if(agentTile != null)
+            {
+                agentTile.avaible = true;
+                agentTile.agentOnTile = null;
+            }
+
+            //Debug.Log("Set Agent Tile");
+            agentTile = value;
+
+            value.avaible = false;
+            value.agentOnTile = this;
+        }
+    }
 
     [Header("Actions")]
     public StateOfAction state;
@@ -19,11 +38,33 @@ public class Mb_Agent : Mb_Poolable
 
     public void Awake()
     {
-        pathfinder = GetComponent<Pathfinder>();
+        if(GetComponent<Pathfinder>() != null)
+            pathfinder = GetComponent<Pathfinder>();
     }
 
     public virtual void PerformAction() { }
     public virtual void AddDeplacement(List<Tile> path) { }
+    public virtual void ChangeDeplacement(List<Tile> newPath)
+    {
+        //REMOVE OLDER DEPLACEMENT ACTION
+        List<Deplacement> removeList = new List<Deplacement>();
+        foreach (Action action in actionsToPerform)
+        {
+            if (action is Deplacement)
+                removeList.Add(action as Deplacement);
+        }
+
+        List<Action> actionList = actionsToPerform;
+        actionsToPerform.Clear();
+
+        foreach (Tile tile in newPath)
+        {
+            actionsToPerform.Add(new Deplacement(charaPerks.speed, this, tile));
+        }
+
+        actionsToPerform.AddRange(actionList);
+    }
+
     public virtual void FindAnOtherPath() { }
     public virtual void Interact() { }
     //Put Action at the end of actionToPerform queue

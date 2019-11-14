@@ -18,7 +18,7 @@ public class Mb_HostageStockArea : Mb_Trial
     public override void DoThings()
     {
         Mb_Player player = listOfUser[0] as Mb_Player;
-        IAManager.Instance.StockHostagesInArea(this, player.capturedHostages);
+        Ma_IAManager.Instance.StockHostagesInArea(this, player.capturedHostages);
         ResetValues();
     }
 }

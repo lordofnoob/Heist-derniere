@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371b4434abd985745951b905939a7e0e, type: 3}
+  m_Name: BasicWallConfig
+  m_EditorClassIdentifier: 
+  wallConfiguration:
+  - walltype: 3
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 295134a2ca5d0b748abd933e01ae9c8d, type: 3}
+  - walltype: 12
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: f374bed47b805d84794631b9d9e1daf1, type: 3}
+  - walltype: 10
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 5c0f301b10c277249b0f9c4523463031, type: 3}
+  - walltype: 9
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: ace54a8254edd044c9b657965ab528b5, type: 3}
+  - walltype: 6
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 67e63fac1ccf73c47ad12e7b26429e0c, type: 3}
+  - walltype: 5
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 838f3138c783b324496f3aa0801a6c4b, type: 3}
+  - walltype: 11
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 334fd0160d755194da2afe93c1389f6b, type: 3}
+  - walltype: 14
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: a4484637e2d64ce45898edd9dec45413, type: 3}
+  - walltype: 7
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 39ad7f63f4ff737468a66597fb442879, type: 3}
+  - walltype: 13
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 331f5a3170bd0f448b26ca7c40334ffb, type: 3}
+  - walltype: 15
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: f0dce00a8aef82a4ba76b64601cd7f75, type: 3}
+  - walltype: 2
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 20eb8df1b5af333488916361b18bb0e5, type: 3}
+  - walltype: 1
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: b1b9d7539d4b5ed45abbdb78df715146, type: 3}
+  - walltype: 8
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 6fbce835c6a68c7489f38097bfd50f06, type: 3}
+  - walltype: 4
+    associatedTiles:
+    - {fileID: 47738409495746552, guid: 53d749f8b4ee99a4f84aefdd868d4d90, type: 3}

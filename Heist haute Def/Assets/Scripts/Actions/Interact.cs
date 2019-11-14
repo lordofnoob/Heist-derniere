@@ -13,7 +13,7 @@ public class Interact : Action
 
     public override void PerformAction()
     {
-        Debug.Log("INTERACT");
+        //trial.StopMoving();
         agent.Interact();
     }
 
