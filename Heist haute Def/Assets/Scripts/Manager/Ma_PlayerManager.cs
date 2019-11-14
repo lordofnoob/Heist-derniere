@@ -71,7 +71,7 @@ public class Ma_PlayerManager : MonoBehaviour
                     }
 
                     //Debug.Log(hit.transform.GetComponent<Tile>().transform.position);
-                    List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.agentTile, new List<Tile> { hit.transform.GetComponent<Tile>() });
+                    List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, new List<Tile> { hit.transform.GetComponent<Tile>() });
                     selectedPlayer.AddDeplacement(ShortestPath);
                 }
                 else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.state != StateOfAction.Captured && selectedPlayer.state!= StateOfAction.Interacting)
@@ -105,7 +105,13 @@ public class Ma_PlayerManager : MonoBehaviour
                             return;
                         }
 
-                        List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.agentTile, positionToAccomplishDuty);
+                        if(targetTrial is Mb_IATrial)
+                        {
+                            Mb_IATrial IATrial = targetTrial as Mb_IATrial;
+                            IATrial.IAAgent.SomeoneWillInteractWith = true;
+                        }
+
+                        List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, positionToAccomplishDuty);
                         selectedPlayer.AddDeplacement(ShortestPath);
                         selectedPlayer.SetNextInteraction(targetTrial);
                     }

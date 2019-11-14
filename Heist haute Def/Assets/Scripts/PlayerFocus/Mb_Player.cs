@@ -18,7 +18,7 @@ public class Mb_Player : Mb_Agent
     public Color highlightedColor, selectedColor;
 
     [Header("Hostage")]
-    public List<Mb_IAHostage> capturedHostages = new List<Mb_IAHostage>();
+    public List<Mb_IAAgent> capturedHostages = new List<Mb_IAAgent>();
 
 
     [Header("Items")]
@@ -90,17 +90,24 @@ public class Mb_Player : Mb_Agent
 
     public override void AddDeplacement(List<Tile> path)
     {
-        //Debug.Log(path.Count);
-        state = StateOfAction.Moving;
-        destination = path[path.Count - 1];
-        foreach(Tile tile in path)
+        if (path.Count != 0)
         {
-            actionsToPerform.Add(new Deplacement(charaPerks.speed, this, tile));
-        }
-        //Debug.Log(actionsToPerform.Count);
+            //Debug.Log(path.Count);
+            state = StateOfAction.Moving;
+            destination = path[path.Count - 1];
+            foreach (Tile tile in path)
+            {
+                actionsToPerform.Add(new Deplacement(charaPerks.speed, this, tile));
+            }
+            //Debug.Log(actionsToPerform.Count);
 
-        //uniquement pour la next interaction n influe pas sur le deplacement whatsoever
-        //positionToGo = endPos;
+            //uniquement pour la next interaction n influe pas sur le deplacement whatsoever
+            //positionToGo = endPos;
+        }
+        else
+        {
+            Debug.Log("Chemin Impossible");
+        }
     }
 
     public override void FindAnOtherPath()
@@ -108,11 +115,11 @@ public class Mb_Player : Mb_Agent
         List<Tile> newShortestPath = new List<Tile>();
         if (!destination.avaible)
         {
-            newShortestPath = pathfinder.SearchForShortestPath(agentTile, destination.GetFreeNeighbours());
+            newShortestPath = pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours());
         }
         else
         {
-            newShortestPath = pathfinder.SearchForShortestPath(agentTile, new List<Tile> { destination });
+            newShortestPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { destination });
         }
         Debug.Log("New path deplacement number : " + newShortestPath.Count);
         ChangeDeplacement(newShortestPath);
@@ -123,16 +130,22 @@ public class Mb_Player : Mb_Agent
     {
         if(actionsToPerform.Count != 0 && nextAction)
         {
-            if(onGoingInteraction != null && onGoingInteraction.state == StateOfAction.Moving)
+            //CHECK Si la prochaine interaction est un hotage en movement => alors recalcul du path
+            if(onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
             {
-                List<Tile> posToGo = new List<Tile>();
-                for (int i = 0; i < onGoingInteraction.positionToGo.Length; i++)
+                Mb_IATrial IATrial = onGoingInteraction as Mb_IATrial;
+                if(IATrial.IAAgent.state == StateOfAction.Moving)
                 {
-                    posToGo.Add(onGoingInteraction.positionToGo[i]);
+                    List<Tile> posToGo = new List<Tile>();
+                    for (int i = 0; i < onGoingInteraction.positionToGo.Length; i++)
+                    {
+                        posToGo.Add(onGoingInteraction.positionToGo[i]);
+                    }
+                    List<Tile> newPath = pathfinder.SearchForShortestPath(AgentTile, posToGo);
+                    ChangeDeplacement(newPath);
                 }
-                List<Tile> newPath = pathfinder.SearchForShortestPath(agentTile, posToGo);
-                ChangeDeplacement(newPath);
             }
+
             nextAction = false;
             actionsToPerform.First().PerformAction();
             actionsToPerform.Remove(actionsToPerform.First());

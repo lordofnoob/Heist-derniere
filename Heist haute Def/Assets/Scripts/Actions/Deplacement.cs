@@ -44,11 +44,6 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
-                destination.avaible = false;
-                destination.agentOnTile = player;
-                player.agentTile.avaible = true;
-                player.agentTile.agentOnTile = null;
-
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 player.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
                                                     destination.transform.position.z),
@@ -56,7 +51,6 @@ public class Deplacement : Action
                                 .SetEase(Ease.Linear)
                                 .OnComplete(() =>
                                 {
-                                    player.agentTile = destination;
                                     destination.SetOutlinesEnabled(false);
                                     destination.highlighted = false;
 
@@ -76,31 +70,24 @@ public class Deplacement : Action
                         if (i == 0)
                         {
                             //Debug.Log("FIRST HOSTAGE");
-                            player.capturedHostages[i].transform.DOMove(new Vector3(player.agentTile.transform.position.x, 0.5f,
-                                                                                    player.agentTile.transform.position.z),
+                            player.capturedHostages[i].transform.DOMove(new Vector3(player.AgentTile.transform.position.x, 0.5f,
+                                                                                    player.AgentTile.transform.position.z),
                                                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                                                 .SetEase(Ease.Linear);
-                            player.agentTile.avaible = false;
-                            player.agentTile.agentOnTile = player.capturedHostages[i];
-                            player.capturedHostages[i].agentTile.avaible = true;
-                            player.capturedHostages[i].agentTile.agentOnTile = null;
-                            player.capturedHostages[i].agentTile = player.agentTile;
+                            player.capturedHostages[i].AgentTile = player.AgentTile;
                         }
                         else
                         {
                             //Debug.Log("OTHER HOSTAGE");
-                            player.capturedHostages[i].transform.DOMove(new Vector3(player.capturedHostages[i - 1].agentTile.transform.position.x, 0.5f,
-                                                        player.capturedHostages[i - 1].agentTile.transform.position.z),
+                            player.capturedHostages[i].transform.DOMove(new Vector3(player.capturedHostages[i - 1].AgentTile.transform.position.x, 0.5f,
+                                                        player.capturedHostages[i - 1].AgentTile.transform.position.z),
                                                         Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                                                 .SetEase(Ease.Linear);
-                            player.capturedHostages[i - 1].agentTile.avaible = false;
-                            player.capturedHostages[i - 1].agentTile.agentOnTile = player.capturedHostages[i];
-                            player.capturedHostages[i].agentTile.avaible = true;
-                            player.capturedHostages[i].agentTile.agentOnTile = null;
-                            player.capturedHostages[i].agentTile = player.capturedHostages[i - 1].agentTile;
+                            player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
                         }
                     }
                 }
+                player.AgentTile = destination;
             }
             else
             {
@@ -112,9 +99,9 @@ public class Deplacement : Action
                 player.FindAnOtherPath();
             }
         }
-        else if(agent is Mb_IAHostage)
+        else if(agent is Mb_IAAgent)
         {
-            Mb_IAHostage hostage = agent as Mb_IAHostage;
+            Mb_IAAgent hostage = agent as Mb_IAAgent;
 
             if (!destination.avaible && destination == hostage.destination)
             {
@@ -141,11 +128,6 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
-                destination.avaible = false;
-                destination.agentOnTile = hostage;
-                hostage.agentTile.avaible = true;
-                hostage.agentTile.agentOnTile = null;
-
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
                                                      destination.transform.position.z),
@@ -153,7 +135,6 @@ public class Deplacement : Action
                                  .SetEase(Ease.Linear)
                                  .OnComplete(() =>
                                  {
-                                     hostage.agentTile = destination;
                                      destination.SetOutlinesEnabled(false);
                                      destination.highlighted = false;
 
@@ -168,7 +149,7 @@ public class Deplacement : Action
                                      if (!findNewPath)
                                          hostage.nextAction = true;
                                  });
-
+                hostage.AgentTile = destination;
             }
             else if(destination.GetComponentInChildren<Mb_Door>() != null)
             {

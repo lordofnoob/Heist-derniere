@@ -8,7 +8,7 @@ public class Ma_IAManager : MonoBehaviour
 
     public Transform HostagesContainer;
     //[HideInInspector]
-    public Mb_IAHostage[] IAList;
+    public Mb_IAAgent[] IAList;
     public List<Mb_Trial> HostageArea = new List<Mb_Trial>();
 
     public float repeatActionInterval = 3f;
@@ -17,12 +17,12 @@ public class Ma_IAManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        IAList = HostagesContainer.GetComponentsInChildren<Mb_IAHostage>();
+        IAList = HostagesContainer.GetComponentsInChildren<Mb_IAAgent>();
     }
 
     private void Start()
     {
-        foreach (Mb_IAHostage hostage in IAList)
+        foreach (Mb_IAAgent hostage in IAList)
         {
             Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
         }
@@ -45,17 +45,17 @@ public class Ma_IAManager : MonoBehaviour
 
     public void IAHostageFollowingPlayer(Mb_Agent h, Mb_Agent p)
     {
-        Mb_IAHostage hostage = h as Mb_IAHostage;
+        Mb_IAAgent hostage = h as Mb_IAAgent;
         Mb_Player player = p as Mb_Player;
         hostage.target = player;
         player.capturedHostages.Add(hostage);
         hostage.hostageState = HostageState.Captured;
     }
 
-    public void StockHostagesInArea(Mb_HostageStockArea area, List<Mb_IAHostage> hostages)
+    public void StockHostagesInArea(Mb_HostageStockArea area, List<Mb_IAAgent> hostages)
     {
-        List<Mb_IAHostage> stockedHosteges = new List<Mb_IAHostage>();
-        foreach(Mb_IAHostage hostage in hostages)
+        List<Mb_IAAgent> stockedHosteges = new List<Mb_IAAgent>();
+        foreach(Mb_IAAgent hostage in hostages)
         {
             foreach (Transform position in area.hostagesPos)
             {
@@ -72,7 +72,7 @@ public class Ma_IAManager : MonoBehaviour
                 }
             }
         }
-        foreach(Mb_IAHostage stockedHostege in stockedHosteges)
+        foreach(Mb_IAAgent stockedHostege in stockedHosteges)
             hostages.Remove(stockedHostege);
         
     }

@@ -173,7 +173,8 @@ GameObject:
   - component: {fileID: 3930483895375567117}
   - component: {fileID: 1847766912380400694}
   - component: {fileID: 5657659807170411418}
-  - component: {fileID: 3465430763639448767}
+  - component: {fileID: 5770262166141487127}
+  - component: {fileID: 9038479790727851147}
   - component: {fileID: 7816519674179130439}
   m_Layer: 8
   m_Name: IAHostage
@@ -259,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileVisited: 0
---- !u!114 &3465430763639448767
+--- !u!114 &5770262166141487127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,7 +269,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3431368413598332794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad3e654579237d644ada22d8b8aa7bf9, type: 3}
+  m_Script: {fileID: 11500000, guid: af82c5022a1bd5244bdb84a1c1d12bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   charaPerks: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
@@ -279,22 +280,34 @@ MonoBehaviour:
   onGoingInteraction: {fileID: 0}
   destination: {fileID: 0}
   nextAction: 1
-  trialParameters: {fileID: 11400000, guid: 639a342ae923c1147827b43c98bbd567, type: 2}
-  positionToGo:
-  - {fileID: 0}
-  trialTile: {fileID: 0}
-  timeVignet: {fileID: 1129344465071966787}
-  listOfUser: []
+  IATrial: {fileID: 0}
   normalSpeed: 2
-  panicSpeed: 1
+  panicSpeed: 3
   stress: 0
   minStress: 0.2
   maxStress: 0.5
   stressBar: {fileID: 6270282380555665319}
   panicCounter: 0
-  trialsAreaSize: 5
-  hostageState: 0
   target: {fileID: 0}
+  hostageState: 0
+--- !u!114 &9038479790727851147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3431368413598332794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4322f0ccb1ad42489a71305a558b546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trialParameters: {fileID: 11400000, guid: 639a342ae923c1147827b43c98bbd567, type: 2}
+  positionToGo: []
+  trialTile: {fileID: 0}
+  timeVignet: {fileID: 1129344465071966787}
+  listOfUser: []
+  IAAgent: {fileID: 0}
 --- !u!114 &7816519674179130439
 MonoBehaviour:
   m_ObjectHideFlags: 0

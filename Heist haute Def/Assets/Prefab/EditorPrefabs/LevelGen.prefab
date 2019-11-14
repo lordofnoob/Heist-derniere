@@ -52,9 +52,9 @@ MonoBehaviour:
     type: 2}
   playerPrefab: {fileID: 1926673876582789652, guid: e5fa444fb59a8ef4a85efe8cdd0e7991,
     type: 3}
-  hostageCharactSpectToInstantiate: {fileID: 11400000, guid: 23641f896dad4e24dba47b8c5d510c4c,
+  hostageCharactSpectToInstantiate: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4,
     type: 2}
-  hostagePrefab: {fileID: 3465430763639448767, guid: 6620c699e4103b74e84e8eaa441f47e2,
+  hostagePrefab: {fileID: 5770262166141487127, guid: 6620c699e4103b74e84e8eaa441f47e2,
     type: 3}
   playerTransform: {fileID: 0}
   hostageTransform: {fileID: 0}

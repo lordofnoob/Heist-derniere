@@ -109,14 +109,33 @@ public class Tile : MonoBehaviour
          neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column + 1));*/
          Ma_LevelManager manager = GameObject.FindObjectOfType<Ma_LevelManager>();
 
-           neighbours.North = manager.GetTile(row - 1, column);;
-           neighbours.South = manager.GetTile(row + 1, column);
-           neighbours.East =manager.GetTile(row, column - 1);
-           neighbours.West =manager.GetTile(row, column + 1);
-           neighbours.NW =  manager.GetTile(row -1, column + 1);
-           neighbours.NE =  manager.GetTile(row -1, column - 1);
-           neighbours.SW =  manager.GetTile(row +1, column + 1);
-           neighbours.SE =  manager.GetTile(row +1, column - 1);
+        Tile North = Ma_LevelManager.Instance.GetTile(row - 1, column);
+        Tile South = Ma_LevelManager.Instance.GetTile(row + 1, column);
+        Tile East = Ma_LevelManager.Instance.GetTile(row, column - 1);
+        Tile West = Ma_LevelManager.Instance.GetTile(row, column + 1);
+        Tile NW = Ma_LevelManager.Instance.GetTile(row -1, column + 1);
+        Tile NE = Ma_LevelManager.Instance.GetTile(row -1, column - 1);
+        Tile SW = Ma_LevelManager.Instance.GetTile(row +1, column + 1);
+        Tile SE = Ma_LevelManager.Instance.GetTile(row +1, column - 1);
+
+        if(North != null)
+            res.Add(North);
+        if (South != null)
+            res.Add(South);
+        if (East != null)
+            res.Add(East);
+        if (West != null)
+            res.Add(West);
+        if (NW != null)
+            res.Add(NW);
+        if (NE != null)
+            res.Add(NE);
+        if (SW != null)
+            res.Add(SW);
+        if (SE != null)
+            res.Add(SE);
+
+        return res;
     }
 
     public void ModifyOutlines(Outlines.Mode mode, Color color, float width)

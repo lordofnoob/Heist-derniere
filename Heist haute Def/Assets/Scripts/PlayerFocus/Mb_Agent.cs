@@ -9,8 +9,25 @@ public class Mb_Agent : Mb_Poolable
     //[HideInInspector] 
     public Pathfinder pathfinder;
     [HideInInspector] public List<Tile> VisitedTiles = new List<Tile>();
-    
-    public Tile agentTile;
+
+    [SerializeField]private Tile agentTile;
+    [SerializeField]public Tile AgentTile {
+        get { return agentTile; }
+        set
+        {
+            if(agentTile != null)
+            {
+                agentTile.avaible = true;
+                agentTile.agentOnTile = null;
+            }
+
+            //Debug.Log("Set Agent Tile");
+            agentTile = value;
+
+            value.avaible = false;
+            value.agentOnTile = this;
+        }
+    }
 
     [Header("Actions")]
     public StateOfAction state;

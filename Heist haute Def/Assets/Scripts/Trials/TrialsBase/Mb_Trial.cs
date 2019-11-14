@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Mb_Trial : Mb_Agent
+public class Mb_Trial : Mb_Poolable
 {
     [Header("Parameters")]
     public Sc_TrialDefinition trialParameters;
@@ -138,16 +138,5 @@ public class Mb_Trial : Mb_Agent
     public virtual bool CheckCondition()
     {
         return true;
-    }
-
-    public void StopMoving()
-    {
-        Debug.Log("STOP MOVING");
-        state = StateOfAction.Idle;
-        actionsToPerform.Clear();
-        actionsToPerform.TrimExcess();
-        onGoingInteraction = null;
-        destination = null;
-        Debug.Log("actions have been flushed. Count left = " + actionsToPerform.Count.ToString());
     }
 }

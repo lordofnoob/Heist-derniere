@@ -157,7 +157,7 @@ public class In_RoomCreator : Editor
     void UpdateAgentsLists()
     {
         Ma_IAManager iaManage = GameObject.FindObjectOfType<Ma_IAManager>();
-        iaManage.IAList = GameObject.FindObjectsOfType<Mb_IAHostage>();
+        iaManage.IAList = GameObject.FindObjectsOfType<Mb_IAAgent>();
 
         Ma_PlayerManager playerManage = GameObject.FindObjectOfType<Ma_PlayerManager>();
         playerManage.playerList = GameObject.FindObjectsOfType<Mb_Player>();
@@ -452,9 +452,9 @@ public class In_RoomCreator : Editor
                 break;
 
                 case UsedMode.RemoveHostage:
-                    if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Mb_IAHostage>() == true)
+                    if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Mb_IAAgent>() == true)
                     {
-                        EraseHostage(hitInfo.collider.GetComponent<Mb_IAHostage>());
+                        EraseHostage(hitInfo.collider.GetComponent<Mb_IAAgent>());
                         serializedObject.ApplyModifiedProperties();
                     }
                     break;
@@ -486,36 +486,38 @@ public class In_RoomCreator : Editor
         Mb_Player NewGameObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue) as Mb_Player;
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
-        NewGameObject.GetComponent<Mb_Player>().charaPerks = characterProperty;
-        NewGameObject.GetComponent<Mb_Player>().agentTile = hisTile;
+        NewGameObject.charaPerks = characterProperty;
+        NewGameObject.AgentTile = hisTile;
         NewGameObject.transform.SetParent(playerTransformProperty.objectReferenceValue as Transform);
-        hisTile.avaible = false;
         Selection.activeGameObject = NewGameObject.gameObject;
+        EditorUtility.SetDirty(NewGameObject);
+        EditorUtility.SetDirty(hisTile);
         EditorSceneManager.MarkAllScenesDirty();
     }
 
     void CreateHostage(Sc_Charaspec characterProperty, Tile hisTile)
     {
-        Mb_IAHostage NewGameObject = PrefabUtility.InstantiatePrefab(hostagePrefabProperty.objectReferenceValue) as Mb_IAHostage;
+        Mb_IAAgent NewGameObject = PrefabUtility.InstantiatePrefab(hostagePrefabProperty.objectReferenceValue) as Mb_IAAgent;
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
-        NewGameObject.GetComponent<Mb_IAHostage>().charaPerks = characterProperty;
-        NewGameObject.GetComponent<Mb_IAHostage>().agentTile = hisTile;
+        NewGameObject.charaPerks = characterProperty;
+        NewGameObject.AgentTile = hisTile;
         NewGameObject.transform.SetParent(hostageTransformProperty.objectReferenceValue as Transform);
-        hisTile.avaible = false;
         Selection.activeGameObject = NewGameObject.gameObject;
+        EditorUtility.SetDirty(NewGameObject);
+        EditorUtility.SetDirty(hisTile);
         EditorSceneManager.MarkAllScenesDirty();
     }
 
     void EraseCharacter(Mb_Player player)
     {
-        player.agentTile.avaible = true;
+        player.AgentTile.avaible = true;
         Undo.DestroyObjectImmediate(player.gameObject);
     }
 
-    void EraseHostage(Mb_IAHostage hostage)
+    void EraseHostage(Mb_IAAgent hostage)
     {
-        hostage.agentTile.avaible = true;
+        hostage.AgentTile.avaible = true;
         Undo.DestroyObjectImmediate(hostage.gameObject);
     }
 
