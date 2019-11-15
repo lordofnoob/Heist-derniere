@@ -92,12 +92,12 @@ TextureImporter:
       name: Sign_Black - Copy_0
       rect:
         serializedVersion: 2
-        x: 1283
-        y: 507
-        width: 942
-        height: 1466
+        x: 0
+        y: 0
+        width: 928
+        height: 1447
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

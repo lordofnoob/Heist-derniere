@@ -23,9 +23,10 @@ public class TriggerPanelEvent : MonoBehaviour
 
     public void OnMouseExit()
     {
-        toTrigger.RestatPos();
+        //toTrigger.RestatPos();
         toTrigger.bScale = false;
         oneTime = true;
 
+        toTrigger.killIdle();
     }
 }
