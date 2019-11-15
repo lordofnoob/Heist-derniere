@@ -46,23 +46,27 @@ public class Mb_Agent : Mb_Poolable
     public virtual void AddDeplacement(List<Tile> path) { }
     public virtual void ChangeDeplacement(List<Tile> newPath)
     {
+        Debug.Log("CHANGE DEPLACEMENT");
         //REMOVE OLDER DEPLACEMENT ACTION
-        List<Deplacement> removeList = new List<Deplacement>();
+        List<Action> actionList = new List<Action>();
         foreach (Action action in actionsToPerform)
         {
-            if (action is Deplacement)
-                removeList.Add(action as Deplacement);
+            if (!(action is Deplacement))
+                actionList.Add(action);
         }
 
-        List<Action> actionList = actionsToPerform;
         actionsToPerform.Clear();
 
-        foreach (Tile tile in newPath)
-        {
-            actionsToPerform.Add(new Deplacement(charaPerks.speed, this, tile));
-        }
+        AddDeplacement(newPath);
 
         actionsToPerform.AddRange(actionList);
+
+        /*Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
+        foreach (Action action in actionsToPerform)
+        {
+            Debug.Log("First Action is : " + action);
+        }
+        Debug.Log("##############################");*/
     }
 
     public virtual void FindAnOtherPath() { }
