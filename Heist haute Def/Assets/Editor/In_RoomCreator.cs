@@ -231,16 +231,16 @@ public class In_RoomCreator : Editor
             List<CombinableWallType> WallTypeList = new List<CombinableWallType>();
 
             if (wallTile.neighbours.North != null)
-                if (wallTile.neighbours.North.tileType == Tile.TileType.Wall)
+                if (wallTile.neighbours.North.tileType != Tile.TileType.Other)
                     WallTypeList.Add(CombinableWallType.Up);
             if (wallTile.neighbours.South != null)
-                if (wallTile.neighbours.South.tileType == Tile.TileType.Wall)
+                if (wallTile.neighbours.South.tileType != Tile.TileType.Other)
                     WallTypeList.Add(CombinableWallType.Down);
             if (wallTile.neighbours.East != null)
-                if (wallTile.neighbours.East.tileType == Tile.TileType.Wall)
+                if (wallTile.neighbours.East.tileType != Tile.TileType.Other)
                     WallTypeList.Add(CombinableWallType.Right);
             if (wallTile.neighbours.West != null)
-                if (wallTile.neighbours.West.tileType == Tile.TileType.Wall)
+                if (wallTile.neighbours.West.tileType != Tile.TileType.Other)
                     WallTypeList.Add(CombinableWallType.Left);
 
 
@@ -271,12 +271,14 @@ public class In_RoomCreator : Editor
 
                 if (DefinitiveType == wallConfig.wallConfiguration[i].walltype)
                 {
+                    //Pour l'aléat pondéré faudra reprendre la ligne la
                     Tile newGameObject = PrefabUtility.InstantiatePrefab(wallConfig.wallConfiguration[i].associatedTiles[0].associatedTile) as Tile;
                     newGameObject.transform.position = wallTile.transform.position;
                     newGameObject.transform.SetParent(wallTile.transform.parent);
                     DestroyImmediate(wallTile.gameObject);
                     GenerateGrid();
                 }
+               
                 /* for (int j = 0; j < wallConfig.wallConfiguration[i].associatedTiles.Length; j++)
                {
                    totalWeight += wallConfig.wallConfiguration[i].associatedTiles[j].weight;

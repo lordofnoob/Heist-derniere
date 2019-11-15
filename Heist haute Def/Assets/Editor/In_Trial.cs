@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[CustomEditor(typeof(Mb_Trial))]
+//[CustomEditor(typeof(Mb_Trial))]
 public class In_Trial : Editor
 {
-//    SerializedProperty
+    Mb_Trial mySelectedScript;
+    SerializedProperty positionToGoProperty;
 
     public void OnEnable()
     {
-     //   mySelectedScript = target as Ed_Mb_Generator;
+        mySelectedScript = target as Mb_Trial;
+        //positionToGoProperty = 
     }
 
     public override void OnInspectorGUI()

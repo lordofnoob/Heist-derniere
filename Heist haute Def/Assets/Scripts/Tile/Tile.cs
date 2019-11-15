@@ -190,29 +190,9 @@ public class Tile : MonoBehaviour
 
     public enum TileType
     {
-        Other, Wall
+        Other, Wall, Incrusted
     }
 
-    [System.Flags]
-    public enum CombinableWallType2
-    {
-        None = (0 << 0),
-        Left = (1 << 0),
-        Right = (1 << 1),
-        Up = (1 << 2),
-        Down = (1 << 3),
-
-        LeftUp = (1 << 4),
-        RightUp = (1 << 5),
-        LeftDown = (1 << 6),
-        RightDown = (1 << 7),
-
-        LeftDownRight = (1 << 8),
-        DownRightUp = (1 << 9),
-        RightUpLeft = (1 << 10),
-        UpLeftDown = (1 << 11),
-
-        All = Left & Down & Left & Right
-    }
+  
 
 }
