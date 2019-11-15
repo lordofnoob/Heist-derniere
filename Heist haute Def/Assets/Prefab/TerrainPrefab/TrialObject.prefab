@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8112902895605486005}
   - component: {fileID: 8112902895605486006}
   m_Layer: 0
-  m_Name: Trial
+  m_Name: TrialObject
   m_TagString: Trial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2ae03be527c7e7048862bae4247e7dda, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,12 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c336066a9e8e08499902370882aa9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolable: 1
-  objectType: 0
   trialParameters: {fileID: 11400000, guid: ab6f09797398ea24d96f3a2cedeec4b2, type: 2}
   positionToGo:
   - {fileID: 0}
   - {fileID: 0}
+  trialTile: {fileID: 0}
   timeVignet: {fileID: 0}
   listOfUser: []
 --- !u!1 &8112902895744287860

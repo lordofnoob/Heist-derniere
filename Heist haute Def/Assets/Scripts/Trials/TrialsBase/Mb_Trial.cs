@@ -139,4 +139,14 @@ public class Mb_Trial : Mb_Poolable
     {
         return true;
     }
+
+    public void AddPositionToGo(Tile positionToAdd)
+    {
+        List<Tile> tempList = new List<Tile>();
+        for (int i = 0; i < positionToGo.Length; i++)
+            tempList.Add(positionToGo[i]);
+
+        tempList.Add(positionToAdd);
+        positionToGo = tempList.ToArray();
+    }
 }

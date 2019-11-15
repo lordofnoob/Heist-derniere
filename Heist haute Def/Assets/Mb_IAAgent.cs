@@ -25,7 +25,7 @@ public class Mb_IAAgent : Mb_Agent
     [Header("Hostage State")]
     public HostageState hostageState = HostageState.Free;
     //[HideInInspector]
-    public bool SomeoneWillInteractWith = false;
+    public Mb_Agent SomeoneWillInteractWith = null;
 
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class Mb_IAAgent : Mb_Agent
         }
         //Debug.Log("Stress : "+stress);
 
-        if (stress == 100 && hostageState != HostageState.InPanic)
+        if (stress == 100 && hostageState != HostageState.InPanic && hostageState != HostageState.Captured)
         {
             Panic();
         }
@@ -77,7 +77,7 @@ public class Mb_IAAgent : Mb_Agent
     {
         if (path.Count != 0)
         {
-            Debug.Log(path.Count);
+            //Debug.Log(path.Count);
             destination = path[path.Count - 1];
             foreach (Tile tile in path)
             {
@@ -96,16 +96,16 @@ public class Mb_IAAgent : Mb_Agent
 
     public override void PerformAction()
     {
-        if (SomeoneWillInteractWith)
+        if (SomeoneWillInteractWith != null)
         {
             foreach (Tile neighbour in AgentTile.GetNeighbours())
             {
-
-                    if (neighbour.agentOnTile != null && neighbour.agentOnTile.onGoingInteraction == this)
-                    {
-                        StopMoving();
-                        return;
-                    }
+                //Debug.Log("Neighbour");
+                if (neighbour.agentOnTile != null && neighbour.agentOnTile == SomeoneWillInteractWith)
+                {
+                    StopMoving();
+                    return;
+                }
             }
         }
 
@@ -117,6 +117,14 @@ public class Mb_IAAgent : Mb_Agent
             //Debug.Log("PERFORM 1 IAHOSTAGE ACTION");
             nextAction = false;
             actionsToPerform.First().PerformAction();
+
+            if (destination == AgentTile)
+            {
+                state = StateOfAction.Idle;
+                destination = null;
+            }
+            UpdatePositionToGo();
+
             actionsToPerform.Remove(actionsToPerform.First());
 
         }
@@ -195,7 +203,7 @@ public class Mb_IAAgent : Mb_Agent
     public override void ResetInteractionParameters()
     {
         state = StateOfAction.Idle;
-        SomeoneWillInteractWith = false;
+        SomeoneWillInteractWith = null;
         onGoingInteraction = null;
         nextAction = true;
         //Debug.Log(actionsToPerform.Count);
@@ -207,9 +215,10 @@ public class Mb_IAAgent : Mb_Agent
         state = StateOfAction.Idle;
         actionsToPerform.Clear();
         actionsToPerform.TrimExcess();
+        SomeoneWillInteractWith = null;
         onGoingInteraction = null;
         destination = null;
-        Debug.Log("actions have been flushed. Count left = " + actionsToPerform.Count.ToString());
+        //Debug.Log("actions have been flushed. Count left = " + actionsToPerform.Count.ToString());
     }
 
     public void UpdatePositionToGo()

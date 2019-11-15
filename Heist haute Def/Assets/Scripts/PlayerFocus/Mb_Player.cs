@@ -107,22 +107,36 @@ public class Mb_Player : Mb_Agent
         else
         {
             Debug.Log("Chemin Impossible");
+            FindAnOtherPath();
         }
     }
 
     public override void FindAnOtherPath()
     {
         List<Tile> newShortestPath = new List<Tile>();
-        if (!destination.avaible)
+        if(destination == null)
         {
-            newShortestPath = pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours());
+            if(onGoingInteraction != null)
+            {
+                List<Tile> posToGo = new List<Tile> ();
+                posToGo.AddRange(onGoingInteraction.positionToGo);
+
+                newShortestPath = pathfinder.SearchForShortestPath(AgentTile, posToGo);
+            }
+            else
+            {
+                if (!destination.avaible)
+                {
+                    newShortestPath = pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours());
+                }
+                else
+                {
+                    newShortestPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { destination });
+                }
+            }
+            Debug.Log("New path deplacement number : " + newShortestPath.Count);
+            ChangeDeplacement(newShortestPath);
         }
-        else
-        {
-            newShortestPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { destination });
-        }
-        Debug.Log("New path deplacement number : " + newShortestPath.Count);
-        ChangeDeplacement(newShortestPath);
         nextAction = true;
     }
 
@@ -130,8 +144,15 @@ public class Mb_Player : Mb_Agent
     {
         if(actionsToPerform.Count != 0 && nextAction)
         {
+            /*Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
+            foreach (Action action in actionsToPerform)
+            {
+                Debug.Log("First Action is : " + action);
+            }
+            Debug.Log("##############################");*/
+
             //CHECK Si la prochaine interaction est un hotage en movement => alors recalcul du path
-            if(onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
+            if (onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
             {
                 Mb_IATrial IATrial = onGoingInteraction as Mb_IATrial;
                 if(IATrial.IAAgent.state == StateOfAction.Moving)
@@ -148,6 +169,13 @@ public class Mb_Player : Mb_Agent
 
             nextAction = false;
             actionsToPerform.First().PerformAction();
+
+            if (destination == AgentTile)
+            {
+                state = StateOfAction.Idle;
+                destination = null;
+            }
+
             actionsToPerform.Remove(actionsToPerform.First());
         }
     }

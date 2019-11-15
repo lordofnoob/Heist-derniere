@@ -108,17 +108,15 @@ public class Ma_PlayerManager : MonoBehaviour
                         if(targetTrial is Mb_IATrial)
                         {
                             Mb_IATrial IATrial = targetTrial as Mb_IATrial;
-                            IATrial.IAAgent.SomeoneWillInteractWith = true;
+                            IATrial.IAAgent.SomeoneWillInteractWith = selectedPlayer;
                         }
 
                         List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, positionToAccomplishDuty);
                         selectedPlayer.AddDeplacement(ShortestPath);
                         selectedPlayer.SetNextInteraction(targetTrial);
-                    }
-                    
+                    }                    
                 }
-            }
-            
+            }            
         }
 
     }
