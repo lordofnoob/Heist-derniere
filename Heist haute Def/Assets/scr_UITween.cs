@@ -6,7 +6,6 @@ using DG.Tweening;
 
 public class scr_UITween : MonoBehaviour
 {
-
     public Image ring;
     public Image circle;
     public RectTransform panel;
@@ -29,6 +28,20 @@ public class scr_UITween : MonoBehaviour
 
     public float fillValue;
     public float fillSpeed = 0.1f;
+
+    [Space(10)]
+    [Header("Idle Parameter")]
+    public float Iduration;
+    public Vector3 Istrength;
+    public int Ivibrato;
+    public float Irandomness;
+    public bool Isnapping;
+    public bool IfadeOut;
+
+
+    static Sequence sequence;
+    public float transitionTime;
+    public bool alreadyFull;
 
     void Start()
     {
@@ -66,14 +79,25 @@ public class scr_UITween : MonoBehaviour
         {
 
             bScale = true;
-            panel.DOPunchAnchorPos(punchDir, duration, vibrato, elasticity, snapping);
-            doOnce = true;
+            if(!alreadyFull)
+            {
+                sequence.Append(panel.DOPunchAnchorPos(punchDir, duration, vibrato, elasticity, snapping));
+                sequence.PrependInterval(transitionTime);
+                sequence.Append(panel.DOShakeAnchorPos(Iduration, Istrength, Ivibrato, Irandomness, Isnapping, IfadeOut)/*.SetLoops(-1, LoopType.Restart)*/);
+                alreadyFull = true;
+            }
+            else
+            {
+                sequence.Restart();
+            }
 
+            // doOnce = true;
+            // Idle();
             punch = false;
         }
         else
         {
-            RestatPos();
+           // RestatPos();
         }
 
         if (bScale)
@@ -114,5 +138,11 @@ public class scr_UITween : MonoBehaviour
         {
             fill = false;
         }
+    }
+
+    public void killIdle()
+    {
+        sequence.Kill();
+        sequence.Pause();
     }
 }
