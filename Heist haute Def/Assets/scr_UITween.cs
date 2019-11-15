@@ -42,13 +42,20 @@ public class scr_UITween : MonoBehaviour
     static Sequence sequence;
     public float transitionTime;
     public bool alreadyFull;
+    private Tween idleTween;
+
+    [Space(10)]
+    [Header("Circle Parameter")]
+    public Vector3 targetC;
+    public float sizingSpeedC;
+
+    public TriggerPanelEvent myTpe;
 
     void Start()
     {
         originPos.x = -0.5f;
 
         originPos.y = 0.5f;
-
     }
 
     void Update()
@@ -56,7 +63,20 @@ public class scr_UITween : MonoBehaviour
 
         panel.localScale = new Vector3(scaleValue, scaleValue, 1);
         ring.fillAmount = fillValue;
-        circle.fillAmount = fillValue;
+       // circle.fillAmount = fillValue;
+
+        if(fillValue >= 0.99f)
+        {
+            circle.rectTransform.DOScale(targetC, sizingSpeedC);
+
+        }
+        else
+        {
+            circle.rectTransform.DOScale(new Vector3(0, 0, 1), 0.8f);
+            //circle.rectTransform.localScale = new Vector3(0, 0, 1);
+
+        }
+
 
         if (fill)
         {
@@ -79,17 +99,19 @@ public class scr_UITween : MonoBehaviour
         {
 
             bScale = true;
-            if(!alreadyFull)
-            {
+            /*if(!alreadyFull)
+            {*/
                 sequence.Append(panel.DOPunchAnchorPos(punchDir, duration, vibrato, elasticity, snapping));
                 sequence.PrependInterval(transitionTime);
-                sequence.Append(panel.DOShakeAnchorPos(Iduration, Istrength, Ivibrato, Irandomness, Isnapping, IfadeOut)/*.SetLoops(-1, LoopType.Restart)*/);
+                idleTween = panel.DOShakeAnchorPos(Iduration, Istrength, Ivibrato, Irandomness, Isnapping, IfadeOut).SetAutoKill(false);
+                idleTween.OnComplete(() => idleTween.Restart());
+                sequence.Append(idleTween);
                 alreadyFull = true;
-            }
+           /* }
             else
             {
                 sequence.Restart();
-            }
+            }*/
 
             // doOnce = true;
             // Idle();
@@ -109,6 +131,8 @@ public class scr_UITween : MonoBehaviour
         }
         else
         {
+            panel.anchoredPosition3D = new Vector3(0, originPos.y, panel.anchoredPosition3D.z);
+            panel.anchoredPosition = new Vector2(panel.anchoredPosition.x, originPos.x);
             scaleValue = 0;
         }
     }
@@ -136,13 +160,16 @@ public class scr_UITween : MonoBehaviour
 
         if(Input.GetMouseButtonDown(1))
         {
+            myTpe.filling = false;
             fill = false;
         }
     }
 
     public void killIdle()
     {
-        sequence.Kill();
-        sequence.Pause();
+
+        idleTween.Kill(true);
+        sequence.Kill(true);
+
     }
 }

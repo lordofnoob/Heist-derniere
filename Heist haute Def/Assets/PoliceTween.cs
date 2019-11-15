@@ -27,12 +27,10 @@ public class PoliceTween : MonoBehaviour
 
         if (transform.localScale.x > originScale.x + resetDist || transform.localScale.x < originScale.x - resetDist || transform.localScale.y < originScale.y - resetDist || transform.localScale.y > originScale.y + resetDist || transform.localScale.z < originScale.z - resetDist || transform.localScale.z > originScale.z + resetDist)
         {
-            Debug.Log("Reset");
             transform.localScale = Vector3.Lerp(transform.localScale, originScale, resetSpeed);
         }
         else
         {
-            Debug.Log("DoShake");
             transform.DOShakeScale(duration, shakeStrength, vibrato, noise, isFadeOut);
         }
     }
