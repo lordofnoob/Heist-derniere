@@ -54,11 +54,6 @@ public class Deplacement : Action
                                     destination.SetOutlinesEnabled(false);
                                     destination.highlighted = false;
 
-                                    if (destination == player.destination)
-                                    {
-                                        player.state = StateOfAction.Idle;
-                                        player.destination = null;
-                                    }
                                     if (!findNewPath)
                                         player.nextAction = true;
                                 });
@@ -137,14 +132,6 @@ public class Deplacement : Action
                                  {
                                      destination.SetOutlinesEnabled(false);
                                      destination.highlighted = false;
-
-                                     if (destination == hostage.destination)
-                                     {
-                                         hostage.state = StateOfAction.Idle;
-                                         hostage.destination = null;
-                                     }
-
-                                     hostage.UpdatePositionToGo();
 
                                      if (!findNewPath)
                                          hostage.nextAction = true;
