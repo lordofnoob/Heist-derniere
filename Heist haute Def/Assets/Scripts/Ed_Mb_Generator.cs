@@ -18,6 +18,7 @@ public class Ed_Mb_Generator : MonoBehaviour
     [HideInInspector] public Sc_Charaspec hostageCharactSpectToInstantiate;
     [HideInInspector] public Mb_Agent hostagePrefab;
     [HideInInspector] public Transform playerTransform, hostageTransform;
+
     public void InstantiateRoom()
     {
         Identify();
@@ -57,6 +58,4 @@ public class Ed_Mb_Generator : MonoBehaviour
 
         }
     }
-
-
 }

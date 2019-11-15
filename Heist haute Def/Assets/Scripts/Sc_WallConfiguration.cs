@@ -21,5 +21,5 @@ public struct WallStruct
 public struct TileGeneration
 {
     public Tile associatedTile;
-    public int weight;
+    [Range(0,100)] public int weight;
 }
