@@ -107,6 +107,7 @@ public class Mb_Player : Mb_Agent
         else
         {
             Debug.Log("Chemin Impossible");
+            
             FindAnOtherPath();
         }
     }

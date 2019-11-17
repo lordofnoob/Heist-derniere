@@ -90,7 +90,8 @@ public class Mb_IAAgent : Mb_Agent
         }
         else
         {
-            Debug.Log("Chemin Impossible");
+            Debug.Log("Wait a tick");
+            SetFirstActionToPerform(new Wait(Ma_ClockManager.Instance.tickInterval, this));
         }
     }
 
@@ -190,12 +191,11 @@ public class Mb_IAAgent : Mb_Agent
         actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
     }
 
-    public override void SetFirstInteraction(Mb_Trial trialToUse)
+    public override void SetFirstActionToPerform(Action action)
     {
-        onGoingInteraction = trialToUse;
         List<Action> temp = actionsToPerform;
         actionsToPerform.Clear();
-        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+        actionsToPerform.Add(action);
         actionsToPerform.AddRange(temp);
         //Debug.Log(actionsToPerform[0]);
     }
