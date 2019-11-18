@@ -91,7 +91,7 @@ public class Mb_IAAgent : Mb_Agent
         else
         {
             Debug.Log("Wait a tick");
-            SetFirstActionToPerform(new Wait(Ma_ClockManager.Instance.tickInterval, this));
+            SetFirstActionToPerform(new Wait(Ma_ClockManager.Instance.tickInterval, this, FindAnOtherPath));
         }
     }
 
@@ -135,7 +135,7 @@ public class Mb_IAAgent : Mb_Agent
     {
         if (state == StateOfAction.Moving)
         {
-            Debug.Log("FIND ANOTHER PATH");
+            Debug.Log("IA Find a new path");
 
             List<Deplacement> removeList = new List<Deplacement>();
             foreach (Action action in actionsToPerform)
