@@ -21,10 +21,19 @@ public class Mb_Trial : Mb_Poolable
     private bool counting;
     private List<float> reductionList;
     private float definitiveModifier=1;
+    private float vignetCompletion = 0;
+    float tickInterval;
+
+    private void OnEnable()
+    {
+        currentTimeSpentOn = 0;
+        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
+    }
 
     void Awake()
-    {
-
+    { 
+        Ma_ClockManager.Instance.tickTrigger.AddListener(this.Counting);
+        tickInterval = Ma_ClockManager.Instance.tickInterval;
     }
 
      public void StartInteracting()
@@ -65,15 +74,25 @@ public class Mb_Trial : Mb_Poolable
     public void Counting()
     {
 
-        if (counting==true)
-            currentTimeSpentOn += Time.deltaTime * listOfUser.Count;
+
+        if (counting == true)
+        {
+            currentTimeSpentOn += tickInterval;
+            Debug.Log(currentTimeSpentOn);
+        }
 
         if (currentTimeSpentOn > finalTimeToSpendOn)
         {
             DoThings();
         }
 
-        timeVignet.fillAmount = currentTimeSpentOn / finalTimeToSpendOn;
+        
+    }
+
+    private void Update()
+    {
+        vignetCompletion = Mathf.Lerp(vignetCompletion, currentTimeSpentOn, tickInterval);
+        timeVignet.fillAmount = vignetCompletion / finalTimeToSpendOn;
     }
 
     public void ReUpduateTiming()
@@ -102,10 +121,6 @@ public class Mb_Trial : Mb_Poolable
         counting = true;
     }
 
-    private void Update()
-    {
-        Counting();
-    }
 
     public virtual void DoThings()
     {}
@@ -113,6 +128,7 @@ public class Mb_Trial : Mb_Poolable
     public void ResetValues()
     {
         counting = false;
+        vignetCompletion = 0;
         currentTimeSpentOn = 0;
         definitiveModifier = 1;
         //Debug.Log(listOfUser.Count);
@@ -140,13 +156,5 @@ public class Mb_Trial : Mb_Poolable
         return true;
     }
 
-    public void AddPositionToGo(Tile positionToAdd)
-    {
-        List<Tile> tempList = new List<Tile>();
-        for (int i = 0; i < positionToGo.Length; i++)
-            tempList.Add(positionToGo[i]);
 
-        tempList.Add(positionToAdd);
-        positionToGo = tempList.ToArray();
-    }
 }

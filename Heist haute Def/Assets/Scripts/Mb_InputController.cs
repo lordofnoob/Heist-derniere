@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Mb_InputController : MonoBehaviour
 {
-    public bool Z, Q, S, D;
+    public bool Z, Q, S, D, space;
     public bool RightClick, LeftClick, MiddleClick;
     public float scroll;
     public Vector2 mousePosition;
@@ -22,6 +22,8 @@ public class Mb_InputController : MonoBehaviour
         Q = Input.GetKey(KeyCode.Q);
         S = Input.GetKey(KeyCode.S);
         D = Input.GetKey(KeyCode.D);
+
+        space = Input.GetKeyDown(KeyCode.Space);
 
         scroll = Input.GetAxis("Mouse ScrollWheel");
 

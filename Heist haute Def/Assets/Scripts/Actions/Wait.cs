@@ -6,13 +6,21 @@ public class Wait : Action
 {
     private float timer = 0;
     public Wait(float timeToPerform, Mb_Agent agent) : base(timeToPerform, agent) { }
+    private float intervalTime, waitingTime;
+
+    void Start()
+    {
+        intervalTime = Ma_ClockManager.Instance.tickInterval;
+        Ma_ClockManager.Instance.tickTrigger.AddListener(this.PerformAction);
+    }
 
     public override void PerformAction()
     {
-        while(timer < timeToPerform * Ma_ClockManager.Instance.tickInterval)
+        if (timeToPerform < waitingTime)
         {
-            timer += Time.deltaTime;
+            waitingTime += intervalTime;
         }
-        agent.nextAction = true;
+        else
+            agent.nextAction = true;
     }
 }

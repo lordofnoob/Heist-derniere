@@ -13,7 +13,7 @@ public enum CombinableWallType
    [HideInInspector] None = (0 << 0),
    [HideInInspector] Left = (1 << 0),
    [HideInInspector] Right = (1 << 1),
-   [HideInInspector] Up = (1 << 2),
+   [HideInInspector] Up =   (1 << 2),
    [HideInInspector] Down = (1 << 3),
 
     LeftUp = Left | Up,

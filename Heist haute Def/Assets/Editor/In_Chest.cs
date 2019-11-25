@@ -9,6 +9,8 @@ public class In_Chest : Editor
     Mb_Chest mySelectedScript;
     SerializedProperty positionToGoProperty;
     UsedMode mode;
+    Color addTileColor = Color.red, RemoveTileColor = Color.red;
+    Color CleanAllTilesColor = Color.cyan;
 
     public void OnEnable()
     {
@@ -22,20 +24,37 @@ public class In_Chest : Editor
         EditorGUI.BeginChangeCheck();
 
         serializedObject.Update();
+        GUI.backgroundColor = addTileColor;
         if (GUILayout.Button("AddTileToGo", GUILayout.MinWidth(50)) )
         {
+            ResetAllColors();
             if (mode == UsedMode.AddTileToGo)
+            {
+               
                 mode = UsedMode.None;
+            }
             else
+            {
+                addTileColor = Color.green;
                 mode = UsedMode.AddTileToGo;
+            }
+             
         }
+        GUI.backgroundColor = RemoveTileColor;
         if (GUILayout.Button("RemoveTileToGo", GUILayout.MinWidth(50)))
         {
+            ResetAllColors();
             if (mode == UsedMode.RemoveTileToGo)
+            {
                 mode = UsedMode.None;
+            }
             else
+            {
+               RemoveTileColor = Color.green;
                 mode = UsedMode.RemoveTileToGo;
+            }
         }
+        GUI.backgroundColor = CleanAllTilesColor;
         if (GUILayout.Button("CleanAllTiles", GUILayout.MinWidth(50)))
         {
             mode = UsedMode.None;
@@ -43,19 +62,28 @@ public class In_Chest : Editor
             serializedObject.ApplyModifiedProperties();
         }
     }
+    void ResetAllColors()
+    {
+        addTileColor = RemoveTileColor = Color.red;
+    }
 
     private void OnSceneGUI()
     {
         CheckEffect();
     }
 
+    private void ExitGUI()
+    {
+        ResetAllColors();
+    }
 
     public void CheckEffect()
     {
         if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.A)
         {
-            Debug.Log("before" + positionToGoProperty.arraySize);
             
+            Debug.Log("before" + positionToGoProperty.arraySize);
+            Debug.Log(mode);
             
             Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
             RaycastHit hitInfo;
@@ -64,28 +92,49 @@ public class In_Chest : Editor
                 case UsedMode.AddTileToGo:
                     if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Tile>().walkable == true)
                     {
+                        //nettoyage de la liste si elle a 1 element vide 
+                       if (positionToGoProperty.arraySize >0)
+                           if(positionToGoProperty.GetArrayElementAtIndex(0).objectReferenceValue == null)
+                            positionToGoProperty.arraySize = 0;
+
+
+                        serializedObject.ApplyModifiedProperties();
+
                         positionToGoProperty.arraySize += 1;
-                        Debug.Log(positionToGoProperty.GetArrayElementAtIndex(0).objectReferenceValue);
-                        Debug.Log(hitInfo.collider.gameObject);
-                     
-                        positionToGoProperty.GetArrayElementAtIndex(positionToGoProperty.arraySize - 1).objectReferenceValue = hitInfo.collider.GetComponent<Tile>();
+                        List<Tile> tempListTile = new List<Tile>();
+                        foreach (Tile tilestoGo in mySelectedScript.positionToGo)
+                        {
+                            tempListTile.Add(tilestoGo);
+                        }
+                        
+                        
+                        
                         bool alreadyHere = false;
 
-                        for (int i = 0; i < positionToGoProperty.arraySize; i++)
+                        for (int i = 0; i < tempListTile.Count; i++)
                         {
-                            if (positionToGoProperty.GetArrayElementAtIndex(i).objectReferenceValue != hitInfo.collider.GetComponent<Tile>() && alreadyHere == false)
+                            if (tempListTile[i] != hitInfo.collider.GetComponent<Tile>() && alreadyHere == false)
                             {
+                                tempListTile.Add(hitInfo.collider.GetComponent<Tile>());
                                 alreadyHere = true;
                                 Debug.Log("YAS");
+
+                                for (int y = 0; y < tempListTile.Count; y++)
+                                {
+                                    positionToGoProperty.GetArrayElementAtIndex(y).objectReferenceValue = tempListTile[y];
+                                    
+                                }
+                                serializedObject.ApplyModifiedProperties();
                                 break;
                             }
                             else
                             {
-                                Debug.Log("Already in the list");
                                 positionToGoProperty.arraySize -= 1;
+                                Debug.Log("Already in the list");
+                                break;  
                             }
                         }
-
+                       
                     } 
                     break;
 

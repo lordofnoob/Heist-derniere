@@ -12,17 +12,10 @@ public enum HostageState
 
 public class Mb_IATrial : Mb_Trial
 {
-    [HideInInspector] public Mb_IAAgent IAAgent;
+    public Mb_IAAgent IAAgent;
 
-    private void Awake()
-    {
-        IAAgent = GetComponent<Mb_IAAgent>();
-    }
 
-    void Update()
-    {
-        Counting();
-    }
+
 
     public override void DoThings()
     {

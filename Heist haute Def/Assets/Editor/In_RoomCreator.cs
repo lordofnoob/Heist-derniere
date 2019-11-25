@@ -50,6 +50,9 @@ public class In_RoomCreator : Editor
         }
 
         //clean Room
+
+
+
         #region
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("CleanRoom", GUILayout.MinHeight(50)))

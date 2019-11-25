@@ -26,6 +26,8 @@ public class Ma_IAManager : MonoBehaviour
         {
             Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
         }
+
+
     }
 
     // Update is called once per frame

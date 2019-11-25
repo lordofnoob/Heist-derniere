@@ -14,7 +14,6 @@ public class In_Trial : Editor
 
     public void OnEnable()
     {
-
         mySelectedScript = target as Mb_Trial;
         positionToGoProperty = serializedObject.FindProperty("positionToGo");
     }
