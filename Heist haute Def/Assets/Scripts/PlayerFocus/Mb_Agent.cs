@@ -78,4 +78,10 @@ public class Mb_Agent : Mb_Poolable
     public virtual void ResetInteractionParameters() { }
     public virtual void AddItem(Sc_Items itemToAdd) { }
     public virtual void DropItem(Sc_Items itemToDrop) { }
+
+    public IEnumerator WaitForTime(float timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        nextAction = true;
+    }
 }

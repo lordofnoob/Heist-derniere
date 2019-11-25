@@ -156,6 +156,7 @@ public class Deplacement : Action
             if (findNewPath)
             {
                 hostage.FindAnOtherPath();
+                //hostage.SetFirstActionToPerform(new Wait(1f, hostage, hostage.FindAnOtherPath));
             }
         }
 

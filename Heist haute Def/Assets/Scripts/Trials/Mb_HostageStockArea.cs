@@ -6,7 +6,6 @@ public class Mb_HostageStockArea : Mb_Trial
 {
 
     private int areaCapacity = 0;
-    //Dictionary des slots : true = free
     public Tile[] hostagesPos;
 
 
