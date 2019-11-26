@@ -50,6 +50,9 @@ public class In_RoomCreator : Editor
         }
 
         //clean Room
+
+
+
         #region
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("CleanRoom", GUILayout.MinHeight(50)))
@@ -113,7 +116,7 @@ public class In_RoomCreator : Editor
             mode = UsedMode.RemovePlayer;
             CheckButtonColor();
         }
-        GUI.backgroundColor = Color.grey;
+        GUI.backgroundColor = Color.gray;
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
         #endregion

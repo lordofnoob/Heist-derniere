@@ -47,7 +47,7 @@ public class Mb_IAAgent : Mb_Agent
                 break;
             case HostageState.Captured:
                 stress += Random.Range(minStress, maxStress) / 2;
-                stress = Mathf.Clamp(stress, 40, 100);
+                stress = Mathf.Clamp(stress, 0, 40);
                 break;
         }
         //Debug.Log("Stress : "+stress);
@@ -90,7 +90,9 @@ public class Mb_IAAgent : Mb_Agent
         }
         else
         {
-            Debug.Log("Chemin Impossible");
+            Debug.Log("Wait a tick");
+            FindAnOtherPath();
+            //SetFirstActionToPerform(new Wait(1f, this, this.FindAnOtherPath));
         }
     }
 
@@ -134,7 +136,7 @@ public class Mb_IAAgent : Mb_Agent
     {
         if (state == StateOfAction.Moving)
         {
-            Debug.Log("FIND ANOTHER PATH");
+            Debug.Log("IA Find a new path");
 
             List<Deplacement> removeList = new List<Deplacement>();
             foreach (Action action in actionsToPerform)
@@ -190,12 +192,11 @@ public class Mb_IAAgent : Mb_Agent
         actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
     }
 
-    public override void SetFirstInteraction(Mb_Trial trialToUse)
+    public override void SetFirstActionToPerform(Action action)
     {
-        onGoingInteraction = trialToUse;
         List<Action> temp = actionsToPerform;
         actionsToPerform.Clear();
-        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+        actionsToPerform.Add(action);
         actionsToPerform.AddRange(temp);
         //Debug.Log(actionsToPerform[0]);
     }

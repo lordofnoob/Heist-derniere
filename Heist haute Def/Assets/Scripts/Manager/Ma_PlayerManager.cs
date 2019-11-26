@@ -52,8 +52,10 @@ public class Ma_PlayerManager : MonoBehaviour
             Ray ray = Ma_CameraManager.Instance.mainCam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit)) 
             {
+
+                //quand le joueur est en train d interagir
                 if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != StateOfAction.Captured && selectedPlayer.state != StateOfAction.Moving)
                 {
                     /*hit.point += new Vector3(Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2, 0f, Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2);
@@ -69,11 +71,13 @@ public class Ma_PlayerManager : MonoBehaviour
                         selectedPlayer.onGoingInteraction.QuittingCheck();
                         selectedPlayer.onGoingInteraction = null;
                     }
-
+                    selectedPlayer.nextAction = true;
                     //Debug.Log(hit.transform.GetComponent<Tile>().transform.position);
                     List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, new List<Tile> { hit.transform.GetComponent<Tile>() });
-                    selectedPlayer.AddDeplacement(ShortestPath);
+                    selectedPlayer.ChangeDeplacement(ShortestPath);
+                    //selectedPlayer.AddDeplacement(ShortestPath);
                 }
+
                 else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.state != StateOfAction.Captured && selectedPlayer.state!= StateOfAction.Interacting)
                 {
                     Mb_Trial targetTrial = hit.transform.gameObject.GetComponent<Mb_Trial>();
@@ -112,8 +116,9 @@ public class Ma_PlayerManager : MonoBehaviour
                         }
 
                         List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, positionToAccomplishDuty);
-                        selectedPlayer.AddDeplacement(ShortestPath);
+                        selectedPlayer.ChangeDeplacement(ShortestPath);
                         selectedPlayer.SetNextInteraction(targetTrial);
+                        selectedPlayer.nextAction = true;
                     }                    
                 }
             }            

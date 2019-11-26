@@ -11,10 +11,15 @@ public class Ma_ClockManager : MonoBehaviour
     public List<Mb_Agent> agentList = new List<Mb_Agent>();
 
     public float tickInterval = 0.2f;
+    bool isPauseActive;
+
+    IEnumerator clock;
+
     void Awake()
     {
         Instance = this;
 
+        clock = Sequencer();
         if (tickTrigger == null)
             tickTrigger = new UnityEvent();
 
@@ -30,12 +35,19 @@ public class Ma_ClockManager : MonoBehaviour
 
     IEnumerator Sequencer()
     {
+       
         yield return new WaitForSeconds(tickInterval);
 
-        tickTrigger.Invoke();
-        PerformAgentActions();
+        if (isPauseActive == false)
+        {
+            Debug.Log("CLick");
+
+            tickTrigger.Invoke();
+            PerformAgentActions();
+        }
 
         StartCoroutine(Sequencer());
+        
     }
 
     public void PerformAgentActions()
@@ -43,6 +55,14 @@ public class Ma_ClockManager : MonoBehaviour
         foreach(Mb_Agent agent in agentList)
         {
             agent.PerformAction();
+        }
+    }
+
+    public void Update()
+    {
+        if (Mb_InputController.inputControler.space == true)
+        {
+            isPauseActive = !isPauseActive;
         }
     }
 }

@@ -43,11 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c0eccfcb274424896591f80091241d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureToTraduce: {fileID: 2800000, guid: dbe5a6ebb6b5eae4cae29c638dac80a9, type: 3}
+  allRoomTransform: {fileID: 0}
+  textureToTraduce: {fileID: 2800000, guid: 2217c4e43b3d6734a8ec68afa3bfc96f, type: 3}
   distanceBetweenItems: 1
   colorCodeAssociated: {fileID: 11400000, guid: fec7311aeb512fc44b18085e6467c823,
     type: 2}
   roomParent: {fileID: 0}
+  wallConfig: {fileID: 0}
   playerCharactSpectToInstantiate: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4,
     type: 2}
   playerPrefab: {fileID: 1926673876582789652, guid: e5fa444fb59a8ef4a85efe8cdd0e7991,

@@ -141,7 +141,11 @@ public class Deplacement : Action
             else if(destination.GetComponentInChildren<Mb_Door>() != null)
             {
                 //Debug.Log("Set interaction");
-                hostage.SetFirstInteraction(destination.GetComponentInChildren<Mb_Trial>());
+                Mb_Trial trial = destination.GetComponentInChildren<Mb_Trial>();
+                //hostage.SetFirstInteraction();
+                hostage.onGoingInteraction = trial;
+                hostage.SetFirstActionToPerform(new Interact(trial.trialParameters.timeToAccomplishTrial, hostage, trial));
+
                 hostage.nextAction = true;
             }
             else
@@ -152,6 +156,7 @@ public class Deplacement : Action
             if (findNewPath)
             {
                 hostage.FindAnOtherPath();
+                //hostage.SetFirstActionToPerform(new Wait(1f, hostage, hostage.FindAnOtherPath));
             }
         }
 

@@ -26,6 +26,8 @@ public class Ma_IAManager : MonoBehaviour
         {
             Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
         }
+
+
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class Ma_IAManager : MonoBehaviour
             timer = 0f;
         }
         timer += Time.deltaTime;*/
-        
+
     }
 
     public void IAHostageFollowingPlayer(Mb_Agent h, Mb_Agent p)
@@ -55,25 +57,25 @@ public class Ma_IAManager : MonoBehaviour
     public void StockHostagesInArea(Mb_HostageStockArea area, List<Mb_IAAgent> hostages)
     {
         List<Mb_IAAgent> stockedHosteges = new List<Mb_IAAgent>();
-        foreach(Mb_IAAgent hostage in hostages)
+        foreach (Mb_IAAgent hostage in hostages)
         {
-            foreach (Transform position in area.hostagesPos)
+            foreach (Tile position in area.hostagesPos)
             {
-                if (position.GetComponent<Mb_PositionCheck>().dispo)
+                if (position.agentOnTile == null)
                 {
-                    position.GetComponent<Mb_PositionCheck>().dispo = false;
-
-                    hostage.hostageState = HostageState.Stocked;                    
+                    List<Tile> pathToGo = hostage.pathfinder.SearchForShortestPath(hostage.AgentTile, new List<Tile> { position});
+                    Debug.Log("Deplacement to stock pos : " + pathToGo.Count);
+                    hostage.AddDeplacement(pathToGo);
+                    hostage.hostageState = HostageState.Stocked;
+                    position.agentOnTile = hostage;
                     hostage.target = null;
                     stockedHosteges.Add(hostage);
-                    //hostage.agent.SetDestination(position.position);
-                    //hostage.agent.stoppingDistance = 0f;
                     break;
                 }
             }
         }
-        foreach(Mb_IAAgent stockedHostege in stockedHosteges)
+        foreach (Mb_IAAgent stockedHostege in stockedHosteges)
             hostages.Remove(stockedHostege);
-        
+
     }
 }

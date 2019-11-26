@@ -74,8 +74,14 @@ public class Mb_Agent : Mb_Poolable
     //Put Action at the end of actionToPerform queue
     public virtual void SetNextInteraction(Mb_Trial trialToUse) { }
     //Put Action at the Starrt of actionToPerform queue
-    public virtual void SetFirstInteraction(Mb_Trial trialToUse) { }
+    public virtual void SetFirstActionToPerform(Action action) { }
     public virtual void ResetInteractionParameters() { }
     public virtual void AddItem(Sc_Items itemToAdd) { }
     public virtual void DropItem(Sc_Items itemToDrop) { }
+
+    public IEnumerator WaitForTime(float timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        nextAction = true;
+    }
 }
