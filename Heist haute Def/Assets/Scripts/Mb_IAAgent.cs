@@ -91,8 +91,9 @@ public class Mb_IAAgent : Mb_Agent
         else
         {
             Debug.Log("Wait a tick");
+            SetFirstActionToPerform(new Wait(1f, this, this.FindAnOtherPath));
             FindAnOtherPath();
-            //SetFirstActionToPerform(new Wait(1f, this, this.FindAnOtherPath));
+           
         }
     }
 

@@ -45,6 +45,12 @@ public class Ma_IAManager : MonoBehaviour
 
     }
 
+    void OrderIaTick()
+    {
+        foreach(Mb_IAAgent ialis)
+        Mb_Agent.dothings()
+    }
+
     public void IAHostageFollowingPlayer(Mb_Agent h, Mb_Agent p)
     {
         Mb_IAAgent hostage = h as Mb_IAAgent;
