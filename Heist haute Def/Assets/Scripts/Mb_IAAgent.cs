@@ -47,7 +47,7 @@ public class Mb_IAAgent : Mb_Agent
                 break;
             case HostageState.Captured:
                 stress += Random.Range(minStress, maxStress) / 2;
-                stress = Mathf.Clamp(stress, 40, 100);
+                stress = Mathf.Clamp(stress, 0, 40);
                 break;
         }
         //Debug.Log("Stress : "+stress);
@@ -228,4 +228,21 @@ public class Mb_IAAgent : Mb_Agent
         IATrial.positionToGo = AgentTile.GetFreeNeighbours().ToArray();
     }
 
+    public override void SetNewActionState(StateOfAction agentState)
+    {
+        state = agentState;
+        if(agentState == StateOfAction.Moving)
+        {
+            if (hostageState == HostageState.InPanic)
+                animator.SetFloat("Speed", 10);
+            else
+                animator.SetFloat("Speed", 5);//Change to Lerp
+        }
+        else if(agentState == StateOfAction.Idle)
+        {
+            animator.SetFloat("Speed", 0);
+        }
+    }
+
+    //IEnumerator 
 }

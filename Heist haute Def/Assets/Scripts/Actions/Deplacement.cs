@@ -14,7 +14,7 @@ public class Deplacement : Action
 
     public override void PerformAction()
     {
-        agent.state = StateOfAction.Moving;
+        agent.SetNewActionState(StateOfAction.Moving);
 
         if (agent is Mb_Player)
         {
@@ -44,6 +44,7 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
+                player.AgentTile = destination;
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 player.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
                                                     destination.transform.position.z),
@@ -58,7 +59,7 @@ public class Deplacement : Action
                                         player.nextAction = true;
                                 });
 
-                if(player.capturedHostages.Count != 0)
+                /*if(player.capturedHostages.Count != 0)
                 {
                     for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
                     {
@@ -81,8 +82,7 @@ public class Deplacement : Action
                             player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
                         }
                     }
-                }
-                player.AgentTile = destination;
+                }*/
             }
             else
             {
@@ -123,6 +123,8 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
+                hostage.AgentTile = destination;
+
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
                                                      destination.transform.position.z),
@@ -136,7 +138,6 @@ public class Deplacement : Action
                                      if (!findNewPath)
                                          hostage.nextAction = true;
                                  });
-                hostage.AgentTile = destination;
             }
             else if(destination.GetComponentInChildren<Mb_Door>() != null)
             {
