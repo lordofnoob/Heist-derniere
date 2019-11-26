@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    UIManager Instance;
+    public static UIManager Instance;
 
     [Header("AllUiSlots")]
-    [SerializeField] In_Chara_Interface[] allCharaCards;
-    [SerializeField] Image chaosBar;
-    [SerializeField] Text timeElpased;
+    public  Text timeElpased;
 
     void Awake()
     {

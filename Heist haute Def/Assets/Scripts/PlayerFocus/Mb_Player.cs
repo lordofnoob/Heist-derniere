@@ -93,7 +93,7 @@ public class Mb_Player : Mb_Agent
         if (path.Count != 0)
         {
             //Debug.Log(path.Count);
-            state = StateOfAction.Moving;
+            SetNewActionState(StateOfAction.Moving);
             destination = path[path.Count - 1];
             foreach (Tile tile in path)
             {
@@ -156,7 +156,7 @@ public class Mb_Player : Mb_Agent
             if (onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
             {
                 Mb_IATrial IATrial = onGoingInteraction as Mb_IATrial;
-                if(IATrial.IAAgent.state == StateOfAction.Moving)
+                if(IATrial.IAAgent.GetActionState() == StateOfAction.Moving)
                 {
                     List<Tile> posToGo = new List<Tile>();
                     for (int i = 0; i < onGoingInteraction.positionToGo.Length; i++)
@@ -173,7 +173,7 @@ public class Mb_Player : Mb_Agent
 
             if (destination == AgentTile)
             {
-                state = StateOfAction.Idle;
+                SetNewActionState(StateOfAction.Idle);
                 destination = null;
             }
 
@@ -184,7 +184,7 @@ public class Mb_Player : Mb_Agent
     public override void Interact()
     {
         //Debug.Log("INTERACT");
-        state = StateOfAction.Interacting;
+        SetNewActionState(StateOfAction.Interacting);
         if (onGoingInteraction.listOfUser.Count==0)
         {
             onGoingInteraction.listOfUser.Add(this);
@@ -203,7 +203,7 @@ public class Mb_Player : Mb_Agent
 
     public override void ResetInteractionParameters()
     {
-        state = StateOfAction.Idle;
+        SetNewActionState(StateOfAction.Idle);
         onGoingInteraction = null;
         nextAction = true;
     }
