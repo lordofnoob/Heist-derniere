@@ -47,7 +47,7 @@ public class Mb_IAAgent : Mb_Agent
                 break;
             case HostageState.Captured:
                 stress += Random.Range(minStress, maxStress) / 2;
-                stress = Mathf.Clamp(stress, 40, 100);
+                stress = Mathf.Clamp(stress, 0, 40);
                 break;
         }
         //Debug.Log("Stress : "+stress);
