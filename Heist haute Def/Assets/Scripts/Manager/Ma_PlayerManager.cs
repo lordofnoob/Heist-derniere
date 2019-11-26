@@ -56,7 +56,7 @@ public class Ma_PlayerManager : MonoBehaviour
             {
 
                 //quand le joueur est en train d interagir
-                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.state != StateOfAction.Captured && selectedPlayer.state != StateOfAction.Moving)
+                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.GetActionState() != StateOfAction.Captured && selectedPlayer.GetActionState() != StateOfAction.Moving)
                 {
                     /*hit.point += new Vector3(Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2, 0f, Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2);
 
@@ -78,7 +78,7 @@ public class Ma_PlayerManager : MonoBehaviour
                     //selectedPlayer.AddDeplacement(ShortestPath);
                 }
 
-                else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.state != StateOfAction.Captured && selectedPlayer.state!= StateOfAction.Interacting)
+                else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.GetActionState() != StateOfAction.Captured && selectedPlayer.GetActionState() != StateOfAction.Interacting)
                 {
                     Mb_Trial targetTrial = hit.transform.gameObject.GetComponent<Mb_Trial>();
                     if (selectedPlayer.onGoingInteraction != targetTrial)

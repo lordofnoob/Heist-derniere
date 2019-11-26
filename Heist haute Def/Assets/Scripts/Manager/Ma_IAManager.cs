@@ -6,6 +6,9 @@ public class Ma_IAManager : MonoBehaviour
 {
     public static Ma_IAManager Instance;
 
+    [Header("For Debuging")]
+    public bool activateHostageStress = true;
+
     public Transform HostagesContainer;
     //[HideInInspector]
     public Mb_IAAgent[] IAList;
@@ -24,7 +27,8 @@ public class Ma_IAManager : MonoBehaviour
     {
         foreach (Mb_IAAgent hostage in IAList)
         {
-            Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
+            if(activateHostageStress)
+                Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
         }
 
 

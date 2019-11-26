@@ -32,7 +32,7 @@ public class Mb_LockedDoor : Mb_Door
         locked = false;
         for (int i = 0; i < listOfUser.Count; i++)
         {
-            listOfUser[i].state = StateOfAction.Idle;
+            listOfUser[i].SetNewActionState(StateOfAction.Idle);
         }
         listOfUser.Clear();
         door.Play();

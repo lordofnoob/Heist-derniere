@@ -12,7 +12,7 @@ public class ShowcaseAnimsOstages : MonoBehaviour
     [Range(0, 10)]
     public float speed;
 
-    [Tooltip("-10: idlePanic03   -5: idlePanic02     0: idlePanic01    10: Opening a door")]
+    //[Tooltip("-10: idlePanic03   -5: idlePanic02     0: idlePanic01    10: Opening a door")]
     [Range(0, 10)]
     public float idleType;
 
