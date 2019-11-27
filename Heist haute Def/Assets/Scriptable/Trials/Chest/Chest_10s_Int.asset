@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Chest_10s_Int
   m_EditorClassIdentifier: 
   skillToUse:
-  - associatedSkill: 0
+  - associatedSkill: 4
     associatedReduction: 0.3
-  timeToAccomplishTrial: 10
+  timeToAccomplishTrial: 20

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c331ba71144345645a84011634befb4c, type: 3}
-  m_Name: Chest_10s_LP
+  m_Script: {fileID: 11500000, guid: 0472492eeab14dd418036f6428b16a80, type: 3}
+  m_Name: henry
   m_EditorClassIdentifier: 
-  skillToUse:
-  - associatedSkill: 0
-    associatedReduction: 0.3
-  timeToAccomplishTrial: 20
+  characterName: 
+  characterPortrait: {fileID: 0}
+  surveillanceLimit: 2
+  speed: 2
+  characterSkills: 0900000002000000
