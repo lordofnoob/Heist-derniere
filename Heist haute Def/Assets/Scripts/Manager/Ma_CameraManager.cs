@@ -50,7 +50,7 @@ public class Ma_CameraManager : MonoBehaviour
     void Update () {
 
         mainCam.transform.position = Vector3.LerpUnclamped(mainCam.transform.position, targetPos,0.1f);
-        /ScrollingUpdate();
+        ScrollingUpdate();
         ClavierUpdate();
         ScrollingMouse();
 
