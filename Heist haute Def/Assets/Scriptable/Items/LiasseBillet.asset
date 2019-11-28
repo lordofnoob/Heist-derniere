@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c331ba71144345645a84011634befb4c, type: 3}
-  m_Name: door5s
+  m_Script: {fileID: 11500000, guid: 249b2bff10eddd74a8d498c938b8bd44, type: 3}
+  m_Name: Liasse_billet
   m_EditorClassIdentifier: 
-  skillToUse: []
-  timeToAccomplishTrial: 5
+  valueOfTheItem: 300

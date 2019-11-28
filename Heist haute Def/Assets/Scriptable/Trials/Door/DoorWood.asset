@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c331ba71144345645a84011634befb4c, type: 3}
   m_Name: door_Wood
   m_EditorClassIdentifier: 
-  skillToUse: []
+  skillToUse:
+  - associatedSkill: 0
+    associatedReduction: 0.3
+  - associatedSkill: 1
+    associatedReduction: -0.3
   timeToAccomplishTrial: 15
