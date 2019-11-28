@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class ShowcaseAnimsOstages : MonoBehaviour
 {
+
+    //les idles ne nécessitent aucun bool pour être modifiées
+
+    // POUR ACTIVER UNE ANIM "ACTION" ou MOVE
+    /// checker le type de l'idle
+    /// passer le bool de "tonIdleActif"To"tonAction" en true
+    /// Lerp le float "nomDeTonAction" de 0 à la value souhaitée (1 pour une action, 5 ou 10 pour le mouvement)
+
+    // le cheminement inverse s'applique pour retourner à l'idle
+
+
+
+    [Header("                           ******* HOSTAGES ********")]
     [Header("                  ******* Use For Debug Purpose Only ********")]
     [Space(20)]
     public Animator animator;
@@ -12,25 +25,13 @@ public class ShowcaseAnimsOstages : MonoBehaviour
     [Range(0, 10)]
     public float speed;
 
-    //[Tooltip("-10: idlePanic03   -5: idlePanic02     0: idlePanic01    10: Opening a door")]
+    [Tooltip("0: idlePanic00     5: idlePanic01     10: idlePanic02")]
     [Range(0, 10)]
     public float idleType;
 
-    [Tooltip("0: idlePanic01   5: Walk    10: Run")]
+    [Tooltip("0: idle   1: Open door")]
     [Range(0, 1)]
-    public float Action00Value;
-
-    [Tooltip("0: idlePanic01   5: Walk    10: Run")]
-    [Range(0, 1)]
-    public float Action01Value;
-
-    [Tooltip("0: idlePanic01   5: Walk    10: Run")]
-    [Range(0, 1)]
-    public float Action02Value;
-
-    [Tooltip("0: idlePanic01   5: Walk    10: Run")]
-    [Range(0, 1)]
-    public float Action03Value;
+    public float open;
 
     [Space(20)]
     public bool idleType00ToMove;
@@ -38,27 +39,10 @@ public class ShowcaseAnimsOstages : MonoBehaviour
     public bool idleType02ToMove;
 
     [Space(20)]
-    public bool idleType00ToAction00;
-    public bool idleType01ToAction00;
-    public bool idleType02ToAction00;
+    public bool idleType00ToOpen;
+    public bool idleType01ToOpen;
+    public bool idleType02ToOpen;
 
-    [Space(20)]
-    public bool idleType00ToAction01;
-    public bool idleType01ToAction01;
-    public bool idleType02ToAction01;
-
-    [Space(20)]
-    public bool idleType00ToAction02;
-    public bool idleType01ToAction02;
-    public bool idleType02ToAction02;
-
-    [Space(20)]
-    public bool idleType00ToAction03;
-    public bool idleType01ToAction03;
-    public bool idleType02ToAction03;
-
-    [Space(20)]
-    public bool death;
 
     public void Start()
     {
@@ -73,38 +57,16 @@ public class ShowcaseAnimsOstages : MonoBehaviour
 
         animator.SetFloat("Speed", speed);
         animator.SetFloat("IdleValue", idleType);
-        animator.SetFloat("Action00_Value", Action00Value);
-        animator.SetFloat("Action02_Value", Action02Value);
-        animator.SetFloat("Action03_Value", Action03Value);
-
-
-        animator.SetFloat("Action01_Value", Action01Value);
-
+        animator.SetFloat("Action00_Value", open);
 
         animator.SetBool("Idle00_To_Move", idleType00ToMove);
         animator.SetBool("Idle01_To_Move", idleType01ToMove);
         animator.SetBool("Idle02_To_Move", idleType02ToMove);
 
-        animator.SetBool("Idle00_To_Action00", idleType00ToAction00);
-        animator.SetBool("Idle01_To_Action00", idleType01ToAction00);
-        animator.SetBool("Idle02_To_Action00", idleType02ToAction00);
+        animator.SetBool("Idle00_To_Action00", idleType00ToOpen);
+        animator.SetBool("Idle01_To_Action00", idleType01ToOpen);
+        animator.SetBool("Idle02_To_Action00", idleType02ToOpen);
 
-
-        animator.SetBool("Idle00_To_Action01", idleType00ToAction01);
-        animator.SetBool("Idle01_To_Action01", idleType01ToAction01);
-        animator.SetBool("Idle02_To_Action01", idleType02ToAction01);
-
-
-        animator.SetBool("Idle00_To_Action02", idleType00ToAction02);
-        animator.SetBool("Idle01_To_Action02", idleType01ToAction02);
-        animator.SetBool("Idle02_To_Action02", idleType02ToAction02);
-
-
-        animator.SetBool("Idle00_To_Action03", idleType00ToAction03);
-        animator.SetBool("Idle01_To_Action03", idleType01ToAction03);
-        animator.SetBool("Idle02_To_Action03", idleType02ToAction03);
-
-        animator.SetBool("Death", death);
     }
 }
 
