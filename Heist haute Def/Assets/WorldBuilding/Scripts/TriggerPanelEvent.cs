@@ -12,6 +12,14 @@ public class TriggerPanelEvent : MonoBehaviour
     public bool isTriggerable;
     public bool filling;
 
+    private void Start()
+    {
+        isTriggerable = true;
+    }
+
+
+    //Mouse over pour le Debug => à linker avec le système de trial
+
     public void OnMouseOver()
     {
         if (isTriggerable)
@@ -38,6 +46,7 @@ public class TriggerPanelEvent : MonoBehaviour
         }
     }
 
+    //Empêche des petis bugs de superposition d'anim et bind le "pop" de l'icone.
     public IEnumerator Availability()
     {
 
