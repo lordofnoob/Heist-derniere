@@ -34,20 +34,6 @@ public class Ma_IAManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*if(timer >= repeatActionInterval)
-        {
-            foreach(Sc_IAHostage IACharacter in IAList)
-            {
-                IACharacter.RandomMovement();
-            }
-            timer = 0f;
-        }
-        timer += Time.deltaTime;*/
-
-    }
 
     public void IAHostageFollowingPlayer(Mb_Agent h, Mb_Agent p)
     {

@@ -7,52 +7,30 @@ public class Ma_LevelManager : MonoBehaviour
 {
 
     public static Ma_LevelManager Instance;
-    public GameObject WallPrefab;
-    public GameObject FreePrefab;
-    public GameObject PlayerPrefab;
-    public GameObject IAPrefab;
 
     public Ma_ClockManager clock;
-    //public NavMeshSurface navMeshSurface;
+    
 
     [SerializeField]public Tile[] allWalkableTile;
     [SerializeField]public Mb_Door[] allExitDoors;
     [SerializeField] public Tile[] allTiles;
+    [SerializeField] Sc_LevelParameters levelBaseParameters;
+    private float timeRemaining;
+    private float interval;
+    private int minuteRemaining;
+    private int secondsRemaining;
 
     public void Awake()
     {
         Instance = this;
+        Ma_ClockManager.Instance.tickTrigger.AddListener(this.TimeShattering);
+        interval = Ma_ClockManager.Instance.tickInterval;
+        timeRemaining = levelBaseParameters.timeAvaibleBeforePolice;
         clock = GetComponentInChildren<Ma_ClockManager>();
+
+       
     }
 
-    public void InitLevel()
-    {/*
-        //TO CHANGE
-        string[,] array = new string[,]{    { "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"},
-                                            { "W", "F", "H", "F", "F", "W", "F", "F", "F", "W", "F", "F", "F", "F", "F", "F", "F", "F", "F", "W"},
-                                            { "W", "F", "F", "F", "F", "W", "F", "W", "F", "W", "F", "W", "W", "F", "W", "F", "P", "P", "F", "W"},
-                                            { "W", "H", "F", "H", "F", "W", "W", "W", "F", "W", "F", "W", "F", "F", "W", "F", "W", "W", "F", "W"},
-                                            { "W", "W", "F", "W", "W", "W", "W", "F", "F", "F", "F", "W", "W", "W", "W", "W", "F", "F", "F", "W"},
-                                            { "W", "F", "F", "F", "W", "F", "W", "W", "F", "W", "F", "F", "F", "W", "F", "W", "W", "W", "F", "W"},
-                                            { "W", "F", "W", "F", "W", "F", "F", "W", "F", "F", "F", "W", "F", "F", "F", "F", "W", "F", "F", "W"},
-                                            { "W", "F", "W", "W", "W", "F", "W", "W", "F", "W", "W", "W", "W", "W", "W", "F", "F", "F", "W", "W"},
-                                            { "W", "F", "F", "F", "F", "F", "W", "F", "F", "F", "F", "F", "F", "F", "W", "W", "W", "F", "F", "W"},
-                                            { "W", "W", "W", "F", "W", "W", "W", "F", "W", "W", "W", "W", "W", "F", "F", "F", "W", "W", "F", "W"},
-                                            { "W", "F", "F", "F", "W", "F", "F", "F", "F", "F", "F", "F", "W", "F", "W", "W", "W", "F", "F", "W"},
-                                            { "W", "W", "F", "W", "W", "F", "W", "W", "F", "W", "F", "W", "W", "F", "W", "F", "W", "W", "F", "W"},
-                                            { "W", "F", "F", "F", "F", "F", "F", "W", "W", "W", "F", "W", "F", "F", "F", "F", "F", "F", "F", "W"},
-                                            { "W", "F", "W", "W", "W", "W", "F", "F", "F", "W", "F", "W", "F", "W", "W", "W", "W", "W", "F", "W"},
-                                            { "W", "F", "F", "F", "F", "W", "W", "W", "F", "F", "F", "W", "F", "W", "F", "F", "F", "W", "F", "W"},
-                                            { "W", "F", "W", "W", "W", "W", "F", "F", "F", "W", "F", "F", "F", "W", "F", "W", "F", "W", "F", "W"},
-                                            { "W", "F", "F", "F", "W", "W", "F", "W", "W", "W", "F", "W", "W", "W", "F", "W", "F", "F", "F", "W"},
-                                            { "W", "F", "F", "F", "W", "F", "F", "F", "F", "W", "F", "F", "F", "F", "F", "W", "W", "W", "W", "W"},
-                                            { "W", "F", "F", "F", "F", "F", "W", "W", "F", "F", "F", "W", "F", "W", "F", "F", "F", "F", "F", "W"},
-                                            { "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"}
-                                            };
-        grid = gameObject.AddComponent<Grid>();
-        grid.BuildGridLevel(array);
-        //navMeshSurface.BuildNavMesh();*/
-    }
 
     public Tile GetWalkableTile(int row, int column)
     {
@@ -69,6 +47,7 @@ public class Ma_LevelManager : MonoBehaviour
         }
         return res;
     }
+
     public Tile GetTile(int row, int column)
     {
         Tile res = null;
@@ -83,5 +62,27 @@ public class Ma_LevelManager : MonoBehaviour
             }
         }
         return res;
+    }
+
+    void TimeShattering()
+    {
+        timeRemaining -= interval;
+        //Setup du timing a afficher pour la clock
+        minuteRemaining = Mathf.FloorToInt(timeRemaining / 60);
+        secondsRemaining = Mathf.RoundToInt(timeRemaining - minuteRemaining * 60);
+        string timeSpentToDisplay;
+        if (secondsRemaining>10)
+            timeSpentToDisplay = minuteRemaining + " : " + secondsRemaining;
+        else
+            timeSpentToDisplay = minuteRemaining + " : 0" + secondsRemaining;
+        UIManager.Instance.timeElpased.text = timeSpentToDisplay;
+
+        if (timeRemaining == 0)
+            PoliceArrive();
+    }
+
+    void PoliceArrive()
+    {
+        Debug.Log("PoliceArrive");
     }
 }
