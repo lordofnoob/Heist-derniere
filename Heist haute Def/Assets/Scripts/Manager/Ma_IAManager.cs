@@ -25,13 +25,11 @@ public class Ma_IAManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (Mb_IAAgent hostage in IAList)
-        {
-            if(activateHostageStress)
+        if (activateHostageStress)
+            foreach (Mb_IAAgent hostage in IAList)
+            {
                 Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
-        }
-
-
+            }
     }
 
 

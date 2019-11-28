@@ -169,7 +169,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5028995057435999965}
-  - component: {fileID: 3557224083425641414}
   - component: {fileID: 1847766912380400694}
   - component: {fileID: 5657659807170411418}
   - component: {fileID: 5770262166141487127}
@@ -198,25 +197,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3557224083425641414
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3431368413598332794}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 859c3def7b0fdca4ba4a59bb97a3cb47, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &1847766912380400694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -258,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af82c5022a1bd5244bdb84a1c1d12bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 9073937570812084160}
   charaPerks: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
   pathfinder: {fileID: 5657659807170411418}
   VisitedTiles: []
@@ -597,12 +578,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1445808587877892261, guid: c14228b2d81dd304880f2e5607cd7609,
         type: 3}
-      propertyPath: m_LocalScale.y
+      propertyPath: m_LocalScale.x
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1445808587877892261, guid: c14228b2d81dd304880f2e5607cd7609,
         type: 3}
-      propertyPath: m_LocalScale.x
+      propertyPath: m_LocalScale.y
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1445808587877892261, guid: c14228b2d81dd304880f2e5607cd7609,

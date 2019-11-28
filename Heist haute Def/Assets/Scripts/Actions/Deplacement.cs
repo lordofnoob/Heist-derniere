@@ -46,7 +46,8 @@ public class Deplacement : Action
             {
                 player.AgentTile = destination;
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
-                player.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
+                player.transform.DOMove(new Vector3(destination.transform.position.x,
+                                                    destination.transform.position.y + destination.transform.localScale.y/2,
                                                     destination.transform.position.z),
                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                 .SetEase(Ease.Linear)

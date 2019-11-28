@@ -243,6 +243,4 @@ public class Mb_IAAgent : Mb_Agent
             animator.SetFloat("Speed", 0);
         }
     }
-
-    //IEnumerator 
 }

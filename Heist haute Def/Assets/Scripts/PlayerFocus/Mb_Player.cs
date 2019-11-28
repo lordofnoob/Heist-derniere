@@ -232,4 +232,17 @@ public class Mb_Player : Mb_Agent
         onGoingInteraction = trialToUse;
         actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
     }
+
+    public override void SetNewActionState(StateOfAction agentState)
+    {
+        state = agentState;
+        if(agentState == StateOfAction.Moving)
+        {
+            animator.SetFloat("Speed", 10);
+        }
+        else if(agentState == StateOfAction.Idle)
+        {
+            animator.SetFloat("Speed", 0);
+        }
+    }
 }
