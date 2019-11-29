@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249b2bff10eddd74a8d498c938b8bd44, type: 3}
-  m_Name: 100 Money
+  m_Name: Lingots
   m_EditorClassIdentifier: 
-  valueOfTheItem: 100
+  valueOfTheItem: 1000

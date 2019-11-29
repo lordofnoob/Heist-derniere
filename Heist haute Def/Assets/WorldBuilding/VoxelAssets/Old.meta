@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Heist haute Def/Assets/Scripts/TriggerPanelEvent.cs.meta
+guid: 1668f84b5127a8540ac4655dbc5e6ed4
+MonoImporter:
+=======
 guid: a7ef36448a27279498868758a4dc482c
 folderAsset: yes
 DefaultImporter:
+>>>>>>> master:Heist haute Def/Assets/WorldBuilding/VoxelAssets/Old.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
