@@ -37,7 +37,7 @@ public class Mb_Agent : Mb_Poolable
     }
 
     [Header("Actions")]
-    [SerializeField]protected StateOfAction state;
+    [SerializeField]private StateOfAction state;
     public List<Action> actionsToPerform = new List<Action>();
     [HideInInspector] public Mb_Trial onGoingInteraction;
     public Tile destination;
@@ -85,7 +85,10 @@ public class Mb_Agent : Mb_Poolable
     public virtual void ResetInteractionParameters() { }
     public virtual void AddItem(Sc_Items itemToAdd) { }
     public virtual void DropItem(Sc_Items itemToDrop) { }
-    public virtual void SetNewActionState(StateOfAction agentState) { }
+    public virtual void SetNewActionState(StateOfAction agentState)
+    {
+        state = agentState;
+    }
     public StateOfAction GetActionState()
     {
         return state;

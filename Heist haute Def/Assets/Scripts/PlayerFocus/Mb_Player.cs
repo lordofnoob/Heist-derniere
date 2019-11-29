@@ -35,12 +35,12 @@ public class Mb_Player : Mb_Agent
             {
                 case true:
                     isSelected = true;
-                    ModifyOutlines(Outlines.Mode.OutlineAll, selectedColor, 7.5f);
-                    SetOutlinesEnabled(true);
+                    //ModifyOutlines(Outlines.Mode.OutlineAll, selectedColor, 7.5f);
+                    //SetOutlinesEnabled(true);
                     break;
                 case false:
                     isSelected = false;
-                    SetOutlinesEnabled(false);
+                    //SetOutlinesEnabled(false);
                     break;
             }
         }
@@ -58,24 +58,24 @@ public class Mb_Player : Mb_Agent
     void OnMouseEnter()
     {
         highlighted = true;
-        ModifyOutlines(Outlines.Mode.OutlineVisible, highlightedColor, 7.5f);
-        SetOutlinesEnabled(true);
+        //ModifyOutlines(Outlines.Mode.OutlineVisible, highlightedColor, 7.5f);
+        //SetOutlinesEnabled(true);
     }
 
     void OnMouseExit()
     {
         if (IsSelected)
         {
-            ModifyOutlines(Outlines.Mode.OutlineVisible, selectedColor, 7.5f);
+            //ModifyOutlines(Outlines.Mode.OutlineVisible, selectedColor, 7.5f);
         }
         else
         {
-            SetOutlinesEnabled(false);
+            //SetOutlinesEnabled(false);
         }
         highlighted = false;
     }
 
-    void ModifyOutlines(Outlines.Mode mode, Color color, float width)
+    /*void ModifyOutlines(Outlines.Mode mode, Color color, float width)
     {
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.OutlineMode = mode;
@@ -87,7 +87,7 @@ public class Mb_Player : Mb_Agent
     {
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.enabled = enabled;
-    }
+    }*/
 
     public override void AddDeplacement(List<Tile> path)
     {
@@ -172,12 +172,6 @@ public class Mb_Player : Mb_Agent
             nextAction = false;
             actionsToPerform.First().PerformAction();
 
-            if (destination == AgentTile)
-            {
-                SetNewActionState(StateOfAction.Idle);
-                destination = null;
-            }
-
             actionsToPerform.Remove(actionsToPerform.First());
         }
     }
@@ -232,5 +226,21 @@ public class Mb_Player : Mb_Agent
     {
         onGoingInteraction = trialToUse;
         actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+    }
+
+    public override void SetNewActionState(StateOfAction agentState)
+    {
+        //Debug.Log(agentState);
+        base.SetNewActionState(agentState);
+        if(agentState == StateOfAction.Moving)
+        {
+            animator.SetBool("Idle00_To_Move", true);
+            animator.SetFloat("Speed", 8.5f);
+        }
+        else if(agentState == StateOfAction.Idle)
+        {
+            animator.SetBool("Idle00_To_Move", false);
+            animator.SetFloat("Speed", 0);
+        }
     }
 }
