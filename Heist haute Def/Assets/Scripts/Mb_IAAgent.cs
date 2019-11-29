@@ -123,7 +123,7 @@ public class Mb_IAAgent : Mb_Agent
 
             if (destination == AgentTile)
             {
-                state = StateOfAction.Idle;
+                SetNewActionState(StateOfAction.Idle);
                 destination = null;
             }
             UpdatePositionToGo();
@@ -135,7 +135,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public override void FindAnOtherPath()
     {
-        if (state == StateOfAction.Moving)
+        if (GetActionState() == StateOfAction.Moving)
         {
             Debug.Log("IA Find a new path");
 
@@ -168,7 +168,7 @@ public class Mb_IAAgent : Mb_Agent
     public override void Interact()
     {
         //Debug.Log("INTERACTING");
-        state = StateOfAction.Interacting;
+        SetNewActionState(StateOfAction.Interacting);
 
         if (onGoingInteraction.listOfUser.Count == 0)
         {
@@ -204,7 +204,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public override void ResetInteractionParameters()
     {
-        state = StateOfAction.Idle;
+        SetNewActionState(StateOfAction.Idle);
         SomeoneWillInteractWith = null;
         onGoingInteraction = null;
         nextAction = true;
@@ -214,7 +214,7 @@ public class Mb_IAAgent : Mb_Agent
     public void StopMoving()
     {
         Debug.Log("STOP MOVING");
-        state = StateOfAction.Idle;
+        SetNewActionState(StateOfAction.Idle);
         actionsToPerform.Clear();
         actionsToPerform.TrimExcess();
         SomeoneWillInteractWith = null;
@@ -230,7 +230,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public override void SetNewActionState(StateOfAction agentState)
     {
-        state = agentState;
+        base.SetNewActionState(agentState);
         if(agentState == StateOfAction.Moving)
         {
             if (hostageState == HostageState.InPanic)
@@ -243,6 +243,4 @@ public class Mb_IAAgent : Mb_Agent
             animator.SetFloat("Speed", 0);
         }
     }
-
-    //IEnumerator 
 }
