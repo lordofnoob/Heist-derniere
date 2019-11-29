@@ -40,8 +40,6 @@ public class Ma_ClockManager : MonoBehaviour
 
         if (isPauseActive == false)
         {
-            Debug.Log("CLick");
-
             tickTrigger.Invoke();
             PerformAgentActions();
         }

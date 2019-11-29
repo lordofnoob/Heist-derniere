@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Mb_Agent : Mb_Poolable
 {
+    [Header("Animator infos")]
+    public Animator animator;
+
     [Header("Chara perks")]
     public Sc_Charaspec charaPerks;
     //[HideInInspector] 
@@ -30,7 +33,7 @@ public class Mb_Agent : Mb_Poolable
     }
 
     [Header("Actions")]
-    public StateOfAction state;
+    [SerializeField]private StateOfAction state;
     public List<Action> actionsToPerform = new List<Action>();
     [HideInInspector] public Mb_Trial onGoingInteraction;
     public Tile destination;
@@ -78,6 +81,14 @@ public class Mb_Agent : Mb_Poolable
     public virtual void ResetInteractionParameters() { }
     public virtual void AddItem(Sc_Items itemToAdd) { }
     public virtual void DropItem(Sc_Items itemToDrop) { }
+    public virtual void SetNewActionState(StateOfAction agentState)
+    {
+        state = agentState;
+    }
+    public StateOfAction GetActionState()
+    {
+        return state;
+    }
 
     public IEnumerator WaitForTime(float timeToWait)
     {

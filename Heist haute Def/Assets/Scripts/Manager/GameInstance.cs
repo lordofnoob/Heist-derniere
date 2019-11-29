@@ -13,7 +13,7 @@ public class GameInstance : MonoBehaviour
 
     void Start()
     {
-        Ma_LevelManager.Instance.InitLevel();
+       // Ma_LevelManager.Instance.InitLevel();
     }
 
     // Update is called once per frame

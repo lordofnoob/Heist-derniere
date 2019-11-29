@@ -6,6 +6,9 @@ public class Ma_IAManager : MonoBehaviour
 {
     public static Ma_IAManager Instance;
 
+    [Header("For Debuging")]
+    public bool activateHostageStress = true;
+
     public Transform HostagesContainer;
     //[HideInInspector]
     public Mb_IAAgent[] IAList;
@@ -22,28 +25,13 @@ public class Ma_IAManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (Mb_IAAgent hostage in IAList)
-        {
-            Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
-        }
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*if(timer >= repeatActionInterval)
-        {
-            foreach(Sc_IAHostage IACharacter in IAList)
+        if (activateHostageStress)
+            foreach (Mb_IAAgent hostage in IAList)
             {
-                IACharacter.RandomMovement();
+                Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
             }
-            timer = 0f;
-        }
-        timer += Time.deltaTime;*/
-
     }
+
 
     public void IAHostageFollowingPlayer(Mb_Agent h, Mb_Agent p)
     {

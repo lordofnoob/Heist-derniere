@@ -34,12 +34,12 @@ public class Mb_Player : Mb_Agent
             {
                 case true:
                     isSelected = true;
-                    ModifyOutlines(Outlines.Mode.OutlineAll, selectedColor, 7.5f);
-                    SetOutlinesEnabled(true);
+                    //ModifyOutlines(Outlines.Mode.OutlineAll, selectedColor, 7.5f);
+                    //SetOutlinesEnabled(true);
                     break;
                 case false:
                     isSelected = false;
-                    SetOutlinesEnabled(false);
+                    //SetOutlinesEnabled(false);
                     break;
             }
         }
@@ -57,24 +57,24 @@ public class Mb_Player : Mb_Agent
     void OnMouseEnter()
     {
         highlighted = true;
-        ModifyOutlines(Outlines.Mode.OutlineVisible, highlightedColor, 7.5f);
-        SetOutlinesEnabled(true);
+        //ModifyOutlines(Outlines.Mode.OutlineVisible, highlightedColor, 7.5f);
+        //SetOutlinesEnabled(true);
     }
 
     void OnMouseExit()
     {
         if (IsSelected)
         {
-            ModifyOutlines(Outlines.Mode.OutlineVisible, selectedColor, 7.5f);
+            //ModifyOutlines(Outlines.Mode.OutlineVisible, selectedColor, 7.5f);
         }
         else
         {
-            SetOutlinesEnabled(false);
+            //SetOutlinesEnabled(false);
         }
         highlighted = false;
     }
 
-    void ModifyOutlines(Outlines.Mode mode, Color color, float width)
+    /*void ModifyOutlines(Outlines.Mode mode, Color color, float width)
     {
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.OutlineMode = mode;
@@ -86,14 +86,14 @@ public class Mb_Player : Mb_Agent
     {
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.enabled = enabled;
-    }
+    }*/
 
     public override void AddDeplacement(List<Tile> path)
     {
         if (path.Count != 0)
         {
             //Debug.Log(path.Count);
-            state = StateOfAction.Moving;
+            SetNewActionState(StateOfAction.Moving);
             destination = path[path.Count - 1];
             foreach (Tile tile in path)
             {
@@ -156,7 +156,7 @@ public class Mb_Player : Mb_Agent
             if (onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
             {
                 Mb_IATrial IATrial = onGoingInteraction as Mb_IATrial;
-                if(IATrial.IAAgent.state == StateOfAction.Moving)
+                if(IATrial.IAAgent.GetActionState() == StateOfAction.Moving)
                 {
                     List<Tile> posToGo = new List<Tile>();
                     for (int i = 0; i < onGoingInteraction.positionToGo.Length; i++)
@@ -171,12 +171,6 @@ public class Mb_Player : Mb_Agent
             nextAction = false;
             actionsToPerform.First().PerformAction();
 
-            if (destination == AgentTile)
-            {
-                state = StateOfAction.Idle;
-                destination = null;
-            }
-
             actionsToPerform.Remove(actionsToPerform.First());
         }
     }
@@ -184,7 +178,7 @@ public class Mb_Player : Mb_Agent
     public override void Interact()
     {
         //Debug.Log("INTERACT");
-        state = StateOfAction.Interacting;
+        SetNewActionState(StateOfAction.Interacting);
         if (onGoingInteraction.listOfUser.Count==0)
         {
             onGoingInteraction.listOfUser.Add(this);
@@ -203,7 +197,7 @@ public class Mb_Player : Mb_Agent
 
     public override void ResetInteractionParameters()
     {
-        state = StateOfAction.Idle;
+        SetNewActionState(StateOfAction.Idle);
         onGoingInteraction = null;
         nextAction = true;
     }
@@ -231,5 +225,21 @@ public class Mb_Player : Mb_Agent
     {
         onGoingInteraction = trialToUse;
         actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+    }
+
+    public override void SetNewActionState(StateOfAction agentState)
+    {
+        //Debug.Log(agentState);
+        base.SetNewActionState(agentState);
+        if(agentState == StateOfAction.Moving)
+        {
+            animator.SetBool("Idle00_To_Move", true);
+            animator.SetFloat("Speed", 8.5f);
+        }
+        else if(agentState == StateOfAction.Idle)
+        {
+            animator.SetBool("Idle00_To_Move", false);
+            animator.SetFloat("Speed", 0);
+        }
     }
 }

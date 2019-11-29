@@ -14,7 +14,7 @@ public class Deplacement : Action
 
     public override void PerformAction()
     {
-        agent.state = StateOfAction.Moving;
+        //agent.SetNewActionState(StateOfAction.Moving);
 
         if (agent is Mb_Player)
         {
@@ -44,8 +44,11 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
+                player.AgentTile = destination;
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
-                player.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
+                player.transform.DOLookAt(destination.transform.position,0.2f, AxisConstraint.Y);
+                player.transform.DOMove(new Vector3(destination.transform.position.x,
+                                                    destination.transform.position.y + destination.transform.localScale.y/2,
                                                     destination.transform.position.z),
                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                 .SetEase(Ease.Linear)
@@ -54,11 +57,18 @@ public class Deplacement : Action
                                     destination.SetOutlinesEnabled(false);
                                     destination.highlighted = false;
 
+                                    if (destination == player.destination)
+                                    {
+                                        player.SetNewActionState(StateOfAction.Idle);
+                                        destination = null;
+                                        return;
+                                    }
+
                                     if (!findNewPath)
                                         player.nextAction = true;
                                 });
 
-                if(player.capturedHostages.Count != 0)
+                /*if(player.capturedHostages.Count != 0)
                 {
                     for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
                     {
@@ -81,8 +91,7 @@ public class Deplacement : Action
                             player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
                         }
                     }
-                }
-                player.AgentTile = destination;
+                }*/
             }
             else
             {
@@ -123,7 +132,10 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
+                hostage.AgentTile = destination;
+
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
+                hostage.transform.DOLookAt(destination.transform.position, 0.2f, AxisConstraint.Y);
                 hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
                                                      destination.transform.position.z),
                                                      Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
@@ -133,10 +145,16 @@ public class Deplacement : Action
                                      destination.SetOutlinesEnabled(false);
                                      destination.highlighted = false;
 
+                                     if (destination == hostage.destination)
+                                     {
+                                         hostage.SetNewActionState(StateOfAction.Idle);
+                                         destination = null;
+                                         return;
+                                     }
+
                                      if (!findNewPath)
                                          hostage.nextAction = true;
                                  });
-                hostage.AgentTile = destination;
             }
             else if(destination.GetComponentInChildren<Mb_Door>() != null)
             {

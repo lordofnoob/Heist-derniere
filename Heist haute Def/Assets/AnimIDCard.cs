@@ -25,37 +25,48 @@ public class AnimIDCard : MonoBehaviour
 
     public KeyCode toggleKey;
 
+    public bool locking;
+
+    public void Start()
+    {
+        locking = true;
+    }
+
     void Update()
     {
+        //Toggles ID card ON
 
         if (Input.GetKey(toggleKey) && !idle)
         {
-            if(scr_IDmanager.iDManager.isOn == false)
+            if (scr_IDmanager.iDManager.isOn == false)
             {
+                scr_IDmanager.iDManager.triggeredID = this;
                 scr_IDmanager.iDManager.isOn = true;
-            
-            activated = true;
+            }
+            // activated = true;
             popTween = cardID.DOJumpAnchorPos(endTarget, jumpPower, 1, speed, false).SetAutoKill(true);
             popTween.OnComplete(() =>
             {
-                scr_IDmanager.iDManager.oneTriggered = true;
-                idle = true;
+                    //scr_IDmanager.iDManager.oneTriggered = true;
+                    idle = true;
             });
-            }
+            //  }
         }
 
 
+        //Toggles ID card OFF
+
         if (Input.GetKey(toggleKey) && idle)
         {
-            activated = false;
+            //activated = false;
             dePopTween = cardID.DOJumpAnchorPos(endTargetR, jumpPowerR, 1, speedR, false).SetAutoKill(true);
             dePopTween.OnComplete(() =>
             {
-                scr_IDmanager.iDManager.oneTriggered = false;
-                idle = false;
-                scr_IDmanager.iDManager.isOn = false;
+                    //  scr_IDmanager.iDManager.oneTriggered = false;
+                    idle = false;
+                    scr_IDmanager.iDManager.isOn = false;
 
-            });
+                });
         }
     }
 }
