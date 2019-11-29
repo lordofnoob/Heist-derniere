@@ -619,8 +619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478431214824953659}
-  - component: {fileID: 7505734102248405569}
-  - component: {fileID: 4888954715201247477}
+  - component: {fileID: 2831057633798674175}
   m_Layer: 0
   m_Name: Raider
   m_TagString: Untagged
@@ -645,26 +644,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -87.135, z: 0}
---- !u!95 &7505734102248405569
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3528820444231591208}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 13e043a351dd88740b00c5a7b64a8f78, type: 3}
-  m_Controller: {fileID: 9100000, guid: 758144479a122ea47bd812979f2a7ea4, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4888954715201247477
+--- !u!114 &2831057633798674175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -673,31 +653,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3528820444231591208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b091d8509a14664e9e108d9ba6c0eed, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d51d0e479a945d41ae7dd702c694aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   speed: 0
   idleType: 0
-  Action00Value: 0
-  Action01Value: 0
-  Action02Value: 0
-  Action03Value: 0
-  idleType00ToMove: 0
-  idleType01ToMove: 0
-  idleType02ToMove: 0
-  idleType00ToAction00: 0
-  idleType01ToAction00: 0
-  idleType02ToAction00: 0
-  idleType00ToAction01: 0
-  idleType01ToAction01: 0
-  idleType02ToAction01: 0
-  idleType00ToAction02: 0
-  idleType01ToAction02: 0
-  idleType02ToAction02: 0
-  idleType00ToAction03: 0
-  idleType01ToAction03: 0
-  idleType02ToAction03: 0
+  lowTrial: 0
+  open: 0
+  Hacking: 0
+  idleToMove: 0
+  carryingToMove: 0
+  idleToLowTrial: 0
+  carryingToLowTrial: 0
+  idleToOpen: 0
+  carryingToOpen: 0
+  idleToHacking: 0
+  carryingToHacking: 0
   death: 0
 --- !u!1 &3587121675711125617
 GameObject:
