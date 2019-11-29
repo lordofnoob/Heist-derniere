@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c331ba71144345645a84011634befb4c, type: 3}
-  m_Name: Chest_LP
+  m_Name: ChestLP
   m_EditorClassIdentifier: 
   skillToUse:
   - associatedSkill: 0

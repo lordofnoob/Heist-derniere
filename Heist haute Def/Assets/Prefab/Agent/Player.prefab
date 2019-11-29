@@ -47,7 +47,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 13e043a351dd88740b00c5a7b64a8f78, type: 3}
   m_Controller: {fileID: 9100000, guid: 758144479a122ea47bd812979f2a7ea4, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -207,13 +207,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4888954715201247477, guid: e94ab19bb73fc9d4fa5c794b964d366c,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 7571269375243667252}
     m_RemovedComponents:
-    - {fileID: 7505734102248405569, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
+    - {fileID: 2831057633798674175, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
 --- !u!4 &544309743462926210 stripped
 Transform:
