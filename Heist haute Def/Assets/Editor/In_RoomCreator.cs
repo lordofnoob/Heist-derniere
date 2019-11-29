@@ -11,7 +11,7 @@ public class In_RoomCreator : Editor
     SerializedProperty allRoomTransform, characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty, playerTransformProperty, hostageTransformProperty;
     SerializedProperty wallConfigProperty;
     //Pour donner toutes les sorties au gameManager
-    private List<Mb_Door> exitList;
+    private List<Tile> exitList;
     //Pour l'editor pour qu il sache quoi faire
     private UsedMode mode;
     private Color backGroundColorPlacingPlayer, backGroundColorErasingPlayer, backGroundColorAddHostage, backGroundColorErasingHostage = Color.red;
@@ -179,7 +179,7 @@ public class In_RoomCreator : Editor
     void updateExits()
     {
         Ma_LevelManager level = FindObjectOfType<Ma_LevelManager>();
-        level.allExitDoors = exitList.ToArray();
+        level.allExitTile = exitList.ToArray();
     }
 
     void CheckButtonColor()
@@ -328,7 +328,7 @@ public class In_RoomCreator : Editor
          Tile[] listOfTile;
            List<Tile> listOfTileOfWalkableTile = new List<Tile>();
 
-            exitList = new List<Mb_Door>();
+            exitList = new List<Tile>();
 
    
             listOfTile = GameObject.FindObjectsOfType<Tile>();
@@ -453,13 +453,13 @@ public class In_RoomCreator : Editor
                 EditorUtility.SetDirty(listOfTile[i]);
             }
 
-            // check de chacune des portes pour verifier si faut les rajouter en sortie ou pas
-            Mb_Door[] temporaryList = FindObjectsOfType<Mb_Door>();
-            for (int i = 0; i < temporaryList.Length; i++)
+            //recup des tuiles de sorties
+         
+            for (int i = 0; i < FindObjectOfType<Ma_LevelManager>().allWalkableTile.Length; i++)
             {
-                if (temporaryList[i].isExitDoor == true)
+                if (FindObjectOfType<Ma_LevelManager>().allWalkableTile[i].isExitTile == true)
                 {
-                    exitList.Add(temporaryList[i]);
+                    exitList.Add(FindObjectOfType<Ma_LevelManager>().allWalkableTile[i]);
                 }
             }
     }
@@ -475,7 +475,7 @@ public class In_RoomCreator : Editor
                 case UsedMode.AddHostage:
                     if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Tile>().avaible == true)
                     {
-                        CreateHostage(charactSpectToInstantiateProperty.objectReferenceValue as Sc_Charaspec, hitInfo.collider.GetComponent<Tile>());
+                        CreateHostage(charactSpectToInstantiateProperty.objectReferenceValue as Sc_AiSpecs, hitInfo.collider.GetComponent<Tile>());
                         serializedObject.ApplyModifiedProperties();
                     }
                 break;
@@ -491,7 +491,7 @@ public class In_RoomCreator : Editor
                 case UsedMode.AddPlayer:
                     if (Physics.Raycast(worldRay, out hitInfo, 10000) && hitInfo.collider.GetComponent<Tile>().avaible == true)
                     {
-                        CreateCharacter(charactSpectToInstantiateProperty.objectReferenceValue as Sc_Charaspec, hitInfo.collider.GetComponent<Tile>());
+                        CreateCharacter(charactSpectToInstantiateProperty.objectReferenceValue as Sc_PlayerSpecs, hitInfo.collider.GetComponent<Tile>());
                         serializedObject.ApplyModifiedProperties();
                     }
                     break;
@@ -509,7 +509,7 @@ public class In_RoomCreator : Editor
         }
     }
 
-    void CreateCharacter(Sc_Charaspec characterProperty, Tile hisTile)
+    void CreateCharacter(Sc_PlayerSpecs characterProperty, Tile hisTile)
     {
         //
         Mb_Player NewGameObject = PrefabUtility.InstantiatePrefab(characterPrefab.objectReferenceValue) as Mb_Player;
@@ -524,13 +524,14 @@ public class In_RoomCreator : Editor
         EditorSceneManager.MarkAllScenesDirty();
     }
 
-    void CreateHostage(Sc_Charaspec characterProperty, Tile hisTile)
+    void CreateHostage(Sc_AiSpecs characterProperty, Tile hisTile)
     {
         Mb_IAAgent NewGameObject = PrefabUtility.InstantiatePrefab(hostagePrefabProperty.objectReferenceValue) as Mb_IAAgent;
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
-        NewGameObject.charaPerks = characterProperty;
+        NewGameObject.aiCharacteristics = characterProperty;
         NewGameObject.AgentTile = hisTile;
+        NewGameObject.SetupTheMovementValues();
         NewGameObject.transform.SetParent(hostageTransformProperty.objectReferenceValue as Transform);
         Selection.activeGameObject = NewGameObject.gameObject;
         EditorUtility.SetDirty(NewGameObject);

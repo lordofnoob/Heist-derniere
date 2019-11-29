@@ -16,6 +16,8 @@ public class Ma_CameraManager : MonoBehaviour
 	public float scrollSpeed = 15f;
     private Vector3 targetPos;
 
+
+
     [Header("Camera Follow Settings")]
 	public bool hasTarget = false;
 	[SerializeField] Vector3 targetOffset = new Vector3(4f,7f,0f);
@@ -28,9 +30,10 @@ public class Ma_CameraManager : MonoBehaviour
     float screenWidth;
     float screenHeight;
 
+    float mouseX;
+    float mouseY;
 
-    //oue les trucs de ouf
-    Vector3 refVelocity = Vector3.forward;
+
 
     private void Awake()
     {
@@ -49,14 +52,20 @@ public class Ma_CameraManager : MonoBehaviour
 
     void Update () {
 
-        mainCam.transform.position = Vector3.LerpUnclamped(mainCam.transform.position, targetPos,0.1f);
+        mouseX = InputController.mousePosition.x;
+        mouseY  = InputController.mousePosition.y;
+        mainCam.transform.position = Vector3.LerpUnclamped(mainCam.transform.position, targetPos, 0.1f);
+
+
+        KeyBoardControl();
         ScrollingUpdate();
         ClavierUpdate();
         ScrollingMouse();
-
+       
 
     }
 
+  
     public void ClavierUpdate()
     {
         if (InputController.Z)
@@ -118,36 +127,54 @@ public class Ma_CameraManager : MonoBehaviour
 
 	public void TargetLooking(Vector3 positionToLook)
     {
-		Vector3 targetPos = new Vector3(positionToLook.x, 0, positionToLook.z) + targetOffset;
+		targetPos = new Vector3(positionToLook.x, 0, positionToLook.z) + targetOffset;
         //transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime*targetSpeed);
-        mainCam.transform.position = targetPos;
+
 	}
 
     private void ScrollingMouse()
     {
-        float mouseX = InputController.mousePosition.x;
-        float mouseY = InputController.mousePosition.y;
+        
 
-        if (mouseX < screenWidth*scrollingPercentage)
+        if (mouseX < screenWidth*scrollingPercentage && mainCam.transform.position.x > minXZ.position.x)
         {
             targetPos.x += (mouseX - screenWidth * scrollingPercentage) * Time.deltaTime* scrollingGrowth.Evaluate((screenWidth * scrollingPercentage- mouseX)/ screenWidth * scrollingPercentage);
         }
-        else if (mouseX > screenWidth * (1-scrollingPercentage))
+        else if (mouseX > screenWidth * (1-scrollingPercentage) && mainCam.transform.position.x < maxXZ.position.x)
         {
             targetPos.x += (mouseX - screenWidth * (1 - scrollingPercentage)) * Time.deltaTime * scrollingGrowth.Evaluate((mouseX - screenWidth * (1 - scrollingPercentage) )/ screenWidth * scrollingPercentage);
     
         }
 
-        if (mouseY < screenHeight * scrollingPercentage)
+        if (mouseY < screenHeight * scrollingPercentage && mainCam.transform.position.z > minXZ.position.z)
         {
             targetPos.z += (mouseY - screenHeight * scrollingPercentage) * Time.deltaTime * scrollingGrowth.Evaluate((screenHeight * scrollingPercentage - mouseY) / screenHeight * scrollingPercentage);
         }
-        else if (mouseY > screenHeight * (1 - scrollingPercentage))
+        else if (mouseY > screenHeight * (1 - scrollingPercentage) && mainCam.transform.position.z < maxXZ.position.z)
         {
             targetPos.z += (mouseY - screenHeight * (1 - scrollingPercentage)) * Time.deltaTime * scrollingGrowth.Evaluate((mouseY - screenHeight * (1 - scrollingPercentage)) / screenHeight * scrollingPercentage);
         }
 
     }
+
+    public void CenterCameraOnCharacter(int playerToFocus)
+    {
         
+        TargetLooking(Ma_PlayerManager.Instance.selectedPlayer.transform.position);
+    }
+
+    void KeyBoardControl()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+            CenterCameraOnCharacter(0);
+        else if (Input.GetKeyDown(KeyCode.Z))
+            CenterCameraOnCharacter(1);
+        else if (Input.GetKeyDown(KeyCode.E))
+            CenterCameraOnCharacter(2);
+        else if (Input.GetKeyDown(KeyCode.R))
+            CenterCameraOnCharacter(3);
+        else if (Input.GetKeyDown(KeyCode.T))
+            CenterCameraOnCharacter(4);
+    }
 }
 

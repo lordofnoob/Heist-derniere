@@ -9,8 +9,9 @@ public class Mb_IAAgent : Mb_Agent
     [HideInInspector] public Mb_IATrial IATrial;
 
     [Header("Hostage Infos")]
-    public float normalSpeed = 2;
-    public float panicSpeed = 1;
+    public float normalSpeed;
+    public float panicSpeed;
+    public Sc_AiSpecs aiCharacteristics;
 
     [Header("Stress Infos")]
     public float stress = 0f; //Percentage
@@ -27,8 +28,9 @@ public class Mb_IAAgent : Mb_Agent
     //[HideInInspector]
     public Mb_Agent SomeoneWillInteractWith = null;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         IATrial = GetComponent<Mb_IATrial>();
     }
 
@@ -59,14 +61,13 @@ public class Mb_IAAgent : Mb_Agent
     }
     public void Panic()
     {
-        Debug.Log("PANIC!");
         hostageState = HostageState.InPanic;
         panicCounter++;
 
         List<Tile> posToExit = new List<Tile>();
-        foreach (Mb_Door door in Ma_LevelManager.Instance.allExitDoors)
+        foreach (Tile exitTile in Ma_LevelManager.Instance.allExitTile)
         {
-            posToExit.AddRange(door.positionToGo);
+            posToExit.Add(exitTile);
         }
         List<Tile> pathToNearestExitDoor = pathfinder.SearchForShortestPath(AgentTile, posToExit, true);
         AddDeplacement(pathToNearestExitDoor);
@@ -243,4 +244,11 @@ public class Mb_IAAgent : Mb_Agent
             animator.SetFloat("Speed", 0);
         }
     }
+
+    public void SetupTheMovementValues()
+    {
+        normalSpeed = aiCharacteristics.normalSpeed;
+        panicSpeed = aiCharacteristics.fleeingSpeed;
+    }
+    //IEnumerator 
 }

@@ -17,13 +17,14 @@ public class Mb_Player : Mb_Agent
     //[SerializeField] NavMeshAgent agent;
     public Color highlightedColor, selectedColor;
 
+    public Sc_PlayerSpecs charaPerks;
+
     [Header("Hostage")]
     public List<Mb_IAAgent> capturedHostages = new List<Mb_IAAgent>();
 
 
     [Header("Items")]
     public List<Sc_Items> itemsHold = new List<Sc_Items>();
-        
     [HideInInspector] public bool highlighted = false;
     [HideInInspector] [SerializeField] private bool isSelected = false;
 
