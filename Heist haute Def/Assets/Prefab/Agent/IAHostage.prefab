@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af82c5022a1bd5244bdb84a1c1d12bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charaPerks: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
+  animator: {fileID: 3557224083425641414}
   pathfinder: {fileID: 5657659807170411418}
   VisitedTiles: []
   agentTile: {fileID: 0}
@@ -269,6 +269,7 @@ MonoBehaviour:
   IATrial: {fileID: 0}
   normalSpeed: 2
   panicSpeed: 3
+  aiCharacteristics: {fileID: 0}
   stress: 0
   minStress: 0.2
   maxStress: 0.5

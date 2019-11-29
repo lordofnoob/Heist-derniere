@@ -62,6 +62,7 @@ public class Pathfinder : MonoBehaviour
             Tile currentTile = Queue.First();
             Queue.Remove(currentTile);
             TileVisited++;
+
             foreach(Tile neighbours in currentTile.GetFreeNeighbours(useDoors))
             {
                 //Debug.Log("NEIGHBOURS : " + neighbours.transform.position);
@@ -69,13 +70,14 @@ public class Pathfinder : MonoBehaviour
                     continue;
                 if(neighbours.MinCostToStart == 0f || currentTile.MinCostToStart + 1 < neighbours.MinCostToStart)
                 {
-                    neighbours.MinCostToStart = currentTile.MinCostToStart + neighbours.Cost;
+                    neighbours.MinCostToStart = currentTile.MinCostToStart + neighbours.cost;
                     neighbours.previous = currentTile;
                     if (!Queue.Contains(neighbours))
                         Queue.Add(neighbours);
                 }
             }
             agent.VisitedTiles.Add(currentTile);
+
             if (PosToGo.Contains(currentTile))
             {
                 if (ShortestPathCost == -1 || currentTile.MinCostToStart < ShortestPathCost)

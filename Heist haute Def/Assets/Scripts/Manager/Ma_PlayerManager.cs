@@ -141,7 +141,6 @@ public class Ma_PlayerManager : MonoBehaviour
             selectedPlayer.IsSelected = false;
 
         selectedPlayer = playerList[playerNumber];
-        Debug.Log(selectedPlayer.transform.position);
         Ma_CameraManager.Instance.TargetLooking(selectedPlayer.transform.position);
         selectedPlayer.IsSelected = true;
     }

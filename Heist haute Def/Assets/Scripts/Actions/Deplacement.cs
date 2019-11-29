@@ -16,15 +16,20 @@ public class Deplacement : Action
     {
         agent.SetNewActionState(StateOfAction.Moving);
 
+        //Mb_player
+        #region
         if (agent is Mb_Player)
         {
             Mb_Player player = agent as Mb_Player;
+
+            //checker si il s est bien déplacé sur la case
             if (!destination.avaible && destination == player.destination)
             {
                 player.nextAction = true;
                 return;
             }
-            bool findNewPath = false;
+            //bool findNewPath = false;
+            bool findNewPath = true;
 
             //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
             foreach (Action action in player.actionsToPerform)
@@ -32,8 +37,6 @@ public class Deplacement : Action
                 if (action is Deplacement)
                 {
                     Deplacement deplacement = action as Deplacement;
-                    //Debug.Log(deplacement.destination.avaible);
-
                     if (!deplacement.destination.avaible)
                     {
                         findNewPath = true;
@@ -59,6 +62,8 @@ public class Deplacement : Action
                                         player.nextAction = true;
                                 });
 
+                //keske
+                #region
                 /*if(player.capturedHostages.Count != 0)
                 {
                     for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
@@ -83,18 +88,23 @@ public class Deplacement : Action
                         }
                     }
                 }*/
+                #endregion
             }
             else
             {
                 findNewPath = true;
             }
 
+            //RECALCULER SI  CEST PAS BIEN 
             if (findNewPath)
             {
                 player.FindAnOtherPath();
             }
         }
-        else if(agent is Mb_IAAgent)
+        #endregion
+        //Mb_AI
+        #region
+        else if (agent is Mb_IAAgent)
         {
             Mb_IAAgent hostage = agent as Mb_IAAgent;
 
@@ -160,6 +170,6 @@ public class Deplacement : Action
                 //hostage.SetFirstActionToPerform(new Wait(1f, hostage, hostage.FindAnOtherPath));
             }
         }
-
+        #endregion
     }
 }

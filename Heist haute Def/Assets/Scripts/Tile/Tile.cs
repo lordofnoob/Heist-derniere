@@ -21,7 +21,8 @@ public class Tile : MonoBehaviour
     [SerializeField] public int column;
     [HideInInspector] public float StraightLineDistanceToEnd, MinCostToStart;
     [HideInInspector] public TileNeighbours neighbours;
-    public float Cost;
+    public bool isExitTile;
+    public float cost;
     //[HideInInspector] 
     public Tile previous;
     public TileType tileType;
@@ -35,6 +36,7 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
+        CalculateCost();
       /*  rend = GetComponent<Renderer>();
         startColor = rend.material.color;*/
     }
@@ -74,6 +76,8 @@ public class Tile : MonoBehaviour
         {
             if((useDoors && North.GetComponentInChildren<Mb_Door>() != null) || North.avaible)
                 res.Add(North);
+            //else if (!North.avaible)
+               // North.
         }
 
         if(South != null && South.walkable)
@@ -185,6 +189,22 @@ public class Tile : MonoBehaviour
         public Tile SE;
     }
 
+    public void CalculateCost()
+    {
+        if (agentOnTile != null)
+        {
+            if (agentOnTile.actionsToPerform.Count != 0)
+            {
+                cost = agentOnTile.actionsToPerform[0].timeToPerform / Ma_ClockManager.Instance.tickInterval;
+            }
+        }
+        else if (GetComponentInChildren<Mb_Door>())
+        {
+            cost = GetComponentInChildren<Mb_Door>().trialParameters.timeToAccomplishTrial / Ma_ClockManager.Instance.tickInterval;
+        }
+        else
+            cost = 1;
+    }
 
    
 

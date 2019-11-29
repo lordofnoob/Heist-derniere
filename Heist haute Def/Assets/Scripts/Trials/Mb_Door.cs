@@ -7,17 +7,16 @@ public class Mb_Door : Mb_Trial
     public Animation door;
     public Tile tileAssociated;
     public bool close = true;
-    public bool isExitDoor = false;
 
     public override void DoThings()
     {
         if (close)
         {
-            tileAssociated.Cost = 1;
+            tileAssociated.cost = 1;
         }
         else
         {
-            tileAssociated.Cost = 3;
+            tileAssociated.cost = base.trialParameters.timeToAccomplishTrial * Ma_ClockManager.Instance.tickInterval;
         }
 
         close = !close;
