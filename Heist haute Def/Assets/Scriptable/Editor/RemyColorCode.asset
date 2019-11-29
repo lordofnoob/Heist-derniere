@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b6d56243b35ed43baec118b6531c4c, type: 3}
+  m_Name: RemyColorCode
+  m_EditorClassIdentifier: 
+  colorCode:
+  - colorAssociated: {r: 0, g: 0, b: 0, a: 1}
+    prefabAssociated: {fileID: 1997135797365634, guid: 295134a2ca5d0b748abd933e01ae9c8d,
+      type: 3}
+  - colorAssociated: {r: 0, g: 0, b: 1, a: 1}
+    prefabAssociated: {fileID: 6711392818150648204, guid: d7e25eb25d1fca840bfb80699016fcc5,
+      type: 3}
+  - colorAssociated: {r: 1, g: 1, b: 1, a: 1}
+    prefabAssociated: {fileID: 1214944879021386, guid: a1a586269b311724b83e8635e5e6c6fa,
+      type: 3}
+  - colorAssociated: {r: 1, g: 1, b: 0, a: 1}
+    prefabAssociated: {fileID: 6711392818150648204, guid: 0a8371a65471e224da50a853227093c6,
+      type: 3}
+  - colorAssociated: {r: 1, g: 0, b: 1, a: 1}
+    prefabAssociated: {fileID: 6711392818150648204, guid: 4a593fb755988f9469e367fcfc2f0f63,
+      type: 3}
+  - colorAssociated: {r: 1, g: 0, b: 0, a: 1}
+    prefabAssociated: {fileID: 6711392818150648204, guid: 4564f62221384d044bf94001b3070187,
+      type: 3}
+  - colorAssociated: {r: 0.57254905, g: 0.57254905, b: 0.57254905, a: 1}
+    prefabAssociated: {fileID: 1214944879021386, guid: ccf15648ab607bb4b9da351a593c53cc,
+      type: 3}
+  - colorAssociated: {r: 0, g: 1, b: 1, a: 1}
+    prefabAssociated: {fileID: 2552047503744395961, guid: ededf39628c7f284ea094ccb250efb7a,
+      type: 3}
+  - colorAssociated: {r: 1, g: 0.60784316, b: 0, a: 1}
+    prefabAssociated: {fileID: 6711392818150648204, guid: 37e4abe76cca6164490cb1dc7717bc2d,
+      type: 3}
+  - colorAssociated: {r: 0, g: 1, b: 0, a: 1}
+    prefabAssociated: {fileID: 6711392818150648204, guid: adf95b081d8e07a4dab67499592dee85,
+      type: 3}
