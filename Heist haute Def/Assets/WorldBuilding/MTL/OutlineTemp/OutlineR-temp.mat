@@ -233,6 +233,8 @@ Material:
     - _ZTestModeDistortion: 8
     - _ZTestTransparent: 2
     - _ZWrite: 1
+    - _outIntensity: 0
+    - _outWidth: 0.01
     m_Colors:
     - Color_B0CF1639: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -251,3 +253,4 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+    - _outColor: {r: 0, g: 0, b: 0, a: 0}
