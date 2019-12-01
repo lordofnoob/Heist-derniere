@@ -109,8 +109,8 @@ public class Pathfinder : MonoBehaviour
     {
         foreach (Tile tile in ShortestPath)
         {
-            tile.ModifyOutlines(Outlines.Mode.OutlineVisible, Color.magenta, 7.5f);
-            tile.SetOutlinesEnabled(true);
+            //tile.ModifyOutlines(Outlines.Mode.OutlineVisible, Color.magenta, 7.5f);
+            //tile.SetOutlinesEnabled(true);
             tile.highlighted = true;
         }
     }

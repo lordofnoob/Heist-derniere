@@ -19,6 +19,7 @@ public class Mb_IAAgent : Mb_Agent
     public float minStress, maxStress;
     public Image stressBar;
     [HideInInspector] public int panicCounter = 0;
+    private int idleType = 0;
 
     [Header("Hostage target")]
     public Mb_Player target;
@@ -57,6 +58,24 @@ public class Mb_IAAgent : Mb_Agent
         if (stress == 100 && hostageState != HostageState.InPanic && hostageState != HostageState.Captured)
         {
             Panic();
+        }
+        else
+        {
+            if (stress < 25)
+            {
+                idleType = 0;
+                animator.SetFloat("IdleValue", 0);
+            }
+            else if (stress >= 25 && stress < 75)
+            {
+                idleType = 1;
+                animator.SetFloat("IdleValue", 5);
+            }
+            else if(stress > 75)
+            {
+                idleType = 2;
+                animator.SetFloat("IdleValue", 10);
+            }
         }
     }
     public void Panic()
@@ -232,16 +251,44 @@ public class Mb_IAAgent : Mb_Agent
     public override void SetNewActionState(StateOfAction agentState)
     {
         base.SetNewActionState(agentState);
-        if(agentState == StateOfAction.Moving)
+        switch (idleType)
         {
-            if (hostageState == HostageState.InPanic)
-                animator.SetFloat("Speed", 10);
-            else
-                animator.SetFloat("Speed", 5);//Change to Lerp
-        }
-        else if(agentState == StateOfAction.Idle)
-        {
-            animator.SetFloat("Speed", 0);
+            case 0:
+                if(agentState == StateOfAction.Moving)
+                {
+                    animator.SetBool("Idle00_To_Move", true);
+                    animator.SetFloat("Speed", 10); //LERP
+                }
+                else if(agentState == StateOfAction.Idle)
+                {
+                    animator.SetFloat("Speed", 0);//LERP
+                    animator.SetBool("Idle00_To_Move", false);
+                }
+                break;
+            case 1:
+                if(agentState == StateOfAction.Moving)
+                {
+                    animator.SetBool("Idle01_To_Move", true);
+                    animator.SetFloat("Speed", 10);//LERP
+                }
+                else if(agentState == StateOfAction.Idle)
+                {
+                    animator.SetFloat("Speed", 0);//LERP
+                    animator.SetBool("Idle01_To_Move", false);
+                }
+                break;
+            case 2:
+                if(agentState == StateOfAction.Moving)
+                {
+                    animator.SetBool("Idle02_To_Move", true);
+                    animator.SetFloat("Speed", 10);//LERP
+                }
+                else if(agentState == StateOfAction.Idle)
+                {
+                    animator.SetFloat("Speed", 0);//LERP
+                    animator.SetBool("Idle02_To_Move", false);
+                }
+                break;
         }
     }
 

@@ -45,16 +45,16 @@ public class Tile : MonoBehaviour
     {
         if (!highlighted)
         {
-            ModifyOutlines(Outlines.Mode.OutlineVisible, Color.black, 7.5f);
-            SetOutlinesEnabled(true);
+            //ModifyOutlines(Outlines.Mode.OutlineVisible, Color.black, 7.5f);
+            //SetOutlinesEnabled(true);
 
         }
     }
 
     void OnMouseExit()
     {
-        if (!highlighted)
-            SetOutlinesEnabled(false);
+        //if (!highlighted)
+            //SetOutlinesEnabled(false);
     }
 
     public float StraightLineDistanceTo(Tile end)
@@ -157,7 +157,8 @@ public class Tile : MonoBehaviour
 
     }
 
-    public void ModifyOutlines(Outlines.Mode mode, Color color, float width)
+    //OLDER OUTLINES SYSTEM
+    /*public void ModifyOutlines(Outlines.Mode mode, Color color, float width)
     {
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.OutlineMode = mode;
@@ -169,7 +170,7 @@ public class Tile : MonoBehaviour
     {
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.enabled = enabled;
-    }
+    }*/
 
     public void SetColumnAndRow(int newColumn, int newRow)
     {

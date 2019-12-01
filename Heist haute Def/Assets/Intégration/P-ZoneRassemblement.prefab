@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472402155014094421}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.2475, y: 2.389, z: -0.0145}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.58529603, y: 0.37001204, z: 1}
   m_Children: []
   m_Father: {fileID: 4331559844666874321}
@@ -123,16 +123,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4331559844666874323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c39015300036284287b9e6b1eee6be7, type: 3}
+  m_Script: {fileID: 11500000, guid: 543a30ee5a5f3844eb0ed48c4cdeb6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wZone: {fileID: 4331559845391233860}
-  gZone: {fileID: 4331559844806395697}
+  wZone: {fileID: 1460126784306874440, guid: 2303b427dd53a4644b421c689f140ed2, type: 3}
+  gZone: {fileID: 1460126785945402429, guid: 2303b427dd53a4644b421c689f140ed2, type: 3}
   height: 0.1
-  duration: 1.2
-  voile: {fileID: 4331559845391233861}
-  alertColor: {r: 1, g: 0, b: 0, a: 1}
-  colorSpeed: 0.8
+  duration: 1
+  voile: {fileID: 1486855504371273396, guid: 2303b427dd53a4644b421c689f140ed2, type: 3}
+  alertColor: {r: 0, g: 0, b: 0, a: 0}
+  colorSpeed: 0
   alerte: 0
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   initiateColorS: 0
@@ -161,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4331559844806395699}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.25, y: 2.316, z: -0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.20000002, z: 1}
   m_Children: []
   m_Father: {fileID: 4331559844666874321}
@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4331559845391233863}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.2499999, y: 2.432, z: -0.009999812}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 4331559844666874321}

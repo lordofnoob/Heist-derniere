@@ -69,23 +69,21 @@ public class Mb_Trial : Mb_Poolable
         
         currentTimeSpentOn = 0;
         counting = true;
-     }
+    }
 
     public void Counting()
     {
 
-
         if (counting == true)
         {
             currentTimeSpentOn += tickInterval;
+            Debug.Log(currentTimeSpentOn);
         }
 
         if (currentTimeSpentOn > finalTimeToSpendOn)
         {
             DoThings();
         }
-
-        
     }
 
     private void Update()
@@ -126,6 +124,7 @@ public class Mb_Trial : Mb_Poolable
 
     public void ResetValues()
     {
+        Debug.Log("RESET VALUE");
         counting = false;
         vignetCompletion = 0;
         currentTimeSpentOn = 0;

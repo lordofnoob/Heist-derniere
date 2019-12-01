@@ -44,7 +44,7 @@ public class Ma_IAManager : MonoBehaviour
 
     public void StockHostagesInArea(Mb_HostageStockArea area, List<Mb_IAAgent> hostages)
     {
-        List<Mb_IAAgent> stockedHosteges = new List<Mb_IAAgent>();
+        List<Mb_IAAgent> stockedHostages = new List<Mb_IAAgent>();
         foreach (Mb_IAAgent hostage in hostages)
         {
             foreach (Tile position in area.hostagesPos)
@@ -57,12 +57,13 @@ public class Ma_IAManager : MonoBehaviour
                     hostage.hostageState = HostageState.Stocked;
                     position.agentOnTile = hostage;
                     hostage.target = null;
-                    stockedHosteges.Add(hostage);
+                    area.SetStockedHostageNumber(area.GetStockedHostageNumber() + 1);
+                    stockedHostages.Add(hostage);
                     break;
                 }
             }
         }
-        foreach (Mb_IAAgent stockedHostege in stockedHosteges)
+        foreach (Mb_IAAgent stockedHostege in stockedHostages)
             hostages.Remove(stockedHostege);
 
     }

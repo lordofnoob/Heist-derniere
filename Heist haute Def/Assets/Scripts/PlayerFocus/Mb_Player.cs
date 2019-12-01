@@ -232,7 +232,16 @@ public class Mb_Player : Mb_Agent
     {
         //Debug.Log(agentState);
         base.SetNewActionState(agentState);
-        if(agentState == StateOfAction.Moving)
+
+        if(agentState == StateOfAction.Moving || agentState == StateOfAction.Idle)
+        {
+            foreach (Mb_IAAgent hostage in capturedHostages)
+            {
+                hostage.SetNewActionState(agentState);
+            }
+        }
+
+        if (agentState == StateOfAction.Moving)
         {
             animator.SetBool("Idle00_To_Move", true);
             animator.SetFloat("Speed", 8.5f);
