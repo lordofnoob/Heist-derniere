@@ -11,5 +11,6 @@ public class Mb_Chest : Mb_Trial
     {
         listOfUser[0].AddItem(itemList[0]);
         itemList.Remove(itemList[0]);
+        base.DoThings();
     }
 }

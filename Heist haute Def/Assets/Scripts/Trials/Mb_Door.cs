@@ -36,5 +36,6 @@ public class Mb_Door : Mb_Trial
         }
 
         ResetValues();
+        base.DoThings();
     }        
 }

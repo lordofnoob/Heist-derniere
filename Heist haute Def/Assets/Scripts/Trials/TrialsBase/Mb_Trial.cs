@@ -77,12 +77,12 @@ public class Mb_Trial : Mb_Poolable
         if (counting == true)
         {
             currentTimeSpentOn += tickInterval;
-            Debug.Log(currentTimeSpentOn);
         }
 
         if (currentTimeSpentOn > finalTimeToSpendOn)
         {
             DoThings();
+            currentTimeSpentOn = 0;
         }
     }
 
@@ -94,7 +94,7 @@ public class Mb_Trial : Mb_Poolable
 
     public void ReUpduateTiming()
     {
-        if (listOfUser[0].GetComponent<Mb_Player>())
+        definitiveModifier = 1;
             foreach (Mb_Player player in listOfUser)
             {
                 Debug.Log(player.charaPerks);
@@ -114,13 +114,10 @@ public class Mb_Trial : Mb_Poolable
                             }
 
                         }
-            }
-        else
+            }/*
             foreach (Mb_IAAgent agent in listOfUser)
             {
-                Debug.Log(agent.aiCharacteristics);
                 int length = agent.aiCharacteristics.characterSkills.Length;
-                Debug.Log(length);
                 for (int i = 0; i < agent.aiCharacteristics.characterSkills.Length; i++)
                     for (int y = 0; y < trialParameters.skillToUse.Length; y++)
                         if (agent.aiCharacteristics.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
@@ -135,14 +132,16 @@ public class Mb_Trial : Mb_Poolable
                             }
 
                         }
-            }
+            }*/
         finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
         counting = true;
     }
 
 
     public virtual void DoThings()
-    {}
+    {
+        listOfUser.Clear();
+    }
 
     public void ResetValues()
     {

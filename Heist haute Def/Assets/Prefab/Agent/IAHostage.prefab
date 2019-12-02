@@ -269,7 +269,7 @@ MonoBehaviour:
   IATrial: {fileID: 0}
   normalSpeed: 2
   panicSpeed: 3
-  aiCharacteristics: {fileID: 11400000, guid: d25fcc0ba6dc2494092bb6c4c8870954, type: 2}
+  aiCharacteristics: {fileID: 0}
   stress: 0
   minStress: 0.2
   maxStress: 0.5
@@ -295,7 +295,7 @@ MonoBehaviour:
   trialTile: {fileID: 0}
   timeVignet: {fileID: 1129344465071966787}
   listOfUser: []
-  IAAgent: {fileID: 5770262166141487127}
+  iaAgent: {fileID: 5770262166141487127}
 --- !u!136 &160279560857995052
 CapsuleCollider:
   m_ObjectHideFlags: 0

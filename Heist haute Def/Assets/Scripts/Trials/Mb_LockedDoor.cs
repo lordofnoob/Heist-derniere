@@ -36,5 +36,6 @@ public class Mb_LockedDoor : Mb_Door
         }
         listOfUser.Clear();
         doorAnim.SetTrigger("DoThings");
+        base.DoThings();
     }
 }
