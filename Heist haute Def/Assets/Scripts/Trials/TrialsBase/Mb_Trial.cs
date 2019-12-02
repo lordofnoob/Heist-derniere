@@ -30,7 +30,7 @@ public class Mb_Trial : Mb_Poolable
         finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
-    void Awake()
+   public void Awake()
     { 
         Ma_ClockManager.Instance.tickTrigger.AddListener(this.Counting);
         tickInterval = Ma_ClockManager.Instance.tickInterval;
@@ -69,24 +69,21 @@ public class Mb_Trial : Mb_Poolable
         
         currentTimeSpentOn = 0;
         counting = true;
-     }
+    }
 
     public void Counting()
     {
 
-
         if (counting == true)
         {
             currentTimeSpentOn += tickInterval;
-            Debug.Log(currentTimeSpentOn);
         }
 
         if (currentTimeSpentOn > finalTimeToSpendOn)
         {
             DoThings();
+            currentTimeSpentOn = 0;
         }
-
-        
     }
 
     private void Update()
@@ -97,36 +94,58 @@ public class Mb_Trial : Mb_Poolable
 
     public void ReUpduateTiming()
     {
-        foreach (Mb_Player player in listOfUser)
-        {
-            Debug.Log(player.charaPerks);
-            int length = player.charaPerks.characterSkills.Length;
-            Debug.Log(length);
-            for (int i = 0; i < player.charaPerks.characterSkills.Length; i++)
-                for (int y = 0; y < trialParameters.skillToUse.Length; y++)
-                    if (player.charaPerks.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
-                    {
-                        if (definitiveModifier > (1 - trialParameters.skillToUse[y].associatedReduction))
+        definitiveModifier = 1;
+            foreach (Mb_Player player in listOfUser)
+            {
+                Debug.Log(player.charaPerks);
+                int length = player.charaPerks.characterSkills.Length;
+                Debug.Log(length);
+                for (int i = 0; i < player.charaPerks.characterSkills.Length; i++)
+                    for (int y = 0; y < trialParameters.skillToUse.Length; y++)
+                        if (player.charaPerks.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
                         {
-                            definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
-                        }
-                        else if (definitiveModifier <= (definitiveModifier - trialParameters.skillToUse[y].associatedReduction) && definitiveModifier >= 1)
-                        {
-                            definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
-                        }
+                            if (definitiveModifier > (1 - trialParameters.skillToUse[y].associatedReduction))
+                            {
+                                definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
+                            }
+                            else if (definitiveModifier <= (definitiveModifier - trialParameters.skillToUse[y].associatedReduction) && definitiveModifier >= 1)
+                            {
+                                definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
+                            }
 
-                    }
-        }
+                        }
+            }/*
+            foreach (Mb_IAAgent agent in listOfUser)
+            {
+                int length = agent.aiCharacteristics.characterSkills.Length;
+                for (int i = 0; i < agent.aiCharacteristics.characterSkills.Length; i++)
+                    for (int y = 0; y < trialParameters.skillToUse.Length; y++)
+                        if (agent.aiCharacteristics.characterSkills[i] == trialParameters.skillToUse[y].associatedSkill)
+                        {
+                            if (definitiveModifier > (1 - trialParameters.skillToUse[y].associatedReduction))
+                            {
+                                definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
+                            }
+                            else if (definitiveModifier <= (definitiveModifier - trialParameters.skillToUse[y].associatedReduction) && definitiveModifier >= 1)
+                            {
+                                definitiveModifier = (1 - trialParameters.skillToUse[y].associatedReduction);
+                            }
+
+                        }
+            }*/
         finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
         counting = true;
     }
 
 
     public virtual void DoThings()
-    {}
+    {
+        listOfUser.Clear();
+    }
 
     public void ResetValues()
     {
+        Debug.Log("RESET VALUE");
         counting = false;
         vignetCompletion = 0;
         currentTimeSpentOn = 0;

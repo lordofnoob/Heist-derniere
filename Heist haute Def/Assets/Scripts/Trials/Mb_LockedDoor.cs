@@ -35,6 +35,7 @@ public class Mb_LockedDoor : Mb_Door
             listOfUser[i].SetNewActionState(StateOfAction.Idle);
         }
         listOfUser.Clear();
-        door.Play();
+        doorAnim.SetTrigger("DoThings");
+        base.DoThings();
     }
 }

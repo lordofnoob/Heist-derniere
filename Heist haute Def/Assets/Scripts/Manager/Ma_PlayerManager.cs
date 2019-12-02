@@ -111,8 +111,8 @@ public class Ma_PlayerManager : MonoBehaviour
 
                         if(targetTrial is Mb_IATrial)
                         {
-                            Mb_IATrial IATrial = targetTrial as Mb_IATrial;
-                            IATrial.IAAgent.SomeoneWillInteractWith = selectedPlayer;
+                            Mb_IATrial iaTrial = targetTrial as Mb_IATrial;
+                            iaTrial.iaAgent.SomeoneWillInteractWith = selectedPlayer;
                         }
 
                         List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, positionToAccomplishDuty);
@@ -141,7 +141,6 @@ public class Ma_PlayerManager : MonoBehaviour
             selectedPlayer.IsSelected = false;
 
         selectedPlayer = playerList[playerNumber];
-        Debug.Log(selectedPlayer.transform.position);
         Ma_CameraManager.Instance.TargetLooking(selectedPlayer.transform.position);
         selectedPlayer.IsSelected = true;
     }
