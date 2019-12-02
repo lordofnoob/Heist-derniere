@@ -110,6 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1460126784306874440}
   - component: {fileID: 1460126784306874441}
+  - component: {fileID: 1460126784357100991}
   m_Layer: 0
   m_Name: ZoneRassemblement
   m_TagString: Untagged
@@ -125,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460126784306874443}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 2.843848, z: 0}
+  m_LocalPosition: {x: 0, y: 0.19790936, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 1460126786341954269}
@@ -181,6 +182,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1460126784357100991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460126784306874443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543a30ee5a5f3844eb0ed48c4cdeb6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wZone: {fileID: 1460126784306874440}
+  gZone: {fileID: 1460126785945402429}
+  height: 1
+  duration: 0.4
+  voile: {fileID: 1486855504371273396}
+  alertColor: {r: 0, g: 0, b: 0, a: 0}
+  colorSpeed: 0
+  alerte: 0
+  baseColor: {r: 0, g: 0, b: 0, a: 0}
+  initiateColorS: 0
 --- !u!1 &1460126785945402431
 GameObject:
   m_ObjectHideFlags: 0

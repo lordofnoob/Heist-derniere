@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8486097581385170928}
   - component: {fileID: 8031435553257162172}
   - component: {fileID: 1986817351379589481}
+  - component: {fileID: 1004868655}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -120,11 +121,42 @@ MonoBehaviour:
   nextAction: 1
   highlightedColor: {r: 1, g: 0.73647493, b: 0, a: 0.50980395}
   selectedColor: {r: 1, g: 0.47614014, b: 0, a: 0.7921569}
-  charaPerks: {fileID: 11400000, guid: 283eeeea0f40f8d40adaf4c306039960, type: 2}
+  charaPerks: {fileID: 0}
   capturedHostages: []
   itemsHold: []
   highlighted: 0
   isSelected: 0
+--- !u!114 &1004868655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150200540322368673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8091c79903e4894e962d53e33ea536e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outline: {fileID: 85142281058845238}
+  outlineRend: {fileID: 85142281058845224}
+  outlineMat: {fileID: 0}
+  over: 0
+  outSimpleColor:
+    serializedVersion: 2
+    rgba: 0
+  outSimpleThickness: 0.01
+  outSimpleIntensity: 1
+  outOverColor:
+    serializedVersion: 2
+    rgba: 4286611584
+  outOverThickness: 0.015
+  outOverIntensity: 1
+  outSelectionColor:
+    serializedVersion: 2
+    rgba: 16777215
+  outSelectionThickness: 0.02
+  outSelectionIntensity: 2
 --- !u!1001 &85142282168029369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207,12 +239,23 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2831057633798674175, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
 --- !u!4 &544309743462926210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 478431214824953659, guid: e94ab19bb73fc9d4fa5c794b964d366c,
+    type: 3}
+  m_PrefabInstance: {fileID: 85142282168029369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &85142281058845238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1109185167, guid: e94ab19bb73fc9d4fa5c794b964d366c,
+    type: 3}
+  m_PrefabInstance: {fileID: 85142282168029369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &85142281058845224 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1109185169, guid: e94ab19bb73fc9d4fa5c794b964d366c,
     type: 3}
   m_PrefabInstance: {fileID: 85142282168029369}
   m_PrefabAsset: {fileID: 0}
