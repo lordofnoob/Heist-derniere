@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        
         UpdateHostageStressBar();
         UpdateHostageStockAreaStressBar();
     }
@@ -37,6 +38,11 @@ public class UIManager : MonoBehaviour
         {
             hostageArea.stressBar.fillAmount = hostageArea.areaGlobalStress / 100;
         }
+    }
+
+    public void UpdateMoneyCounter()
+    {
+
     }
 
 }

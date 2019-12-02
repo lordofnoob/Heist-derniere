@@ -22,7 +22,7 @@ public class Mb_IATrial : Mb_Trial
         Debug.Log("TARGET CAPTURED");
         listOfUser[0].nextAction = true;
         Ma_IAManager.Instance.IAHostageFollowingPlayer(IAAgent, listOfUser[0]);
-
+        if (IAAgent.actionsToPerform[0]== Interact)
         ResetValues();
     }
 

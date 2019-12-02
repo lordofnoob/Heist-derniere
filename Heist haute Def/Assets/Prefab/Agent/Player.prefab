@@ -121,7 +121,7 @@ MonoBehaviour:
   nextAction: 1
   highlightedColor: {r: 1, g: 0.73647493, b: 0, a: 0.50980395}
   selectedColor: {r: 1, g: 0.47614014, b: 0, a: 0.7921569}
-  charaPerks: {fileID: 0}
+  charaPerks: {fileID: 11400000, guid: 283eeeea0f40f8d40adaf4c306039960, type: 2}
   capturedHostages: []
   itemsHold: []
   highlighted: 0
@@ -238,6 +238,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831057633798674175, guid: e94ab19bb73fc9d4fa5c794b964d366c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
