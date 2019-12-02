@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mb_Door : Mb_Trial
 {
-    public Animation door;
+    public Animator doorAnim;
     public Tile tileAssociated;
     public bool close = true;
 
@@ -20,7 +20,7 @@ public class Mb_Door : Mb_Trial
         }
 
         close = !close;
-        GetComponentInChildren<MeshRenderer>().enabled = close;
+        doorAnim.SetTrigger("DoThings");
         tileAssociated.avaible = !tileAssociated.avaible;
 
         //   door.
@@ -36,5 +36,6 @@ public class Mb_Door : Mb_Trial
         }
 
         ResetValues();
+        base.DoThings();
     }        
 }

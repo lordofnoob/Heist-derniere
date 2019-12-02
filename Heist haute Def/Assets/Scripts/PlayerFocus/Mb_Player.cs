@@ -157,7 +157,7 @@ public class Mb_Player : Mb_Agent
             if (onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
             {
                 Mb_IATrial IATrial = onGoingInteraction as Mb_IATrial;
-                if(IATrial.IAAgent.GetActionState() == StateOfAction.Moving)
+                if(IATrial.iaAgent.GetActionState() == StateOfAction.Moving)
                 {
                     List<Tile> posToGo = new List<Tile>();
                     for (int i = 0; i < onGoingInteraction.positionToGo.Length; i++)

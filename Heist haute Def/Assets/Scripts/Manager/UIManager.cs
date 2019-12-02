@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     public  Text timeElpased;
 
     public List<Mb_HostageStockArea> hostageStockArea = new List<Mb_HostageStockArea>();
+    public TextMeshProUGUI cashAmountText;
 
     void Awake()
     {
@@ -19,8 +21,10 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        
         UpdateHostageStressBar();
         UpdateHostageStockAreaStressBar();
+        UpdateMoneyCounter();
     }
 
     void UpdateHostageStressBar()
@@ -37,6 +41,11 @@ public class UIManager : MonoBehaviour
         {
             hostageArea.stressBar.fillAmount = hostageArea.areaGlobalStress / 100;
         }
+    }
+
+    public void UpdateMoneyCounter()
+    {
+        cashAmountText.text = Ma_LevelManager.Instance.cashAmount.ToString() + " $";
     }
 
 }
