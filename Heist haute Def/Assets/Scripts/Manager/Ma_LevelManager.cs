@@ -12,7 +12,7 @@ public class Ma_LevelManager : MonoBehaviour
     
 
     [SerializeField]public Tile[] allWalkableTile;
-    [SerializeField]public Mb_Door[] allExitDoors;
+    [SerializeField]public Tile[] allExitTile;
     [SerializeField] public Tile[] allTiles;
     [SerializeField] Sc_LevelParameters levelBaseParameters;
     private float timeRemaining;

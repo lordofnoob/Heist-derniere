@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Mb_Agent : Mb_Poolable
 {
+
+  
+
     [Header("Animator infos")]
     public Animator animator;
 
     [Header("Chara perks")]
-    public Sc_Charaspec charaPerks;
+
     //[HideInInspector] 
     public Pathfinder pathfinder;
+
     [HideInInspector] public List<Tile> VisitedTiles = new List<Tile>();
 
     [SerializeField]private Tile agentTile;
@@ -39,7 +43,7 @@ public class Mb_Agent : Mb_Poolable
     public Tile destination;
     public bool nextAction = true;
 
-    public void Awake()
+    public virtual void Awake()
     {
         if(GetComponent<Pathfinder>() != null)
             pathfinder = GetComponent<Pathfinder>();

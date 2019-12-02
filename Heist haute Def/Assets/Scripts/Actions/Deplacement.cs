@@ -16,15 +16,20 @@ public class Deplacement : Action
     {
         //agent.SetNewActionState(StateOfAction.Moving);
 
+        //Mb_player
+        #region
         if (agent is Mb_Player)
         {
             Mb_Player player = agent as Mb_Player;
+
+            //checker si il s est bien déplacé sur la case
             if (!destination.avaible && destination == player.destination)
             {
                 player.nextAction = true;
                 return;
             }
-            bool findNewPath = false;
+            //bool findNewPath = false;
+            bool findNewPath = true;
 
             //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
             foreach (Action action in player.actionsToPerform)
@@ -32,8 +37,6 @@ public class Deplacement : Action
                 if (action is Deplacement)
                 {
                     Deplacement deplacement = action as Deplacement;
-                    //Debug.Log(deplacement.destination.avaible);
-
                     if (!deplacement.destination.avaible)
                     {
                         findNewPath = true;
@@ -44,6 +47,38 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
+                //keske
+                #region
+                if (player.capturedHostages.Count != 0)
+                {
+                    for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
+                    {
+                        if (i == 0)
+                        {
+                            //Debug.Log("FIRST HOSTAGE");
+                            player.capturedHostages[i].transform.DOLookAt(player.AgentTile.transform.position, 0.2f, AxisConstraint.Y);
+                            player.capturedHostages[i].transform.DOMove(new Vector3(player.AgentTile.transform.position.x,
+                                                                                    player.AgentTile.transform.position.y + player.AgentTile.transform.localScale.y / 2,
+                                                                                    player.AgentTile.transform.position.z),
+                                                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                                                .SetEase(Ease.Linear);
+                            player.capturedHostages[i].AgentTile = player.AgentTile;
+                        }
+                        else
+                        {
+                            //Debug.Log("OTHER HOSTAGE");
+                            player.capturedHostages[i].transform.DOLookAt(player.AgentTile.transform.position, 0.2f, AxisConstraint.Y);
+                            player.capturedHostages[i].transform.DOMove(new Vector3(player.capturedHostages[i - 1].AgentTile.transform.position.x,
+                                                                                    player.capturedHostages[i - 1].AgentTile.transform.position.y + player.capturedHostages[i - 1].AgentTile.transform.localScale.y / 2,
+                                                                                    player.capturedHostages[i - 1].AgentTile.transform.position.z),
+                                                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                                                .SetEase(Ease.Linear);
+                            player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
+                        }
+                    }
+                }
+                #endregion
+
                 player.AgentTile = destination;
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 player.transform.DOLookAt(destination.transform.position,0.2f, AxisConstraint.Y);
@@ -54,7 +89,7 @@ public class Deplacement : Action
                                 .SetEase(Ease.Linear)
                                 .OnComplete(() =>
                                 {
-                                    destination.SetOutlinesEnabled(false);
+                                    //destination.SetOutlinesEnabled(false);
                                     destination.highlighted = false;
 
                                     if (destination == player.destination)
@@ -68,42 +103,22 @@ public class Deplacement : Action
                                         player.nextAction = true;
                                 });
 
-                /*if(player.capturedHostages.Count != 0)
-                {
-                    for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
-                    {
-                        if (i == 0)
-                        {
-                            //Debug.Log("FIRST HOSTAGE");
-                            player.capturedHostages[i].transform.DOMove(new Vector3(player.AgentTile.transform.position.x, 0.5f,
-                                                                                    player.AgentTile.transform.position.z),
-                                                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
-                                                                .SetEase(Ease.Linear);
-                            player.capturedHostages[i].AgentTile = player.AgentTile;
-                        }
-                        else
-                        {
-                            //Debug.Log("OTHER HOSTAGE");
-                            player.capturedHostages[i].transform.DOMove(new Vector3(player.capturedHostages[i - 1].AgentTile.transform.position.x, 0.5f,
-                                                        player.capturedHostages[i - 1].AgentTile.transform.position.z),
-                                                        Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
-                                                                .SetEase(Ease.Linear);
-                            player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
-                        }
-                    }
-                }*/
             }
             else
             {
                 findNewPath = true;
             }
 
+            //RECALCULER SI  CEST PAS BIEN 
             if (findNewPath)
             {
                 player.FindAnOtherPath();
             }
         }
-        else if(agent is Mb_IAAgent)
+        #endregion
+        //Mb_AI
+        #region
+        else if (agent is Mb_IAAgent)
         {
             Mb_IAAgent hostage = agent as Mb_IAAgent;
 
@@ -142,7 +157,7 @@ public class Deplacement : Action
                                  .SetEase(Ease.Linear)
                                  .OnComplete(() =>
                                  {
-                                     destination.SetOutlinesEnabled(false);
+                                     //destination.SetOutlinesEnabled(false);
                                      destination.highlighted = false;
 
                                      if (destination == hostage.destination)
@@ -177,6 +192,6 @@ public class Deplacement : Action
                 //hostage.SetFirstActionToPerform(new Wait(1f, hostage, hostage.FindAnOtherPath));
             }
         }
-
+        #endregion
     }
 }

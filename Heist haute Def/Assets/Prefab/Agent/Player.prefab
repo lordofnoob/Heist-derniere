@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7571269375243667252}
-  charaPerks: {fileID: 11400000, guid: b89e47f476fb52a4bb7ca42ab77bb3f4, type: 2}
   pathfinder: {fileID: 8031435553257162172}
   VisitedTiles: []
   agentTile: {fileID: 0}
@@ -121,6 +120,7 @@ MonoBehaviour:
   nextAction: 1
   highlightedColor: {r: 1, g: 0.73647493, b: 0, a: 0.50980395}
   selectedColor: {r: 1, g: 0.47614014, b: 0, a: 0.7921569}
+  charaPerks: {fileID: 11400000, guid: 283eeeea0f40f8d40adaf4c306039960, type: 2}
   capturedHostages: []
   itemsHold: []
   highlighted: 0
@@ -195,27 +195,21 @@ PrefabInstance:
     - target: {fileID: 478431214824953659, guid: e94ab19bb73fc9d4fa5c794b964d366c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 478431214824953659, guid: e94ab19bb73fc9d4fa5c794b964d366c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 478431214824953659, guid: e94ab19bb73fc9d4fa5c794b964d366c,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2831057633798674175, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e94ab19bb73fc9d4fa5c794b964d366c, type: 3}
---- !u!1 &3591232622559409553 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3528820444231591208, guid: e94ab19bb73fc9d4fa5c794b964d366c,
-    type: 3}
-  m_PrefabInstance: {fileID: 85142282168029369}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &544309743462926210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 478431214824953659, guid: e94ab19bb73fc9d4fa5c794b964d366c,

@@ -30,7 +30,7 @@ public class Mb_Trial : Mb_Poolable
         finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
-    void Awake()
+   public void Awake()
     { 
         Ma_ClockManager.Instance.tickTrigger.AddListener(this.Counting);
         tickInterval = Ma_ClockManager.Instance.tickInterval;
@@ -69,11 +69,10 @@ public class Mb_Trial : Mb_Poolable
         
         currentTimeSpentOn = 0;
         counting = true;
-     }
+    }
 
     public void Counting()
     {
-
 
         if (counting == true)
         {
@@ -85,8 +84,6 @@ public class Mb_Trial : Mb_Poolable
         {
             DoThings();
         }
-
-        
     }
 
     private void Update()
@@ -127,6 +124,7 @@ public class Mb_Trial : Mb_Poolable
 
     public void ResetValues()
     {
+        Debug.Log("RESET VALUE");
         counting = false;
         vignetCompletion = 0;
         currentTimeSpentOn = 0;

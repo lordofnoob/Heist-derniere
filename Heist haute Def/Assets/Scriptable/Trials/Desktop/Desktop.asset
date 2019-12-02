@@ -17,4 +17,4 @@ MonoBehaviour:
     associatedReduction: 0.3
   - associatedSkill: 5
     associatedReduction: -0.3
-  timeToAccomplishTrial: 25
+  timeToAccomplishTrial: 10

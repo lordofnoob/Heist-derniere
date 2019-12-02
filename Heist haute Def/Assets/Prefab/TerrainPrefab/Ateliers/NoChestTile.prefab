@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3070866728953699978}
   - component: {fileID: 8950239383702546569}
   - component: {fileID: 6187152332806789115}
-  - component: {fileID: 8411338046535841379}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Trial
@@ -93,26 +92,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8411338046535841379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621746791564297987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d49707789ef5c804d8386489da82117d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trialParameters: {fileID: 11400000, guid: 0e7f7af4812fe314e9251f0d8f2711fa, type: 2}
-  positionToGo:
-  - {fileID: 0}
-  trialTile: {fileID: 0}
-  timeVignet: {fileID: 0}
-  listOfUser: []
-  itemList:
-  - {fileID: 11400000, guid: ee249106be30dc24898bd526073b6bad, type: 2}
 --- !u!1 &6711392818150648204
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,6 +226,7 @@ MonoBehaviour:
   column: -10
   StraightLineDistanceToEnd: 0
   MinCostToStart: 0
-  Cost: 1
+  isExitTile: 0
+  cost: 0
   previous: {fileID: 0}
   tileType: 0

@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0472492eeab14dd418036f6428b16a80, type: 3}
-  m_Name: "andr\xE9"
+  m_Script: {fileID: 11500000, guid: 4314f67db486aa441880a62d0145ca23, type: 3}
+  m_Name: Martoof_1_4
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: Martoof
   characterPortrait: {fileID: 0}
-  surveillanceLimit: 4
-  speed: 2
-  characterSkills: 0700000001000000
+  speed: 1
+  characterSkills: 02000000
+  surveillanceLimit: 2

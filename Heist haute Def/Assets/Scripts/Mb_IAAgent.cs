@@ -9,8 +9,9 @@ public class Mb_IAAgent : Mb_Agent
     [HideInInspector] public Mb_IATrial IATrial;
 
     [Header("Hostage Infos")]
-    public float normalSpeed = 2;
-    public float panicSpeed = 1;
+    public float normalSpeed;
+    public float panicSpeed;
+    public Sc_AiSpecs aiCharacteristics;
 
     [Header("Stress Infos")]
     public float stress = 0f; //Percentage
@@ -18,6 +19,7 @@ public class Mb_IAAgent : Mb_Agent
     public float minStress, maxStress;
     public Image stressBar;
     [HideInInspector] public int panicCounter = 0;
+    private int idleType = 0;
 
     [Header("Hostage target")]
     public Mb_Player target;
@@ -27,8 +29,9 @@ public class Mb_IAAgent : Mb_Agent
     //[HideInInspector]
     public Mb_Agent SomeoneWillInteractWith = null;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         IATrial = GetComponent<Mb_IATrial>();
     }
 
@@ -56,17 +59,34 @@ public class Mb_IAAgent : Mb_Agent
         {
             Panic();
         }
+        else
+        {
+            if (stress < 25)
+            {
+                idleType = 0;
+                animator.SetFloat("IdleValue", 0);
+            }
+            else if (stress >= 25 && stress < 75)
+            {
+                idleType = 1;
+                animator.SetFloat("IdleValue", 5);
+            }
+            else if(stress > 75)
+            {
+                idleType = 2;
+                animator.SetFloat("IdleValue", 10);
+            }
+        }
     }
     public void Panic()
     {
-        Debug.Log("PANIC!");
         hostageState = HostageState.InPanic;
         panicCounter++;
 
         List<Tile> posToExit = new List<Tile>();
-        foreach (Mb_Door door in Ma_LevelManager.Instance.allExitDoors)
+        foreach (Tile exitTile in Ma_LevelManager.Instance.allExitTile)
         {
-            posToExit.AddRange(door.positionToGo);
+            posToExit.Add(exitTile);
         }
         List<Tile> pathToNearestExitDoor = pathfinder.SearchForShortestPath(AgentTile, posToExit, true);
         AddDeplacement(pathToNearestExitDoor);
@@ -231,16 +251,51 @@ public class Mb_IAAgent : Mb_Agent
     public override void SetNewActionState(StateOfAction agentState)
     {
         base.SetNewActionState(agentState);
-        if(agentState == StateOfAction.Moving)
+        switch (idleType)
         {
-            if (hostageState == HostageState.InPanic)
-                animator.SetFloat("Speed", 10);
-            else
-                animator.SetFloat("Speed", 5);//Change to Lerp
-        }
-        else if(agentState == StateOfAction.Idle)
-        {
-            animator.SetFloat("Speed", 0);
+            case 0:
+                if(agentState == StateOfAction.Moving)
+                {
+                    animator.SetBool("Idle00_To_Move", true);
+                    animator.SetFloat("Speed", 10); //LERP
+                }
+                else if(agentState == StateOfAction.Idle)
+                {
+                    animator.SetFloat("Speed", 0);//LERP
+                    animator.SetBool("Idle00_To_Move", false);
+                }
+                break;
+            case 1:
+                if(agentState == StateOfAction.Moving)
+                {
+                    animator.SetBool("Idle01_To_Move", true);
+                    animator.SetFloat("Speed", 10);//LERP
+                }
+                else if(agentState == StateOfAction.Idle)
+                {
+                    animator.SetFloat("Speed", 0);//LERP
+                    animator.SetBool("Idle01_To_Move", false);
+                }
+                break;
+            case 2:
+                if(agentState == StateOfAction.Moving)
+                {
+                    animator.SetBool("Idle02_To_Move", true);
+                    animator.SetFloat("Speed", 10);//LERP
+                }
+                else if(agentState == StateOfAction.Idle)
+                {
+                    animator.SetFloat("Speed", 0);//LERP
+                    animator.SetBool("Idle02_To_Move", false);
+                }
+                break;
         }
     }
+
+    public void SetupTheMovementValues()
+    {
+        normalSpeed = aiCharacteristics.normalSpeed;
+        panicSpeed = aiCharacteristics.fleeingSpeed;
+    }
+    //IEnumerator 
 }

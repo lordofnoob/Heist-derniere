@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Chara/CharaSpecs")]
+
 public class Sc_Charaspec : ScriptableObject
 {
     [Header("Interface")]
@@ -10,8 +10,7 @@ public class Sc_Charaspec : ScriptableObject
     public Sprite characterPortrait;
 
     [Header("Gameplay")]
-    public int surveillanceLimit;
-    public float speed;
+    [Tooltip(" tick/case 1 is super fast 5 slow")] public float speed;
     public CharacterSkills[] characterSkills;
    
 
