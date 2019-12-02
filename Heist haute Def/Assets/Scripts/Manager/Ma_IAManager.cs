@@ -63,6 +63,9 @@ public class Ma_IAManager : MonoBehaviour
                 }
             }
         }
+
+        area.stockedHostage.AddRange(stockedHostages);
+
         foreach (Mb_IAAgent stockedHostege in stockedHostages)
             hostages.Remove(stockedHostege);
 

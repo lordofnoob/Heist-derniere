@@ -77,7 +77,7 @@ public class Mb_Trial : Mb_Poolable
         if (counting == true)
         {
             currentTimeSpentOn += tickInterval;
-            Debug.Log(currentTimeSpentOn);
+            //Debug.Log(currentTimeSpentOn);
         }
 
         if (currentTimeSpentOn > finalTimeToSpendOn)
