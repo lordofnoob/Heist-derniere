@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/KillianScene.unity
+    guid: 5017a6b3e54c9434eaf39f498039b462
   m_configObjects: {}

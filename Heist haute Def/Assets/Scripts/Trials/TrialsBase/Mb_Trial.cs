@@ -30,7 +30,7 @@ public class Mb_Trial : Mb_Poolable
         finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
-   public void Awake()
+   public virtual void Awake()
     { 
         Ma_ClockManager.Instance.tickTrigger.AddListener(this.Counting);
         tickInterval = Ma_ClockManager.Instance.tickInterval;
