@@ -8,7 +8,11 @@ public class Mb_HostageStockArea : Mb_Trial
 
     private int areaCapacity = 0;
     public Tile[] hostagesPos;
+    public List<Mb_IAAgent> stockedHostage = new List<Mb_IAAgent>();
+
+    [Header("UI Info")]
     public Image stressBar;
+
     public float areaGlobalStress;
     private int stockedHostageNumber;
 
