@@ -12,6 +12,7 @@ public class Mb_Trial : Mb_Poolable
 
     [Header("Interface")]
     public Image timeVignet;
+    public scr_UITween UiToTrigger;
     //A rechanger en private
     public List<Mb_Agent> listOfUser= new List<Mb_Agent>();
 
@@ -65,15 +66,16 @@ public class Mb_Trial : Mb_Poolable
             }
         }
 
-        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial* definitiveModifier;
-        
-        currentTimeSpentOn = 0;
-        counting = true;
+        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial* definitiveModifier;
+
+        UiToTrigger.fill = true;
+        transform.GetComponent<TriggerPanelEvent>().filling = true;
+        /*currentTimeSpentOn = 0;
+        counting = true;*/
     }
 
     public void Counting()
     {
-
         if (counting == true)
         {
             currentTimeSpentOn += tickInterval;
@@ -133,8 +135,8 @@ public class Mb_Trial : Mb_Poolable
 
                         }
             }*/
-        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
-        counting = true;
+        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
+        transform.GetComponent<TriggerPanelEvent>().filling = true;
     }
 
 
@@ -146,7 +148,7 @@ public class Mb_Trial : Mb_Poolable
     public void ResetValues()
     {
         Debug.Log("RESET VALUE");
-        counting = false;
+        UiToTrigger.fill = false;
         vignetCompletion = 0;
         currentTimeSpentOn = 0;
         definitiveModifier = 1;
