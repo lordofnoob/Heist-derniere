@@ -124,6 +124,10 @@ public class scr_UITween : MonoBehaviour
             punch = false;
             doOnce = false;
             bScale = false;
+            fill = false;
+            vignetCompletion = 0;
+            currentTimeSpentOn = 0;
+            myTpe.filling = false;
         }
     }
 
@@ -136,14 +140,15 @@ public class scr_UITween : MonoBehaviour
             currentTimeSpentOn += tickInterval;
         }
 
+        //Debug.Log("CurrentTimeSpentOn : "+currentTimeSpentOn);
         if (currentTimeSpentOn > finalTimeToSpendOn)
         {
+            currentTimeSpentOn = 0;
+            fill = false;
             circle.rectTransform.DOScale(targetC, sizingSpeedC).OnComplete(()=> 
             {
-                Debug.Log("DO THING");
+                //Debug.Log("DO THING : "+ myTpe.name);
                 myTpe.GetComponent<Mb_Trial>().DoThings();
-                currentTimeSpentOn = 0;
-                RestatPos();
             });
         }
         else

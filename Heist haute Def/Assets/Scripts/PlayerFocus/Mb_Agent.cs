@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Mb_Agent : Mb_Poolable
@@ -40,6 +41,7 @@ public class Mb_Agent : Mb_Poolable
     [SerializeField]private StateOfAction state;
     public List<Action> actionsToPerform = new List<Action>();
     [HideInInspector] public Mb_Trial onGoingInteraction;
+    [HideInInspector] public List<Mb_Trial> trialsToGo;
     public Tile destination;
     public bool nextAction = true;
 
@@ -50,10 +52,50 @@ public class Mb_Agent : Mb_Poolable
     }
 
     public virtual void PerformAction() { }
+    public void GoTo(Tile tileDestination)
+    {
+        List<Tile> newPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { tileDestination });
+        destination = tileDestination;
+        ChangeDeplacement(newPath);
+        nextAction = true;
+    }
+    public void GoTo(Mb_Trial nextTrialToInteract)
+    {
+        List<Tile> possibleDestination = new List<Tile>();
+        if (nextTrialToInteract.listOfUser.Count >= nextTrialToInteract.positionToGo.Length)
+        {
+            for (int i = 0; i < nextTrialToInteract.listOfUser.Count; i++)
+            {
+                if (nextTrialToInteract.listOfUser[i] == null)
+                {
+                    possibleDestination.Add(nextTrialToInteract.positionToGo[i]);
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < nextTrialToInteract.positionToGo.Length; i++)
+            {
+                possibleDestination.Add(nextTrialToInteract.positionToGo[i]);
+            }
+        }
+
+        if (possibleDestination.Count == 0)
+        {
+            Debug.Log("DEPLACEMENT IMPOSSIBLE");
+            return;
+        }
+
+        List<Tile> newPath = pathfinder.SearchForShortestPath(AgentTile, possibleDestination);
+        destination = newPath[newPath.Count - 1];
+        ChangeDeplacement(newPath);
+        SetNextInteraction();
+        nextAction = true;
+    }
     public virtual void AddDeplacement(List<Tile> path) { }
     public virtual void ChangeDeplacement(List<Tile> newPath)
     {
-        Debug.Log("CHANGE DEPLACEMENT");
+        //Debug.Log("CHANGE DEPLACEMENT");
         //REMOVE OLDER DEPLACEMENT ACTION
         List<Action> actionList = new List<Action>();
         foreach (Action action in actionsToPerform)
@@ -77,9 +119,20 @@ public class Mb_Agent : Mb_Poolable
     }
 
     public virtual void FindAnOtherPath() { }
-    public virtual void Interact() { }
+    public virtual void Interact()
+    {
+        trialsToGo.Remove(trialsToGo.First());
+        if(trialsToGo.Count > 0)
+        {
+            onGoingInteraction = trialsToGo.First();
+        }
+        else
+        {
+            onGoingInteraction = null;
+        }
+    }
     //Put Action at the end of actionToPerform queue
-    public virtual void SetNextInteraction(Mb_Trial trialToUse) { }
+    public virtual void SetNextInteraction() { }
     //Put Action at the Starrt of actionToPerform queue
     public virtual void SetFirstActionToPerform(Action action) { }
     public virtual void ResetInteractionParameters() { }

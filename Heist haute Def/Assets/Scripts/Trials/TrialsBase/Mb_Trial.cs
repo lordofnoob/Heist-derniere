@@ -88,12 +88,6 @@ public class Mb_Trial : Mb_Poolable
         }
     }
 
-    private void Update()
-    {
-        vignetCompletion = Mathf.Lerp(vignetCompletion, currentTimeSpentOn, tickInterval);
-        timeVignet.fillAmount = vignetCompletion / finalTimeToSpendOn;
-    }
-
     public void ReUpduateTiming()
     {
         definitiveModifier = 1;
@@ -147,8 +141,8 @@ public class Mb_Trial : Mb_Poolable
 
     public void ResetValues()
     {
-        Debug.Log("RESET VALUE");
-        UiToTrigger.fill = false;
+        //Debug.Log("RESET VALUE");
+        UiToTrigger.RestatPos();
         vignetCompletion = 0;
         currentTimeSpentOn = 0;
         definitiveModifier = 1;
@@ -159,7 +153,7 @@ public class Mb_Trial : Mb_Poolable
         }
         listOfUser.Clear();
 
-        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
+        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
     public void QuittingCheck()

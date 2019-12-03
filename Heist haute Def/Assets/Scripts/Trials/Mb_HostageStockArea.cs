@@ -54,6 +54,7 @@ public class Mb_HostageStockArea : Mb_Trial
         }
 
         ResetValues();
+        base.DoThings();
     }
 
     public void IncreaseAreaGlobalStress()
