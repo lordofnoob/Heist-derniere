@@ -151,8 +151,7 @@ public class Deplacement : Action
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 hostage.transform.DOLookAt(destination.transform.position, 0.2f, AxisConstraint.Y);
-                hostage.transform.DOMove(new Vector3(destination.transform.position.x, 
-                                                     destination.transform.position.y + destination.transform.localScale.y / 2,
+                hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
                                                      destination.transform.position.z),
                                                      Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                  .SetEase(Ease.Linear)
