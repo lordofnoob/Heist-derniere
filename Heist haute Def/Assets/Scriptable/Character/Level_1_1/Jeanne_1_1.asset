@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Jeanne
   characterPortrait: {fileID: 0}
-  speed: 1
+  speed: 2
   characterSkills: 0600000005000000
   surveillanceLimit: 3

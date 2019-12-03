@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Miranda
   characterPortrait: {fileID: 0}
-  speed: 1
+  speed: 2
   characterSkills: 0000000006000000
   surveillanceLimit: 1
