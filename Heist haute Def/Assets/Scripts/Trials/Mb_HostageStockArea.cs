@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,14 +8,12 @@ public class Mb_HostageStockArea : Mb_Trial
 
     private int areaCapacity = 0;
     public Tile[] hostagesPos;
-    public List<Mb_IAAgent> stockedHostages = new List<Mb_IAAgent>();
     public Image stressBar;
-    public TextMeshProUGUI hostageNumeberText;
     public float areaGlobalStress;
     private int stockedHostageNumber;
 
-  public override void Awake()
-       {
+    private void Awake()
+    {
         base.Awake();
         Ma_ClockManager.Instance.tickTrigger.AddListener(IncreaseAreaGlobalStress);
     }
@@ -38,7 +35,6 @@ public class Mb_HostageStockArea : Mb_Trial
             stressBar.transform.parent.gameObject.SetActive(true);
         }
         stockedHostageNumber = number;
-        hostageNumeberText.text = number.ToString();
     }
 
     public int GetStockedHostageNumber()
@@ -61,9 +57,13 @@ public class Mb_HostageStockArea : Mb_Trial
         if(stockedHostageNumber > 0)
         {
             float areaStressPercentage = 0;
-            foreach (Mb_IAAgent hostage in stockedHostages)
+            foreach (Tile tile in hostagesPos)
             {
-                areaStressPercentage += hostage.stress;
+                if (tile.agentOnTile is Mb_IAAgent)
+                {
+                    Mb_IAAgent hostage = tile.agentOnTile as Mb_IAAgent;
+                    areaStressPercentage += hostage.stress;
+                }
             }
             areaGlobalStress = areaStressPercentage / stockedHostageNumber;
         }
