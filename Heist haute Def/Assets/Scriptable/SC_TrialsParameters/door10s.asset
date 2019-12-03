@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4314f67db486aa441880a62d0145ca23, type: 3}
-  m_Name: New Sc_Player Specs
+  m_Script: {fileID: 11500000, guid: c331ba71144345645a84011634befb4c, type: 3}
+  m_Name: door10s
   m_EditorClassIdentifier: 
-  characterName: 
-  characterPortrait: {fileID: 0}
-  speed: 1
-  characterSkills: 06000000
-  surveillanceLimit: 0
+  skillToUse: []
+  timeToAccomplishTrial: 10

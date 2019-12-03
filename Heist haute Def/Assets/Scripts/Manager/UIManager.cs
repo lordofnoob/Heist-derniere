@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateMoneyCounter()
     {
-        cashAmountText.text = Ma_LevelManager.Instance.cashAmount.ToString() + " $";
+       // cashAmountText.text = Ma_LevelManager.Instance.cashAmount.ToString() + " $";
     }
 
 }

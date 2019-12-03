@@ -18,7 +18,7 @@ public class Mb_HostageStockArea : Mb_Trial
   public override void Awake()
        {
         base.Awake();
-        Ma_ClockManager.Instance.tickTrigger.AddListener(IncreaseAreaGlobalStress);
+        Ma_ClockManager.instance.tickTrigger.AddListener(IncreaseAreaGlobalStress);
     }
 
     private void Start()

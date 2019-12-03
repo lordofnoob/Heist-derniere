@@ -29,10 +29,12 @@ public class Mb_IAAgent : Mb_Agent
     //[HideInInspector]
     public Mb_Agent SomeoneWillInteractWith = null;
 
+
     public override void Awake()
     {
         base.Awake();
         IATrial = GetComponent<Mb_IATrial>();
+        SetupTheMovementValues();
     }
 
     void Start()
@@ -101,7 +103,7 @@ public class Mb_IAAgent : Mb_Agent
     {
         if (path.Count != 0)
         {
-            //Debug.Log(path.Count);
+            
             destination = path[path.Count - 1];
             foreach (Tile tile in path)
             {
@@ -110,15 +112,14 @@ public class Mb_IAAgent : Mb_Agent
                 else
                     actionsToPerform.Add(new Deplacement(normalSpeed, this, tile));
             }
-            //Debug.Log(actionsToPerform.Count);
         }
-        else
+       /* else
         {
             Debug.Log("Wait a tick");
             SetFirstActionToPerform(new Wait(1f, this, this.FindAnOtherPath));
-            FindAnOtherPath();
+            AddDeplacement(pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours()));
            
-        }
+        }*/
     }
 
     public override void PerformAction()
@@ -139,9 +140,13 @@ public class Mb_IAAgent : Mb_Agent
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
         if (actionsToPerform.Count != 0 && nextAction)
         {
-            /*if(actionsToPerform.First() is Interact)
-                Debug.Log("Perform Interaction");*/
-            //Debug.Log("PERFORM 1 IAHOSTAGE ACTION");
+            Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
+           foreach (Deplacement action in actionsToPerform)
+           {
+               Debug.Log("First Action is : " + action + "("+ action.destination.name+")");
+           }
+           Debug.Log("##############################");
+
             nextAction = false;
             actionsToPerform.First().PerformAction();
 
@@ -155,7 +160,7 @@ public class Mb_IAAgent : Mb_Agent
             actionsToPerform.Remove(actionsToPerform.First());
 
         }
-        FindAnOtherPath();
+
     }
 
     public override void FindAnOtherPath()
@@ -175,6 +180,7 @@ public class Mb_IAAgent : Mb_Agent
                 actionsToPerform.Remove(depla);
 
             List<Tile> newShortestPath = new List<Tile>();
+            
             if (!destination.avaible)
             {
                 newShortestPath = pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours());
@@ -183,7 +189,7 @@ public class Mb_IAAgent : Mb_Agent
             {
                 newShortestPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { destination });
             }
-            //Debug.Log("New path deplacement number : " + newShortestPath.Count);
+     
             ChangeDeplacement(newShortestPath);
         }
 
@@ -192,7 +198,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public override void Interact()
     {
-        //Debug.Log("INTERACTING");
+
         SetNewActionState(StateOfAction.Interacting);
 
         if (onGoingInteraction.listOfUser.Count == 0)
@@ -244,7 +250,7 @@ public class Mb_IAAgent : Mb_Agent
         actionsToPerform.TrimExcess();
         SomeoneWillInteractWith = null;
         onGoingInteraction = null;
-        destination = null;
+       // destination = null;
         //Debug.Log("actions have been flushed. Count left = " + actionsToPerform.Count.ToString());
     }
 
@@ -299,6 +305,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public void SetupTheMovementValues()
     {
+
         normalSpeed = aiCharacteristics.normalSpeed;
         panicSpeed = aiCharacteristics.fleeingSpeed;
     }

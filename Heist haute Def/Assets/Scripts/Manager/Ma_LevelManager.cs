@@ -12,6 +12,7 @@ public class Ma_LevelManager : MonoBehaviour
 
 
     [SerializeField] public Tile[] allWalkableTile;
+    [SerializeField] public Mb_Door[] allDoor;
     [SerializeField] public Tile[] allExitTile;
     [SerializeField] public Tile[] allTiles;
     [SerializeField] Sc_LevelParameters levelBaseParameters;
@@ -24,8 +25,8 @@ public class Ma_LevelManager : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        Ma_ClockManager.Instance.tickTrigger.AddListener(this.TimeShattering);
-        interval = Ma_ClockManager.Instance.tickInterval;
+        Ma_ClockManager.instance.tickTrigger.AddListener(this.TimeShattering);
+        interval = Ma_ClockManager.instance.tickInterval;
         timeRemaining = levelBaseParameters.timeAvaibleBeforePolice;
         clock = GetComponentInChildren<Ma_ClockManager>();
 
@@ -78,6 +79,7 @@ public class Ma_LevelManager : MonoBehaviour
             timeSpentToDisplay = minuteRemaining + " : 0" + secondsRemaining;
         UIManager.Instance.timeElpased.text = timeSpentToDisplay;
 
+        SetTileWeight();
         if (timeRemaining == 0)
             PoliceArrive();
     }
@@ -85,6 +87,30 @@ public class Ma_LevelManager : MonoBehaviour
     void PoliceArrive()
     {
         Debug.Log("PoliceArrive");
+    }
+
+    void SetTileWeight()
+    {
+        foreach (Tile tileToSet in allWalkableTile )
+        {
+            if (tileToSet.avaible == false)
+            {
+                if (tileToSet.agentOnTile != null && tileToSet.agentOnTile.actionsToPerform.Count>0)
+                    tileToSet.cost = tileToSet.agentOnTile.actionsToPerform[0].timeToPerform * Ma_ClockManager.instance.tickInterval;
+                else
+                {
+                    tileToSet.cost = 300;
+                   
+                }
+            }
+            else
+                tileToSet.cost = 1;
+        }
+      foreach (Mb_Door doorToSet in allDoor)
+        {
+            Debug.Log(doorToSet);
+            doorToSet.trialTile.cost = 1+ (doorToSet.trialParameters.timeToAccomplishTrial - doorToSet.currentTimeSpentOn) * Ma_ClockManager.instance.tickInterval;
+        }
     }
 }
   

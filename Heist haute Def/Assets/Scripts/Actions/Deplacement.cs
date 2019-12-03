@@ -53,6 +53,7 @@ public class Deplacement : Action
                 {
                     for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
                     {
+                        /*
                         if (i == 0)
                         {
                             //Debug.Log("FIRST HOSTAGE");
@@ -74,7 +75,10 @@ public class Deplacement : Action
                                                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                                                 .SetEase(Ease.Linear);
                             player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
-                        }
+                        }*/
+                        player.capturedHostages[i].destination = player.AgentTile;
+                        Debug.Log(player.AgentTile);
+                        player.capturedHostages[i].FindAnOtherPath();
                     }
                 }
                 #endregion

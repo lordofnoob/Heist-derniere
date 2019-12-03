@@ -7,6 +7,7 @@ public class En_WallConstuctor : MonoBehaviour
   
 }
 
+[System.Flags]
 [System.Serializable]
 public enum CombinableWallType
 {

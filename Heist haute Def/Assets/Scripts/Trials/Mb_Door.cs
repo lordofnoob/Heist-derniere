@@ -9,15 +9,16 @@ public class Mb_Door : Mb_Trial
     public bool close = true;
 
     public override void DoThings()
-    {
+    { 
+        /*
         if (close)
         {
             tileAssociated.cost = 1;
         }
         else
         {
-            tileAssociated.cost = base.trialParameters.timeToAccomplishTrial * Ma_ClockManager.Instance.tickInterval;
-        }
+            tileAssociated.cost = base.trialParameters.timeToAccomplishTrial * Ma_ClockManager.instance.tickInterval;
+        }*/
 
         close = !close;
         doorAnim.SetTrigger("DoThings");

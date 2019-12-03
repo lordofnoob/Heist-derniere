@@ -325,7 +325,14 @@ public class In_RoomCreator : Editor
     //AddPlayerPart OnSceneGUI + erasePlayer
     void GenerateGrid()
     {
-         Tile[] listOfTile;
+
+        Mb_Door[] doorListTemp;
+        doorListTemp = GameObject.FindObjectsOfType<Mb_Door>();
+        GameObject.FindObjectOfType<Ma_LevelManager>().allDoor = doorListTemp;
+
+
+        
+            Tile[] listOfTile;
            List<Tile> listOfTileOfWalkableTile = new List<Tile>();
 
             exitList = new List<Tile>();
@@ -531,8 +538,8 @@ public class In_RoomCreator : Editor
         NewGameObject.transform.position = newpos;
         NewGameObject.aiCharacteristics = characterProperty;
         NewGameObject.AgentTile = hisTile;
-        NewGameObject.SetupTheMovementValues();
         NewGameObject.transform.SetParent(hostageTransformProperty.objectReferenceValue as Transform);
+        Debug.Log(hostageTransformProperty);
         Selection.activeGameObject = NewGameObject.gameObject;
         EditorUtility.SetDirty(NewGameObject);
         EditorUtility.SetDirty(hisTile);

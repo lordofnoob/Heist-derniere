@@ -28,7 +28,7 @@ public class Ma_IAManager : MonoBehaviour
         if (activateHostageStress)
             foreach (Mb_IAAgent hostage in IAList)
             {
-                Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
+                Ma_ClockManager.instance.tickTrigger.AddListener(hostage.IncreaseStress);
             }
     }
 

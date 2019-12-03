@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Ma_ClockManager : MonoBehaviour
 {
-    public static Ma_ClockManager Instance;
+    public static Ma_ClockManager instance;
 
     public UnityEvent tickTrigger;
     public List<Mb_Agent> agentList = new List<Mb_Agent>();
@@ -17,7 +17,7 @@ public class Ma_ClockManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        instance = this;
 
         clock = Sequencer();
         if (tickTrigger == null)

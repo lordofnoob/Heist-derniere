@@ -12,12 +12,13 @@ public class Ed_Mb_Generator : MonoBehaviour
     public Ed_Sc_ColorCode colorCodeAssociated;
     public Transform roomParent;
     [SerializeField] Sc_WallConfiguration wallConfig;
-    [HideInInspector] public Sc_Charaspec playerCharactSpectToInstantiate;
+    [HideInInspector] public Sc_PlayerSpecs playerCharactSpectToInstantiate;
     [HideInInspector] public Mb_Player playerPrefab;
-    [HideInInspector] public Sc_Charaspec hostageCharactSpectToInstantiate;
+    [HideInInspector] public Sc_AiSpecs hostageCharactSpectToInstantiate;
     [HideInInspector] public Mb_IAAgent hostagePrefab;
     [HideInInspector] public Transform playerTransform, hostageTransform;
 
+#if UNITY_EDITOR
     public void InstantiateRoom()
     {
         Identify();
@@ -38,7 +39,7 @@ public class Ed_Mb_Generator : MonoBehaviour
 
         if (currentPixelColor.a == 0)
             return;
-       /* else
+        else
         {
             for (int i =0; i< colorCodeAssociated.colorCode.Length; i++)
             {
@@ -51,10 +52,11 @@ public class Ed_Mb_Generator : MonoBehaviour
                         newGameObject.transform.position = new Vector3(roomParent.position.x + x * distanceBetweenItems, roomParent.position.y, roomParent.position.z + z * distanceBetweenItems);
                         newGameObject.transform.SetParent(roomParent);
                     }
-                       // colorCodeAssociated.colorCode[i].prefabAssociated, , Quaternion.identity, roomParent);
+                     
                 }
             }
-
-        }*/
+        
+        }
     }
+#endif
 }

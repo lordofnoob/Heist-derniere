@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-//[CustomEditor(typeof(Mb_Chest))]
+[CustomEditor(typeof(Mb_Chest))]
 public class In_Chest : Editor
 {
     Mb_Chest mySelectedScript;
@@ -102,6 +102,7 @@ public class In_Chest : Editor
 
                         positionToGoProperty.arraySize += 1;
                         List<Tile> tempListTile = new List<Tile>();
+
                         foreach (Tile tilestoGo in mySelectedScript.positionToGo)
                         {
                             tempListTile.Add(tilestoGo);

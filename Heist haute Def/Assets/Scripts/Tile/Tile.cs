@@ -196,12 +196,12 @@ public class Tile : MonoBehaviour
         {
             if (agentOnTile.actionsToPerform.Count != 0)
             {
-                cost = agentOnTile.actionsToPerform[0].timeToPerform / Ma_ClockManager.Instance.tickInterval;
+                cost = agentOnTile.actionsToPerform[0].timeToPerform / Ma_ClockManager.instance.tickInterval;
             }
         }
         else if (GetComponentInChildren<Mb_Door>())
         {
-            cost = GetComponentInChildren<Mb_Door>().trialParameters.timeToAccomplishTrial / Ma_ClockManager.Instance.tickInterval;
+            cost = GetComponentInChildren<Mb_Door>().trialParameters.timeToAccomplishTrial / Ma_ClockManager.instance.tickInterval;
         }
         else
             cost = 1;
