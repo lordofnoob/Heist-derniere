@@ -151,6 +151,7 @@ public class Mb_IAAgent : Mb_Agent
             actionsToPerform.Remove(actionsToPerform.First());
 
         }
+        FindAnOtherPath();
     }
 
     public override void FindAnOtherPath()
