@@ -54,10 +54,6 @@ public class Mb_IAAgent : Mb_Agent
                 stress += Random.Range(minStress, maxStress) / 2;
                 stress = Mathf.Clamp(stress, 0, 40);
                 break;
-            case HostageState.Stocked:
-                stress += Random.Range(minStress, maxStress) / 2;
-                stress = Mathf.Clamp(stress, 0, 100);
-                break;
         }
         //Debug.Log("Stress : "+stress);
 
@@ -215,13 +211,16 @@ public class Mb_IAAgent : Mb_Agent
                     onGoingInteraction.ReUpduateTiming();
                 }
             }
+        base.Interact();
     }
 
-    public override void SetNextInteraction(Mb_Trial trialToUse)
+    public override void SetNextInteraction()
     {
-        //Debug.Log("Interact");
-        onGoingInteraction = trialToUse;
-        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+        if (trialsToGo.Count > 0)
+        {
+            onGoingInteraction = trialsToGo.First();
+            actionsToPerform.Add(new Interact(onGoingInteraction.trialParameters.timeToAccomplishTrial, this, onGoingInteraction));
+        }
     }
 
     public override void SetFirstActionToPerform(Action action)
@@ -244,7 +243,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public void StopMoving()
     {
-        Debug.Log("STOP MOVING");
+        //Debug.Log("STOP MOVING");
         SetNewActionState(StateOfAction.Idle);
         actionsToPerform.Clear();
         actionsToPerform.TrimExcess();

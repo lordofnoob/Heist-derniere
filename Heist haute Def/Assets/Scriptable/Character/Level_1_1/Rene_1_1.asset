@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: "Ren\xE9"
   characterPortrait: {fileID: 0}
-  speed: 1
+  speed: 3
   characterSkills: 0800000001000000
   surveillanceLimit: 3

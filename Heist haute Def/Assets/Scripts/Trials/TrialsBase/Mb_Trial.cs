@@ -12,7 +12,6 @@ public class Mb_Trial : Mb_Poolable
 
     [Header("Interface")]
     public Image timeVignet;
-    public scr_UITween UiToTrigger;
     //A rechanger en private
     public List<Mb_Agent> listOfUser= new List<Mb_Agent>();
 
@@ -31,7 +30,7 @@ public class Mb_Trial : Mb_Poolable
         finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
-   public virtual void Awake()
+   public void Awake()
     { 
         Ma_ClockManager.instance.tickTrigger.AddListener(this.Counting);
         tickInterval = Ma_ClockManager.instance.tickInterval;
@@ -66,16 +65,15 @@ public class Mb_Trial : Mb_Poolable
             }
         }
 
-        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial* definitiveModifier;
-
-        UiToTrigger.fill = true;
-        transform.GetComponent<TriggerPanelEvent>().filling = true;
-        /*currentTimeSpentOn = 0;
-        counting = true;*/
+        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial* definitiveModifier;
+        
+        currentTimeSpentOn = 0;
+        counting = true;
     }
 
     public void Counting()
     {
+
         if (counting == true)
         {
             currentTimeSpentOn += tickInterval;
@@ -86,12 +84,6 @@ public class Mb_Trial : Mb_Poolable
             DoThings();
             currentTimeSpentOn = 0;
         }
-    }
-
-    private void Update()
-    {
-        vignetCompletion = Mathf.Lerp(vignetCompletion, currentTimeSpentOn, tickInterval);
-        timeVignet.fillAmount = vignetCompletion / finalTimeToSpendOn;
     }
 
     public void ReUpduateTiming()
@@ -135,8 +127,8 @@ public class Mb_Trial : Mb_Poolable
 
                         }
             }*/
-        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
-        transform.GetComponent<TriggerPanelEvent>().filling = true;
+        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
+        counting = true;
     }
 
 
@@ -147,8 +139,8 @@ public class Mb_Trial : Mb_Poolable
 
     public void ResetValues()
     {
-        Debug.Log("RESET VALUE");
-        UiToTrigger.fill = false;
+        //Debug.Log("RESET VALUE");
+        UiToTrigger.RestatPos();
         vignetCompletion = 0;
         currentTimeSpentOn = 0;
         definitiveModifier = 1;
@@ -159,7 +151,7 @@ public class Mb_Trial : Mb_Poolable
         }
         listOfUser.Clear();
 
-        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
+        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
     public void QuittingCheck()

@@ -9,6 +9,7 @@ public class Ma_LevelManager : MonoBehaviour
     public static Ma_LevelManager Instance;
 
     public Ma_ClockManager clock;
+    
 
 
     [SerializeField] public Tile[] allWalkableTile;
@@ -20,7 +21,6 @@ public class Ma_LevelManager : MonoBehaviour
     private float interval;
     private int minuteRemaining;
     private int secondsRemaining;
-    [HideInInspector] public float cashAmount;
 
     public void Awake()
     {
@@ -30,18 +30,18 @@ public class Ma_LevelManager : MonoBehaviour
         timeRemaining = levelBaseParameters.timeAvaibleBeforePolice;
         clock = GetComponentInChildren<Ma_ClockManager>();
 
-
+       
     }
 
 
     public Tile GetWalkableTile(int row, int column)
     {
         Tile res = null;
-        for (int i = 0; i < allWalkableTile.Length; i++)
+        for(int i = 0; i < allWalkableTile.Length; i++)
         {
-            if (allWalkableTile[i].column == column)
+            if(allWalkableTile[i].column == column)
             {
-                if (allWalkableTile[i].row == row)
+                if(allWalkableTile[i].row == row)
                 {
                     res = allWalkableTile[i];
                 }
@@ -73,7 +73,7 @@ public class Ma_LevelManager : MonoBehaviour
         minuteRemaining = Mathf.FloorToInt(timeRemaining / 60);
         secondsRemaining = Mathf.RoundToInt(timeRemaining - minuteRemaining * 60);
         string timeSpentToDisplay;
-        if (secondsRemaining > 10)
+        if (secondsRemaining>10)
             timeSpentToDisplay = minuteRemaining + " : " + secondsRemaining;
         else
             timeSpentToDisplay = minuteRemaining + " : 0" + secondsRemaining;
@@ -113,4 +113,3 @@ public class Ma_LevelManager : MonoBehaviour
         }
     }
 }
-  
