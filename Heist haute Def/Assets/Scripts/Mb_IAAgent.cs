@@ -52,10 +52,6 @@ public class Mb_IAAgent : Mb_Agent
                 stress += Random.Range(minStress, maxStress) / 2;
                 stress = Mathf.Clamp(stress, 0, 40);
                 break;
-            case HostageState.Stocked:
-                stress += Random.Range(minStress, maxStress) / 2;
-                stress = Mathf.Clamp(stress, 0, 100);
-                break;
         }
         //Debug.Log("Stress : "+stress);
 

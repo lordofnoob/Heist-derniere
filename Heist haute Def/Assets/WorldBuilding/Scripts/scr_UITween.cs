@@ -10,7 +10,7 @@ public class scr_UITween : MonoBehaviour
     public Image circle;
     public RectTransform panel;
     public bool fill;
-    public float finalTimeToSpendOn = 1;
+    public float fillTime;
 
     public bool punch;
     public Vector2 punchDir;
@@ -26,9 +26,8 @@ public class scr_UITween : MonoBehaviour
     public Vector2 originPos;
     public bool doOnce;
 
-    private float vignetCompletion = 0;
-    private float currentTimeSpentOn = 0;
-    float tickInterval = 0;
+    private float fillValue;
+    public float fillSpeed = 0.1f;
 
     [Space(10)]
     [Header("Idle Parameter")]
@@ -52,10 +51,8 @@ public class scr_UITween : MonoBehaviour
 
     public TriggerPanelEvent myTpe;
 
-    void Awake()
+    void Start()
     {
-        tickInterval = Ma_ClockManager.Instance.tickInterval;
-        Ma_ClockManager.Instance.tickTrigger.AddListener(Fill);
       /*  originPos.x = -0.5f;
 
         originPos.y = 0.5f;*/
@@ -66,20 +63,27 @@ public class scr_UITween : MonoBehaviour
         // /!\ bcp en update.. => à opti
 
         panel.localScale = new Vector3(scaleValue, scaleValue, 1);
+        ring.fillAmount = fillValue;
 
-        vignetCompletion = Mathf.Lerp(vignetCompletion, currentTimeSpentOn, tickInterval);
-        ring.fillAmount = vignetCompletion / finalTimeToSpendOn;
-
+        // Gère la taille du cercle de complétion finale
+        if (fillValue >= 0.99f)
+        {
+            circle.rectTransform.DOScale(targetC, sizingSpeedC);
+        }
+        else
+        {
+            circle.rectTransform.DOScale(new Vector3(0, 0, 1), 0.8f);
+        }
 
         //Gère la jauge d'avancement du trial
-        /*if (fill)
+        if (fill)
         {
             Fill();
         }
         else
         {
-            currentTimeSpentOn = 0;
-        }*/
+            fillValue = 0;
+        }
 
         //Gère l'animation de "bond" puis d'idle lors de l'apparition de l'icone
         if (punch)
@@ -129,15 +133,15 @@ public class scr_UITween : MonoBehaviour
             currentTimeSpentOn = 0;
             myTpe.filling = false;
         }
+
     }
 
     //Gère la jauge d'avancement du trial
     public void Fill()
     {
-        if (fill)
+        if (fillValue < 1)
         {
-            bScale = true;
-            currentTimeSpentOn += tickInterval;
+            fillValue += fillSpeed;
         }
 
         //Debug.Log("CurrentTimeSpentOn : "+currentTimeSpentOn);
@@ -160,7 +164,7 @@ public class scr_UITween : MonoBehaviour
         {
             myTpe.filling = false;
             fill = false;
-        }*/
+        }
     }
 
     // Termine l'idle state
