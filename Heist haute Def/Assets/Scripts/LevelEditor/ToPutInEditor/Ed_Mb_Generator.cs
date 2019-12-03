@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 
 
 public class Ed_Mb_Generator : MonoBehaviour
@@ -39,7 +38,7 @@ public class Ed_Mb_Generator : MonoBehaviour
 
         if (currentPixelColor.a == 0)
             return;
-        else
+       /* else
         {
             for (int i =0; i< colorCodeAssociated.colorCode.Length; i++)
             {
@@ -56,6 +55,6 @@ public class Ed_Mb_Generator : MonoBehaviour
                 }
             }
 
-        }
+        }*/
     }
 }

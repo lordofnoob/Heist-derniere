@@ -158,8 +158,7 @@ public class Ma_CameraManager : MonoBehaviour
     }
 
     public void CenterCameraOnCharacter(int playerToFocus)
-    {
-        
+    {        
         TargetLooking(Ma_PlayerManager.Instance.selectedPlayer.transform.position);
     }
 

@@ -38,6 +38,7 @@ public class Ma_IAManager : MonoBehaviour
         Mb_IAAgent hostage = h as Mb_IAAgent;
         Mb_Player player = p as Mb_Player;
         hostage.target = player;
+        hostage.stressBar.transform.parent.gameObject.SetActive(true);
         player.capturedHostages.Add(hostage);
         hostage.hostageState = HostageState.Captured;
     }
@@ -55,6 +56,7 @@ public class Ma_IAManager : MonoBehaviour
                     Debug.Log("Deplacement to stock pos : " + pathToGo.Count);
                     hostage.AddDeplacement(pathToGo);
                     hostage.hostageState = HostageState.Stocked;
+                    hostage.stressBar.transform.parent.gameObject.SetActive(false);
                     position.agentOnTile = hostage;
                     hostage.target = null;
                     area.SetStockedHostageNumber(area.GetStockedHostageNumber() + 1);
@@ -63,6 +65,9 @@ public class Ma_IAManager : MonoBehaviour
                 }
             }
         }
+
+        area.stockedHostages.AddRange(stockedHostages);
+
         foreach (Mb_IAAgent stockedHostege in stockedHostages)
             hostages.Remove(stockedHostege);
 

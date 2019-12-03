@@ -12,5 +12,17 @@ public class Mb_Chest : Mb_Trial
         listOfUser[0].AddItem(itemList[0]);
         itemList.Remove(itemList[0]);
         base.DoThings();
+        CalculateCashAmount();
+    }
+    void CalculateCashAmount()
+    {
+        foreach (Mb_Player player in Ma_PlayerManager.Instance.playerList)
+        {
+            foreach (Sc_Money items in player.itemsHold)
+            {
+                Ma_LevelManager.Instance.cashAmount += items.valueOfTheItem;
+            }
+        }
     }
 }
+
