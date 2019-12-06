@@ -87,14 +87,18 @@ public class Mb_IAAgent : Mb_Agent
         hostageState = HostageState.InPanic;
         panicCounter++;
 
-        List<Tile> posToExit = new List<Tile>();
+        //OLD
+        /*List<Tile> posToExit = new List<Tile>();
         foreach (Tile exitTile in Ma_LevelManager.Instance.allExitTile)
         {
             posToExit.Add(exitTile);
         }
         List<Tile> pathToNearestExitDoor = pathfinder.SearchForShortestPath(AgentTile, posToExit, true);
-        AddDeplacement(pathToNearestExitDoor);
+        AddDeplacement(pathToNearestExitDoor);*/
         //Debug.Log(actionsToPerform.Count);
+
+        //NEW
+        //GoTo(warpHostageTrial);
     }
 
     public override void AddDeplacement(List<Tile> path)

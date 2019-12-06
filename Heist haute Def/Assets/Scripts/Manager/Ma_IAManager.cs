@@ -51,9 +51,7 @@ public class Ma_IAManager : MonoBehaviour
             {
                 if (position.agentOnTile == null)
                 {
-                    List<Tile> pathToGo = hostage.pathfinder.SearchForShortestPath(hostage.AgentTile, new List<Tile> { position});
-                    Debug.Log("Deplacement to stock pos : " + pathToGo.Count);
-                    hostage.AddDeplacement(pathToGo);
+                    hostage.GoTo(position);
                     hostage.hostageState = HostageState.Stocked;
                     position.agentOnTile = hostage;
                     hostage.target = null;
