@@ -22,6 +22,8 @@ public class Ma_LevelManager : MonoBehaviour
     private int minuteRemaining;
     private int secondsRemaining;
 
+    public float cashAmount = 0;
+
     public void Awake()
     {
         Instance = this;
