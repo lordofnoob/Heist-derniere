@@ -106,12 +106,14 @@ public class Ma_LevelManager : MonoBehaviour
                 }
             }
             else
-                tileToSet.cost = 1;
+                tileToSet.cost = Ma_ClockManager.instance.tickInterval;
         }
       foreach (Mb_Door doorToSet in allDoor)
-        {
-            Debug.Log(doorToSet);
-            doorToSet.trialTile.cost = 1+ (doorToSet.trialParameters.timeToAccomplishTrial - doorToSet.currentTimeSpentOn) * Ma_ClockManager.instance.tickInterval;
+        { 
+            foreach (Tile tileToSet in doorToSet.tileAssociated)
+                if (tileToSet.avaible==false)
+                    tileToSet.cost = Ma_ClockManager.instance.tickInterval + (doorToSet.trialParameters.timeToAccomplishTrial - doorToSet.currentTimeSpentOn) * Ma_ClockManager.instance.tickInterval;
+
         }
     }
 }

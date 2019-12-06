@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8818113118122498021}
-  - component: {fileID: 3353822405893606109}
   m_Layer: 9
   m_Name: UI
   m_TagString: Untagged
@@ -32,19 +31,6 @@ Transform:
   m_Father: {fileID: 6712938590612087638}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3353822405893606109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6362853656379809609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821de9b1a6d80d34ca736b29fc0cdff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformToLookAt: {fileID: 0}
 --- !u!1 &6621746791564297987
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,9 +139,10 @@ MonoBehaviour:
   trialParameters: {fileID: 11400000, guid: 0e7f7af4812fe314e9251f0d8f2711fa, type: 2}
   positionToGo:
   - {fileID: 0}
-  trialTile: {fileID: 0}
   timeVignet: {fileID: 9196770387053895367}
+  UiToTrigger: {fileID: 0}
   listOfUser: []
+  currentTimeSpentOn: 0
   itemList:
   - {fileID: 11400000, guid: ee249106be30dc24898bd526073b6bad, type: 2}
 --- !u!1 &6711392818150648204
@@ -293,7 +280,8 @@ MonoBehaviour:
   column: -10
   StraightLineDistanceToEnd: 0
   MinCostToStart: 0
-  Cost: 1
+  isExitTile: 0
+  cost: 0
   previous: {fileID: 0}
   tileType: 0
 --- !u!1001 &6722226658690690321

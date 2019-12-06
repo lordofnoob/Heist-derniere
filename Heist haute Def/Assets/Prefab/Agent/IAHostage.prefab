@@ -196,7 +196,6 @@ GameObject:
   - component: {fileID: 1112481153666434520}
   - component: {fileID: 5628605433060301194}
   - component: {fileID: 6270282380555665319}
-  - component: {fileID: 6111246125894185761}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -259,19 +258,6 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6111246125894185761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227804482148568742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821de9b1a6d80d34ca736b29fc0cdff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformToLookAt: {fileID: 0}
 --- !u!1 &1590761070473672342
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +780,7 @@ MonoBehaviour:
   agentTile: {fileID: 0}
   state: 0
   onGoingInteraction: {fileID: 0}
+  trialsToGo: []
   destination: {fileID: 0}
   nextAction: 1
   IATrial: {fileID: 0}
@@ -822,10 +809,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trialParameters: {fileID: 11400000, guid: 639a342ae923c1147827b43c98bbd567, type: 2}
   positionToGo: []
-  trialTile: {fileID: 0}
   timeVignet: {fileID: 1129344465071966787}
   UiToTrigger: {fileID: 5895512470876032256}
   listOfUser: []
+  currentTimeSpentOn: 0
   iaAgent: {fileID: 5770262166141487127}
 --- !u!136 &160279560857995052
 CapsuleCollider:
@@ -866,7 +853,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7339412151556531989}
-  - component: {fileID: 1686321885090497629}
   m_Layer: 8
   m_Name: UI
   m_TagString: Untagged
@@ -889,19 +875,6 @@ Transform:
   m_Father: {fileID: 5028995057435999965}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1686321885090497629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3559699657092150029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821de9b1a6d80d34ca736b29fc0cdff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformToLookAt: {fileID: 0}
 --- !u!1 &3576097045218172899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,7 +1369,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5895512470012061926}
-  - component: {fileID: 5895512470012061925}
   m_Layer: 0
   m_Name: UI-TS
   m_TagString: Untagged
@@ -1419,19 +1391,6 @@ Transform:
   m_Father: {fileID: 5131760745643702072}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5895512470012061925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5895512470012061924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821de9b1a6d80d34ca736b29fc0cdff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformToLookAt: {fileID: 0}
 --- !u!1 &5895512470013227926
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,7 +2151,7 @@ MonoBehaviour:
   circle: {fileID: 5895512470767718942}
   panel: {fileID: 5895512470876032319}
   fill: 0
-  fillTime: 0
+  finalTimeToSpendOn: 1
   punch: 0
   punchDir: {x: 0, y: 0.28}
   duration: 0.45
@@ -2203,7 +2162,6 @@ MonoBehaviour:
   bScale: 0
   originPos: {x: -0.5, y: -0.5}
   doOnce: 0
-  fillSpeed: 0.01
   Iduration: 2
   Istrength: {x: 0, y: 0.15, z: 0}
   Ivibrato: 0
