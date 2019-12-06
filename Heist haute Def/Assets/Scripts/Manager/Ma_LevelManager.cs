@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Ma_LevelManager : MonoBehaviour
 {
 
-    public static Ma_LevelManager Instance;
+    public static Ma_LevelManager instance;
 
     public Ma_ClockManager clock;
     
@@ -14,7 +14,7 @@ public class Ma_LevelManager : MonoBehaviour
 
     [SerializeField] public Tile[] allWalkableTile;
     [SerializeField] public Mb_Door[] allDoor;
-    [SerializeField] public Tile[] allExitTile;
+    [SerializeField] public Mb_Escape escapeTrial;
     [SerializeField] public Tile[] allTiles;
     [SerializeField] Sc_LevelParameters levelBaseParameters;
     public float timeRemaining;
@@ -26,7 +26,7 @@ public class Ma_LevelManager : MonoBehaviour
 
     public void Awake()
     {
-        Instance = this;
+        instance = this;
         Ma_ClockManager.instance.tickTrigger.AddListener(this.TimeShattering);
         interval = Ma_ClockManager.instance.tickInterval;
         timeRemaining = levelBaseParameters.timeAvaibleBeforePolice;

@@ -88,7 +88,7 @@ public class Mb_IAAgent : Mb_Agent
         panicCounter++;
 
         List<Tile> posToExit = new List<Tile>();
-        foreach (Tile exitTile in Ma_LevelManager.Instance.allExitTile)
+        foreach (Tile exitTile in Ma_LevelManager.instance.allExitTile)
         {
             posToExit.Add(exitTile);
         }

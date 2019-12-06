@@ -16,8 +16,8 @@ public class Mb_Trial : Mb_Poolable
     //A rechanger en private
     public List<Mb_Agent> listOfUser= new List<Mb_Agent>();
 
-   
-    private float currentTimeSpentOn=0;
+
+    public float currentTimeSpentOn=0;
     private float finalTimeToSpendOn=1;
     private bool counting;
     private List<float> reductionList;
@@ -33,8 +33,8 @@ public class Mb_Trial : Mb_Poolable
 
    public virtual void Awake()
     { 
-        Ma_ClockManager.Instance.tickTrigger.AddListener(this.Counting);
-        tickInterval = Ma_ClockManager.Instance.tickInterval;
+        Ma_ClockManager.instance.tickTrigger.AddListener(this.Counting);
+        tickInterval = Ma_ClockManager.instance.tickInterval;
     }
 
      public void StartInteracting()

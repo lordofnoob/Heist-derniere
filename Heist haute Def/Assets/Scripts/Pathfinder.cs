@@ -37,7 +37,7 @@ public class Pathfinder : MonoBehaviour
 
         foreach(Tile endPos in PosToGo)
         {
-            foreach (Tile tile in Ma_LevelManager.Instance.allWalkableTile)
+            foreach (Tile tile in Ma_LevelManager.instance.allWalkableTile)
             {
                 tile.StraightLineDistanceToEnd = tile.StraightLineDistanceTo(endPos);
             }
@@ -119,7 +119,7 @@ public class Pathfinder : MonoBehaviour
 
     public void ResetVisitedTile()
     {
-        foreach (Tile tile in Ma_LevelManager.Instance.allWalkableTile)
+        foreach (Tile tile in Ma_LevelManager.instance.allWalkableTile)
         {            
             tile.previous = null;
             tile.MinCostToStart = 0;
