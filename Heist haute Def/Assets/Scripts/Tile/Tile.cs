@@ -67,10 +67,10 @@ public class Tile : MonoBehaviour
     {
         List<Tile> res = new List<Tile>();
 
-        Tile North = Ma_LevelManager.Instance.GetWalkableTile(row - 1, column);
-        Tile South = Ma_LevelManager.Instance.GetWalkableTile(row + 1, column);
-        Tile East = Ma_LevelManager.Instance.GetWalkableTile(row, column - 1);
-        Tile West = Ma_LevelManager.Instance.GetWalkableTile(row, column + 1);
+        Tile North = Ma_LevelManager.instance.GetWalkableTile(row - 1, column);
+        Tile South = Ma_LevelManager.instance.GetWalkableTile(row + 1, column);
+        Tile East = Ma_LevelManager.instance.GetWalkableTile(row, column - 1);
+        Tile West = Ma_LevelManager.instance.GetWalkableTile(row, column + 1);
 
         if(North != null && North.walkable)
         {
@@ -113,14 +113,14 @@ public class Tile : MonoBehaviour
          neighbours.Add(Ma_LevelManager.Instance.GetTile(row + 1, column + 1));*/
         List<Tile> res = new List<Tile>();
 
-        Tile North = Ma_LevelManager.Instance.GetTile(row - 1, column);
-        Tile South = Ma_LevelManager.Instance.GetTile(row + 1, column);
-        Tile East = Ma_LevelManager.Instance.GetTile(row, column - 1);
-        Tile West = Ma_LevelManager.Instance.GetTile(row, column + 1);
-        Tile NW = Ma_LevelManager.Instance.GetTile(row -1, column + 1);
-        Tile NE = Ma_LevelManager.Instance.GetTile(row -1, column - 1);
-        Tile SW = Ma_LevelManager.Instance.GetTile(row +1, column + 1);
-        Tile SE = Ma_LevelManager.Instance.GetTile(row +1, column - 1);
+        Tile North = Ma_LevelManager.instance.GetTile(row - 1, column);
+        Tile South = Ma_LevelManager.instance.GetTile(row + 1, column);
+        Tile East = Ma_LevelManager.instance.GetTile(row, column - 1);
+        Tile West = Ma_LevelManager.instance.GetTile(row, column + 1);
+        Tile NW = Ma_LevelManager.instance.GetTile(row -1, column + 1);
+        Tile NE = Ma_LevelManager.instance.GetTile(row -1, column - 1);
+        Tile SW = Ma_LevelManager.instance.GetTile(row +1, column + 1);
+        Tile SE = Ma_LevelManager.instance.GetTile(row +1, column - 1);
 
         if(North != null)
             res.Add(North);

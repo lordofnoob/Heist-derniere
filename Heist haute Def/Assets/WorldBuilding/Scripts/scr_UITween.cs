@@ -54,8 +54,8 @@ public class scr_UITween : MonoBehaviour
 
     void Awake()
     {
-        tickInterval = Ma_ClockManager.Instance.tickInterval;
-        Ma_ClockManager.Instance.tickTrigger.AddListener(Fill);
+        tickInterval = Ma_ClockManager.instance.tickInterval;
+        Ma_ClockManager.instance.tickTrigger.AddListener(Fill);
       /*  originPos.x = -0.5f;
 
         originPos.y = 0.5f;*/

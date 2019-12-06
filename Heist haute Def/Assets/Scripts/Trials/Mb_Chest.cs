@@ -13,7 +13,7 @@ public class Mb_Chest : Mb_Trial
         if(itemList[0] is Sc_Money)
         {
             Sc_Money cash = itemList[0] as Sc_Money;
-            Ma_LevelManager.Instance.cashAmount += cash.valueOfTheItem;
+            Ma_LevelManager.instance.cashAmount += cash.valueOfTheItem;
         }
         itemList.Remove(itemList[0]);
         base.DoThings();
