@@ -16,6 +16,10 @@ public class Mb_Chest : Mb_Trial
             Ma_LevelManager.instance.cashAmount += cash.valueOfTheItem;
         }
         itemList.Remove(itemList[0]);
+        foreach(Mb_Player playerUiToUpdate in listOfUser)
+        {
+            UIManager.instance.UpdateSpecificUI(playerUiToUpdate);
+        }
         base.DoThings();
     }
 }

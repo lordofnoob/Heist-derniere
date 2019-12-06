@@ -79,7 +79,7 @@ public class Ma_LevelManager : MonoBehaviour
             timeSpentToDisplay = minuteRemaining + " : " + secondsRemaining;
         else
             timeSpentToDisplay = minuteRemaining + " : 0" + secondsRemaining;
-        UIManager.Instance.timeElpased.text = timeSpentToDisplay;
+        UIManager.instance.timeElpased.text = timeSpentToDisplay;
 
         SetTileWeight();
         if (timeRemaining == 0)

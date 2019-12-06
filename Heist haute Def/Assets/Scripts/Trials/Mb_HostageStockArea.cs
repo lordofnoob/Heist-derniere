@@ -23,7 +23,7 @@ public class Mb_HostageStockArea : Mb_Trial
 
     private void Start()
     {
-        UIManager.Instance.hostageStockArea.Add(this);
+        UIManager.instance.hostageStockArea.Add(this);
         SetStockedHostageNumber(0);
     }
 

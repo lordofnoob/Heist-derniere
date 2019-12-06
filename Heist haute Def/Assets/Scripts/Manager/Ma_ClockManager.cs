@@ -27,7 +27,7 @@ public class Ma_ClockManager : MonoBehaviour
 
     private void Start()
     {
-        agentList.AddRange(Ma_PlayerManager.Instance.playerList);
+        agentList.AddRange(Ma_PlayerManager.instance.playerList);
         agentList.AddRange(Ma_IAManager.Instance.IAList);
 
         StartCoroutine(Sequencer());

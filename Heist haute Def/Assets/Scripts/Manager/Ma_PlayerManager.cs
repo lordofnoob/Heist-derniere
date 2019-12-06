@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Ma_PlayerManager : MonoBehaviour
 {
-    public static Ma_PlayerManager Instance;
+    public static Ma_PlayerManager instance;
 
     public Mb_InputController InputController;
     public Transform PlayersContainer;
@@ -17,7 +17,7 @@ public class Ma_PlayerManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        instance = this;
         playerList = PlayersContainer.GetComponentsInChildren<Mb_Player>();
     }
 

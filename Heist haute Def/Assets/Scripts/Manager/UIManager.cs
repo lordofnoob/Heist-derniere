@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
+    public static UIManager instance;
 
     [Header("AllUiSlots")]
-    public  Text timeElpased;
-
+    public Text timeElpased;
+    public Mb_UiPlayerCharacter[] allPlayerCards;
     public List<Mb_HostageStockArea> hostageStockArea = new List<Mb_HostageStockArea>();
     public TextMeshProUGUI cashAmountText;
 
     void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     void Update()
@@ -48,4 +48,16 @@ public class UIManager : MonoBehaviour
         cashAmountText.text = Ma_LevelManager.instance.cashAmount.ToString() + " $";
     }
 
+    public void UpdateSpecificUI(Mb_Player player)
+    {
+        for (int i =0; i < Ma_PlayerManager.instance.playerList.Length; i++)
+        {
+            if (player == Ma_PlayerManager.instance.playerList[i])
+            {
+                allPlayerCards[i].UpdateUi(player);
+                break;
+            }
+        }
+      
+    }
 }
