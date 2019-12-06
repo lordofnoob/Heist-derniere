@@ -11,7 +11,7 @@ public class TEMP_DEPOPHOSTAGe : MonoBehaviour
         if (other.GetComponent<Mb_IAAgent>())
         {
             Destroy(other);
-            Ma_LevelManager.Instance.timeRemaining -= 10;
+            Ma_LevelManager.instance.timeRemaining -= 10;
             tileAssociated.avaible = true;
         }
     }
