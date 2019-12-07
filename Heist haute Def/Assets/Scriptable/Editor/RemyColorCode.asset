@@ -35,7 +35,7 @@ MonoBehaviour:
     prefabAssociated: {fileID: 1214944879021386, guid: ccf15648ab607bb4b9da351a593c53cc,
       type: 3}
   - colorAssociated: {r: 0, g: 1, b: 1, a: 1}
-    prefabAssociated: {fileID: 2552047503744395961, guid: ededf39628c7f284ea094ccb250efb7a,
+    prefabAssociated: {fileID: 6711392818150648204, guid: 133790012a3c8654ea3eeb47c2192a29,
       type: 3}
   - colorAssociated: {r: 1, g: 0.60784316, b: 0, a: 1}
     prefabAssociated: {fileID: 6711392818150648204, guid: 37e4abe76cca6164490cb1dc7717bc2d,

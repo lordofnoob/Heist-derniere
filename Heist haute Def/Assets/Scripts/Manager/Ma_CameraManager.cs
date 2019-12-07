@@ -160,7 +160,7 @@ public class Ma_CameraManager : MonoBehaviour
     public void CenterCameraOnCharacter(int playerToFocus)
     {
         
-        TargetLooking(Ma_PlayerManager.Instance.selectedPlayer.transform.position);
+        TargetLooking(Ma_PlayerManager.instance.selectedPlayer.transform.position);
     }
 
     void KeyBoardControl()

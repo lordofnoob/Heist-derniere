@@ -95,7 +95,6 @@ public class Mb_Player : Mb_Agent
         {
             //Debug.Log(path.Count);
             SetNewActionState(StateOfAction.Moving);
-            destination = path[path.Count - 1];
             foreach (Tile tile in path)
             {
                 actionsToPerform.Add(new Deplacement(charaPerks.speed, this, tile));
@@ -194,6 +193,7 @@ public class Mb_Player : Mb_Agent
                     onGoingInteraction.ReUpduateTiming();
                 }
             }
+        base.Interact();
     }
 
     public override void ResetInteractionParameters()
@@ -222,10 +222,13 @@ public class Mb_Player : Mb_Agent
         itemsHold.Remove(itemToDrop);
     }
 
-    public override void SetNextInteraction(Mb_Trial trialToUse)
+    public override void SetNextInteraction()
     {
-        onGoingInteraction = trialToUse;
-        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+        if(trialsToGo.Count > 0)
+        {
+            onGoingInteraction = trialsToGo.First();
+            actionsToPerform.Add(new Interact(onGoingInteraction.trialParameters.timeToAccomplishTrial, this, onGoingInteraction));
+        }
     }
 
     public override void SetNewActionState(StateOfAction agentState)

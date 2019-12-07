@@ -28,7 +28,7 @@ public class Ma_IAManager : MonoBehaviour
         if (activateHostageStress)
             foreach (Mb_IAAgent hostage in IAList)
             {
-                Ma_ClockManager.Instance.tickTrigger.AddListener(hostage.IncreaseStress);
+                Ma_ClockManager.instance.tickTrigger.AddListener(hostage.IncreaseStress);
             }
     }
 
@@ -51,9 +51,7 @@ public class Ma_IAManager : MonoBehaviour
             {
                 if (position.agentOnTile == null)
                 {
-                    List<Tile> pathToGo = hostage.pathfinder.SearchForShortestPath(hostage.AgentTile, new List<Tile> { position});
-                    Debug.Log("Deplacement to stock pos : " + pathToGo.Count);
-                    hostage.AddDeplacement(pathToGo);
+                    hostage.GoTo(position);
                     hostage.hostageState = HostageState.Stocked;
                     position.agentOnTile = hostage;
                     hostage.target = null;

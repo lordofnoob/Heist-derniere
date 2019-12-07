@@ -16,5 +16,4 @@ public class Interact : Action
         //trial.StopMoving();
         agent.Interact();
     }
-
 }

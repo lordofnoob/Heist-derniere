@@ -37,7 +37,9 @@ public class In_RoomCreator : Editor
     {
         base.OnInspectorGUI();
         EditorGUI.BeginChangeCheck();
-
+      
+        //Generate Room Button
+        #region
         serializedObject.Update();
 
         if (GUILayout.Button("GenerateRoom", GUILayout.MinHeight(50)))
@@ -48,11 +50,9 @@ public class In_RoomCreator : Editor
                 Debug.Log("AlreadyProduced");
 
         }
+        #endregion
 
-        //clean Room
-
-
-
+        //clean Room Button
         #region
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("CleanRoom", GUILayout.MinHeight(50)))
@@ -76,22 +76,22 @@ public class In_RoomCreator : Editor
         GUILayout.EndHorizontal();
         #endregion
 
-        //Generate Grid
+        //Generate Grid Button
         #region
         if (GUILayout.Button("GenerateGrid", GUILayout.MinHeight(50)))
         {
             GenerateGrid();
            
             UpdateAgentsLists();
-            updateExits();
+            UpdateExits();
             SetWallGraphs();
 
         }
         #endregion
 
-        //AddPlayerPart
+        //AddPlayerPart Button
         #region
-  
+
         EditorGUILayout.HelpBox("Lock the inspector and select the correct mode, then press A on a player or a tile to create or remove it", MessageType.None);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
@@ -121,7 +121,7 @@ public class In_RoomCreator : Editor
         EditorGUILayout.EndHorizontal();
         #endregion
 
-        //Add Hostage
+        //Add Hostage Button
         #region
         EditorGUILayout.HelpBox("Lock the inspector and select the correct mode, then press A on a Hostage or a tile to create or remove it", MessageType.None);
         EditorGUILayout.BeginHorizontal();
@@ -175,13 +175,8 @@ public class In_RoomCreator : Editor
     {
         mode = UsedMode.none;
     }
-
-    void updateExits()
-    {
-        Ma_LevelManager level = FindObjectOfType<Ma_LevelManager>();
-        level.allExitTile = exitList.ToArray();
-    }
-
+    //Editor Button etc
+    #region
     void CheckButtonColor()
     {
         switch (mode)
@@ -215,6 +210,11 @@ public class In_RoomCreator : Editor
         backGroundColorAddHostage = Color.red;
         backGroundColorErasingHostage = Color.red;
     }
+    #endregion
+
+
+
+    // ALED SIMON LE CONTROL Z D UN OBJET QUE JE CREER DANS UNE SCENE CA MARCHE     PAS
 
     void SetWallGraphs()
     {
@@ -263,11 +263,11 @@ public class In_RoomCreator : Editor
                 DefinitiveType |= WallTypeList[i];
 
             }
-           
+
             Sc_WallConfiguration wallConfig = wallConfigProperty.objectReferenceValue as Sc_WallConfiguration;
 
             int randomWeightCumulated = 0;
-            int totalWeight=0;
+            int totalWeight = 0;
 
             for (int i = 0; i < wallConfig.wallConfiguration.Length; i++)
             {
@@ -281,7 +281,7 @@ public class In_RoomCreator : Editor
                     DestroyImmediate(wallTile.gameObject);
                     GenerateGrid();
                 }
-               
+
                 /* for (int j = 0; j < wallConfig.wallConfiguration[i].associatedTiles.Length; j++)
                {
                    totalWeight += wallConfig.wallConfiguration[i].associatedTiles[j].weight;
@@ -302,30 +302,24 @@ public class In_RoomCreator : Editor
 
                 //}
             }
-        
-
-        }
 
 
         }
-    //  GenerateGrid();
-
-    // PrefabUtility.InstantiatePrefab();*/
-    /* }
-
-           foreach (Tile wallTile in allWalls)
-            {
-
-            }
-}*/
 
 
-    // ALED SIMON LE CONTROL Z D UN OBJET QUE JE CREER DANS UNE SCENE CA MARCHE     PAS
+    }
 
     //AddPlayerPart OnSceneGUI + erasePlayer
     void GenerateGrid()
     {
-         Tile[] listOfTile;
+
+        Mb_Door[] doorListTemp;
+        doorListTemp = GameObject.FindObjectsOfType<Mb_Door>();
+        GameObject.FindObjectOfType<Ma_LevelManager>().allDoor = doorListTemp;
+
+
+        
+            Tile[] listOfTile;
            List<Tile> listOfTileOfWalkableTile = new List<Tile>();
 
             exitList = new List<Tile>();
@@ -453,15 +447,8 @@ public class In_RoomCreator : Editor
                 EditorUtility.SetDirty(listOfTile[i]);
             }
 
-            //recup des tuiles de sorties
          
-            for (int i = 0; i < FindObjectOfType<Ma_LevelManager>().allWalkableTile.Length; i++)
-            {
-                if (FindObjectOfType<Ma_LevelManager>().allWalkableTile[i].isExitTile == true)
-                {
-                    exitList.Add(FindObjectOfType<Ma_LevelManager>().allWalkableTile[i]);
-                }
-            }
+        SetUiManagerLists();
     }
 
     void PlacingAndErasing()
@@ -531,8 +518,8 @@ public class In_RoomCreator : Editor
         NewGameObject.transform.position = newpos;
         NewGameObject.aiCharacteristics = characterProperty;
         NewGameObject.AgentTile = hisTile;
-        NewGameObject.SetupTheMovementValues();
         NewGameObject.transform.SetParent(hostageTransformProperty.objectReferenceValue as Transform);
+        Debug.Log(hostageTransformProperty);
         Selection.activeGameObject = NewGameObject.gameObject;
         EditorUtility.SetDirty(NewGameObject);
         EditorUtility.SetDirty(hisTile);
@@ -549,6 +536,21 @@ public class In_RoomCreator : Editor
     {
         hostage.AgentTile.avaible = true;
         Undo.DestroyObjectImmediate(hostage.gameObject);
+    }
+
+    void SetUiManagerLists()
+    {
+        List<Mb_HostageStockArea> tempList = new List<Mb_HostageStockArea>();
+        tempList.AddRange(FindObjectsOfType<Mb_HostageStockArea>());
+        FindObjectOfType<UIManager>().hostageStockArea.Clear();
+        FindObjectOfType<UIManager>().hostageStockArea.AddRange(tempList);
+
+    }
+
+    void UpdateExits()
+    {
+        Ma_LevelManager level = FindObjectOfType<Ma_LevelManager>();
+        level.escapeTrial = FindObjectOfType<Mb_Escape>();
     }
 
     //GENRE JUSQUE LA

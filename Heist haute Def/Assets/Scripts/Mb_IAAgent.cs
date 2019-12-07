@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -52,6 +52,10 @@ public class Mb_IAAgent : Mb_Agent
                 stress += Random.Range(minStress, maxStress) / 2;
                 stress = Mathf.Clamp(stress, 0, 40);
                 break;
+            case HostageState.Stocked:
+                stress += Random.Range(minStress, maxStress) / 2;
+                stress = Mathf.Clamp(stress, 0, 100);
+                break;
         }
         //Debug.Log("Stress : "+stress);
 
@@ -83,14 +87,18 @@ public class Mb_IAAgent : Mb_Agent
         hostageState = HostageState.InPanic;
         panicCounter++;
 
-        List<Tile> posToExit = new List<Tile>();
+        //OLD
+        /*List<Tile> posToExit = new List<Tile>();
         foreach (Tile exitTile in Ma_LevelManager.Instance.allExitTile)
         {
             posToExit.Add(exitTile);
         }
         List<Tile> pathToNearestExitDoor = pathfinder.SearchForShortestPath(AgentTile, posToExit, true);
-        AddDeplacement(pathToNearestExitDoor);
+        AddDeplacement(pathToNearestExitDoor);*/
         //Debug.Log(actionsToPerform.Count);
+
+        //NEW
+        //GoTo(warpHostageTrial);
     }
 
     public override void AddDeplacement(List<Tile> path)
@@ -135,9 +143,13 @@ public class Mb_IAAgent : Mb_Agent
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
         if (actionsToPerform.Count != 0 && nextAction)
         {
-            /*if(actionsToPerform.First() is Interact)
-                Debug.Log("Perform Interaction");*/
-            //Debug.Log("PERFORM 1 IAHOSTAGE ACTION");
+            Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
+           foreach (Deplacement action in actionsToPerform)
+           {
+               Debug.Log("First Action is : " + action + "("+ action.destination.name+")");
+           }
+           Debug.Log("##############################");
+
             nextAction = false;
             actionsToPerform.First().PerformAction();
 
@@ -204,13 +216,16 @@ public class Mb_IAAgent : Mb_Agent
                     onGoingInteraction.ReUpduateTiming();
                 }
             }
+        base.Interact();
     }
 
-    public override void SetNextInteraction(Mb_Trial trialToUse)
+    public override void SetNextInteraction()
     {
-        //Debug.Log("Interact");
-        onGoingInteraction = trialToUse;
-        actionsToPerform.Add(new Interact(trialToUse.trialParameters.timeToAccomplishTrial, this, trialToUse));
+        if (trialsToGo.Count > 0)
+        {
+            onGoingInteraction = trialsToGo.First();
+            actionsToPerform.Add(new Interact(onGoingInteraction.trialParameters.timeToAccomplishTrial, this, onGoingInteraction));
+        }
     }
 
     public override void SetFirstActionToPerform(Action action)
@@ -233,7 +248,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public void StopMoving()
     {
-        Debug.Log("STOP MOVING");
+        //Debug.Log("STOP MOVING");
         SetNewActionState(StateOfAction.Idle);
         actionsToPerform.Clear();
         actionsToPerform.TrimExcess();

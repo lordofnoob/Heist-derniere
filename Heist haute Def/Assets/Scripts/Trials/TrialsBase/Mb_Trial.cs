@@ -8,15 +8,15 @@ public class Mb_Trial : Mb_Poolable
     [Header("Parameters")]
     public Sc_TrialDefinition trialParameters;
     public Tile[] positionToGo;
-    public Tile trialTile;
 
     [Header("Interface")]
     public Image timeVignet;
+    public scr_UITween UiToTrigger;
     //A rechanger en private
     public List<Mb_Agent> listOfUser= new List<Mb_Agent>();
 
-   
-    private float currentTimeSpentOn=0;
+
+    public float currentTimeSpentOn=0;
     private float finalTimeToSpendOn=1;
     private bool counting;
     private List<float> reductionList;
@@ -30,10 +30,10 @@ public class Mb_Trial : Mb_Poolable
         finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
-   public void Awake()
+   public virtual void Awake()
     { 
-        Ma_ClockManager.Instance.tickTrigger.AddListener(this.Counting);
-        tickInterval = Ma_ClockManager.Instance.tickInterval;
+        Ma_ClockManager.instance.tickTrigger.AddListener(this.Counting);
+        tickInterval = Ma_ClockManager.instance.tickInterval;
     }
 
      public void StartInteracting()
@@ -65,15 +65,16 @@ public class Mb_Trial : Mb_Poolable
             }
         }
 
-        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial* definitiveModifier;
-        
-        currentTimeSpentOn = 0;
-        counting = true;
+        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial* definitiveModifier;
+
+        UiToTrigger.fill = true;
+        transform.GetComponent<TriggerPanelEvent>().filling = true;
+        /*currentTimeSpentOn = 0;
+        counting = true;*/
     }
 
     public void Counting()
     {
-
         if (counting == true)
         {
             currentTimeSpentOn += tickInterval;
@@ -84,12 +85,6 @@ public class Mb_Trial : Mb_Poolable
             DoThings();
             currentTimeSpentOn = 0;
         }
-    }
-
-    private void Update()
-    {
-        vignetCompletion = Mathf.Lerp(vignetCompletion, currentTimeSpentOn, tickInterval);
-        timeVignet.fillAmount = vignetCompletion / finalTimeToSpendOn;
     }
 
     public void ReUpduateTiming()
@@ -133,8 +128,8 @@ public class Mb_Trial : Mb_Poolable
 
                         }
             }*/
-        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
-        counting = true;
+        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial * definitiveModifier;
+        transform.GetComponent<TriggerPanelEvent>().filling = true;
     }
 
 
@@ -145,8 +140,8 @@ public class Mb_Trial : Mb_Poolable
 
     public void ResetValues()
     {
-        Debug.Log("RESET VALUE");
-        counting = false;
+        //Debug.Log("RESET VALUE");
+        UiToTrigger.RestatPos();
         vignetCompletion = 0;
         currentTimeSpentOn = 0;
         definitiveModifier = 1;
@@ -157,7 +152,7 @@ public class Mb_Trial : Mb_Poolable
         }
         listOfUser.Clear();
 
-        finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
+        UiToTrigger.finalTimeToSpendOn = trialParameters.timeToAccomplishTrial;
     }
 
     public void QuittingCheck()

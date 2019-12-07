@@ -20,7 +20,8 @@ public class Mb_IATrial : Mb_Trial
     public override void DoThings()
     {
         
-        Debug.Log(iaAgent.onGoingInteraction);
+        //Debug.Log(iaAgent.onGoingInteraction);
+        //Debug.Log("DO THINGS");
 
         if (iaAgent.onGoingInteraction != null)
         {

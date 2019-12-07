@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Ma_PlayerManager : MonoBehaviour
 {
-    public static Ma_PlayerManager Instance;
+    public static Ma_PlayerManager instance;
 
     public Mb_InputController InputController;
     public Transform PlayersContainer;
@@ -17,7 +17,7 @@ public class Ma_PlayerManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        instance = this;
         playerList = PlayersContainer.GetComponentsInChildren<Mb_Player>();
     }
 
@@ -71,11 +71,12 @@ public class Ma_PlayerManager : MonoBehaviour
                         selectedPlayer.onGoingInteraction.QuittingCheck();
                         selectedPlayer.onGoingInteraction = null;
                     }
-                    selectedPlayer.nextAction = true;
+                    //selectedPlayer.nextAction = true;
                     //Debug.Log(hit.transform.GetComponent<Tile>().transform.position);
-                    List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, new List<Tile> { hit.transform.GetComponent<Tile>() });
-                    selectedPlayer.ChangeDeplacement(ShortestPath);
-                    //selectedPlayer.AddDeplacement(ShortestPath);
+                    /*List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, new List<Tile> { hit.transform.GetComponent<Tile>() });
+                    selectedPlayer.ChangeDeplacement(ShortestPath);*/
+
+                    selectedPlayer.GoTo(hit.transform.GetComponent<Tile>());
                 }
 
                 else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.GetActionState() != StateOfAction.Captured && selectedPlayer.GetActionState() != StateOfAction.Interacting)
@@ -84,30 +85,6 @@ public class Ma_PlayerManager : MonoBehaviour
                     if (selectedPlayer.onGoingInteraction != targetTrial)
                     {
                         //CHANGED 
-                        List<Tile> positionToAccomplishDuty = new List<Tile>();
-                        if (targetTrial.listOfUser.Count >= targetTrial.positionToGo.Length)
-                        {
-                            for (int i = 0; i < targetTrial.listOfUser.Count; i++)
-                            {
-                                if (targetTrial.listOfUser[i] == null)
-                                {
-                                    positionToAccomplishDuty.Add(targetTrial.positionToGo[i]);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < targetTrial.positionToGo.Length; i++)
-                            {
-                                positionToAccomplishDuty.Add(targetTrial.positionToGo[i]);
-                            }
-                        }
-
-                        if (positionToAccomplishDuty.Count == 0)
-                        {
-                            Debug.Log("DEPLACEMENT IMPOSSIBLE");
-                            return;
-                        }
 
                         if(targetTrial is Mb_IATrial)
                         {
@@ -115,10 +92,13 @@ public class Ma_PlayerManager : MonoBehaviour
                             iaTrial.iaAgent.SomeoneWillInteractWith = selectedPlayer;
                         }
 
-                        List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, positionToAccomplishDuty);
+                        /*List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, positionToAccomplishDuty);
                         selectedPlayer.ChangeDeplacement(ShortestPath);
                         selectedPlayer.SetNextInteraction(targetTrial);
-                        selectedPlayer.nextAction = true;
+                        selectedPlayer.nextAction = true;*/
+
+                        selectedPlayer.trialsToGo.Add(targetTrial);
+                        selectedPlayer.GoTo(targetTrial);
                     }                    
                 }
             }            

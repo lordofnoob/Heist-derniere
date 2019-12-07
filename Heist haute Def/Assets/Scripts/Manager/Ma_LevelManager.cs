@@ -6,13 +6,15 @@ using UnityEngine.AI;
 public class Ma_LevelManager : MonoBehaviour
 {
 
-    public static Ma_LevelManager Instance;
+    public static Ma_LevelManager instance;
 
     public Ma_ClockManager clock;
     
 
-    [SerializeField]public Tile[] allWalkableTile;
-    [SerializeField]public Tile[] allExitTile;
+
+    [SerializeField] public Tile[] allWalkableTile;
+    [SerializeField] public Mb_Door[] allDoor;
+    [SerializeField] public Mb_Escape escapeTrial;
     [SerializeField] public Tile[] allTiles;
     [SerializeField] Sc_LevelParameters levelBaseParameters;
     public float timeRemaining;
@@ -20,11 +22,13 @@ public class Ma_LevelManager : MonoBehaviour
     private int minuteRemaining;
     private int secondsRemaining;
 
+    public float cashAmount = 0;
+
     public void Awake()
     {
-        Instance = this;
-        Ma_ClockManager.Instance.tickTrigger.AddListener(this.TimeShattering);
-        interval = Ma_ClockManager.Instance.tickInterval;
+        instance = this;
+        Ma_ClockManager.instance.tickTrigger.AddListener(this.TimeShattering);
+        interval = Ma_ClockManager.instance.tickInterval;
         timeRemaining = levelBaseParameters.timeAvaibleBeforePolice;
         clock = GetComponentInChildren<Ma_ClockManager>();
 
@@ -75,8 +79,9 @@ public class Ma_LevelManager : MonoBehaviour
             timeSpentToDisplay = minuteRemaining + " : " + secondsRemaining;
         else
             timeSpentToDisplay = minuteRemaining + " : 0" + secondsRemaining;
-        UIManager.Instance.timeElpased.text = timeSpentToDisplay;
+        UIManager.instance.timeElpased.text = timeSpentToDisplay;
 
+        SetTileWeight();
         if (timeRemaining == 0)
             PoliceArrive();
     }
@@ -84,5 +89,31 @@ public class Ma_LevelManager : MonoBehaviour
     void PoliceArrive()
     {
         Debug.Log("PoliceArrive");
+    }
+
+    void SetTileWeight()
+    {
+        foreach (Tile tileToSet in allWalkableTile )
+        {
+            if (tileToSet.avaible == false)
+            {
+                if (tileToSet.agentOnTile != null && tileToSet.agentOnTile.actionsToPerform.Count>0)
+                    tileToSet.cost = tileToSet.agentOnTile.actionsToPerform[0].timeToPerform * Ma_ClockManager.instance.tickInterval;
+                else
+                {
+                    tileToSet.cost = 300;
+                   
+                }
+            }
+            else
+                tileToSet.cost = Ma_ClockManager.instance.tickInterval;
+        }
+      foreach (Mb_Door doorToSet in allDoor)
+        { 
+            foreach (Tile tileToSet in doorToSet.tileAssociated)
+                if (tileToSet.avaible==false)
+                    tileToSet.cost = Ma_ClockManager.instance.tickInterval + (doorToSet.trialParameters.timeToAccomplishTrial - doorToSet.currentTimeSpentOn) * Ma_ClockManager.instance.tickInterval;
+
+        }
     }
 }

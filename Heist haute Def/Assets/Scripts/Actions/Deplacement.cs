@@ -53,6 +53,7 @@ public class Deplacement : Action
                 {
                     for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
                     {
+                        /*
                         if (i == 0)
                         {
                             //Debug.Log("FIRST HOSTAGE");
@@ -74,7 +75,10 @@ public class Deplacement : Action
                                                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
                                                                 .SetEase(Ease.Linear);
                             player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
-                        }
+                        }*/
+                        player.capturedHostages[i].destination = player.AgentTile;
+                        Debug.Log(player.AgentTile);
+                        player.capturedHostages[i].FindAnOtherPath();
                     }
                 }
                 #endregion
@@ -85,7 +89,7 @@ public class Deplacement : Action
                 player.transform.DOMove(new Vector3(destination.transform.position.x,
                                                     destination.transform.position.y + destination.transform.localScale.y/2,
                                                     destination.transform.position.z),
-                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                                    Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
                                 .SetEase(Ease.Linear)
                                 .OnComplete(() =>
                                 {
@@ -153,7 +157,7 @@ public class Deplacement : Action
                 hostage.transform.DOLookAt(destination.transform.position, 0.2f, AxisConstraint.Y);
                 hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
                                                      destination.transform.position.z),
-                                                     Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
+                                                     Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
                                  .SetEase(Ease.Linear)
                                  .OnComplete(() =>
                                  {

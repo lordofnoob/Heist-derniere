@@ -15,5 +15,5 @@ MonoBehaviour:
   characterName: 
   characterPortrait: {fileID: 0}
   speed: 1
-  characterSkills: 
+  characterSkills: 06000000
   surveillanceLimit: 0

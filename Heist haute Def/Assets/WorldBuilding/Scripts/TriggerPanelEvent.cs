@@ -30,11 +30,11 @@ public class TriggerPanelEvent : MonoBehaviour
                 toTrigger.doOnce = true;
                 oneTime = false;
             }
-            if (Input.GetMouseButtonDown(0))
+            /*if (Input.GetMouseButtonDown(0))
             {
                 filling = true;
                 toTrigger.fill = true;
-            }
+            }*/
         }
     }
 

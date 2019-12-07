@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Sc_Items : ScriptableObject
 {
-
+    public Sprite itemIcon;
 }
