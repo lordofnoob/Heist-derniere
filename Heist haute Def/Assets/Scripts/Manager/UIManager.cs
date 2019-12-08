@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour
         
         UpdateHostageStressBar();
         UpdateHostageStockAreaStressBar();
-        UpdateMoneyCounter();
     }
 
     void UpdateHostageStressBar()
@@ -45,7 +44,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateMoneyCounter()
     {
-        cashAmountText.text = Ma_LevelManager.instance.cashAmount.ToString() + " $";
+        cashAmountText.text = Ma_LevelManager.instance.GetCashAmount().ToString() + " $";
     }
 
     public void UpdateSpecificUI(Mb_Player player)

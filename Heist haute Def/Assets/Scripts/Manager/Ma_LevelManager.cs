@@ -22,7 +22,7 @@ public class Ma_LevelManager : MonoBehaviour
     private int minuteRemaining;
     private int secondsRemaining;
 
-    public float cashAmount = 0;
+    private float cashAmount = 0;
 
     public void Awake()
     {
@@ -35,6 +35,16 @@ public class Ma_LevelManager : MonoBehaviour
        
     }
 
+    public float GetCashAmount()
+    {
+        return cashAmount;
+    }
+
+    public void AddCash(float cash)
+    {
+        cashAmount += cash;
+        UIManager.instance.UpdateMoneyCounter();
+    }
 
     public Tile GetWalkableTile(int row, int column)
     {

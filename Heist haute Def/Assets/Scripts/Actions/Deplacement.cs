@@ -47,7 +47,30 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
-                //keske
+                player.AgentTile = destination;
+                //Debug.Log("MOVE TO : "+ destination.transform.position);
+                player.transform.DOLookAt(destination.transform.position,0.2f, AxisConstraint.Y);
+                player.transform.DOMove(new Vector3(destination.transform.position.x,
+                                                    destination.transform.position.y + destination.transform.localScale.y/2,
+                                                    destination.transform.position.z),
+                                                    Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
+                                .SetEase(Ease.Linear)
+                                .OnComplete(() =>
+                                {
+                                    //destination.SetOutlinesEnabled(false);
+                                    destination.highlighted = false;
+
+                                    if (destination == player.destination)
+                                    {
+                                        player.SetNewActionState(StateOfAction.Idle);
+                                        destination = null;
+                                        return;
+                                    }
+
+                                    if (!findNewPath)
+                                        player.nextAction = true;
+                                });
+
                 #region
                 if (player.capturedHostages.Count != 0)
                 {
@@ -76,37 +99,11 @@ public class Deplacement : Action
                                                                 .SetEase(Ease.Linear);
                             player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
                         }*/
-                        player.capturedHostages[i].destination = player.AgentTile;
-                        Debug.Log(player.AgentTile);
-                        player.capturedHostages[i].FindAnOtherPath();
+                        player.capturedHostages[i].GoTo(player.AgentTile);
+                        //Debug.Log(player.AgentTile);
                     }
                 }
                 #endregion
-
-                player.AgentTile = destination;
-                //Debug.Log("MOVE TO : "+ destination.transform.position);
-                player.transform.DOLookAt(destination.transform.position,0.2f, AxisConstraint.Y);
-                player.transform.DOMove(new Vector3(destination.transform.position.x,
-                                                    destination.transform.position.y + destination.transform.localScale.y/2,
-                                                    destination.transform.position.z),
-                                                    Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
-                                .SetEase(Ease.Linear)
-                                .OnComplete(() =>
-                                {
-                                    //destination.SetOutlinesEnabled(false);
-                                    destination.highlighted = false;
-
-                                    if (destination == player.destination)
-                                    {
-                                        player.SetNewActionState(StateOfAction.Idle);
-                                        destination = null;
-                                        return;
-                                    }
-
-                                    if (!findNewPath)
-                                        player.nextAction = true;
-                                });
-
             }
             else
             {
@@ -129,10 +126,13 @@ public class Deplacement : Action
             if (!destination.avaible && destination == hostage.destination)
             {
                 hostage.nextAction = true;
+                Debug.Log("AT DESTINATION");
                 return;
             }
-            bool findNewPath = false;
 
+            //OLD
+            /*
+            bool findNewPath = false;
             //IF HOSTAGE PATH HAS CHANGE DURING DEPLACEMENT
             foreach (Action action in hostage.actionsToPerform)
             {
@@ -148,6 +148,7 @@ public class Deplacement : Action
                     }
                 }
             }
+            */
 
             if (destination.avaible)
             {
@@ -155,7 +156,8 @@ public class Deplacement : Action
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 hostage.transform.DOLookAt(destination.transform.position, 0.2f, AxisConstraint.Y);
-                hostage.transform.DOMove(new Vector3(destination.transform.position.x, 0.5f,
+                hostage.transform.DOMove(new Vector3(destination.transform.position.x, 
+                                                     destination.transform.position.y + destination.transform.localScale.y / 2,
                                                      destination.transform.position.z),
                                                      Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
                                  .SetEase(Ease.Linear)
@@ -171,30 +173,20 @@ public class Deplacement : Action
                                          return;
                                      }
 
-                                     if (!findNewPath)
-                                         hostage.nextAction = true;
+                                     hostage.FindAnOtherPath();
+                                     hostage.nextAction = true;
                                  });
             }
             else if(destination.GetComponentInChildren<Mb_Door>() != null)
             {
                 //Debug.Log("Set interaction");
                 Mb_Trial trial = destination.GetComponentInChildren<Mb_Trial>();
-                //hostage.SetFirstInteraction();
                 hostage.onGoingInteraction = trial;
                 hostage.SetFirstActionToPerform(new Interact(trial.trialParameters.timeToAccomplishTrial, hostage, trial));
 
                 hostage.nextAction = true;
             }
-            else
-            {
-                findNewPath = true;
-            }
 
-            if (findNewPath)
-            {
-                hostage.FindAnOtherPath();
-                //hostage.SetFirstActionToPerform(new Wait(1f, hostage, hostage.FindAnOtherPath));
-            }
         }
         #endregion
     }

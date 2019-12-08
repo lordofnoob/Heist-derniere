@@ -54,8 +54,16 @@ public class Mb_Agent : Mb_Poolable
     public virtual void PerformAction() { }
     public void GoTo(Tile tileDestination)
     {
-        List<Tile> newPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { tileDestination });
-        destination = tileDestination;
+        List<Tile> newPath;
+        if (!tileDestination.avaible)
+        {
+            newPath = pathfinder.SearchForShortestPath(AgentTile, tileDestination.GetFreeNeighbours());
+        }
+        else
+        {
+            newPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { tileDestination });
+        }
+        destination = newPath[newPath.Count - 1];
         ChangeDeplacement(newPath);
         nextAction = true;
     }

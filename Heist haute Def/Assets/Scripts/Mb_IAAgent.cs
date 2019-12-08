@@ -144,10 +144,18 @@ public class Mb_IAAgent : Mb_Agent
         if (actionsToPerform.Count != 0 && nextAction)
         {
             Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
-           foreach (Deplacement action in actionsToPerform)
+           foreach (Action action in actionsToPerform)
            {
-               Debug.Log("First Action is : " + action + "("+ action.destination.name+")");
-           }
+                if(action is Deplacement)
+                {
+                    Deplacement deplacement = action as Deplacement;
+                    Debug.Log("First Action is : " + deplacement + "(" + deplacement.destination.name + ")");
+                }
+                else
+                {
+                    Debug.Log("First Action is : " + action);
+                }
+            }
            Debug.Log("##############################");
 
             nextAction = false;
@@ -171,27 +179,14 @@ public class Mb_IAAgent : Mb_Agent
         {
             Debug.Log("IA Find a new path");
 
-            List<Deplacement> removeList = new List<Deplacement>();
-            foreach (Action action in actionsToPerform)
+            if (onGoingInteraction)
             {
-                if (action is Deplacement)
-                    removeList.Add(action as Deplacement);
-            }
-
-            foreach (Deplacement depla in removeList)
-                actionsToPerform.Remove(depla);
-
-            List<Tile> newShortestPath = new List<Tile>();
-            if (!destination.avaible)
-            {
-                newShortestPath = pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours());
+                GoTo(onGoingInteraction);
             }
             else
             {
-                newShortestPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { destination });
+                GoTo(destination);
             }
-            //Debug.Log("New path deplacement number : " + newShortestPath.Count);
-            ChangeDeplacement(newShortestPath);
         }
 
         nextAction = true;
