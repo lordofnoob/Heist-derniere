@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
         {
             if (player == Ma_PlayerManager.instance.playerList[i])
             {
-                allPlayerCards[i].UpdateUi(player);
+                allPlayerCards[i].UpdateItemUi(player);
                 break;
             }
         }
