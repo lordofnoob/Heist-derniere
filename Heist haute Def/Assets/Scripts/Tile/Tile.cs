@@ -74,7 +74,7 @@ public class Tile : MonoBehaviour
 
         if(North != null && North.walkable)
         {
-            if((useDoors && North.GetComponentInChildren<Mb_Door>() != null) || North.avaible)
+            if((useDoors && North.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(North);
             //else if (!North.avaible)
                // North.
@@ -82,19 +82,19 @@ public class Tile : MonoBehaviour
 
         if(South != null && South.walkable)
         {
-            if ((useDoors && South.GetComponentInChildren<Mb_Door>() != null) || South.avaible)
+            if ((useDoors && South.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(South);
         }
 
         if(East != null && East.walkable)
         {
-            if ((useDoors && East.GetComponentInChildren<Mb_Door>() != null) || East.avaible)
+            if ((useDoors && East.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(East);
         }
 
         if(West != null && West.walkable )
         {
-            if ((useDoors && West.GetComponentInChildren<Mb_Door>() != null) || West.avaible)
+            if ((useDoors && West.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(West);
         }
         return res;

@@ -143,6 +143,19 @@ public class Mb_IAAgent : Mb_Agent
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
         if (actionsToPerform.Count != 0 && nextAction)
         {
+            if(actionsToPerform.First() is Deplacement)
+            {
+                Deplacement depla = actionsToPerform.First() as Deplacement;
+                if(depla.destination.cost > Ma_ClockManager.instance.tickInterval)
+                {
+                    Debug.Log("WAIT");
+                    List<Action> temp = actionsToPerform;
+                    actionsToPerform.Clear();
+                    actionsToPerform.Add(new Wait(1, this, FindAnOtherPath));
+                    actionsToPerform.AddRange(temp);
+                }
+            }
+
             Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
            foreach (Action action in actionsToPerform)
            {

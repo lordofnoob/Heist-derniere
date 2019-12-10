@@ -118,7 +118,7 @@ public class Ma_LevelManager : MonoBehaviour
             else
                 tileToSet.cost = Ma_ClockManager.instance.tickInterval;
         }
-      foreach (Mb_Door doorToSet in allDoor)
+        foreach (Mb_Door doorToSet in allDoor)
         { 
             foreach (Tile tileToSet in doorToSet.tileAssociated)
                 if (tileToSet.avaible==false)
