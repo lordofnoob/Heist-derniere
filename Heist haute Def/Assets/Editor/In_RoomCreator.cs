@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
+
 [CustomEditor(typeof(Ed_Mb_Generator))]
 public class In_RoomCreator : Editor
 {
     Ed_Mb_Generator mySelectedScript;
     SerializedProperty allRoomTransform, characterPrefab, charactSpectToInstantiateProperty, hostagePrefabProperty, hostageSpecProperty, playerTransformProperty, hostageTransformProperty;
     SerializedProperty wallConfigProperty;
+    Ma_LevelManager gameManager;
     //Pour donner toutes les sorties au gameManager
     private List<Tile> exitList;
     //Pour l'editor pour qu il sache quoi faire
@@ -22,6 +24,7 @@ public class In_RoomCreator : Editor
     private void OnEnable()
     {
         mySelectedScript = target as Ed_Mb_Generator;
+
         characterPrefab = serializedObject.FindProperty("playerPrefab");
         charactSpectToInstantiateProperty = serializedObject.FindProperty("playerCharactSpectToInstantiate");
         hostagePrefabProperty = serializedObject.FindProperty("hostagePrefab");
@@ -31,6 +34,8 @@ public class In_RoomCreator : Editor
         allRoomTransform = serializedObject.FindProperty("allRoomTransform");
         wallConfigProperty = serializedObject.FindProperty("wallConfig");
         resetAllColor();
+
+        
     }
 
     public override void OnInspectorGUI()
@@ -51,6 +56,13 @@ public class In_RoomCreator : Editor
 
         }
         #endregion
+        if (GUILayout.Button("GenerateDoorBasic", GUILayout.MinHeight(50)))
+        {
+            gameManager = GameObject.FindObjectOfType<Ma_LevelManager>().gameObject.GetComponent<Ma_LevelManager>();
+            Debug.Log(gameManager);
+            SetupDoorBasic();
+        }
+
 
         //clean Room Button
         #region
@@ -85,7 +97,8 @@ public class In_RoomCreator : Editor
             UpdateAgentsLists();
             UpdateExits();
             SetWallGraphs();
-
+            SetUiManagerLists();
+         
         }
         #endregion
 
@@ -448,7 +461,7 @@ public class In_RoomCreator : Editor
             }
 
          
-        SetUiManagerLists();
+       
     }
 
     void PlacingAndErasing()
@@ -551,6 +564,69 @@ public class In_RoomCreator : Editor
     {
         Ma_LevelManager level = FindObjectOfType<Ma_LevelManager>();
         level.escapeTrial = FindObjectOfType<Mb_Escape>();
+    }
+
+    void SetupDoorBasic()
+    {
+        foreach (Mb_Door doorToSetup in GameObject.FindObjectsOfType<Mb_Door>())
+        {
+            //reset de la postoGo
+            doorToSetup.positionToGo = new List<Tile>().ToArray();
+            //liste finale a donner
+            List<Tile> allTileToGo = new List<Tile>();
+
+            List<Tile> neighbourTile = new List<Tile>();
+            foreach (Tile tileToCheck in doorToSetup.tileAssociated)
+            {
+                //choppage des voisins en editor
+           
+                Tile North = gameManager.GetTile(tileToCheck.row - 1, tileToCheck.column);
+                Tile South = gameManager.GetTile(tileToCheck.row + 1, tileToCheck.column);
+                Tile East = gameManager.GetTile(tileToCheck.row, tileToCheck.column - 1);
+                Tile West = gameManager.GetTile(tileToCheck.row, tileToCheck.column + 1);
+                if (North != null )
+                    if (North.walkable == true)
+                        neighbourTile.Add(North);
+                if (South != null)
+                    if (South.walkable == true)
+                        neighbourTile.Add(South);
+                if ( East!= null)
+                    if (East.walkable == true)
+                        neighbourTile.Add(East);
+                if (West != null)
+                    if (West.walkable==true)
+                        neighbourTile.Add(West);
+            }
+            List<Tile> finalTile = neighbourTile;
+            allTileToGo = finalTile;
+            /*
+            //verifier que la neighbour tile n est pas une case de porte dans le cas d une porte a plusieurs tuiles
+            foreach (Tile possibleTile in neighbourTile)
+            {
+                //la virer de la liste des tuiles a rajouter si c est le cas
+                foreach (Tile doorTile in doorToSetup.tileAssociated)
+                {
+                    if (possibleTile == doorTile)
+                        finalTile.Remove(possibleTile);
+                }
+            }*/
+
+
+            //la virer de la liste des tuiles a rajouter si elle est pas avaible
+            foreach (Tile tileIsAvaible in finalTile)
+                if (tileIsAvaible.walkable == false)
+                {
+                    allTileToGo.Remove(tileIsAvaible);
+                }
+                //virer la tuile si il s'agit d'une tuile de porte
+                /*
+                foreach (Tile tileOfDoor in doorToSetup.tileAssociated)
+                    if (tileOfDoor == tileIsAvaible)
+                        allTileToGo.Remove(tileIsAvaible);*/
+
+
+            doorToSetup.positionToGo = allTileToGo.ToArray();
+        }
     }
 
     //GENRE JUSQUE LA

@@ -7,6 +7,7 @@ using UnityEditor.SceneManagement;
 
 public class Ed_Mb_Generator : MonoBehaviour
 {
+    public Ma_LevelManager levelManager;
     public Transform allRoomTransform;
     public Texture2D textureToTraduce;
     public float distanceBetweenItems;
