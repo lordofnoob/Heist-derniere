@@ -153,11 +153,13 @@ MonoBehaviour:
   trialParameters: {fileID: 11400000, guid: 0e7f7af4812fe314e9251f0d8f2711fa, type: 2}
   positionToGo:
   - {fileID: 0}
-  trialTile: {fileID: 3885763082956274667}
   timeVignet: {fileID: 9196770387053895367}
+  UiToTrigger: {fileID: 0}
   listOfUser: []
+  currentTimeSpentOn: 0
   doorAnim: {fileID: 4938251201649473428}
-  tileAssociated: {fileID: 3885763082956274667}
+  tileAssociated:
+  - {fileID: 3885763082956274667}
   close: 1
 --- !u!1 &6711392818150648204
 GameObject:

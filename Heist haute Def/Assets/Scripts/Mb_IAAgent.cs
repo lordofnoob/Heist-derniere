@@ -129,7 +129,7 @@ public class Mb_IAAgent : Mb_Agent
     {
         if (SomeoneWillInteractWith != null)
         {
-            foreach (Tile neighbour in AgentTile.GetNeighbours())
+            foreach (Tile neighbour in GetAgentTile().GetNeighbours())
             {
                 //Debug.Log("Neighbour");
                 if (neighbour.agentOnTile != null && neighbour.agentOnTile == SomeoneWillInteractWith)
@@ -168,21 +168,19 @@ public class Mb_IAAgent : Mb_Agent
                 {
                     Debug.Log("First Action is : " + action);
                 }
-            }
+           }
            Debug.Log("##############################");
 
             nextAction = false;
             actionsToPerform.First().PerformAction();
 
-            if (destination == AgentTile)
+            if (destination == GetAgentTile())
             {
                 SetNewActionState(StateOfAction.Idle);
                 destination = null;
             }
             UpdatePositionToGo();
-
             actionsToPerform.Remove(actionsToPerform.First());
-
         }
     }
 
@@ -268,7 +266,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public void UpdatePositionToGo()
     {
-        IATrial.positionToGo = AgentTile.GetFreeNeighbours().ToArray();
+        IATrial.positionToGo = GetAgentTile().GetFreeNeighbours().ToArray();
     }
 
     public override void SetNewActionState(StateOfAction agentState)

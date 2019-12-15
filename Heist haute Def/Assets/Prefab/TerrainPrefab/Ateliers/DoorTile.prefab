@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6e2869263abc14589b55e8831c78f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trialParameters: {fileID: 0}
+  trialParameters: {fileID: 11400000, guid: df9c608a6d7615e42956006f0dc5a17b, type: 2}
   positionToGo: []
   timeVignet: {fileID: 9196770387053895367}
   UiToTrigger: {fileID: 0}
@@ -245,11 +245,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6927086263373039699}
     m_Modifications:
-    - target: {fileID: 7334923383430359021, guid: e9c22e10a00d86349a2e46bddb3a0d0e,
-        type: 3}
-      propertyPath: m_Name
-      value: Porte_Bois_Vitre
-      objectReference: {fileID: 0}
     - target: {fileID: 6021796677692970494, guid: e9c22e10a00d86349a2e46bddb3a0d0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -319,6 +314,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334923383430359021, guid: e9c22e10a00d86349a2e46bddb3a0d0e,
+        type: 3}
+      propertyPath: m_Name
+      value: Porte_Bois_Vitre
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9c22e10a00d86349a2e46bddb3a0d0e, type: 3}

@@ -516,7 +516,7 @@ public class In_RoomCreator : Editor
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
         NewGameObject.charaPerks = characterProperty;
-        NewGameObject.AgentTile = hisTile;
+        NewGameObject.SetAgentTile(hisTile);
         NewGameObject.transform.SetParent(playerTransformProperty.objectReferenceValue as Transform);
         Selection.activeGameObject = NewGameObject.gameObject;
         EditorUtility.SetDirty(NewGameObject);
@@ -530,7 +530,7 @@ public class In_RoomCreator : Editor
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
         NewGameObject.aiCharacteristics = characterProperty;
-        NewGameObject.AgentTile = hisTile;
+        NewGameObject.SetAgentTile(hisTile);
         NewGameObject.transform.SetParent(hostageTransformProperty.objectReferenceValue as Transform);
         Debug.Log(hostageTransformProperty);
         Selection.activeGameObject = NewGameObject.gameObject;
@@ -541,13 +541,13 @@ public class In_RoomCreator : Editor
 
     void EraseCharacter(Mb_Player player)
     {
-        player.AgentTile.avaible = true;
+        player.GetAgentTile().avaible = true;
         Undo.DestroyObjectImmediate(player.gameObject);
     }
 
     void EraseHostage(Mb_IAAgent hostage)
     {
-        hostage.AgentTile.avaible = true;
+        hostage.GetAgentTile().avaible = true;
         Undo.DestroyObjectImmediate(hostage.gameObject);
     }
 

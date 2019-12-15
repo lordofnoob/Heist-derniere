@@ -122,17 +122,17 @@ public class Mb_Player : Mb_Agent
                 List<Tile> posToGo = new List<Tile> ();
                 posToGo.AddRange(onGoingInteraction.positionToGo);
 
-                newShortestPath = pathfinder.SearchForShortestPath(AgentTile, posToGo);
+                newShortestPath = pathfinder.SearchForShortestPath(GetAgentTile(), posToGo);
             }
             else
             {
                 if (!destination.avaible)
                 {
-                    newShortestPath = pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours());
+                    newShortestPath = pathfinder.SearchForShortestPath(GetAgentTile(), destination.GetFreeNeighbours());
                 }
                 else
                 {
-                    newShortestPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { destination });
+                    newShortestPath = pathfinder.SearchForShortestPath(GetAgentTile(), new List<Tile> { destination });
                 }
             }
             Debug.Log("New path deplacement number : " + newShortestPath.Count);
@@ -145,12 +145,20 @@ public class Mb_Player : Mb_Agent
     {
         if(actionsToPerform.Count != 0 && nextAction)
         {
-            /*Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
+            Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
             foreach (Action action in actionsToPerform)
             {
-                Debug.Log("First Action is : " + action);
+                if(action is Deplacement)
+                {
+                    Deplacement depla = action as Deplacement;
+                    Debug.Log("Deplacement to : " + depla.destination);
+                }
+                else
+                {
+                    Debug.Log("Action : "+ action);
+                }
             }
-            Debug.Log("##############################");*/
+            Debug.Log("##############################");
 
             //CHECK Si la prochaine interaction est un hotage en movement => alors recalcul du path
             if (onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
@@ -163,7 +171,7 @@ public class Mb_Player : Mb_Agent
                     {
                         posToGo.Add(onGoingInteraction.positionToGo[i]);
                     }
-                    List<Tile> newPath = pathfinder.SearchForShortestPath(AgentTile, posToGo);
+                    List<Tile> newPath = pathfinder.SearchForShortestPath(GetAgentTile(), posToGo);
                     ChangeDeplacement(newPath);
                 }
             }

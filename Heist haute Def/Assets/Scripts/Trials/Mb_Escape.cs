@@ -9,7 +9,7 @@ public class Mb_Escape : Mb_Trial
         foreach(Mb_IAAgent iaAgent in listOfUser)
         {
             Ma_LevelManager.instance.timeRemaining -= iaAgent.aiCharacteristics.escapeValue;
-            iaAgent.AgentTile.avaible = true;
+            iaAgent.GetAgentTile().avaible = true;
             Destroy(iaAgent);
         }
 

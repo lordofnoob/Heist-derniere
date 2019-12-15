@@ -31,6 +31,7 @@ public class Deplacement : Action
             //bool findNewPath = false;
             bool findNewPath = true;
 
+            /*
             //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
             foreach (Action action in player.actionsToPerform)
             {
@@ -44,10 +45,27 @@ public class Deplacement : Action
                     }
                 }
             }
-
-            if (destination.avaible)
+            */
+            //Debug.Log(destination.agentOnTile is Mb_IAAgent);
+            if (destination.avaible || destination.agentOnTile is Mb_IAAgent)
             {
-                player.AgentTile = destination;
+                //Debug.Log(destination.agentOnTile);
+                if (destination.agentOnTile is Mb_IAAgent)
+                {
+                    Debug.Log("Switch");
+                    destination.agentOnTile.transform.DOLookAt(player.GetAgentTile().transform.position, 0.2f, AxisConstraint.Y);
+                    destination.agentOnTile.transform.DOMove(new Vector3(player.GetAgentTile().transform.position.x,
+                                                                            player.GetAgentTile().transform.position.y + player.GetAgentTile().transform.localScale.y / 2,
+                                                                            player.GetAgentTile().transform.position.z),
+                                                                            Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
+                                                        .SetEase(Ease.Linear);
+                    player.SetAgentTile(destination, true);
+                }
+                else
+                {
+                    player.SetAgentTile(destination);
+                }
+
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 player.transform.DOLookAt(destination.transform.position,0.2f, AxisConstraint.Y);
                 player.transform.DOMove(new Vector3(destination.transform.position.x,
@@ -63,7 +81,6 @@ public class Deplacement : Action
                                     if (destination == player.destination)
                                     {
                                         player.SetNewActionState(StateOfAction.Idle);
-                                        destination = null;
                                         return;
                                     }
 
@@ -99,7 +116,7 @@ public class Deplacement : Action
                                                                 .SetEase(Ease.Linear);
                             player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
                         }*/
-                        player.capturedHostages[i].GoTo(player.AgentTile);
+                        player.capturedHostages[i].GoTo(player.GetAgentTile());
                         //Debug.Log(player.AgentTile);
                     }
                 }
@@ -152,7 +169,7 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
-                hostage.AgentTile = destination;
+                hostage.SetAgentTile(destination);
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 hostage.transform.DOLookAt(destination.transform.position, 0.2f, AxisConstraint.Y);
