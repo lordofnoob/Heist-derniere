@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_Objective : MonoBehaviour
+[System.Serializable]
+[CreateAssetMenu(fileName = "Newobjective", menuName = "CreateObjective")]
+public class Sc_Objective : ScriptableObject
 {
     [TextArea] public string objectifDescription;
     public objectiveType objectiveType;

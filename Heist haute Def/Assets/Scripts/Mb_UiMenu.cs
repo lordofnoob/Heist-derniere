@@ -6,14 +6,15 @@ using TMPro;
 
 public class Mb_UiMenu : MonoBehaviour
 {
-    public Sc_LevelParameters parametersToDisplay;
     public Sc_SkillsIconsInfo skillIconRule;
     [SerializeField] TextMeshProUGUI levelTitle;
-    [SerializeField] Image levelScreen;
-    [SerializeField] TextMeshProUGUI[] objectiveDescription;
+    [SerializeField] Image cardMiniature;
+    [SerializeField] TextMeshProUGUI levelDescription;
+    [SerializeField] Image levelIcon;
     [SerializeField] TextMeshProUGUI timeBeforePoliceArrive;
+    [SerializeField] TextMeshProUGUI[] objectiveDescription;
     [SerializeField] CharacterParameters[] allCharacterPreview;
-   
+ 
     [System.Serializable]
     public struct CharacterParameters
     {
@@ -23,9 +24,13 @@ public class Mb_UiMenu : MonoBehaviour
         public TextMeshProUGUI characterName;
     }
 
-    public void SetupUi()
+    public void SetupUi(Sc_LevelParameters parametersToDisplay)
     {
-        levelScreen.sprite = parametersToDisplay.levelScreen;
+        levelDescription.text = parametersToDisplay.levelDescription;
+
+        cardMiniature.sprite = parametersToDisplay.mapIcon;
+
+        levelIcon.sprite = parametersToDisplay.levelScreen;
 
         for (int i = 0; i < objectiveDescription.Length; i++)
             objectiveDescription[i].text = parametersToDisplay.allObjectives[i].objectifDescription;
@@ -37,11 +42,14 @@ public class Mb_UiMenu : MonoBehaviour
             allCharacterPreview[i].characterPortrait.sprite = parametersToDisplay.allPlayerDescription[i].characterPortrait;
 
             //previewSkill
-            for (int j = 0; j < parametersToDisplay.allPlayerDescription[i].characterSkills.Length; i++)
+            Debug.Log(parametersToDisplay.allPlayerDescription[i].characterSkills.Length);
+            for (int j = 0; j < parametersToDisplay.allPlayerDescription[i].characterSkills.Length; j++)
             {
                 for (int n = 0; n < skillIconRule.allSkillsIcon.Length; n++)
+                {
                     if (parametersToDisplay.allPlayerDescription[i].characterSkills[j] == skillIconRule.allSkillsIcon[n].skillAssociated)
                         allCharacterPreview[i].characterSkills[j].sprite = skillIconRule.allSkillsIcon[n].skillIcon;
+                }
             }
             //Preview Capacity
             allCharacterPreview[i].characterCapacity.text = parametersToDisplay.allPlayerDescription[i].surveillanceLimit.ToString();
@@ -55,4 +63,5 @@ public class Mb_UiMenu : MonoBehaviour
         timeBeforePoliceArrive.text = parametersToDisplay.timeAvaibleBeforePolice.ToString();
         levelTitle.text = parametersToDisplay.LevelName;
     }
+
 }
