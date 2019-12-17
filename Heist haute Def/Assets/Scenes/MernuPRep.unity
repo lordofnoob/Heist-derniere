@@ -179,7 +179,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18008659}
-  m_LocalRotation: {x: 0.013655909, y: 0.7198121, z: -0.014166059, w: 0.69389004}
+  m_LocalRotation: {x: 0.01379703, y: 0.713185, z: -0.0140428785, w: 0.7006994}
   m_LocalPosition: {x: 0, y: 0.029000001, z: -72.70001}
   m_LocalScale: {x: 0.998665, y: 0.009996906, z: 0.00800478}
   m_Children:
@@ -1754,7 +1754,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899401502}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.013542146, y: -0.7130746, z: 0.013778907, w: 0.70082194}
   m_LocalPosition: {x: 0, y: 0.029000001, z: -72.70001}
   m_LocalScale: {x: 0.0066666664, y: 0.01, z: 1}
   m_Children:
@@ -2254,19 +2254,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560033547}
   m_CullTransparentMesh: 0
---- !u!1 &1607180171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 152664042766079263, guid: 04db226d9bcb9f8408a0c6dd37d59605,
-    type: 3}
-  m_PrefabInstance: {fileID: 152664041314981760}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1607180172 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 152664042766079265, guid: 04db226d9bcb9f8408a0c6dd37d59605,
     type: 3}
   m_PrefabInstance: {fileID: 152664041314981760}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607180171}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71e95d631f38bfd4cad1675ce78f0442, type: 3}
@@ -2824,17 +2818,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1607180171}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1607180176}
         m_MethodName: SetTrigger
@@ -3798,6 +3781,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687343271668445125, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687343271668445125, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687343271668445125, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687343271668445125, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790051833539072111, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790051833539072111, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790051833539072111, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790051833539072111, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9085335306777512144, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712161696692156431, guid: 04db226d9bcb9f8408a0c6dd37d59605,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 152664042766079268, guid: 04db226d9bcb9f8408a0c6dd37d59605,
         type: 3}

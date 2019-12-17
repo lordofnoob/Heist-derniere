@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e95d631f38bfd4cad1675ce78f0442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIconRule: {fileID: 0}
+  skillIconRule: {fileID: 11400000, guid: 6705fc065ed7b544a854699ebb184fbc, type: 2}
   levelTitle: {fileID: 7804155588693172171}
   cardMiniature: {fileID: 152664042115310554}
   levelDescription: {fileID: 9123939883353878581}
