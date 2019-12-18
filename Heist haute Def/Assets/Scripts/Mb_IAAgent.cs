@@ -106,7 +106,6 @@ public class Mb_IAAgent : Mb_Agent
         if (path.Count != 0)
         {
             //Debug.Log(path.Count);
-            destination = path[path.Count - 1];
             foreach (Tile tile in path)
             {
                 if (hostageState == HostageState.InPanic)
@@ -116,20 +115,13 @@ public class Mb_IAAgent : Mb_Agent
             }
             //Debug.Log(actionsToPerform.Count);
         }
-        else
-        {
-            Debug.Log("Wait a tick");
-            SetFirstActionToPerform(new Wait(1f, this, this.FindAnOtherPath));
-            FindAnOtherPath();
-           
-        }
     }
 
     public override void PerformAction()
     {
         if (SomeoneWillInteractWith != null)
         {
-            foreach (Tile neighbour in AgentTile.GetNeighbours())
+            foreach (Tile neighbour in GetAgentTile().GetNeighbours())
             {
                 //Debug.Log("Neighbour");
                 if (neighbour.agentOnTile != null && neighbour.agentOnTile == SomeoneWillInteractWith)
@@ -138,61 +130,64 @@ public class Mb_IAAgent : Mb_Agent
                     return;
                 }
             }
+        }else if(target != null && target.GetActionState() == StateOfAction.Moving)
+        {
+            Debug.Log("Target.GetAgentTile : "+target.GetAgentTile());
+            GoTo(target.GetAgentTile());
         }
 
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
         if (actionsToPerform.Count != 0 && nextAction)
         {
+            if(actionsToPerform.First() is Deplacement)
+            {
+                Deplacement depla = actionsToPerform.First() as Deplacement;
+                if(depla.destination.cost > Ma_ClockManager.instance.tickInterval)
+                {
+                    Debug.Log("WAIT");
+                    List<Action> temp = actionsToPerform;
+                    actionsToPerform.Clear();
+                    actionsToPerform.Add(new Wait(1, this, FindAnOtherPath));
+                    actionsToPerform.AddRange(temp);
+                }
+            }
+
+            
             Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
-           foreach (Deplacement action in actionsToPerform)
-           {
-               Debug.Log("First Action is : " + action + "("+ action.destination.name+")");
-           }
-           Debug.Log("##############################");
+            foreach (Action action in actionsToPerform)
+            {
+                if(action is Deplacement)
+                {
+                    Deplacement deplacement = action as Deplacement;
+                    Debug.Log("First Action is : " + deplacement + "(" + deplacement.destination.name + ")");
+                }
+                else
+                {
+                    Debug.Log("First Action is : " + action);
+                }
+            }
+            Debug.Log("##############################");
+            
 
             nextAction = false;
             actionsToPerform.First().PerformAction();
 
-            if (destination == AgentTile)
-            {
-                SetNewActionState(StateOfAction.Idle);
-                destination = null;
-            }
-            UpdatePositionToGo();
-
             actionsToPerform.Remove(actionsToPerform.First());
-
         }
     }
 
     public override void FindAnOtherPath()
-    {
-        if (GetActionState() == StateOfAction.Moving)
+    {        
+        //Debug.Log("IA Find a new path");
+
+        if (onGoingInteraction)
         {
-            Debug.Log("IA Find a new path");
-
-            List<Deplacement> removeList = new List<Deplacement>();
-            foreach (Action action in actionsToPerform)
-            {
-                if (action is Deplacement)
-                    removeList.Add(action as Deplacement);
-            }
-
-            foreach (Deplacement depla in removeList)
-                actionsToPerform.Remove(depla);
-
-            List<Tile> newShortestPath = new List<Tile>();
-            if (!destination.avaible)
-            {
-                newShortestPath = pathfinder.SearchForShortestPath(AgentTile, destination.GetFreeNeighbours());
-            }
-            else
-            {
-                newShortestPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { destination });
-            }
-            //Debug.Log("New path deplacement number : " + newShortestPath.Count);
-            ChangeDeplacement(newShortestPath);
+            GoTo(onGoingInteraction);
         }
+        else
+        {
+            GoTo(destination);
+        }        
 
         nextAction = true;
     }
@@ -260,11 +255,12 @@ public class Mb_IAAgent : Mb_Agent
 
     public void UpdatePositionToGo()
     {
-        IATrial.positionToGo = AgentTile.GetFreeNeighbours().ToArray();
+        IATrial.positionToGo = GetAgentTile().GetFreeNeighbours().ToArray();
     }
 
     public override void SetNewActionState(StateOfAction agentState)
     {
+        //Debug.Log(agentState);
         base.SetNewActionState(agentState);
         switch (idleType)
         {

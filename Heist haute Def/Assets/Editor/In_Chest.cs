@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Mb_Chest))]
+//[CustomEditor(typeof(Mb_Chest))]
 public class In_Chest : Editor
 {
     Mb_Chest mySelectedScript;

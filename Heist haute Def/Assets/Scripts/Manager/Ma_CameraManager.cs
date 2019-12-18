@@ -165,15 +165,15 @@ public class Ma_CameraManager : MonoBehaviour
 
     void KeyBoardControl()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
             CenterCameraOnCharacter(0);
-        else if (Input.GetKeyDown(KeyCode.Z))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
             CenterCameraOnCharacter(1);
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
             CenterCameraOnCharacter(2);
-        else if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
             CenterCameraOnCharacter(3);
-        else if (Input.GetKeyDown(KeyCode.T))
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
             CenterCameraOnCharacter(4);
     }
 }

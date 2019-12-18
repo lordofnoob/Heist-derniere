@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_SkillsIconsInfo : MonoBehaviour
+[System.Serializable]
+[CreateAssetMenu(fileName = "NewIconCode", menuName = "NewIconCode")]
+public class Sc_SkillsIconsInfo : ScriptableObject
 {
     public SkillInfos[] allSkillsIcon;
 }
 
+[System.Serializable]
 public struct SkillInfos
 {
     public CharacterSkills skillAssociated;

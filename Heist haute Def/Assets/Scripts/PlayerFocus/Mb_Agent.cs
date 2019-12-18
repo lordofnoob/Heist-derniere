@@ -19,23 +19,6 @@ public class Mb_Agent : Mb_Poolable
     [HideInInspector] public List<Tile> VisitedTiles = new List<Tile>();
 
     [SerializeField]private Tile agentTile;
-    [SerializeField]public Tile AgentTile {
-        get { return agentTile; }
-        set
-        {
-            if(agentTile != null)
-            {
-                agentTile.avaible = true;
-                agentTile.agentOnTile = null;
-            }
-
-            //Debug.Log("Set Agent Tile");
-            agentTile = value;
-
-            value.avaible = false;
-            value.agentOnTile = this;
-        }
-    }
 
     [Header("Actions")]
     [SerializeField]private StateOfAction state;
@@ -51,11 +34,50 @@ public class Mb_Agent : Mb_Poolable
             pathfinder = GetComponent<Pathfinder>();
     }
 
+    public void SetAgentTile(Tile newAgentTile, bool isSwitchingTile = false)
+    {
+        if (!isSwitchingTile)
+        {
+            if(agentTile != null)
+            {
+                agentTile.avaible = true;
+                agentTile.agentOnTile = null;
+            }
+        }
+        else
+        {
+            Debug.Log("Switch tile");
+            agentTile.avaible = false;
+            agentTile.agentOnTile = newAgentTile.agentOnTile;
+            newAgentTile.agentOnTile.agentTile = agentTile;
+        }
+
+        //Debug.Log("Set Agent Tile");
+        agentTile = newAgentTile;
+
+        newAgentTile.avaible = false;
+        newAgentTile.agentOnTile = this;
+    }
+
+    public Tile GetAgentTile()
+    {
+        return agentTile;
+    }
+
     public virtual void PerformAction() { }
     public void GoTo(Tile tileDestination)
     {
-        List<Tile> newPath = pathfinder.SearchForShortestPath(AgentTile, new List<Tile> { tileDestination });
-        destination = tileDestination;
+        List<Tile> newPath;
+        if (!tileDestination.avaible)
+        {
+            newPath = pathfinder.SearchForShortestPath(GetAgentTile(), tileDestination.GetFreeNeighbours());
+        }
+        else
+        {
+            newPath = pathfinder.SearchForShortestPath(GetAgentTile(), new List<Tile> { tileDestination });
+        }
+        destination = newPath[newPath.Count - 1];
+        //Debug.Log("Path count : " + newPath.Count);
         ChangeDeplacement(newPath);
         nextAction = true;
     }
@@ -86,7 +108,7 @@ public class Mb_Agent : Mb_Poolable
             return;
         }
 
-        List<Tile> newPath = pathfinder.SearchForShortestPath(AgentTile, possibleDestination);
+        List<Tile> newPath = pathfinder.SearchForShortestPath(GetAgentTile(), possibleDestination);
         destination = newPath[newPath.Count - 1];
         ChangeDeplacement(newPath);
         SetNextInteraction();

@@ -22,7 +22,7 @@ public class Ma_LevelManager : MonoBehaviour
     private int minuteRemaining;
     private int secondsRemaining;
 
-    public float cashAmount = 0;
+    private float cashAmount = 0;
 
     public void Awake()
     {
@@ -35,6 +35,16 @@ public class Ma_LevelManager : MonoBehaviour
        
     }
 
+    public float GetCashAmount()
+    {
+        return cashAmount;
+    }
+
+    public void AddCash(float cash)
+    {
+        cashAmount += cash;
+        UIManager.instance.UpdateMoneyCounter();
+    }
 
     public Tile GetWalkableTile(int row, int column)
     {
@@ -108,11 +118,13 @@ public class Ma_LevelManager : MonoBehaviour
             else
                 tileToSet.cost = Ma_ClockManager.instance.tickInterval;
         }
-      foreach (Mb_Door doorToSet in allDoor)
+        foreach (Mb_Door doorToSet in allDoor)
         { 
             foreach (Tile tileToSet in doorToSet.tileAssociated)
-                if (tileToSet.avaible==false)
+            {
+                if (tileToSet.avaible == false)
                     tileToSet.cost = Ma_ClockManager.instance.tickInterval + (doorToSet.trialParameters.timeToAccomplishTrial - doorToSet.currentTimeSpentOn) * Ma_ClockManager.instance.tickInterval;
+            }
 
         }
     }

@@ -76,9 +76,9 @@ public class Ma_PlayerManager : MonoBehaviour
                     /*List<Tile> ShortestPath = selectedPlayer.pathfinder.SearchForShortestPath(selectedPlayer.AgentTile, new List<Tile> { hit.transform.GetComponent<Tile>() });
                     selectedPlayer.ChangeDeplacement(ShortestPath);*/
 
-                    selectedPlayer.GoTo(hit.transform.GetComponent<Tile>());
+                    Tile destination = hit.transform.GetComponent<Tile>();
+                    selectedPlayer.GoTo(destination);
                 }
-
                 else if (hit.transform.CompareTag("Trial")  && selectedPlayer !=null && selectedPlayer.GetActionState() != StateOfAction.Captured && selectedPlayer.GetActionState() != StateOfAction.Interacting)
                 {
                     Mb_Trial targetTrial = hit.transform.gameObject.GetComponent<Mb_Trial>();
