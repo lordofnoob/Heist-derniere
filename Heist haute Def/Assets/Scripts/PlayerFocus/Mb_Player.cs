@@ -94,7 +94,6 @@ public class Mb_Player : Mb_Agent
         if (path.Count != 0)
         {
             //Debug.Log(path.Count);
-            SetNewActionState(StateOfAction.Moving);
             foreach (Tile tile in path)
             {
                 actionsToPerform.Add(new Deplacement(charaPerks.speed, this, tile));
@@ -145,6 +144,7 @@ public class Mb_Player : Mb_Agent
     {
         if(actionsToPerform.Count != 0 && nextAction)
         {
+            /*
             Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
             foreach (Action action in actionsToPerform)
             {
@@ -159,6 +159,7 @@ public class Mb_Player : Mb_Agent
                 }
             }
             Debug.Log("##############################");
+            */
 
             //CHECK Si la prochaine interaction est un hotage en movement => alors recalcul du path
             if (onGoingInteraction != null && onGoingInteraction is Mb_IATrial)
@@ -243,14 +244,6 @@ public class Mb_Player : Mb_Agent
     {
         //Debug.Log(agentState);
         base.SetNewActionState(agentState);
-
-        if(agentState == StateOfAction.Moving || agentState == StateOfAction.Idle)
-        {
-            foreach (Mb_IAAgent hostage in capturedHostages)
-            {
-                hostage.SetNewActionState(agentState);
-            }
-        }
 
         if (agentState == StateOfAction.Moving)
         {

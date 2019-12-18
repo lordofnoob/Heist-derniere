@@ -77,7 +77,7 @@ public class Mb_Agent : Mb_Poolable
             newPath = pathfinder.SearchForShortestPath(GetAgentTile(), new List<Tile> { tileDestination });
         }
         destination = newPath[newPath.Count - 1];
-        Debug.Log("Path count : " + newPath.Count);
+        //Debug.Log("Path count : " + newPath.Count);
         ChangeDeplacement(newPath);
         nextAction = true;
     }

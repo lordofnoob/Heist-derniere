@@ -15,7 +15,7 @@ public class Wait : Action
 
     public override void PerformAction()
     {
-        Debug.Log("Wait");
+        //Debug.Log("Wait");
         agent.StartCoroutine(agent.WaitForTime(timeToPerform * Ma_ClockManager.instance.tickInterval));
     }
 }

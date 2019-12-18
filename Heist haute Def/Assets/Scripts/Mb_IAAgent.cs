@@ -106,7 +106,6 @@ public class Mb_IAAgent : Mb_Agent
         if (path.Count != 0)
         {
             //Debug.Log(path.Count);
-            destination = path[path.Count - 1];
             foreach (Tile tile in path)
             {
                 if (hostageState == HostageState.InPanic)
@@ -115,13 +114,6 @@ public class Mb_IAAgent : Mb_Agent
                     actionsToPerform.Add(new Deplacement(normalSpeed, this, tile));
             }
             //Debug.Log(actionsToPerform.Count);
-        }
-        else
-        {
-            Debug.Log("Wait a tick");
-            SetFirstActionToPerform(new Wait(1f, this, this.FindAnOtherPath));
-            FindAnOtherPath();
-           
         }
     }
 
@@ -138,6 +130,10 @@ public class Mb_IAAgent : Mb_Agent
                     return;
                 }
             }
+        }else if(target != null && target.GetActionState() == StateOfAction.Moving)
+        {
+            Debug.Log("Target.GetAgentTile : "+target.GetAgentTile());
+            GoTo(target.GetAgentTile());
         }
 
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
@@ -156,9 +152,10 @@ public class Mb_IAAgent : Mb_Agent
                 }
             }
 
+            
             Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
-           foreach (Action action in actionsToPerform)
-           {
+            foreach (Action action in actionsToPerform)
+            {
                 if(action is Deplacement)
                 {
                     Deplacement deplacement = action as Deplacement;
@@ -168,37 +165,29 @@ public class Mb_IAAgent : Mb_Agent
                 {
                     Debug.Log("First Action is : " + action);
                 }
-           }
-           Debug.Log("##############################");
+            }
+            Debug.Log("##############################");
+            
 
             nextAction = false;
             actionsToPerform.First().PerformAction();
 
-            if (destination == GetAgentTile())
-            {
-                SetNewActionState(StateOfAction.Idle);
-                destination = null;
-            }
-            UpdatePositionToGo();
             actionsToPerform.Remove(actionsToPerform.First());
         }
     }
 
     public override void FindAnOtherPath()
-    {
-        if (GetActionState() == StateOfAction.Moving)
-        {
-            Debug.Log("IA Find a new path");
+    {        
+        //Debug.Log("IA Find a new path");
 
-            if (onGoingInteraction)
-            {
-                GoTo(onGoingInteraction);
-            }
-            else
-            {
-                GoTo(destination);
-            }
+        if (onGoingInteraction)
+        {
+            GoTo(onGoingInteraction);
         }
+        else
+        {
+            GoTo(destination);
+        }        
 
         nextAction = true;
     }
@@ -271,6 +260,7 @@ public class Mb_IAAgent : Mb_Agent
 
     public override void SetNewActionState(StateOfAction agentState)
     {
+        //Debug.Log(agentState);
         base.SetNewActionState(agentState);
         switch (idleType)
         {

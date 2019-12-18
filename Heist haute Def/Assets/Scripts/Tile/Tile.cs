@@ -202,6 +202,7 @@ public class Tile : MonoBehaviour
     {
         if (agentOnTile != null)
         {
+            avaible = false;
             if (agentOnTile.actionsToPerform.Count != 0)
             {
                 cost = agentOnTile.actionsToPerform[0].timeToPerform / Ma_ClockManager.instance.tickInterval;
@@ -212,7 +213,10 @@ public class Tile : MonoBehaviour
             cost = GetComponentInChildren<Mb_Door>().trialParameters.timeToAccomplishTrial / Ma_ClockManager.instance.tickInterval;
         }
         else
+        {
+            avaible = true;
             cost = 1;
+        }
     }
 
    
