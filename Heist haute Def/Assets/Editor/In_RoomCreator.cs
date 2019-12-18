@@ -516,7 +516,7 @@ public class In_RoomCreator : Editor
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
         NewGameObject.charaPerks = characterProperty;
-        NewGameObject.AgentTile = hisTile;
+        NewGameObject.SetAgentTile(hisTile);
         NewGameObject.transform.SetParent(playerTransformProperty.objectReferenceValue as Transform);
         Selection.activeGameObject = NewGameObject.gameObject;
         EditorUtility.SetDirty(NewGameObject);
@@ -530,7 +530,7 @@ public class In_RoomCreator : Editor
         Vector3 newpos = new Vector3(hisTile.transform.position.x, hisTile.transform.position.y + hisTile.transform.localScale.y / 2, hisTile.transform.position.z);
         NewGameObject.transform.position = newpos;
         NewGameObject.aiCharacteristics = characterProperty;
-        NewGameObject.AgentTile = hisTile;
+        NewGameObject.SetAgentTile(hisTile);
         NewGameObject.transform.SetParent(hostageTransformProperty.objectReferenceValue as Transform);
         Debug.Log(hostageTransformProperty);
         Selection.activeGameObject = NewGameObject.gameObject;
@@ -541,13 +541,13 @@ public class In_RoomCreator : Editor
 
     void EraseCharacter(Mb_Player player)
     {
-        player.AgentTile.avaible = true;
+        player.GetAgentTile().avaible = true;
         Undo.DestroyObjectImmediate(player.gameObject);
     }
 
     void EraseHostage(Mb_IAAgent hostage)
     {
-        hostage.AgentTile.avaible = true;
+        hostage.GetAgentTile().avaible = true;
         Undo.DestroyObjectImmediate(hostage.gameObject);
     }
 
@@ -586,16 +586,58 @@ public class In_RoomCreator : Editor
                 Tile West = gameManager.GetTile(tileToCheck.row, tileToCheck.column + 1);
                 if (North != null )
                     if (North.walkable == true)
-                        neighbourTile.Add(North);
+                    {
+                        bool isDoorTile = false;
+                        foreach (Tile tileOfDoor in doorToSetup.tileAssociated)
+                            if (tileOfDoor == North)
+                            {
+                                isDoorTile = true;
+                                break;
+                            }
+                        if (isDoorTile==false)
+                            neighbourTile.Add(North);
+                    }
+                        
                 if (South != null)
                     if (South.walkable == true)
-                        neighbourTile.Add(South);
-                if ( East!= null)
+                    {
+                        bool isDoorTile = false;
+                        foreach (Tile tileOfDoor in doorToSetup.tileAssociated)
+                            if (tileOfDoor == South)
+                            {
+                                isDoorTile = true;
+                                break;
+                            }
+                        if (isDoorTile == false)
+                            neighbourTile.Add(South);
+                    }
+
+                if (East != null)
                     if (East.walkable == true)
-                        neighbourTile.Add(East);
+                    {
+                        bool isDoorTile = false;
+                        foreach (Tile tileOfDoor in doorToSetup.tileAssociated)
+                            if (tileOfDoor == East)
+                            {
+                                isDoorTile = true;
+                                break;
+                            }
+                        if (isDoorTile == false)
+                            neighbourTile.Add(East);
+                    }
                 if (West != null)
                     if (West.walkable==true)
-                        neighbourTile.Add(West);
+                    {
+                        bool isDoorTile = false;
+                        foreach (Tile tileOfDoor in doorToSetup.tileAssociated)
+                            if (tileOfDoor == West)
+                            {
+                                isDoorTile = true;
+                                break;
+                            }
+                        if (isDoorTile == false)
+                            neighbourTile.Add(West);
+                    }
             }
             List<Tile> finalTile = neighbourTile;
             allTileToGo = finalTile;
@@ -619,8 +661,7 @@ public class In_RoomCreator : Editor
                     allTileToGo.Remove(tileIsAvaible);
                 }
                 //virer la tuile si il s'agit d'une tuile de porte
-                /*
-                foreach (Tile tileOfDoor in doorToSetup.tileAssociated)
+            /*foreach (Tile tileOfDoor in doorToSetup.tileAssociated)
                     if (tileOfDoor == tileIsAvaible)
                         allTileToGo.Remove(tileIsAvaible);*/
 

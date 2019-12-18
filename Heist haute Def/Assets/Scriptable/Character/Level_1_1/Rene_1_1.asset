@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Rene_1_1
   m_EditorClassIdentifier: 
   characterName: "Ren\xE9"
-  characterPortrait: {fileID: 0}
+  characterPortrait: {fileID: 4594001479594599871, guid: 53560af95b75d994ca056afb183a1d15,
+    type: 3}
   speed: 3
   characterSkills: 0800000001000000
   surveillanceLimit: 3

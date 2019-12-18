@@ -71,10 +71,18 @@ public class Tile : MonoBehaviour
         Tile South = Ma_LevelManager.instance.GetWalkableTile(row + 1, column);
         Tile East = Ma_LevelManager.instance.GetWalkableTile(row, column - 1);
         Tile West = Ma_LevelManager.instance.GetWalkableTile(row, column + 1);
+        
+        /*
+        Debug.Log(North);
+        Debug.Log(South);
+        Debug.Log(East);
+        Debug.Log(West);
+        Debug.Log("#####");
+        */
 
-        if(North != null && North.walkable)
+        if (North != null && North.walkable)
         {
-            if((useDoors && North.GetComponentInChildren<Mb_Door>() != null))
+            //if((useDoors && North.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(North);
             //else if (!North.avaible)
                // North.
@@ -82,19 +90,19 @@ public class Tile : MonoBehaviour
 
         if(South != null && South.walkable)
         {
-            if ((useDoors && South.GetComponentInChildren<Mb_Door>() != null))
+            //if ((useDoors && South.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(South);
         }
 
         if(East != null && East.walkable)
         {
-            if ((useDoors && East.GetComponentInChildren<Mb_Door>() != null))
+            //if ((useDoors && East.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(East);
         }
 
         if(West != null && West.walkable )
         {
-            if ((useDoors && West.GetComponentInChildren<Mb_Door>() != null))
+            //if ((useDoors && West.GetComponentInChildren<Mb_Door>() != null))
                 res.Add(West);
         }
         return res;
@@ -194,6 +202,7 @@ public class Tile : MonoBehaviour
     {
         if (agentOnTile != null)
         {
+            avaible = false;
             if (agentOnTile.actionsToPerform.Count != 0)
             {
                 cost = agentOnTile.actionsToPerform[0].timeToPerform / Ma_ClockManager.instance.tickInterval;
@@ -204,7 +213,10 @@ public class Tile : MonoBehaviour
             cost = GetComponentInChildren<Mb_Door>().trialParameters.timeToAccomplishTrial / Ma_ClockManager.instance.tickInterval;
         }
         else
+        {
+            avaible = true;
             cost = 1;
+        }
     }
 
    

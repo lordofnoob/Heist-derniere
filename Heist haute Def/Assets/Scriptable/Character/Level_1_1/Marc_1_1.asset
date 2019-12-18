@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Marc_1_1
   m_EditorClassIdentifier: 
   characterName: Marc
-  characterPortrait: {fileID: 0}
+  characterPortrait: {fileID: 21300000, guid: 3019c953ce76d5648acc01a8675d925d, type: 3}
   speed: 4
   characterSkills: 0700000000000000
   surveillanceLimit: 2

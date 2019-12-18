@@ -86,7 +86,8 @@ MonoBehaviour:
   column: 0
   StraightLineDistanceToEnd: 0
   MinCostToStart: 0
-  Cost: 1
+  isExitTile: 0
+  cost: 0
   previous: {fileID: 0}
   tileType: 0
 --- !u!1001 &913496261782563555

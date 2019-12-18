@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6e2869263abc14589b55e8831c78f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trialParameters: {fileID: 0}
+  trialParameters: {fileID: 11400000, guid: df9c608a6d7615e42956006f0dc5a17b, type: 2}
   positionToGo: []
   timeVignet: {fileID: 9196770387053895367}
   UiToTrigger: {fileID: 0}

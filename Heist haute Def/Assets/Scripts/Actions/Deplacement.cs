@@ -14,8 +14,6 @@ public class Deplacement : Action
 
     public override void PerformAction()
     {
-        //agent.SetNewActionState(StateOfAction.Moving);
-
         //Mb_player
         #region
         if (agent is Mb_Player)
@@ -31,6 +29,7 @@ public class Deplacement : Action
             //bool findNewPath = false;
             bool findNewPath = true;
 
+            /*
             //IF PLAYER PATH HAS CHANGE DURING DEPLACEMENT
             foreach (Action action in player.actionsToPerform)
             {
@@ -44,10 +43,31 @@ public class Deplacement : Action
                     }
                 }
             }
-
-            if (destination.avaible)
+            */
+            //Debug.Log(destination.agentOnTile is Mb_IAAgent);
+            if (destination.avaible || destination.agentOnTile is Mb_IAAgent)
             {
-                player.AgentTile = destination;
+                player.SetNewActionState(StateOfAction.Moving);
+
+                //CHECK FOR SWITCH POSITION WITH HOSTAGE
+
+                //Debug.Log(destination.agentOnTile);
+                if (destination.agentOnTile is Mb_IAAgent)
+                {
+                    Debug.Log("Switch");
+                    destination.agentOnTile.transform.DOLookAt(player.GetAgentTile().transform.position, 0.2f, AxisConstraint.Y);
+                    destination.agentOnTile.transform.DOMove(new Vector3(player.GetAgentTile().transform.position.x,
+                                                                            player.GetAgentTile().transform.position.y + player.GetAgentTile().transform.localScale.y / 2,
+                                                                            player.GetAgentTile().transform.position.z),
+                                                                            Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
+                                                        .SetEase(Ease.Linear);
+                    player.SetAgentTile(destination, true);
+                }
+                else
+                {
+                    player.SetAgentTile(destination);
+                }
+
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 player.transform.DOLookAt(destination.transform.position,0.2f, AxisConstraint.Y);
                 player.transform.DOMove(new Vector3(destination.transform.position.x,
@@ -63,47 +83,12 @@ public class Deplacement : Action
                                     if (destination == player.destination)
                                     {
                                         player.SetNewActionState(StateOfAction.Idle);
-                                        destination = null;
                                         return;
                                     }
 
                                     if (!findNewPath)
                                         player.nextAction = true;
-                                });
-
-                #region
-                if (player.capturedHostages.Count != 0)
-                {
-                    for (int i = player.capturedHostages.Count - 1; i >= 0; i--)
-                    {
-                        /*
-                        if (i == 0)
-                        {
-                            //Debug.Log("FIRST HOSTAGE");
-                            player.capturedHostages[i].transform.DOLookAt(player.AgentTile.transform.position, 0.2f, AxisConstraint.Y);
-                            player.capturedHostages[i].transform.DOMove(new Vector3(player.AgentTile.transform.position.x,
-                                                                                    player.AgentTile.transform.position.y + player.AgentTile.transform.localScale.y / 2,
-                                                                                    player.AgentTile.transform.position.z),
-                                                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
-                                                                .SetEase(Ease.Linear);
-                            player.capturedHostages[i].AgentTile = player.AgentTile;
-                        }
-                        else
-                        {
-                            //Debug.Log("OTHER HOSTAGE");
-                            player.capturedHostages[i].transform.DOLookAt(player.AgentTile.transform.position, 0.2f, AxisConstraint.Y);
-                            player.capturedHostages[i].transform.DOMove(new Vector3(player.capturedHostages[i - 1].AgentTile.transform.position.x,
-                                                                                    player.capturedHostages[i - 1].AgentTile.transform.position.y + player.capturedHostages[i - 1].AgentTile.transform.localScale.y / 2,
-                                                                                    player.capturedHostages[i - 1].AgentTile.transform.position.z),
-                                                                                    Ma_LevelManager.Instance.clock.tickInterval * timeToPerform)
-                                                                .SetEase(Ease.Linear);
-                            player.capturedHostages[i].AgentTile = player.capturedHostages[i - 1].AgentTile;
-                        }*/
-                        player.capturedHostages[i].GoTo(player.AgentTile);
-                        //Debug.Log(player.AgentTile);
-                    }
-                }
-                #endregion
+                                });                
             }
             else
             {
@@ -122,13 +107,6 @@ public class Deplacement : Action
         else if (agent is Mb_IAAgent)
         {
             Mb_IAAgent hostage = agent as Mb_IAAgent;
-
-            if (!destination.avaible && destination == hostage.destination)
-            {
-                hostage.nextAction = true;
-                Debug.Log("AT DESTINATION");
-                return;
-            }
 
             //OLD
             /*
@@ -152,7 +130,8 @@ public class Deplacement : Action
 
             if (destination.avaible)
             {
-                hostage.AgentTile = destination;
+                hostage.SetNewActionState(StateOfAction.Moving);
+                hostage.SetAgentTile(destination);
 
                 //Debug.Log("MOVE TO : "+ destination.transform.position);
                 hostage.transform.DOLookAt(destination.transform.position, 0.2f, AxisConstraint.Y);
@@ -166,12 +145,13 @@ public class Deplacement : Action
                                      //destination.SetOutlinesEnabled(false);
                                      destination.highlighted = false;
 
-                                     if (destination == hostage.destination)
+                                     if (hostage.GetAgentTile() == destination)
                                      {
                                          hostage.SetNewActionState(StateOfAction.Idle);
                                          destination = null;
                                          return;
                                      }
+                                     hostage.UpdatePositionToGo();
 
                                      hostage.FindAnOtherPath();
                                      hostage.nextAction = true;

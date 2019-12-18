@@ -70,7 +70,7 @@ public class Pathfinder : MonoBehaviour
                 //Debug.Log("NEIGHBOURS : " + neighbours.transform.position);
                 if (agent.VisitedTiles.Contains(neighbours))
                     continue;
-                if(neighbours.MinCostToStart == 0f || currentTile.MinCostToStart + 1 < neighbours.MinCostToStart)
+                if(neighbours.MinCostToStart == 0f || currentTile.MinCostToStart + neighbours.cost < neighbours.MinCostToStart)
                 {
                     neighbours.MinCostToStart = currentTile.MinCostToStart + neighbours.cost;
                     neighbours.previous = currentTile;
