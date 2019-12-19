@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 [CreateAssetMenu(menuName = "UI/IconSkill")]
-public class Sc_IconSkills : MonoBehaviour
+public class Sc_IconSkills : ScriptableObject
 {
     public IconAssociation[] iconRule;
 }
