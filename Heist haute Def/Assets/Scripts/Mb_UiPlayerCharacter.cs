@@ -6,8 +6,8 @@ using TMPro;
 
 public class Mb_UiPlayerCharacter : MonoBehaviour
 {
-    [SerializeField] Sc_IconSkills iconRuling;
-    public TextMeshPro playerName;
+    [SerializeField] Sc_SkillsIconsInfo iconRuling;
+    public TextMeshProUGUI playerName;
     public Image[] skillsIconSlots;
     public Image[] itemIconSlots;
 
@@ -16,10 +16,10 @@ public class Mb_UiPlayerCharacter : MonoBehaviour
         playerName.text = player.charaPerks.name;
         for (int i = 0; i < player.charaPerks.characterSkills.Length; i++)
         {
-            foreach (IconAssociation skillToCheck in iconRuling.iconRule)
+            foreach (SkillInfos skillToCheck in iconRuling.allSkillsIcon)
             {
-                if (skillToCheck.skillToIcon == player.charaPerks.characterSkills[i])
-                    itemIconSlots[i].sprite = skillToCheck.iconAssociated;
+                if (skillToCheck.skillAssociated == player.charaPerks.characterSkills[i])
+                    itemIconSlots[i].sprite = skillToCheck.skillIcon;
             }               
         }
     }
