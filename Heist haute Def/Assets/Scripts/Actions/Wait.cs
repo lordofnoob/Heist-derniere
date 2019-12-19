@@ -6,12 +6,8 @@ public delegate void Function();
 
 public class Wait : Action
 {
-    private float timer = 0;
-    private Function method;
-    public Wait(float timeToPerform, Mb_Agent agent,  Function method) : base(timeToPerform, agent)
-    {
-        this.method = method;
-    }
+    public Wait(float timeToPerform, Mb_Agent agent) : base(timeToPerform, agent)
+    {}
 
     public override void PerformAction()
     {

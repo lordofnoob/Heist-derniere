@@ -34,7 +34,7 @@ public class Mb_Agent : Mb_Poolable
             pathfinder = GetComponent<Pathfinder>();
     }
 
-    public void SetAgentTile(Tile newAgentTile, bool isSwitchingTile = false)
+    public virtual void SetAgentTile(Tile newAgentTile, bool isSwitchingTile = false)
     {
         if (!isSwitchingTile)
         {
@@ -83,6 +83,7 @@ public class Mb_Agent : Mb_Poolable
     }
     public void GoTo(Mb_Trial nextTrialToInteract)
     {
+        trialsToGo.Add(nextTrialToInteract);
         List<Tile> possibleDestination = new List<Tile>();
         if (nextTrialToInteract.listOfUser.Count >= nextTrialToInteract.positionToGo.Length)
         {
@@ -172,6 +173,7 @@ public class Mb_Agent : Mb_Poolable
     public IEnumerator WaitForTime(float timeToWait)
     {
         yield return new WaitForSeconds(timeToWait);
+        FindAnOtherPath();
         nextAction = true;
     }
 }

@@ -145,15 +145,13 @@ public class Deplacement : Action
                                      //destination.SetOutlinesEnabled(false);
                                      destination.highlighted = false;
 
-                                     if (hostage.GetAgentTile() == destination)
+                                     if (hostage.GetAgentTile() == hostage.destination)
                                      {
                                          hostage.SetNewActionState(StateOfAction.Idle);
                                          destination = null;
-                                         return;
                                      }
-                                     hostage.UpdatePositionToGo();
 
-                                     hostage.FindAnOtherPath();
+                                     hostage.UpdatePositionToGo();
                                      hostage.nextAction = true;
                                  });
             }

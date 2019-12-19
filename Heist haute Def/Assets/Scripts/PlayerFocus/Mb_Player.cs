@@ -21,6 +21,7 @@ public class Mb_Player : Mb_Agent
 
     [Header("Hostage")]
     public List<Mb_IAAgent> capturedHostages = new List<Mb_IAAgent>();
+    private Tile capturedHostagesPosToGo;
 
 
     [Header("Items")]
@@ -88,6 +89,18 @@ public class Mb_Player : Mb_Agent
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.enabled = enabled;
     }*/
+
+    public override void SetAgentTile(Tile newAgentTile, bool isSwitchingTile = false)
+    {
+        //Debug.Log("SET PLAYER AGENT TILE");
+        capturedHostagesPosToGo = GetAgentTile();
+        base.SetAgentTile(newAgentTile, isSwitchingTile);
+    }
+
+    public Tile GetCapturedHostagesPosToGo()
+    {
+        return capturedHostagesPosToGo;
+    }
 
     public override void AddDeplacement(List<Tile> path)
     {

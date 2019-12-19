@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class Tile : MonoBehaviour
 {
+    [Header("DEBUG")]
+    public DEBUGDisplayTileCoord display;
+
     [Header("Surlignance")]
     public Color hoverColor;
     private Renderer rend;
@@ -36,6 +39,10 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
+        //DEBUG
+        if(display != null)
+            display.SetColumnAndRowDisplay(column, row);
+
         CalculateCost();
       /*  rend = GetComponent<Renderer>();
         startColor = rend.material.color;*/
@@ -43,6 +50,11 @@ public class Tile : MonoBehaviour
 
     void OnMouseEnter()
     {
+        //DEBUG
+        if(display != null)
+        {
+            display.GetComponent<Canvas>().enabled = true;
+        }
         if (!highlighted)
         {
             //ModifyOutlines(Outlines.Mode.OutlineVisible, Color.black, 7.5f);
@@ -53,8 +65,14 @@ public class Tile : MonoBehaviour
 
     void OnMouseExit()
     {
+        //DEBUG
+        if (display != null)
+        {
+            display.GetComponent<Canvas>().enabled = false;
+        }
+
         //if (!highlighted)
-            //SetOutlinesEnabled(false);
+        //SetOutlinesEnabled(false);
     }
 
     public float StraightLineDistanceTo(Tile end)

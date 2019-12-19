@@ -61,11 +61,45 @@ public class Pathfinder : MonoBehaviour
         do
         {
             Queue.OrderBy(x => x.MinCostToStart + x.StraightLineDistanceToEnd).ToList();
+
+            /*
+            //DEBUG
+            if(GetComponent<Mb_IAAgent>() != null)
+            {
+                Debug.Log("###START###");
+                foreach (Tile tile in Queue)
+                {
+                    Debug.Log(tile + ", cost : " + tile.cost + ", MinCostToStart : " + tile.MinCostToStart);
+                }
+                Debug.Log("###END###");
+            }
+            */
+
+
             Tile currentTile = Queue.First();
             Queue.Remove(currentTile);
             TileVisited++;
 
-            foreach(Tile neighbours in currentTile.GetFreeNeighbours(useDoors))
+            List<Tile> tilesToCheck = currentTile.GetFreeNeighbours(useDoors);
+
+            //IF IS IA THEN REMOVE TILE WITH AGENT IDLING
+            if (GetComponent<Mb_IAAgent>() != null)
+            {
+                List<Tile> tilesToRemove = new List<Tile>();
+                foreach (Tile neighbours in tilesToCheck)
+                {
+                    if (neighbours.agentOnTile != null && neighbours.agentOnTile.GetActionState() == StateOfAction.Idle)
+                    {
+                        tilesToRemove.Add(neighbours);
+                    }
+                }
+                foreach (Tile tileToRemove in tilesToRemove)
+                {
+                    tilesToCheck.Remove(tileToRemove);
+                }
+            }
+
+            foreach (Tile neighbours in tilesToCheck)
             {
                 //Debug.Log("NEIGHBOURS : " + neighbours.transform.position);
                 if (agent.VisitedTiles.Contains(neighbours))

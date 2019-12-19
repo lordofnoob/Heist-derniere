@@ -97,7 +97,6 @@ public class Ma_PlayerManager : MonoBehaviour
                         selectedPlayer.SetNextInteraction(targetTrial);
                         selectedPlayer.nextAction = true;*/
 
-                        selectedPlayer.trialsToGo.Add(targetTrial);
                         selectedPlayer.GoTo(targetTrial);
                     }                    
                 }
