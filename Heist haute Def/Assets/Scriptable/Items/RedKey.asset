@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10068a5c10945a44934c4e268f74219, type: 3}
   m_Name: RedKey
   m_EditorClassIdentifier: 
-  colorAssociated: 0
+  colorAssociated: 1

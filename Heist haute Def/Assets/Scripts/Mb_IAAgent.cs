@@ -98,7 +98,7 @@ public class Mb_IAAgent : Mb_Agent
         //Debug.Log(actionsToPerform.Count);
 
         //NEW
-        //GoTo(warpHostageTrial);
+        GoTo(Ma_LevelManager.instance.escapeTrial);
     }
 
     public override void AddDeplacement(List<Tile> path)
@@ -130,10 +130,12 @@ public class Mb_IAAgent : Mb_Agent
                     return;
                 }
             }
-        }else if(target != null && target.GetActionState() == StateOfAction.Moving)
+        }
+        
+        if(target != null && GetAgentTile() != target.GetCapturedHostagesPosToGo())
         {
-            Debug.Log("Target.GetAgentTile : "+target.GetAgentTile());
-            GoTo(target.GetAgentTile());
+            GoTo(target.GetCapturedHostagesPosToGo());
+            Debug.Log("Destination : " + destination);
         }
 
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
@@ -144,15 +146,18 @@ public class Mb_IAAgent : Mb_Agent
                 Deplacement depla = actionsToPerform.First() as Deplacement;
                 if(depla.destination.cost > Ma_ClockManager.instance.tickInterval)
                 {
-                    Debug.Log("WAIT");
-                    List<Action> temp = actionsToPerform;
-                    actionsToPerform.Clear();
-                    actionsToPerform.Add(new Wait(1, this, FindAnOtherPath));
-                    actionsToPerform.AddRange(temp);
+                    if (depla.destination.agentOnTile != null && depla.destination.agentOnTile.GetActionState() == StateOfAction.Moving)
+                    {
+                        Debug.Log("WAIT");
+                        List<Action> temp = actionsToPerform;
+                        actionsToPerform.Clear();
+                        actionsToPerform.Add(new Wait(1, this));
+                        actionsToPerform.AddRange(temp);
+                    }
                 }
             }
 
-            
+            /*
             Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
             foreach (Action action in actionsToPerform)
             {
@@ -167,11 +172,10 @@ public class Mb_IAAgent : Mb_Agent
                 }
             }
             Debug.Log("##############################");
-            
+            */
 
             nextAction = false;
             actionsToPerform.First().PerformAction();
-
             actionsToPerform.Remove(actionsToPerform.First());
         }
     }
@@ -184,7 +188,7 @@ public class Mb_IAAgent : Mb_Agent
         {
             GoTo(onGoingInteraction);
         }
-        else
+        else if(destination != null)
         {
             GoTo(destination);
         }        

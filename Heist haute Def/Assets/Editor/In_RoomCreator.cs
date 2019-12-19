@@ -332,136 +332,135 @@ public class In_RoomCreator : Editor
 
 
         
-            Tile[] listOfTile;
-           List<Tile> listOfTileOfWalkableTile = new List<Tile>();
+        Tile[] listOfTile;
+        List<Tile> listOfTileOfWalkableTile = new List<Tile>();
 
-            exitList = new List<Tile>();
+        exitList = new List<Tile>();
 
    
-            listOfTile = GameObject.FindObjectsOfType<Tile>();
-            for (int i = 0; i < listOfTile.Length; i++)
-                if (listOfTile[i].walkable == true)
-                    listOfTileOfWalkableTile.Add(listOfTile[i]);
-            GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile = listOfTileOfWalkableTile.ToArray();
-            GameObject.FindObjectOfType<Ma_LevelManager>().allTiles = listOfTile;
-            Tile firstTile = listOfTile[0];
+        listOfTile = GameObject.FindObjectsOfType<Tile>();
+        for (int i = 0; i < listOfTile.Length; i++)
+            if (listOfTile[i].walkable == true)
+                listOfTileOfWalkableTile.Add(listOfTile[i]);
+        GameObject.FindObjectOfType<Ma_LevelManager>().allWalkableTile = listOfTileOfWalkableTile.ToArray();
+        GameObject.FindObjectOfType<Ma_LevelManager>().allTiles = listOfTile;
+        Tile firstTile = listOfTile[0];
 
-            //test
-            #region
-            /*
-            for (int j = 0; j < mySelectedScript.allRoomTransform.transform.childCount; j++)
+        //test
+        #region
+        /*
+        for (int j = 0; j < mySelectedScript.allRoomTransform.transform.childCount; j++)
+        {
+            for (int i = 0; i < mySelectedScript.allRoomTransform.GetChild(j).childCount; i++)
             {
-                for (int i = 0; i < mySelectedScript.allRoomTransform.GetChild(j).childCount; i++)
+                if (mySelectedScript.allRoomTransform.transform.GetChild(j).GetChild(i).GetComponent<Tile>() == true)
                 {
-                    if (mySelectedScript.allRoomTransform.transform.GetChild(j).GetChild(i).GetComponent<Tile>() == true)
-                    {
-                        listOfTile.Add(mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>());
-                        if (mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>().walkable == true)
-                            listOfTileOfWalkableTile.Add(mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>());
-
-                    }
-                }
-            }*/
-
-            //nettoyer toiute la liste des tuiles de sorties
-
-
-            /*
-            for (int i = 0; i < listOfTile.Count; i++)
-            {
-
-                Tile worstXtile = listOfTile[0];
-                Tile worstYtile = listOfTile[0];
-                Tile bestXtile = listOfTile[0];
-                Tile bestYtile = listOfTile[0];
-
-                if (i > 0)
-                {
-                    if (listOfTile[i].transform.position.x < worstXtile.transform.position.x)
-                    {
-                        worstXtile = listOfTile[i];
-
-                    }
-                    else if (listOfTile[i].transform.position.x > bestXtile.transform.position.x)
-                    {
-                        bestXtile = listOfTile[i];
-                        // Debug.Log(bestXtile.transform.position.x);
-                    }
-                    else if (listOfTile[i].transform.position.y < worstYtile.transform.position.y)
-                    {
-                        worstYtile = listOfTile[i];
-                    }
-                    else if (listOfTile[i].transform.position.y > bestYtile.transform.position.y)
-                    {
-                        bestYtile = listOfTile[i];
-                    }
-                }
-                float bestX = Mathf.Abs(bestXtile.transform.position.x + bestXtile.transform.position.z);
-                float worstX = Mathf.Abs(worstXtile.transform.position.x + worstXtile.transform.position.z);
-                float bestY = Mathf.Abs(bestYtile.transform.position.x + bestYtile.transform.position.z);
-                float worstY = Mathf.Abs(worstYtile.transform.position.x + worstYtile.transform.position.z);
-
-                if (bestX > worstX || bestX > bestY || bestX > worstY)
-                {
-                    firstTile = bestXtile;
+                    listOfTile.Add(mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>());
+                    if (mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>().walkable == true)
+                        listOfTileOfWalkableTile.Add(mySelectedScript.allRoomTransform.GetChild(j).GetChild(i).GetComponent<Tile>());
 
                 }
-                else if (worstX > bestX || worstX > bestY || worstX > worstY)
-                {
-                    firstTile = worstXtile;
-
-                }
-                else if (bestY > worstX || bestY > bestX || bestY > worstY)
-                {
-                    firstTile = bestYtile;
-
-                }
-                else if (worstY > bestX || worstY > bestY || worstY > worstX)
-                {
-                    firstTile = worstYtile;
-
-                }
-
-            }*/
-            #endregion
-
-            List<Tile> tempListOfTile = new List<Tile>();
-            foreach (Tile tileToAdd in listOfTile)
-            {
-                tempListOfTile.Add(tileToAdd);
             }
-            tempListOfTile.Remove(firstTile);
+        }*/
 
-            listOfTile =tempListOfTile.ToArray();
-            firstTile.SetColumnAndRow(0, 0);
+        //nettoyer toiute la liste des tuiles de sorties
 
 
-            EditorUtility.SetDirty(GameObject.FindObjectOfType<Ma_LevelManager>());
+        /*
+        for (int i = 0; i < listOfTile.Count; i++)
+        {
+
+            Tile worstXtile = listOfTile[0];
+            Tile worstYtile = listOfTile[0];
+            Tile bestXtile = listOfTile[0];
+            Tile bestYtile = listOfTile[0];
+
+            if (i > 0)
+            {
+                if (listOfTile[i].transform.position.x < worstXtile.transform.position.x)
+                {
+                    worstXtile = listOfTile[i];
+
+                }
+                else if (listOfTile[i].transform.position.x > bestXtile.transform.position.x)
+                {
+                    bestXtile = listOfTile[i];
+                    // Debug.Log(bestXtile.transform.position.x);
+                }
+                else if (listOfTile[i].transform.position.y < worstYtile.transform.position.y)
+                {
+                    worstYtile = listOfTile[i];
+                }
+                else if (listOfTile[i].transform.position.y > bestYtile.transform.position.y)
+                {
+                    bestYtile = listOfTile[i];
+                }
+            }
+            float bestX = Mathf.Abs(bestXtile.transform.position.x + bestXtile.transform.position.z);
+            float worstX = Mathf.Abs(worstXtile.transform.position.x + worstXtile.transform.position.z);
+            float bestY = Mathf.Abs(bestYtile.transform.position.x + bestYtile.transform.position.z);
+            float worstY = Mathf.Abs(worstYtile.transform.position.x + worstYtile.transform.position.z);
+
+            if (bestX > worstX || bestX > bestY || bestX > worstY)
+            {
+                firstTile = bestXtile;
+
+            }
+            else if (worstX > bestX || worstX > bestY || worstX > worstY)
+            {
+                firstTile = worstXtile;
+
+            }
+            else if (bestY > worstX || bestY > bestX || bestY > worstY)
+            {
+                firstTile = bestYtile;
+
+            }
+            else if (worstY > bestX || worstY > bestY || worstY > worstX)
+            {
+                firstTile = worstYtile;
+
+            }
+
+        }*/
+        #endregion
+
+        List<Tile> tempListOfTile = new List<Tile>();
+        foreach (Tile tileToAdd in listOfTile)
+        {
+            tempListOfTile.Add(tileToAdd);
+        }
+        tempListOfTile.Remove(firstTile);
+
+        listOfTile =tempListOfTile.ToArray();
+        firstTile.SetColumnAndRow(0, 0);
+
+
+        EditorUtility.SetDirty(GameObject.FindObjectOfType<Ma_LevelManager>());
   
-            // SI LA TAILLE DES TUILES CHANGE FAUDRA CHANGER ICI
-            for (int i = 0; i < listOfTile.Length; i++)
+        // SI LA TAILLE DES TUILES CHANGE FAUDRA CHANGER ICI
+        for (int i = 0; i < listOfTile.Length; i++)
+        {
+            string newName= "";
+            listOfTile[i].SetColumnAndRow(Mathf.RoundToInt(firstTile.transform.position.x - listOfTile[i].transform.position.x), Mathf.RoundToInt(firstTile.transform.position.z - listOfTile[i].transform.position.z));
+            if (listOfTile[i].GetComponentInChildren<Mb_Chest>())
+                newName = ("Chest " + listOfTile[i].column + " - " + listOfTile[i].row);
+            else if (listOfTile[i].GetComponent<Tile>().tileType == Tile.TileType.Wall)
+                newName = ("Wall " + listOfTile[i].column + " - " + listOfTile[i].row);
+            else if (listOfTile[i].GetComponentInChildren<Mb_Door>())
+                newName = ("Door " + listOfTile[i].column + " - " + listOfTile[i].row);
+            else if (listOfTile[i].GetComponentInChildren<Mb_LockedDoor>())
+                newName = ("LockedDoor " + listOfTile[i].column + " - " + listOfTile[i].row);
+            else if (listOfTile[i].GetComponentInChildren<Mb_HostageStockArea>())
+                newName = ("HostageStock " + listOfTile[i].column + " - " + listOfTile[i].row);
+            else
             {
-                string newName= "";
-                listOfTile[i].SetColumnAndRow(Mathf.RoundToInt(firstTile.transform.position.x - listOfTile[i].transform.position.x), Mathf.RoundToInt(firstTile.transform.position.z - listOfTile[i].transform.position.z));
-                if (listOfTile[i].GetComponentInChildren<Mb_Chest>())
-                    newName = ("Chest " + listOfTile[i].row + " - " + listOfTile[i].column);
-                else if (listOfTile[i].GetComponent<Tile>().tileType == Tile.TileType.Wall)
-                    newName = ("Wall " + listOfTile[i].row + " - " + listOfTile[i].column);
-                else if (listOfTile[i].GetComponentInChildren<Mb_Door>())
-                    newName = ("Door " + listOfTile[i].row + " - " + listOfTile[i].column);
-                else if (listOfTile[i].GetComponentInChildren<Mb_LockedDoor>())
-                    newName = ("LockedDoor " + listOfTile[i].row + " - " + listOfTile[i].column);
-                else if (listOfTile[i].GetComponentInChildren<Mb_HostageStockArea>())
-                    newName = ("HostageStock " + listOfTile[i].row + " - " + listOfTile[i].column);
-                else
-                    newName = ("Tile " + listOfTile[i].row + " - " + listOfTile[i].column);
-
-                listOfTile[i].name = newName;
-                EditorUtility.SetDirty(listOfTile[i]);
+                newName = ("Tile " + listOfTile[i].column + " - " + listOfTile[i].row);
             }
 
-         
-       
+            listOfTile[i].name = newName;
+            EditorUtility.SetDirty(listOfTile[i]);
+        }
     }
 
     void PlacingAndErasing()
