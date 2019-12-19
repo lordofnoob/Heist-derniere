@@ -163,6 +163,9 @@ public class Ma_CameraManager : MonoBehaviour
         TargetLooking(Ma_PlayerManager.instance.selectedPlayer.transform.position);
     }
 
+
+    // centrer la cam sur le joueurs
+
     void KeyBoardControl()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))

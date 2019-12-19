@@ -12,5 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d04b165e195b14c80859f1881c2461, type: 3}
   m_Name: LevelParametersTest
   m_EditorClassIdentifier: 
+  mapIcon: {fileID: 0}
+  levelScreen: {fileID: 0}
+  LevelName: 
+  levelDescription: 
+  allPlayerDescription: []
+  allObjectives:
+  - {fileID: 11400000, guid: 195496b6646d26148883e1661fefbde1, type: 2}
+  - {fileID: 11400000, guid: 195496b6646d26148883e1661fefbde1, type: 2}
+  - {fileID: 11400000, guid: 195496b6646d26148883e1661fefbde1, type: 2}
+  sceneAssociated:
+    m_Handle: 0
   timeAvaibleBeforePolice: 120
   totalTimeToComplete: 160

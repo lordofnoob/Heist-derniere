@@ -9,14 +9,16 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [Header("AllUiSlots")]
-    public Text timeElpased;
+    public TextMeshProUGUI timeElpased;
     public Mb_UiPlayerCharacter[] allPlayerCards;
     public List<Mb_HostageStockArea> hostageStockArea = new List<Mb_HostageStockArea>();
     public TextMeshProUGUI cashAmountText;
+    public UI_ObjectiveSetup objectiveSpot;
 
     void Awake()
     {
         instance = this;
+        SetupObjective();
     }
 
     void Update()
@@ -59,4 +61,17 @@ public class UIManager : MonoBehaviour
         }
       
     }
+
+    public void SetupObjective()
+    {
+        Debug.LogError(Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length);
+        Debug.LogError(objectiveSpot.objectiveSpots.Length);
+
+        for (int i=0; i <Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length; i++)
+        {
+            objectiveSpot.objectiveSpots[i].objectiveDescription.text = 
+                Ma_LevelManager.instance.levelBaseParameters.allObjectives[i].objectifDescription;
+        }
+    }
+
 }

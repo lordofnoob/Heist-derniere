@@ -16,7 +16,7 @@ public class Ma_LevelManager : MonoBehaviour
     [SerializeField] public Mb_Door[] allDoor;
     [SerializeField] public Mb_Escape escapeTrial;
     [SerializeField] public Tile[] allTiles;
-    [SerializeField] Sc_LevelParameters levelBaseParameters;
+    public Sc_LevelParameters levelBaseParameters;
     public float timeRemaining;
     private float interval;
     private int minuteRemaining;
