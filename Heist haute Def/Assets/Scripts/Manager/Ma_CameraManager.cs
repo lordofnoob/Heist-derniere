@@ -158,9 +158,8 @@ public class Ma_CameraManager : MonoBehaviour
     }
 
     public void CenterCameraOnCharacter(int playerToFocus)
-    {
-        
-        TargetLooking(Ma_PlayerManager.instance.selectedPlayer.transform.position);
+    {        
+        TargetLooking(Ma_PlayerManager.instance.playerList[playerToFocus].transform.position);
     }
 
 
@@ -176,8 +175,6 @@ public class Ma_CameraManager : MonoBehaviour
             CenterCameraOnCharacter(2);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
             CenterCameraOnCharacter(3);
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-            CenterCameraOnCharacter(4);
     }
 }
 

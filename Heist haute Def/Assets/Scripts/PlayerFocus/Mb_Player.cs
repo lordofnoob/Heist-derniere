@@ -95,6 +95,15 @@ public class Mb_Player : Mb_Agent
         //Debug.Log("SET PLAYER AGENT TILE");
         capturedHostagesPosToGo = GetAgentTile();
         base.SetAgentTile(newAgentTile, isSwitchingTile);
+
+        if(capturedHostages.Count > 0)
+        {
+            foreach(Mb_IAAgent capturedHostage in capturedHostages)
+            {
+                capturedHostage.GoTo(GetCapturedHostagesPosToGo());
+            }
+        }
+
     }
 
     public Tile GetCapturedHostagesPosToGo()

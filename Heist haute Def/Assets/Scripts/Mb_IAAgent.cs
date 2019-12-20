@@ -40,6 +40,13 @@ public class Mb_IAAgent : Mb_Agent
         UpdatePositionToGo();
     }
 
+    public override void SetAgentTile(Tile newAgentTile, bool isSwitchingTile = false)
+    {
+        //Debug.Log("SET HOSTAGE AGENT TILE");
+        base.SetAgentTile(newAgentTile, isSwitchingTile);
+        UpdatePositionToGo();
+    }
+
     public void IncreaseStress()
     {
         switch (hostageState)
@@ -132,10 +139,10 @@ public class Mb_IAAgent : Mb_Agent
             }
         }
         
-        if(target != null && GetAgentTile() != target.GetCapturedHostagesPosToGo())
+        if(target != null && GetAgentTile() != destination)
         {
             GoTo(target.GetCapturedHostagesPosToGo());
-            Debug.Log("Destination : " + destination);
+            //Debug.Log("Destination : " + destination);
         }
 
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
@@ -312,5 +319,4 @@ public class Mb_IAAgent : Mb_Agent
         normalSpeed = aiCharacteristics.normalSpeed;
         panicSpeed = aiCharacteristics.fleeingSpeed;
     }
-    //IEnumerator 
 }

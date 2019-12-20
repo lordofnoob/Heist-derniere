@@ -64,8 +64,8 @@ public class UIManager : MonoBehaviour
 
     public void SetupObjective()
     {
-        Debug.LogError(Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length);
-        Debug.LogError(objectiveSpot.objectiveSpots.Length);
+        Debug.Log(Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length);
+        Debug.Log(objectiveSpot.objectiveSpots.Length);
 
         for (int i=0; i <Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length; i++)
         {

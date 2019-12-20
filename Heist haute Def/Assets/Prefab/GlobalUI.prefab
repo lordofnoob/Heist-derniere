@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiToMove: {fileID: 8736916179115049744}
-  button: {fileID: 0}
+  button: {fileID: 7927748408905644067}
   posFolded: {x: 0, y: 300}
   posFinal: {x: 0, y: 0}
   toggleKey: 0
@@ -1236,7 +1236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.07422, y: -65.93286}
+  m_AnchoredPosition: {x: 172.07422, y: -65.93262}
   m_SizeDelta: {x: 344.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1228127659649618749
@@ -2232,6 +2232,11 @@ PrefabInstance:
         type: 3}
       propertyPath: posFinal.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057187569897949795, guid: fe923f1444ff7d544a46336c496229ef,
+        type: 3}
+      propertyPath: toggleKey
+      value: 261
       objectReference: {fileID: 0}
     - target: {fileID: 7659667290185173719, guid: fe923f1444ff7d544a46336c496229ef,
         type: 3}
