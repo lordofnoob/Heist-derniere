@@ -666,6 +666,7 @@ public class In_RoomCreator : Editor
 
 
             doorToSetup.positionToGo = allTileToGo.ToArray();
+            EditorUtility.SetDirty(doorToSetup);
         }
     }
 

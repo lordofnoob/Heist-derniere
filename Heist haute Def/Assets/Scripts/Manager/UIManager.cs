@@ -8,8 +8,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [Header("AllUiSlots")]
+    [Header("TimeElpase")]
     public TextMeshProUGUI timeElpased;
+    public Image vignetTimeElapse;
+    [Header("AllUiSlots")]
     public Mb_UiPlayerCharacter[] allPlayerCards;
     public List<Mb_HostageStockArea> hostageStockArea = new List<Mb_HostageStockArea>();
     public TextMeshProUGUI cashAmountText;
@@ -19,6 +21,11 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
         SetupObjective();
+
+        for(int i=0; i<allPlayerCards.Length; i++ )
+        {
+            allPlayerCards[i].UpdateBasicUI(Ma_LevelManager.instance.levelBaseParameters.allPlayerDescription[i]);
+        }
     }
 
     void Update()
@@ -62,11 +69,8 @@ public class UIManager : MonoBehaviour
       
     }
 
-    public void SetupObjective()
+     public void SetupObjective()
     {
-        Debug.LogError(Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length);
-        Debug.LogError(objectiveSpot.objectiveSpots.Length);
-
         for (int i=0; i <Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length; i++)
         {
             objectiveSpot.objectiveSpots[i].objectiveDescription.text = 

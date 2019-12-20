@@ -61,8 +61,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trialParameters: {fileID: 11400000, guid: df9c608a6d7615e42956006f0dc5a17b, type: 2}
   positionToGo: []
-  timeVignet: {fileID: 0}
-  UiToTrigger: {fileID: 0}
+  timeVignet: {fileID: 4340789688924828631}
+  UiToTrigger: {fileID: 4340789688658333790}
   listOfUser: []
   currentTimeSpentOn: 0
   doorAnim: {fileID: 16659293675129689}
@@ -340,6 +340,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91c9fd59ce1374e4ca59a4dcf77c09a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4340789688924828631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2456908260835775642, guid: 49723befea5d6c64c976fa39d29fb123,
+    type: 3}
+  m_PrefabInstance: {fileID: 2172182196635051853}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2594349715112695774

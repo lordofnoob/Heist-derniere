@@ -83,13 +83,15 @@ public class Ma_LevelManager : MonoBehaviour
         timeRemaining -= interval;
         //Setup du timing a afficher pour la clock
         minuteRemaining = Mathf.FloorToInt(timeRemaining / 60);
-        secondsRemaining = Mathf.RoundToInt(timeRemaining - minuteRemaining * 60);
+        secondsRemaining =Mathf.Clamp(  Mathf.RoundToInt(timeRemaining - minuteRemaining * 60), 0,59);
         string timeSpentToDisplay;
         if (secondsRemaining>10)
             timeSpentToDisplay = minuteRemaining + " : " + secondsRemaining;
         else
             timeSpentToDisplay = minuteRemaining + " : 0" + secondsRemaining;
         UIManager.instance.timeElpased.text = timeSpentToDisplay;
+        UIManager.instance.vignetTimeElapse.fillAmount =
+            timeRemaining / Ma_LevelManager.instance.levelBaseParameters.timeAvaibleBeforePolice;
 
         SetTileWeight();
         if (timeRemaining == 0)
