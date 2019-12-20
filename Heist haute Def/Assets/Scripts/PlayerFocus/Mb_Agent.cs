@@ -49,7 +49,7 @@ public class Mb_Agent : Mb_Poolable
             Debug.Log("Switch tile");
             agentTile.avaible = false;
             agentTile.agentOnTile = newAgentTile.agentOnTile;
-            newAgentTile.agentOnTile.agentTile = agentTile;
+            newAgentTile.agentOnTile.SetAgentTile(agentTile);
         }
 
         //Debug.Log("Set Agent Tile");
@@ -65,22 +65,38 @@ public class Mb_Agent : Mb_Poolable
     }
 
     public virtual void PerformAction() { }
-    public void GoTo(Tile tileDestination)
+    public void GoTo(Tile tileDestination = null)
     {
-        List<Tile> newPath;
+        List<Tile> newPath = new List<Tile>();
         if (!tileDestination.avaible)
         {
-            newPath = pathfinder.SearchForShortestPath(GetAgentTile(), tileDestination.GetFreeNeighbours());
+            //newPath = pathfinder.SearchForShortestPath(GetAgentTile(), tileDestination.GetFreeNeighbours());
+            GoTo(tileDestination.GetFreeNeighbours());
+            return;
         }
         else
         {
             newPath = pathfinder.SearchForShortestPath(GetAgentTile(), new List<Tile> { tileDestination });
         }
+
         destination = newPath[newPath.Count - 1];
         //Debug.Log("Path count : " + newPath.Count);
         ChangeDeplacement(newPath);
         nextAction = true;
     }
+
+    public void GoTo(List<Tile> listOfTileDestination = null)
+    {
+        foreach(Tile tile in listOfTileDestination)
+        {
+            if (tile.avaible)
+            {
+                GoTo(tile);
+                return;
+            }
+        }
+    }
+
     public void GoTo(Mb_Trial nextTrialToInteract)
     {
         trialsToGo.Add(nextTrialToInteract);
@@ -170,10 +186,10 @@ public class Mb_Agent : Mb_Poolable
         return state;
     }
 
-    public IEnumerator WaitForTime(float timeToWait)
+    public IEnumerator WaitForTime(float tickToWait)
     {
-        yield return new WaitForSeconds(timeToWait);
-        FindAnOtherPath();
+        yield return new WaitForSeconds(tickToWait * Ma_ClockManager.instance.tickInterval);
+        GoTo(destination);
         nextAction = true;
     }
 }
