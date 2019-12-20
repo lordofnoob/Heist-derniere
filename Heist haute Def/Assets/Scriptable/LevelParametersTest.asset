@@ -16,7 +16,11 @@ MonoBehaviour:
   levelScreen: {fileID: 0}
   LevelName: 
   levelDescription: 
-  allPlayerDescription: []
+  allPlayerDescription:
+  - {fileID: 11400000, guid: da6027db9391e5e42b2fa651f5c35f76, type: 2}
+  - {fileID: 11400000, guid: 6f3924b82eb99dd469fca95eb086b0a7, type: 2}
+  - {fileID: 11400000, guid: 62743b86f04a11c4193009019d9a3947, type: 2}
+  - {fileID: 11400000, guid: 1ef71e52bded1ac41be3cb96b1428030, type: 2}
   allObjectives:
   - {fileID: 11400000, guid: 195496b6646d26148883e1661fefbde1, type: 2}
   - {fileID: 11400000, guid: 195496b6646d26148883e1661fefbde1, type: 2}
