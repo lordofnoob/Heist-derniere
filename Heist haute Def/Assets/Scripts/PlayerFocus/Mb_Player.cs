@@ -7,7 +7,7 @@ using System.Linq;
 
 public enum StateOfAction
 {
-    Idle, Interacting, Captured, Moving
+    Idle, Interacting, Captured, Moving, Escaped
 }
 
 

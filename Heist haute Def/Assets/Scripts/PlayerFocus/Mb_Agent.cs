@@ -21,7 +21,7 @@ public class Mb_Agent : Mb_Poolable
     [SerializeField]private Tile agentTile;
 
     [Header("Actions")]
-    [SerializeField]private StateOfAction state;
+    [SerializeField] public StateOfAction state;
     public List<Action> actionsToPerform = new List<Action>();
     [HideInInspector] public Mb_Trial onGoingInteraction;
     [HideInInspector] public List<Mb_Trial> trialsToGo;

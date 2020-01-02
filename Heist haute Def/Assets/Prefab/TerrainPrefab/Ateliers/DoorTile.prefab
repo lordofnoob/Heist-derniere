@@ -297,31 +297,6 @@ PrefabInstance:
       propertyPath: myTpe
       value: 
       objectReference: {fileID: 2921282400562566842}
-    - target: {fileID: 2456908259912005033, guid: 49723befea5d6c64c976fa39d29fb123,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2456908259912005033, guid: 49723befea5d6c64c976fa39d29fb123,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2456908259912005033, guid: 49723befea5d6c64c976fa39d29fb123,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2456908259912005033, guid: 49723befea5d6c64c976fa39d29fb123,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2456908259912005033, guid: 49723befea5d6c64c976fa39d29fb123,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49723befea5d6c64c976fa39d29fb123, type: 3}
 --- !u!4 &4340789689539589560 stripped

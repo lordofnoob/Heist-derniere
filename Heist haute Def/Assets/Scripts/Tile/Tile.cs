@@ -230,11 +230,12 @@ public class Tile : MonoBehaviour
         {
             cost = GetComponentInChildren<Mb_Door>().trialParameters.timeToAccomplishTrial / Ma_ClockManager.instance.tickInterval;
         }
-        else
+        else if (avaible == false)
         {
-            avaible = true;
-            cost = 1;
+            cost = 1000;
         }
+        else
+            cost = 1;
     }
 
    
