@@ -19,9 +19,10 @@ public class Ma_LevelManager : MonoBehaviour
    
     //ObjectivePart
     public Sc_LevelParameters levelBaseParameters;
-    [HideInInspector] [SerializeField] List<TimeState> timeObjectives;
-    [HideInInspector] [SerializeField] List<MoneyState> moneyObjectives;
-    [HideInInspector] [SerializeField] List<ItemState> itemObjectives;
+    [HideInInspector] public List<TimeState> timeObjectives;
+    [HideInInspector] public List<MoneyState> moneyObjectives;
+    [HideInInspector] public List<ItemState> itemObjectives;
+    public List<ObjectiveState> allObjectiveState;
     [HideInInspector] public bool levelFinished;
 
     //clock affichage
@@ -162,20 +163,18 @@ public class Ma_LevelManager : MonoBehaviour
         }
     }
 
+
     public void CheckMoneyObjectives(float totalCash)
     {
         for (int i =0; i< moneyObjectives.Count; i++)
         {
             if (totalCash >= moneyObjectives[i].objectiveTocheck.moneyToGet)
             {
-                
-                MoneyState newObjCompleted;
-                newObjCompleted.objectiveTocheck = moneyObjectives[i].objectiveTocheck;
-                newObjCompleted.isCompleted = true;
-                moneyObjectives[i] = newObjCompleted;
+
+                moneyObjectives[i].isCompleted = true;
                 for (int j = 0; j < levelBaseParameters.allObjectives.Length; j++)
                 {
-                    if (newObjCompleted.objectiveTocheck == levelBaseParameters.allObjectives[j])
+                    if (moneyObjectives[i].objectiveTocheck == levelBaseParameters.allObjectives[j])
                     {
                         UIManager.instance.CheckObjectiveUI(j, true);
                     }
@@ -183,55 +182,51 @@ public class Ma_LevelManager : MonoBehaviour
             }
             else
             {
-                MoneyState newObjNotCompleted;
-                newObjNotCompleted.objectiveTocheck = moneyObjectives[i].objectiveTocheck;
-                newObjNotCompleted.isCompleted = false;
-                moneyObjectives[i] = newObjNotCompleted;
+                moneyObjectives[i].isCompleted = false;
                 for (int j = 0; j < levelBaseParameters.allObjectives.Length; j++)
                 {
-                    if (newObjNotCompleted.objectiveTocheck == levelBaseParameters.allObjectives[j])
+                    if (moneyObjectives[i].objectiveTocheck == levelBaseParameters.allObjectives[j])
                     {
                         UIManager.instance.CheckObjectiveUI(j, false);
                     }
                 }
             }
         }
-       
+        UpdateObjectiveListeState();
+
+
     }
 
     public void CheckTimeObjective(float timeSpent)
     {
+    
         for (int i = 0; i < timeObjectives.Count; i++)
         {
             if (timeSpent >= timeObjectives[i].objectiveTocheck.timeToDo)
             {
-                TimeState newObjCompleted;
-                newObjCompleted.objectiveTocheck = timeObjectives[i].objectiveTocheck;
-                newObjCompleted.isCompleted = true;
-                timeObjectives[i] = newObjCompleted;
+                
+                timeObjectives[i].isCompleted = false;
                 for (int j = 0; j < levelBaseParameters.allObjectives.Length; j++)
                 {
-                    if (newObjCompleted.objectiveTocheck == levelBaseParameters.allObjectives[j])
-                    {
-                        UIManager.instance.CheckObjectiveUI(j, true);
-                    }
-                }
-            }
-            else
-            {
-                TimeState newObjNotCompleted;
-                newObjNotCompleted.objectiveTocheck = timeObjectives[i].objectiveTocheck;
-                newObjNotCompleted.isCompleted = false;
-                timeObjectives[i] = newObjNotCompleted;
-                for (int j = 0; j < levelBaseParameters.allObjectives.Length; j++)
-                {
-                    if (newObjNotCompleted.objectiveTocheck == levelBaseParameters.allObjectives[j])
+                    if (timeObjectives[i].objectiveTocheck == levelBaseParameters.allObjectives[j])
                     {
                         UIManager.instance.CheckObjectiveUI(j, false);
                     }
                 }
             }
+            else
+            {
+                timeObjectives[i].isCompleted = true;
+                for (int j = 0; j < levelBaseParameters.allObjectives.Length; j++)
+                {
+                    if (timeObjectives[i].objectiveTocheck == levelBaseParameters.allObjectives[j])
+                    {
+                        UIManager.instance.CheckObjectiveUI(j, true);
+                    }
+                }
+            }
         }
+        UpdateObjectiveListeState();
     }
 
     public void CheckItemObjective(Sc_Items itemGathered)
@@ -240,14 +235,11 @@ public class Ma_LevelManager : MonoBehaviour
         {
             if (itemGathered == itemObjectives[i].objectiveTocheck.itemToSteal)
             {
-                Debug.LogError("CHECKMONEYOBJECTIVE");
-                ItemState newObjCompleted;
-                newObjCompleted.objectiveTocheck = itemObjectives[i].objectiveTocheck;
-                newObjCompleted.isCompleted = true;
-                itemObjectives[i] = newObjCompleted;
+                
+                itemObjectives[i].isCompleted = true;
                 for (int j = 0; j < levelBaseParameters.allObjectives.Length; j++)
                 {
-                    if (newObjCompleted.objectiveTocheck == levelBaseParameters.allObjectives[j])
+                    if (itemObjectives[i].objectiveTocheck == levelBaseParameters.allObjectives[j])
                     {
                         Debug.LogError(j);
                         UIManager.instance.CheckObjectiveUI(j, true);
@@ -256,62 +248,112 @@ public class Ma_LevelManager : MonoBehaviour
             }
             else
             {
-                ItemState newObjNotCompleted;
-                newObjNotCompleted.objectiveTocheck = itemObjectives[i].objectiveTocheck;
-                newObjNotCompleted.isCompleted = false;
-                itemObjectives[i] = newObjNotCompleted;
+                itemObjectives[i].isCompleted = false;
                 for (int j = 0; j < levelBaseParameters.allObjectives.Length; j++)
                 {
-                    if (newObjNotCompleted.objectiveTocheck == levelBaseParameters.allObjectives[j])
+                    if (itemObjectives[i].objectiveTocheck == levelBaseParameters.allObjectives[j])
                     {
                         UIManager.instance.CheckObjectiveUI(j, false);
                     }
                 }
             }
         }
+        UpdateObjectiveListeState();
     }
+
+    void UpdateObjectiveListeState()
+    {
+        allObjectiveState.Clear();
+        allObjectiveState.AddRange(timeObjectives);
+      
+        allObjectiveState.AddRange(moneyObjectives);
+      
+        allObjectiveState.AddRange(itemObjectives);
+        for (int i = 0; i < timeObjectives.Count; i++)
+        {
+            allObjectiveState[i].objectifDescription = timeObjectives[i].objectiveTocheck.objectifDescription;
+        }
+        for (int i = timeObjectives.Count; i < timeObjectives.Count + moneyObjectives.Count; i++)
+        {
+            allObjectiveState[i].objectifDescription = moneyObjectives[i- timeObjectives.Count].objectiveTocheck.objectifDescription;
+        }
+        for (int i = timeObjectives.Count + moneyObjectives.Count; i < itemObjectives.Count+ timeObjectives.Count + moneyObjectives.Count; i++)
+        {
+            allObjectiveState[i].objectifDescription = itemObjectives[i - timeObjectives.Count - moneyObjectives.Count].objectiveTocheck.objectifDescription;
+        }
+    }
+
     public void CheckEscape()
     {
         bool haveAllEscaped = false;
         for (int i =0; i <Ma_PlayerManager.instance.playerList.Length; i++)
         {
-            if (Ma_PlayerManager.instance.playerList[i].state != StateOfAction.Escaped || Ma_PlayerManager.instance.playerList[i].state != StateOfAction.Captured)
+            if (Ma_PlayerManager.instance.playerList[i].state == StateOfAction.Escaped || Ma_PlayerManager.instance.playerList[i].state == StateOfAction.Captured)
             {
+                Debug.Log("yes");
+                haveAllEscaped = true;
+                
+            }
+            else
+            {
+                Debug.Log("no");
                 haveAllEscaped = false;
                 break;
             }
-            else
-                haveAllEscaped = true;
         }
-
+        Debug.Log(haveAllEscaped);
         if (haveAllEscaped == true)
             EndLevel();
     }
 
+    public void CheckEndLevel()
+    {
+        bool asAlreadyAllEscaped = false;
+        for (int i = 0; i < Ma_PlayerManager.instance.playerList.Length; i++)
+        {
+            if (Ma_PlayerManager.instance.playerList[i].state == StateOfAction.Captured | Ma_PlayerManager.instance.playerList[i].state == StateOfAction.Escaped)
+            {
+                asAlreadyAllEscaped = true;
+            }
+            else
+            {
+                asAlreadyAllEscaped = false;
+                break;
+            }
+        }
+
+        if (asAlreadyAllEscaped == true)
+        {
+            Ma_ClockManager.instance.PauseGame();
+            UIManager.instance.EndCanvas();
+        }
+    }
+
+
     public void EndLevel()
     {
-        
+        UIManager.instance.EndCanvas();
     }
 
 }
 
-[System.Serializable]
-public struct MoneyState
+public class ObjectiveState : Sc_Objective
+{
+    public bool isCompleted;
+}
+
+public class MoneyState : ObjectiveState
 {
     public Sc_Objective_Money objectiveTocheck;
-    public bool isCompleted;
 }
 
-[System.Serializable]
-public struct ItemState
+public class ItemState : ObjectiveState
 {
     public Sc_Objective_Item objectiveTocheck;
-    public bool isCompleted;
 }
 
-[System.Serializable]
-public struct TimeState
+
+public class TimeState : ObjectiveState
 {
     public Sc_Objective_Time objectiveTocheck;
-    public bool isCompleted;
 }

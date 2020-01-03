@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249b2bff10eddd74a8d498c938b8bd44, type: 3}
   m_Name: 1600$
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
-  valueOfTheItem: 0
+  itemIcon: {fileID: 21300000, guid: 485a3e159739ba740a9fd04c62b71b9d, type: 3}
+  valueOfTheItem: 1600

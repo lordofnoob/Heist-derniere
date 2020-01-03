@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: door1s
   m_EditorClassIdentifier: 
   skillToUse: []
-  timeToAccomplishTrial: 1
+  timeToAccomplishTrial: 15

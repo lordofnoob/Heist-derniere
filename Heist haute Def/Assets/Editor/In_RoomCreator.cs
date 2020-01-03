@@ -279,9 +279,6 @@ public class In_RoomCreator : Editor
 
             Sc_WallConfiguration wallConfig = wallConfigProperty.objectReferenceValue as Sc_WallConfiguration;
 
-            int randomWeightCumulated = 0;
-            int totalWeight = 0;
-
             for (int i = 0; i < wallConfig.wallConfiguration.Length; i++)
             {
 
