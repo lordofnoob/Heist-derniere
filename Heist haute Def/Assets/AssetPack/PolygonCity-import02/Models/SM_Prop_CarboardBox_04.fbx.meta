@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 guid: baf12e02decb5e04fb5b19c5afe10128
@@ -8,6 +9,13 @@ guid: 3ebcb9a458d5bc441867e1f2a5cb7e1c
 =======
 guid: 3ebcb9a458d5bc441867e1f2a5cb7e1c
 >>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+guid: c3be6f7dac12a1144b55eb95e71d5021
+=======
+guid: baf12e02decb5e04fb5b19c5afe10128
+>>>>>>> master
+>>>>>>> master
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:

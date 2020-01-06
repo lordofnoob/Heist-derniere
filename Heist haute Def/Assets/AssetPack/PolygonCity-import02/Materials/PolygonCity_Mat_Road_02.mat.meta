@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 guid: 1a765681753135c4e92fec7fb2b354de
@@ -8,6 +9,13 @@ guid: d96d0b0c659d89f4cb946f93786c3213
 =======
 guid: d96d0b0c659d89f4cb946f93786c3213
 >>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+guid: ec99eea30db5b2843b2ed79f1123fc00
+=======
+guid: 1a765681753135c4e92fec7fb2b354de
+>>>>>>> master
+>>>>>>> master
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

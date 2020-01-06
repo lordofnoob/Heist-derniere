@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 guid: 2c90bd7b27f800d40b6610dec6641d1a
@@ -8,6 +9,13 @@ guid: 8f81c9393f5dd004f87cdb16f99d6c9f
 =======
 guid: 8f81c9393f5dd004f87cdb16f99d6c9f
 >>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+guid: 8f799d62bc670dc4190223e34052ed91
+=======
+guid: 2c90bd7b27f800d40b6610dec6641d1a
+>>>>>>> master
+>>>>>>> master
 PrefabImporter:
   externalObjects: {}
   userData: 

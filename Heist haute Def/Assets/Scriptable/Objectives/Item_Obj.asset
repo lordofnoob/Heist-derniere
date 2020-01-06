@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3278414a3da6e7b49b4bb05a033434fc, type: 3}
   m_Name: Item_Obj
   m_EditorClassIdentifier: 
-  objectifDescription: Get the malette before escaping.
-  itemToSteal: {fileID: 11400000, guid: d053c9662d99bdd4b88c22d035830085, type: 2}
+  objectifDescription: Get the Diamond before escaping.
+  itemToSteal: {fileID: 11400000, guid: ea0bed17a4d5228469c6c21bd9cea267, type: 2}
