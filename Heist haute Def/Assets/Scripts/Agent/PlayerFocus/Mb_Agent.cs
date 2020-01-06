@@ -97,7 +97,6 @@ public class Mb_Agent : Mb_Poolable
 
     public void GoTo(Mb_Trial nextTrialToInteract)
     {
-        trialsToGo.Add(nextTrialToInteract);
         List<Tile> possibleDestination = new List<Tile>();
         if (nextTrialToInteract.listOfUser.Count >= nextTrialToInteract.positionToGo.Length)
         {
@@ -120,9 +119,11 @@ public class Mb_Agent : Mb_Poolable
         if (possibleDestination.Count == 0)
         {
             Debug.Log("DEPLACEMENT IMPOSSIBLE");
+            nextAction = true;
             return;
         }
 
+        trialsToGo.Add(nextTrialToInteract);
         List<Tile> newPath = pathfinder.SearchForShortestPath(GetAgentTile(), possibleDestination);
         destination = newPath[newPath.Count - 1];
         ChangeDeplacement(newPath);

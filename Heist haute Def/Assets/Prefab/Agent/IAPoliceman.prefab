@@ -539,11 +539,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5028995057435999965}
   - component: {fileID: 1847766912380400694}
+  - component: {fileID: 160279560857995052}
   - component: {fileID: 9108267328766900000}
   - component: {fileID: 5657659807170411418}
-  - component: {fileID: 160279560857995052}
-  - component: {fileID: 7259714005418839074}
   - component: {fileID: 4415859308185275942}
+  - component: {fileID: 7259714005418839074}
   m_Layer: 8
   m_Name: IAPoliceman
   m_TagString: Trial
@@ -558,7 +558,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3431368413598332794}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -566,7 +566,7 @@ Transform:
   - {fileID: 1398114679456764602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1847766912380400694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -583,6 +583,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &160279560857995052
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3431368413598332794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.30501938
+  m_Height: 1.630326
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7440747, z: 0}
 --- !u!95 &9108267328766900000
 Animator:
   serializedVersion: 3
@@ -615,20 +629,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileVisited: 0
---- !u!136 &160279560857995052
-CapsuleCollider:
+--- !u!114 &4415859308185275942
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3431368413598332794}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.30501938
-  m_Height: 1.630326
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.7440747, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a84128882ba4b84997cc341e7804fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9108267328766900000}
+  pathfinder: {fileID: 5657659807170411418}
+  VisitedTiles: []
+  agentTile: {fileID: 0}
+  state: 0
+  onGoingInteraction: {fileID: 0}
+  trialsToGo: []
+  destination: {fileID: 0}
+  nextAction: 1
+  speed: 4
+  targetPlayer: {fileID: 0}
 --- !u!114 &7259714005418839074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,18 +668,6 @@ MonoBehaviour:
   hangTime: 0.75
   isTriggerable: 1
   filling: 0
---- !u!114 &4415859308185275942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3431368413598332794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a84128882ba4b84997cc341e7804fe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3559699657092150029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,22 +1743,22 @@ PrefabInstance:
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.077992566
+      value: 0.11029814
       objectReference: {fileID: 0}
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7027924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.077992566
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7027924
+      value: 0.9938986
       objectReference: {fileID: 0}
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
@@ -1762,7 +1773,7 @@ PrefabInstance:
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
