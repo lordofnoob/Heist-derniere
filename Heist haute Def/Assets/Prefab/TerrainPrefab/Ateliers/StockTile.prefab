@@ -848,7 +848,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   stockedHostages: []
-  stressBar: {fileID: 0}
+  stressBar: {fileID: 7528862834207737751}
   hostageNumeberText: {fileID: 7170615253580073127}
   areaGlobalStress: 0
 --- !u!114 &1728970605001650523
