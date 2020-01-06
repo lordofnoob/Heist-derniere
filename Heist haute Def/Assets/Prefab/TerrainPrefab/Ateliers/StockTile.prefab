@@ -605,8 +605,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6021693887168220868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.365}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1.15, y: 1, z: 1}
   m_Children:
   - {fileID: 7528862834516670716}
   m_Father: {fileID: 982119711423521651}
@@ -614,7 +614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.725}
+  m_AnchoredPosition: {x: 0.0000000089407, y: 0.033}
   m_SizeDelta: {x: 2.252, y: 0.3272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8858047227935855442
@@ -701,14 +701,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6421415232089241451}
-  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: -1.9, y: 2.320015, z: 2.0764725}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -1.271}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3408180307711128414}
   m_Father: {fileID: 378674244858264150}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &9159442076494053435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,10 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trialParameters: {fileID: 11400000, guid: 65a991251500f654682546c454888163, type: 2}
-  positionToGo:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  positionToGo: []
   timeVignet: {fileID: 2332440014908481771}
   UiToTrigger: {fileID: 2332440014641988450}
   listOfUser: []
@@ -848,7 +845,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   stockedHostages: []
-  stressBar: {fileID: 0}
+  stressBar: {fileID: 7528862834516670717}
   hostageNumeberText: {fileID: 7170615253580073127}
   areaGlobalStress: 0
 --- !u!114 &1728970605001650523
@@ -1179,8 +1176,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.003000021, y: 0.001000002}
-  m_SizeDelta: {x: -0.1552, y: -0.098}
+  m_AnchoredPosition: {x: 0.003000021, y: 0.0009999871}
+  m_SizeDelta: {x: -0.0865, y: -0.0782}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7528862834207737744
 CanvasRenderer:
@@ -1265,10 +1262,10 @@ RectTransform:
   m_Father: {fileID: 3408180307711128414}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.7282, y: 0.2205}
-  m_SizeDelta: {x: 0.8701, y: 0.4223}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000000059604645, y: -0}
+  m_SizeDelta: {x: 2.252, y: 0.3272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7528862834516670718
 CanvasRenderer:
@@ -1338,10 +1335,10 @@ RectTransform:
   m_Father: {fileID: 7528862834516670716}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0009999722, y: 0.00000015646219}
-  m_SizeDelta: {x: 3.0251, y: 0.3701}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7528862834694286356
 CanvasRenderer:
@@ -1386,11 +1383,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6712938590612087638}
     m_Modifications:
-    - target: {fileID: 2456908260091056887, guid: 49723befea5d6c64c976fa39d29fb123,
-        type: 3}
-      propertyPath: m_Name
-      value: UI-TS
-      objectReference: {fileID: 0}
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1445,6 +1437,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260091056887, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_Name
+      value: UI-TS
       objectReference: {fileID: 0}
     - target: {fileID: 2456908261106169619, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}

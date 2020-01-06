@@ -717,7 +717,7 @@ MonoBehaviour:
   stress: 0
   minStress: 0.2
   maxStress: 0.5
-  stressBar: {fileID: 0}
+  stressBar: {fileID: 2546970155540993066}
   panicCounter: 0
   target: {fileID: 0}
   hostageState: 0
@@ -2875,11 +2875,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7339412151556531989}
     m_Modifications:
-    - target: {fileID: 5201113508718245071, guid: 4b50524b22734df458ed0839158c3c7d,
-        type: 3}
-      propertyPath: m_Name
-      value: PanicBar - Canvas-inUse
-      objectReference: {fileID: 0}
     - target: {fileID: 2058798830469128407, guid: 4b50524b22734df458ed0839158c3c7d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2935,8 +2930,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5201113508718245071, guid: 4b50524b22734df458ed0839158c3c7d,
+        type: 3}
+      propertyPath: m_Name
+      value: PanicBar - Canvas-inUse
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b50524b22734df458ed0839158c3c7d, type: 3}
+--- !u!114 &2546970155540993066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8739383339179508787, guid: 4b50524b22734df458ed0839158c3c7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6489723395533033497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5080750510241476814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2058798830469128407, guid: 4b50524b22734df458ed0839158c3c7d,
