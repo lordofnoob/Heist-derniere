@@ -7,7 +7,7 @@ using System.Linq;
 
 public enum StateOfAction
 {
-    Idle, Interacting, Captured, Moving
+    Idle, Interacting, Captured, Moving, Escaped
 }
 
 
@@ -17,6 +17,7 @@ public class Mb_Player : Mb_Agent
     //[SerializeField] NavMeshAgent agent;
     public Color highlightedColor, selectedColor;
 
+    [Header("Chara perks")]
     public Sc_PlayerSpecs charaPerks;
 
     [Header("Hostage")]

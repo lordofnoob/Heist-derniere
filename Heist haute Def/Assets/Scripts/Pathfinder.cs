@@ -82,21 +82,32 @@ public class Pathfinder : MonoBehaviour
 
             List<Tile> tilesToCheck = currentTile.GetFreeNeighbours(useDoors);
 
-            //IF IS IA THEN REMOVE TILE WITH AGENT IDLING
-            if (GetComponent<Mb_IAAgent>() != null)
+            //TILE AVAILABILITY CHECK
+            List<Tile> tilesToRemove = new List<Tile>();
+
+            foreach(Tile neighbours in tilesToCheck)
             {
-                List<Tile> tilesToRemove = new List<Tile>();
-                foreach (Tile neighbours in tilesToCheck)
+                if (!neighbours.avaible)
                 {
-                    if (neighbours.agentOnTile != null && neighbours.agentOnTile.GetActionState() == StateOfAction.Idle)
+                    if (neighbours.agentOnTile != null)
+                    {
+                        //IF IS IA THEN REMOVE TILE WITH AGENT IDLING
+                        if (GetComponent<Mb_IAAgent>() != null && neighbours.agentOnTile.GetActionState() == StateOfAction.Idle)
+                            tilesToRemove.Add(neighbours);
+                        //IF IS PLAYER THEN REMOVE OTHER PLAYER
+                        else if (GetComponent<Mb_Player>() != null && neighbours.agentOnTile is Mb_Player)
+                            tilesToRemove.Add(neighbours);
+                    }
+                    else
                     {
                         tilesToRemove.Add(neighbours);
                     }
                 }
-                foreach (Tile tileToRemove in tilesToRemove)
-                {
-                    tilesToCheck.Remove(tileToRemove);
-                }
+            }
+
+            foreach (Tile tileToRemove in tilesToRemove)
+            {
+                tilesToCheck.Remove(tileToRemove);
             }
 
             foreach (Tile neighbours in tilesToCheck)

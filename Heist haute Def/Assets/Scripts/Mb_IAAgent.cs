@@ -117,6 +117,8 @@ public class Mb_IAAgent : Mb_Agent
             {
                 if (hostageState == HostageState.InPanic)
                     actionsToPerform.Add(new Deplacement(panicSpeed, this, tile));
+                else if (hostageState == HostageState.Captured)
+                    actionsToPerform.Add(new Deplacement(target.charaPerks.speed, this, tile));
                 else
                     actionsToPerform.Add(new Deplacement(normalSpeed, this, tile));
             }

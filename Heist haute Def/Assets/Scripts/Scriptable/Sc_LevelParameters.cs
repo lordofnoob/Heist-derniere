@@ -19,4 +19,6 @@ public class Sc_LevelParameters : ScriptableObject
 
     public float timeAvaibleBeforePolice;
     public float totalTimeToComplete;
+
+  
 }
