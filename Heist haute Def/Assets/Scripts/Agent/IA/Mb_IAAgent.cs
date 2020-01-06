@@ -147,6 +147,11 @@ public class Mb_IAAgent : Mb_Agent
             //Debug.Log("Destination : " + destination);
         }
 
+        if(hostageState == HostageState.InPanic)
+        {
+            GoTo(Ma_LevelManager.instance.escapeTrial);
+        }
+
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
         if (actionsToPerform.Count != 0 && nextAction)
         {
@@ -215,7 +220,7 @@ public class Mb_IAAgent : Mb_Agent
             onGoingInteraction.listOfUser.Add(this);
             onGoingInteraction.StartInteracting();
         }
-        else
+        /*else
             for (int i = 0; i < onGoingInteraction.listOfUser.Count; i++)
             {
                 if (onGoingInteraction.listOfUser[i] != this)
@@ -223,7 +228,7 @@ public class Mb_IAAgent : Mb_Agent
                     onGoingInteraction.listOfUser.Add(this);
                     onGoingInteraction.ReUpduateTiming();
                 }
-            }
+            }*/
         base.Interact();
     }
 

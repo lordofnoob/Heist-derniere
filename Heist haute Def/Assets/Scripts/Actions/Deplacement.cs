@@ -59,7 +59,7 @@ public class Deplacement : Action
                     destination.agentOnTile.transform.DOMove(new Vector3(player.GetAgentTile().transform.position.x,
                                                                             player.GetAgentTile().transform.position.y + player.GetAgentTile().transform.localScale.y / 2,
                                                                             player.GetAgentTile().transform.position.z),
-                                                                            Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
+                                                                            Ma_ClockManager.instance.tickInterval * timeToPerform)
                                                         .SetEase(Ease.Linear);
                     player.SetAgentTile(destination, true);
                 }
@@ -73,7 +73,7 @@ public class Deplacement : Action
                 player.transform.DOMove(new Vector3(destination.transform.position.x,
                                                     destination.transform.position.y + destination.transform.localScale.y/2,
                                                     destination.transform.position.z),
-                                                    Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
+                                                    Ma_ClockManager.instance.tickInterval * timeToPerform)
                                 .SetEase(Ease.Linear)
                                 .OnComplete(() =>
                                 {
@@ -138,7 +138,7 @@ public class Deplacement : Action
                 hostage.transform.DOMove(new Vector3(destination.transform.position.x, 
                                                      destination.transform.position.y + destination.transform.localScale.y / 2,
                                                      destination.transform.position.z),
-                                                     Ma_LevelManager.instance.clock.tickInterval * timeToPerform)
+                                                     Ma_ClockManager.instance.tickInterval * timeToPerform)
                                  .SetEase(Ease.Linear)
                                  .OnComplete(() =>
                                  {

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249b2bff10eddd74a8d498c938b8bd44, type: 3}
   m_Name: Diamant
   m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 0d0ac0e261683624a940b8e31f2c70ca, type: 3}
   valueOfTheItem: 5000

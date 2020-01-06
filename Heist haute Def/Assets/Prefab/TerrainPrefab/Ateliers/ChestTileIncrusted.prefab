@@ -214,7 +214,7 @@ MonoBehaviour:
   display: {fileID: 0}
   hoverColor: {r: 0, g: 0, b: 0, a: 0}
   highlighted: 0
-  walkable: 1
+  walkable: 0
   avaible: 0
   agentOnTile: {fileID: 0}
   row: -18

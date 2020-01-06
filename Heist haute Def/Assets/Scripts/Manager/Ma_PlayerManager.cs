@@ -54,9 +54,14 @@ public class Ma_PlayerManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit)) 
             {
+                if (selectedPlayer.GetActionState() == StateOfAction.Captured || selectedPlayer.GetActionState() == StateOfAction.Escaped)
+                {
+                    Debug.Log("PLAYER CAPTURED OR ESCAPED");
+                    return;
+                }
 
                 //quand le joueur est en train d interagir
-                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.GetActionState() != StateOfAction.Captured && selectedPlayer.GetActionState() != StateOfAction.Moving)
+                if (hit.transform.CompareTag("Tile") && selectedPlayer != null && selectedPlayer.GetActionState() != StateOfAction.Moving)
                 {
                     /*hit.point += new Vector3(Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2, 0f, Ma_LevelManager.Instance.FreePrefab.transform.localScale.x / 2);
 
