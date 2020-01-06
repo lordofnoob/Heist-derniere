@@ -8,15 +8,32 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+    [Header("TimeElpase")]
+    public TextMeshProUGUI timeElpased;
+    public Image vignetTimeElapse;
     [Header("AllUiSlots")]
-    public Text timeElpased;
     public Mb_UiPlayerCharacter[] allPlayerCards;
     public List<Mb_HostageStockArea> hostageStockArea = new List<Mb_HostageStockArea>();
     public TextMeshProUGUI cashAmountText;
+    public UI_ObjectiveSetup objectiveSpot;
+    public Image[] validatedSpot;
+    public Image[] notValidatedSpot;
+    [SerializeField] GameObject endCanvas;
+
+    [Header("EndCanvasSlot")]
+    public TextMeshProUGUI finalCashText;
+    public Image[] allStarSpot;
+    public TextMeshProUGUI[] allTextObjectifsSpots;
 
     void Awake()
     {
         instance = this;
+        SetupObjective();
+
+        for(int i=0; i<allPlayerCards.Length; i++ )
+        {
+            allPlayerCards[i].UpdateBasicUI(Ma_LevelManager.instance.levelBaseParameters.allPlayerDescription[i]);
+        }
     }
 
     void Update()
@@ -58,5 +75,54 @@ public class UIManager : MonoBehaviour
             }
         }
       
+    }
+
+     public void SetupObjective()
+    {
+        for (int i=0; i <Ma_LevelManager.instance.levelBaseParameters.allObjectives.Length; i++)
+        {
+            objectiveSpot.objectiveSpots[i].objectiveDescription.text = 
+                Ma_LevelManager.instance.levelBaseParameters.allObjectives[i].objectifDescription;
+        }
+    }
+
+    public void CheckObjectiveUI(int objectiveNumber, bool state)
+    {
+        if (state == true)
+        {
+            validatedSpot[objectiveNumber].gameObject.SetActive(true);
+            notValidatedSpot[objectiveNumber].gameObject.SetActive(false);
+        }
+        else
+        {
+            validatedSpot[objectiveNumber].gameObject.SetActive(false);
+            notValidatedSpot[objectiveNumber].gameObject.SetActive(true);
+        }
+    }
+
+    public void EndCanvas()
+    {
+        //METTRE ICI LES FONCTIONS D ANIMS POUR LE CANVAS DE FIN/ ON LE METS SUR LES COMPOSANTS DE L UI FINAL
+        SeTupTheEndCanvasText();
+        endCanvas.SetActive(true);
+
+    }
+
+    public void SeTupTheEndCanvasText()
+    {
+        finalCashText.text = Ma_LevelManager.instance.cashAmount.ToString() + "$ stollen.";
+
+        for (int i = 0; i < allTextObjectifsSpots.Length; i++)
+        {
+            Debug.Log(Ma_LevelManager.instance.allObjectiveState[i].objectifDescription);
+            allTextObjectifsSpots[i].text = Ma_LevelManager.instance.allObjectiveState[i].objectifDescription;
+            if (Ma_LevelManager.instance.allObjectiveState[i].isCompleted == true)
+            {
+                allStarSpot[i].gameObject.SetActive(true);
+            }
+            else
+                allStarSpot[i].gameObject.SetActive(false);
+        }
+          
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 
 public enum StateOfAction
 {
-    Idle, Interacting, Captured, Moving
+    Idle, Interacting, Captured, Moving, Escaped
 }
 
 
@@ -17,10 +17,12 @@ public class Mb_Player : Mb_Agent
     //[SerializeField] NavMeshAgent agent;
     public Color highlightedColor, selectedColor;
 
+    [Header("Chara perks")]
     public Sc_PlayerSpecs charaPerks;
 
     [Header("Hostage")]
     public List<Mb_IAAgent> capturedHostages = new List<Mb_IAAgent>();
+    private Tile capturedHostagesPosToGo;
 
 
     [Header("Items")]
@@ -88,6 +90,27 @@ public class Mb_Player : Mb_Agent
         Outlines outline = gameObject.GetComponent<Outlines>();
         outline.enabled = enabled;
     }*/
+
+    public override void SetAgentTile(Tile newAgentTile, bool isSwitchingTile = false)
+    {
+        //Debug.Log("SET PLAYER AGENT TILE");
+        capturedHostagesPosToGo = GetAgentTile();
+        base.SetAgentTile(newAgentTile, isSwitchingTile);
+
+        if(capturedHostages.Count > 0)
+        {
+            foreach(Mb_IAAgent capturedHostage in capturedHostages)
+            {
+                capturedHostage.GoTo(GetCapturedHostagesPosToGo());
+            }
+        }
+
+    }
+
+    public Tile GetCapturedHostagesPosToGo()
+    {
+        return capturedHostagesPosToGo;
+    }
 
     public override void AddDeplacement(List<Tile> path)
     {
