@@ -84,8 +84,6 @@ public class Ma_PlayerManager : MonoBehaviour
                     Mb_Trial targetTrial = hit.transform.gameObject.GetComponent<Mb_Trial>();
                     if (selectedPlayer.onGoingInteraction != targetTrial)
                     {
-                        //CHANGED 
-
                         if(targetTrial is Mb_IATrial)
                         {
                             Mb_IATrial iaTrial = targetTrial as Mb_IATrial;

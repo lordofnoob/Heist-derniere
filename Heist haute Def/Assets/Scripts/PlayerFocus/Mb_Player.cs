@@ -17,6 +17,7 @@ public class Mb_Player : Mb_Agent
     //[SerializeField] NavMeshAgent agent;
     public Color highlightedColor, selectedColor;
 
+    [Header("Chara perks")]
     public Sc_PlayerSpecs charaPerks;
 
     [Header("Hostage")]

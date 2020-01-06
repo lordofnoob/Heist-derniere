@@ -11,8 +11,6 @@ public class Mb_Agent : Mb_Poolable
     [Header("Animator infos")]
     public Animator animator;
 
-    [Header("Chara perks")]
-
     //[HideInInspector] 
     public Pathfinder pathfinder;
 
