@@ -1,8 +1,23 @@
 fileFormatVersion: 2
-guid: ed981b598eec64f40866b9b5f9c3538a
-timeCreated: 1504145086
-licenseType: Store
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+guid: cd19e6f31b9d3524ea9e08e87e99757c
+=======
+guid: 3a6ace4c05d7dac488bc65d87193c07d
+>>>>>>> Stashed changes
+=======
+guid: 3a6ace4c05d7dac488bc65d87193c07d
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+guid: 96e32044521b66e41aec19a5ebf8c81c
+=======
+guid: cd19e6f31b9d3524ea9e08e87e99757c
+>>>>>>> master
+>>>>>>> master
 TextScriptImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

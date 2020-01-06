@@ -1,8 +1,24 @@
 fileFormatVersion: 2
-guid: c01b7c8cb1175b54aab24b670c2d58dd
-timeCreated: 1499381849
-licenseType: Store
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+guid: fdd6c46d45889bb4e8a8567316917ec2
+=======
+guid: 9bd1a2c2fedb44c468e8592917cae9b7
+>>>>>>> Stashed changes
+=======
+guid: 9bd1a2c2fedb44c468e8592917cae9b7
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+guid: 051549e16b734a042868104b0eee616c
+=======
+guid: fdd6c46d45889bb4e8a8567316917ec2
+>>>>>>> master
+>>>>>>> master
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

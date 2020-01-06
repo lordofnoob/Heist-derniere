@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: f422dbe4849e51347af15eedd142ec3c
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+guid: 6276285d9c454ab45ba85d544fc673ea
+=======
+guid: c85a39e7ba63bde449415a59e055bacb
+>>>>>>> Stashed changes
+=======
+guid: c85a39e7ba63bde449415a59e055bacb
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+guid: a864258f06d9bcd45a6a47806be3dca0
+=======
+guid: 6276285d9c454ab45ba85d544fc673ea
+>>>>>>> master
+>>>>>>> master
 folderAsset: yes
-timeCreated: 1544997007
-licenseType: Store
 DefaultImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
