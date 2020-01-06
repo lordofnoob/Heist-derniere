@@ -11,15 +11,15 @@ public class Mb_UiPlayerCharacter : MonoBehaviour
     public Image[] skillsIconSlots;
     public Image[] itemIconSlots;
 
-    public void UpdateBasicUI(Mb_Player player)
+    public void UpdateBasicUI(Sc_Charaspec player)
     {
-        playerName.text = player.charaPerks.name;
-        for (int i = 0; i < player.charaPerks.characterSkills.Length; i++)
+        playerName.text = player.name;
+        for (int i = 0; i < player.characterSkills.Length; i++)
         {
             foreach (SkillInfos skillToCheck in iconRuling.allSkillsIcon)
             {
-                if (skillToCheck.skillAssociated == player.charaPerks.characterSkills[i])
-                    itemIconSlots[i].sprite = skillToCheck.skillIcon;
+                if (skillToCheck.skillAssociated == player.characterSkills[i])
+                    skillsIconSlots[i].sprite = skillToCheck.skillIcon;
             }               
         }
     }

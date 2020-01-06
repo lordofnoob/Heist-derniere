@@ -12,6 +12,7 @@ public class Ma_ClockManager : MonoBehaviour
 
     public float tickInterval = 0.2f;
     bool isPauseActive;
+    float timePassed = 0; 
 
     IEnumerator clock;
 
@@ -37,7 +38,8 @@ public class Ma_ClockManager : MonoBehaviour
     {
        
         yield return new WaitForSeconds(tickInterval);
-
+        timePassed += tickInterval;
+        Ma_LevelManager.instance.CheckTimeObjective(timePassed);
         if (isPauseActive == false)
         {
             tickTrigger.Invoke();
@@ -58,9 +60,14 @@ public class Ma_ClockManager : MonoBehaviour
 
     public void Update()
     {
-        if (Mb_InputController.inputControler.space == true)
+        if (Mb_InputController.inputControler.space == true && Ma_LevelManager.instance.levelFinished == false)
         {
-            isPauseActive = !isPauseActive;
+            PauseGame();
         }
+    }
+
+    public void PauseGame()
+    {
+        isPauseActive = !isPauseActive;
     }
 }

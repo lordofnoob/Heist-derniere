@@ -23,9 +23,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62743b86f04a11c4193009019d9a3947, type: 2}
   - {fileID: 11400000, guid: 1ef71e52bded1ac41be3cb96b1428030, type: 2}
   allObjectives:
-  - {fileID: 11400000, guid: d54d4171b81376847b95cffffef83003, type: 2}
-  - {fileID: 11400000, guid: 195496b6646d26148883e1661fefbde1, type: 2}
-  - {fileID: 11400000, guid: 610d2cdeacbcc2d42be85bf7b1e8748a, type: 2}
+  - {fileID: 11400000, guid: e5782ec373a90b744815625e3216089a, type: 2}
+  - {fileID: 11400000, guid: d5319f4d333ac434e95a9082ffdd63dd, type: 2}
+  - {fileID: 11400000, guid: 94f4983e2a1cdc843be6233e0eab0470, type: 2}
   sceneAssociated:
     m_Handle: 0
   timeAvaibleBeforePolice: 120

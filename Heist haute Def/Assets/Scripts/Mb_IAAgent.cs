@@ -40,6 +40,13 @@ public class Mb_IAAgent : Mb_Agent
         UpdatePositionToGo();
     }
 
+    public override void SetAgentTile(Tile newAgentTile, bool isSwitchingTile = false)
+    {
+        //Debug.Log("SET HOSTAGE AGENT TILE");
+        base.SetAgentTile(newAgentTile, isSwitchingTile);
+        UpdatePositionToGo();
+    }
+
     public void IncreaseStress()
     {
         switch (hostageState)
@@ -98,7 +105,7 @@ public class Mb_IAAgent : Mb_Agent
         //Debug.Log(actionsToPerform.Count);
 
         //NEW
-        //GoTo(warpHostageTrial);
+        GoTo(Ma_LevelManager.instance.escapeTrial);
     }
 
     public override void AddDeplacement(List<Tile> path)
@@ -110,6 +117,8 @@ public class Mb_IAAgent : Mb_Agent
             {
                 if (hostageState == HostageState.InPanic)
                     actionsToPerform.Add(new Deplacement(panicSpeed, this, tile));
+                else if (hostageState == HostageState.Captured)
+                    actionsToPerform.Add(new Deplacement(target.charaPerks.speed, this, tile));
                 else
                     actionsToPerform.Add(new Deplacement(normalSpeed, this, tile));
             }
@@ -130,10 +139,12 @@ public class Mb_IAAgent : Mb_Agent
                     return;
                 }
             }
-        }else if(target != null && target.GetActionState() == StateOfAction.Moving)
+        }
+        
+        if(target != null && GetAgentTile() != destination)
         {
-            Debug.Log("Target.GetAgentTile : "+target.GetAgentTile());
-            GoTo(target.GetAgentTile());
+            GoTo(target.GetCapturedHostagesPosToGo());
+            //Debug.Log("Destination : " + destination);
         }
 
         //Debug.Log("about to perform action. Count left = " + actionsToPerform.Count.ToString());
@@ -144,15 +155,18 @@ public class Mb_IAAgent : Mb_Agent
                 Deplacement depla = actionsToPerform.First() as Deplacement;
                 if(depla.destination.cost > Ma_ClockManager.instance.tickInterval)
                 {
-                    Debug.Log("WAIT");
-                    List<Action> temp = actionsToPerform;
-                    actionsToPerform.Clear();
-                    actionsToPerform.Add(new Wait(1, this, FindAnOtherPath));
-                    actionsToPerform.AddRange(temp);
+                    if (depla.destination.agentOnTile != null && depla.destination.agentOnTile.GetActionState() == StateOfAction.Moving)
+                    {
+                        Debug.Log("WAIT");
+                        List<Action> temp = actionsToPerform;
+                        actionsToPerform.Clear();
+                        actionsToPerform.Add(new Wait(1, this));
+                        actionsToPerform.AddRange(temp);
+                    }
                 }
             }
 
-            
+            /*
             Debug.Log("##### ACTUAL ACTIONS TO PERFORM #####");
             foreach (Action action in actionsToPerform)
             {
@@ -167,11 +181,10 @@ public class Mb_IAAgent : Mb_Agent
                 }
             }
             Debug.Log("##############################");
-            
+            */
 
             nextAction = false;
             actionsToPerform.First().PerformAction();
-
             actionsToPerform.Remove(actionsToPerform.First());
         }
     }
@@ -184,7 +197,7 @@ public class Mb_IAAgent : Mb_Agent
         {
             GoTo(onGoingInteraction);
         }
-        else
+        else if(destination != null)
         {
             GoTo(destination);
         }        
@@ -308,5 +321,4 @@ public class Mb_IAAgent : Mb_Agent
         normalSpeed = aiCharacteristics.normalSpeed;
         panicSpeed = aiCharacteristics.fleeingSpeed;
     }
-    //IEnumerator 
 }
