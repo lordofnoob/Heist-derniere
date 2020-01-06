@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 79e9679e8516bc7478e155fefce3d6c8
+=======
 guid: d21c19e50299c5649bb5d89367393b0c
+>>>>>>> master
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
