@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EscapeParametres
   m_EditorClassIdentifier: 
   skillToUse: []
-  timeToAccomplishTrial: 5
+  timeToAccomplishTrial: 2

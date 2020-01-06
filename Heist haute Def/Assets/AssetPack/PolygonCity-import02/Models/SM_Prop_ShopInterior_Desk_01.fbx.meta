@@ -1,8 +1,20 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+guid: 52c101673d40791409e7b13b450ba52a
+=======
+guid: c7632d2cdc959404a8de270851095432
+>>>>>>> Stashed changes
+=======
+guid: c7632d2cdc959404a8de270851095432
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
 guid: 49f638b9b19a73d45af3f7e77d18913c
 =======
 guid: 52c101673d40791409e7b13b450ba52a
+>>>>>>> master
 >>>>>>> master
 ModelImporter:
   serializedVersion: 26

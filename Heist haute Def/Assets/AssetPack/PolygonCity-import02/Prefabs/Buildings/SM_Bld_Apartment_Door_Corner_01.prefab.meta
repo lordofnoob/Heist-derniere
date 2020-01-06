@@ -1,8 +1,20 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+guid: 42b7f533e1b2b6d41b155939df785bc6
+=======
+guid: 29a33d25e11bf0f46bb5d8dcf04aff68
+>>>>>>> Stashed changes
+=======
+guid: 29a33d25e11bf0f46bb5d8dcf04aff68
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
 guid: 41bf4e600d2f3a042a998d116e5326cd
 =======
 guid: 42b7f533e1b2b6d41b155939df785bc6
+>>>>>>> master
 >>>>>>> master
 PrefabImporter:
   externalObjects: {}

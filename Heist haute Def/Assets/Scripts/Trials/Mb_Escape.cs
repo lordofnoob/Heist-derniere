@@ -10,7 +10,10 @@ public class Mb_Escape : Mb_Trial
         {
             Ma_LevelManager.instance.timeRemaining -= iaAgent.aiCharacteristics.escapeValue;
             iaAgent.GetAgentTile().avaible = true;
-            Destroy(iaAgent);
+           // iaAgent.SetAgentTile(null);
+            listOfUser.Clear();
+
+            Destroy(iaAgent.gameObject);
         }
 
         base.DoThings();

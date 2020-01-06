@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3278414a3da6e7b49b4bb05a033434fc, type: 3}
-  m_Name: GetADiamond
+  m_Name: GetTheMalette
   m_EditorClassIdentifier: 
-  objectifDescription: 
-  itemToSteal: {fileID: 0}
+  objectifDescription: Find the malette of important document and get away with it.
+  itemToSteal: {fileID: 11400000, guid: d053c9662d99bdd4b88c22d035830085, type: 2}
