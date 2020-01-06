@@ -21,7 +21,7 @@ public class Mb_IATrial : Mb_Trial
     {
         
         //Debug.Log(iaAgent.onGoingInteraction);
-        //Debug.Log("DO THINGS");
+        Debug.Log("DO THINGS");
 
         if (iaAgent.onGoingInteraction != null)
         {

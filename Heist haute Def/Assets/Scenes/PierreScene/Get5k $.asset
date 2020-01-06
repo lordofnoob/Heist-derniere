@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6431c745dd6a4249b41dcb60148ba9f, type: 3}
   m_Name: Get5k $
   m_EditorClassIdentifier: 
-  objectifDescription: 
-  moneyToGet: 0
+  objectifDescription: Find 5k $ worth of good and escape with it.
+  moneyToGet: 5000

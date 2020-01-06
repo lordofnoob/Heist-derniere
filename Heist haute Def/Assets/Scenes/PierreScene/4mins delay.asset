@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58188b7da3d29e14881faf9077aeef28, type: 3}
   m_Name: 4mins delay
   m_EditorClassIdentifier: 
-  objectifDescription: 
-  timeToDo: 0
+  objectifDescription: Esape in less than 4 mins, quick heist are the best one.
+  timeToDo: 240

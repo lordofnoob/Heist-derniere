@@ -15,14 +15,17 @@ MonoBehaviour:
   mapIcon: {fileID: 21300000, guid: 64f30d86b301df642be5e2eda24cda00, type: 3}
   levelScreen: {fileID: 21300000, guid: 64f30d86b301df642be5e2eda24cda00, type: 3}
   LevelName: Banque Assault
-  levelDescription: Get the diamond, get at least 5k$ and get out before 4mins to
+  levelDescription: Find the malette, get at least 5k$ and get out before 4mins to
     get the best score
   allPlayerDescription:
   - {fileID: 11400000, guid: daaee2cdf94afc546bb10303a6d050a1, type: 2}
   - {fileID: 11400000, guid: 57e1da7d58674df45a58d396b7fcf166, type: 2}
   - {fileID: 11400000, guid: c8ebf01319e669f439dd3530cf8f7014, type: 2}
   - {fileID: 11400000, guid: c8d070e1470605e4da5e5c3c2a94befa, type: 2}
-  allObjectives: []
+  allObjectives:
+  - {fileID: 11400000, guid: a2fec721170cb6441a5cfa06bac61e9d, type: 2}
+  - {fileID: 11400000, guid: 63b44152ed0180945ac8aa7ba24fb5fc, type: 2}
+  - {fileID: 11400000, guid: b980d5b00b300ec409a544f4bc496822, type: 2}
   sceneAssociated:
     m_Handle: 0
   timeAvaibleBeforePolice: 240

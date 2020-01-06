@@ -108,8 +108,8 @@ MonoBehaviour:
   trialParameters: {fileID: 11400000, guid: 0e7f7af4812fe314e9251f0d8f2711fa, type: 2}
   positionToGo:
   - {fileID: 0}
-  timeVignet: {fileID: 0}
-  UiToTrigger: {fileID: 0}
+  timeVignet: {fileID: 6118548597330654388}
+  UiToTrigger: {fileID: 6118548597601064765}
   listOfUser: []
   currentTimeSpentOn: 0
   doorAnim: {fileID: 4938251201649473428}
@@ -358,7 +358,7 @@ PrefabInstance:
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2456908260091056885, guid: 49723befea5d6c64c976fa39d29fb123,
         type: 3}
@@ -438,3 +438,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8570845437518241838}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6118548597601064765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2456908261106169619, guid: 49723befea5d6c64c976fa39d29fb123,
+    type: 3}
+  m_PrefabInstance: {fileID: 8570845437518241838}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c9fd59ce1374e4ca59a4dcf77c09a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6118548597330654388 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2456908260835775642, guid: 49723befea5d6c64c976fa39d29fb123,
+    type: 3}
+  m_PrefabInstance: {fileID: 8570845437518241838}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
