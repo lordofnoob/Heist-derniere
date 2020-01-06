@@ -6,13 +6,16 @@ using UnityEditor;
 public class Mb_FacingTheCam : MonoBehaviour
 {
     public Transform transformToLookAt;
-    public void Awake()
+    Vector3 lookAtPose;
+
+    public void Start()
     {
-        transformToLookAt = Editor.FindObjectOfType<Camera>().transform;
+        transformToLookAt = FindObjectOfType<Camera>().transform;
     }
 
     private void Update()
     {
-        transform.LookAt(transformToLookAt);
+        lookAtPose = new Vector3(transformToLookAt.position.x, transform.position.y, transform.position.z);
+        transform.LookAt(lookAtPose);
     }
 }
