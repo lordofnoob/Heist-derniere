@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249b2bff10eddd74a8d498c938b8bd44, type: 3}
   m_Name: Actions
   m_EditorClassIdentifier: 
-  valueOfTheItem: 3000
+  itemIcon: {fileID: 0}
+  valueOfTheItem: 100

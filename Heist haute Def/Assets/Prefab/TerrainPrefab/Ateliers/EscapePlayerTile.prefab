@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2921282400562566842}
   - component: {fileID: 7275416664350194188}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: InteractionEscape
   m_TagString: Trial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,6 +292,47 @@ PrefabInstance:
       propertyPath: myTpe
       value: 
       objectReference: {fileID: 2921282400562566842}
+    - target: {fileID: 2456908261106169644, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260659279130, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260659279130, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260659279130, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.51524
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260659279130, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.51524
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260659279130, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.51524
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260659279130, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.649
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456908260659279129, guid: 49723befea5d6c64c976fa39d29fb123,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b48a255e9194714ca0c5fc07be50de3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49723befea5d6c64c976fa39d29fb123, type: 3}
 --- !u!4 &4340789689539589560 stripped

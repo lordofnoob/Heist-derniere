@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   characterPortrait: {fileID: 0}
-  speed: 0
+  speed: 20
   characterSkills: 
-  escapeValue: 0
-  normalSpeed: 0
-  fleeingSpeed: 0
+  escapeValue: 10
+  normalSpeed: 15
+  fleeingSpeed: 20
